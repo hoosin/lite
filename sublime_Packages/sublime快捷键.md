@@ -1,7 +1,7 @@
 Thank Github
 ===================
 
- 1. sublime 快捷键 
+sublime 快捷键 
 -------------------
 <table cellspacing="0" cellpadding="0">
 	<tbody style="word-wrap:break-word">
