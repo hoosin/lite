@@ -1,0 +1,76 @@
+thank Github
+===================
+
+ 1. sublime 快捷键 
+-------------------
+
+<table width="50%">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>WinXP</td>
+			<td>Win7</td>
+			<td>OS X</td>
+		</tr>
+		<tr>
+			<td>IE9</td>
+			<td>B</td>
+			<td>B</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>IE8</td>
+			<td>A</td>
+			<td>A</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>IE7</td>
+			<td>B</td>
+			<td>B</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>IE6</td>
+			<td>B</td>
+			<td>B</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Chrome16</td>
+			<td>A</td>
+			<td>A</td>
+			<td>A</td>
+		</tr>
+		<tr>
+			<td>Chrome14</td>
+			<td>A</td>
+			<td>A</td>
+			<td>A</td>
+		</tr>
+		<tr>
+			<td>Firefox10</td>
+			<td>A</td>
+			<td>A</td>
+			<td>A</td>
+		</tr>
+		<tr>
+			<td>Firefox9</td>
+			<td>A</td>
+			<td>A</td>
+			<td>A</td>
+		</tr>
+		<tr>
+			<td>Safari</td>
+			<td>B</td>
+			<td>B</td>
+			<td>B</td>
+		</tr>
+		<tr>
+			<td>Opera</td>
+			<td>C</td>
+			<td>C</td>
+			<td>C</td>
+		</tr>
+	</tbody>
+</table>
