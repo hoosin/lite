@@ -1,9 +1,9 @@
-thank Github
+Thank Github
 ===================
 
  1. sublime 快捷键 
 -------------------
-<table cellspacing="0" cellpadding="0" border="1" style="word-wrap:break-word; empty-cells:show; border-collapse:collapse">
+<table cellspacing="0" cellpadding="0">
 	<tbody style="word-wrap:break-word">
 		<tr style="word-wrap:break-word">
 			<td width="114" valign="top" style="word-wrap:break-word">
