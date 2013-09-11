@@ -1,0 +1,192 @@
+[
+	{
+		"caption": "Emmet: Expand Abbreviation",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "expand_abbreviation"
+		}
+	},
+
+	{
+		"caption": "Emmet: Wrap With Abbreviation",
+		"command": "wrap_as_you_type"
+	},
+
+	{
+		"caption": "Emmet: Match Pair (outward)",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "match_pair_outward"
+		}
+	},
+
+	{
+		"caption": "Emmet: Match Pair (inward)",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "match_pair_inward"
+		}
+	},
+
+	{
+		"caption": "Emmet: Go to Matching Pair",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "matching_pair"
+		}
+	},
+
+	{
+		"caption": "Emmet: Next Edit Point",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "next_edit_point"
+		}
+	},
+
+	{
+		"caption": "Emmet: Previous Edit Point",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "prev_edit_point"
+		}
+	},
+
+	{
+		"caption": "Emmet: Merge Lines",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "merge_lines"
+		}
+	},
+
+	{
+		"caption": "Emmet: Toggle Comment",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "toggle_comment"
+		}
+	},
+
+	{
+		"caption": "Emmet: Split\\Join Tag",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "split_join_tag"
+		}
+	},
+
+	{
+		"caption": "Emmet: Remove Tag",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "remove_tag"
+		}
+	},
+
+	{
+		"caption": "Emmet: Evaluate Math Expression",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "evaluate_math_expression"
+		}
+	},
+
+	{
+		"caption": "Emmet: Increment Number by 1",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "increment_number_by_1"
+		}
+	},
+
+	{
+		"caption": "Emmet: Decrement Number by 1",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "decrement_number_by_1"
+		}
+	},
+
+	{
+		"caption": "Emmet: Increment Number by 0.1",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "increment_number_by_01"
+		}
+	},
+
+	{
+		"caption": "Emmet: Decrement Number by 0.1",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "decrement_number_by_01"
+		}
+	},
+
+	{
+		"caption": "Emmet: Increment Number by 10",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "increment_number_by_10"
+		}
+	},
+
+	{
+		"caption": "Emmet: Decrement Number by 10",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "decrement_number_by_10"
+		}
+	},
+
+	{
+		"caption": "Emmet: Select Next Item",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "select_next_item"
+		}
+	},
+
+	{
+		"caption": "Emmet: Select Previous Item",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "select_previous_item"
+		}
+	},
+
+	{
+		"caption": "Emmet: Reflect CSS Value",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "reflect_css_value"
+		}
+	},
+
+	{
+		"caption": "Emmet: Encode\\Decode Image to data:URL",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "encode_decode_data_url"
+		}
+	},
+
+	{
+		"caption": "Emmet: Update Image Size",
+		"command": "run_emmet_action",
+		"args": {
+			"action": "update_image_size"
+		}
+	},
+
+	{
+		"caption": "Emmet: Rename Tag",
+		"command": "rename_tag"
+	},
+
+	{
+		"caption": "Emmet: Reload Extensions",
+		"command": "emmet_reset_context"
+	}
+]

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:article  property="summary" textLen="-1" autoformat="false" istr="" astr="">摘要</cms:article>
+]]></content>
+	<tabTrigger>cmss</tabTrigger>
+	<description>article:文章摘要/简介</description>
+	<scope>text.html</scope>
+</snippet>

@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+left: auto
+
+]]></content>
+	<tabTrigger>l:a</tabTrigger>
+	<scope>source.sass</scope>
+	<description>left:auto</description>
+</snippet>

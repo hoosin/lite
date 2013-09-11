@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:include page="${1}" ssi="false" />
+]]></content>
+	<tabTrigger>cmsin</tabTrigger>
+	<description>cms:include</description>
+	<scope>text.html</scope>
+</snippet>

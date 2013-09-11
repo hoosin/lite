@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+<cms:outline name="${1:栏目名}" id="" property="topnews" beforeday="-1" startpos="${2:1}" num="${3:10}" varLoopStatus="vst">
+    <cms:article property="_toptitle" autolink="true" target="_blank" useTitle="true" ${4:textLen="-1" istr="" astr="" extra="" hrefAd="" hrefParam="" }>{标题}</cms:article>
+</cms:outline>
+	]]></content>
+	<tabTrigger>cmst</tabTrigger>
+	<description>outline:头条新闻</description>
+	<scope>text.html</scope>
+</snippet>

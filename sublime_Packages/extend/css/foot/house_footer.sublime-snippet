@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+/*底部样式*/
+body #footer .aLinks {background:none; border:none;color:#fff;width:auto; margin:20px auto 10px}
+body #footer,body #footer .aLinks a,body #footer .aLinks a:hover,body #footer .fLink1 a,body #footer .fLink1 a:hover,body #footer .fLink2 a,body #footer .fLink2 a:hover,body #footer .fDes,body #footer .fDes a{color:#fff;}
+]]></content>
+	<tabTrigger>house_f</tabTrigger>
+	<scope>source.css</scope>
+</snippet>

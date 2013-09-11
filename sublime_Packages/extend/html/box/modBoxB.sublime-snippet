@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+<div class="modBoxB">
+	<div class="thB">
+		<span class="mark">$1</span>
+		<span class="subMark"><a href="" target="_blank" title="$2">更多>></a></span>
+	</div>
+	<div class="tbB">
+		$0
+	</div>
+</div>
+	]]></content>
+	<tabTrigger>mb</tabTrigger>
+	<scope>text.html</scope>
+</snippet>

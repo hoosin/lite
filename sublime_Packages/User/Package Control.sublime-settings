@@ -1,0 +1,17 @@
+{
+	"installed_packages":
+	[
+		"Alignment",
+		"AndyJS2",
+		"Autoprefixer",
+		"ConvertToUTF8",
+		"css compact expand",
+		"DocBlockr",
+		"Emmet",
+		"Emmet Css Snippets",
+		"JavaScript Snippets",
+		"JsFormat",
+		"Package Control",
+		"Tag"
+	]
+}

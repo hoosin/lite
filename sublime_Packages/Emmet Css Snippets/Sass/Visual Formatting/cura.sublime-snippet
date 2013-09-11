@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+cursor: auto
+
+]]></content>
+	<tabTrigger>cur:a</tabTrigger>
+	<scope>source.sass</scope>
+	<description>cursor:auto</description>
+</snippet>

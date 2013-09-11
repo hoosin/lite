@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+border-collapse: separate
+
+]]></content>
+	<tabTrigger>bdcl:s</tabTrigger>
+	<scope>source.sass</scope>
+	<description>border-collapse:separate</description>
+</snippet>

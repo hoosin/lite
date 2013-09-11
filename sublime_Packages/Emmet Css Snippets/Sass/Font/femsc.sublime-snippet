@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+font-emphasize-style: circle
+
+]]></content>
+	<tabTrigger>fems:c</tabTrigger>
+	<scope>source.sass</scope>
+	<description>font-emphasize-style:circle</description>
+</snippet>

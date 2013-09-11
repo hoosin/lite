@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+<c:set var="${1}"><cms:block property="channel" name="${1:config}">{代码块}</cms:block></c:set>
+<c:forTokens var='data' items='${1}' delims="${2:,}">
+	${0}
+</c:forTokens>
+]]></content>
+	<tabTrigger>ct</tabTrigger>
+	<description>c:forTokens 分割循环</description>
+	<scope>text.html</scope>
+</snippet>

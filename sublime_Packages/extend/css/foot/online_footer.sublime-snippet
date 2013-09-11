@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+/*底部样式*/
+html body { background:#000;}
+body #bottom .links { background:none; text-align:center;}
+body #bottom .links ,body #bottom .links a { color:#fff;}
+body #bottom .sites ,body #bottom .sites a ,body #bottom .sites a:link { color:#fff;}
+body #bottom .sites a:hover ,body #bottom .sites a:visited { color:#fff;}
+body #bottom .left p ,body #bottom .left p a ,body #bottom .left p a:link { color:#fff;}
+body #bottom .mid ,body #bottom .mid a ,body #bottom .mid a:link { color:#fff;}
+]]></content>
+	<tabTrigger>online_f</tabTrigger>
+	<scope>source.css</scope>
+</snippet>

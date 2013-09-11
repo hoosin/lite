@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[$0<a href="#" target="_blank"><img width="$1" height="$2" alt="" src="http://dummyimage.com/$1x$2/f1f1f1/999" /></a>]]></content>  // 缩写展开后的代码
+    <tabTrigger>im</tabTrigger>  // 快捷输入的缩写
+    <description>img</description>  // 片段的描述
+    <scope>text.html</scope>  // 仅对 html 文件有效
+</snippet>

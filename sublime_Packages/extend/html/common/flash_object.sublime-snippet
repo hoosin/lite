@@ -1,0 +1,13 @@
+<snippet>
+    <content><![CDATA[
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="100%" height="685">
+    <param name="movie" value="asus_1440x685_0409.swf" />
+	<param name="allowScriptAccess" value="always" />
+    <param name="wmode" value="transparent" />
+    <embed src="asus_1440x685_0409.swf" quality="high" wmode= "transparent" allowScriptAccess="always" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="100%" height="685"></embed>
+</object>
+]]></content>  // 缩写展开后的代码
+    <tabTrigger>ob</tabTrigger>  // 快捷输入的缩写
+    <description>flash object代码</description>  // 片段的描述
+    <scope>text.html</scope>  // 仅对 html 文件有效
+</snippet>

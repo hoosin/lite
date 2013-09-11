@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+font-style: normal
+
+]]></content>
+	<tabTrigger>fs:n</tabTrigger>
+	<scope>source.sass</scope>
+	<description>font-style:normal</description>
+</snippet>

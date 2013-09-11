@@ -1,0 +1,5 @@
+[
+{ "keys": ["ctrl+alt+]"], 	"command": "compact_expand_css", "args": { "action": "expand" }  },
+{ "keys": ["ctrl+alt+["], 	"command": "compact_expand_css", "args": { "action": "compact" } },
+{ "keys": ["ctrl+shift+r"],	"command": "expand_to_css_rule"}
+]

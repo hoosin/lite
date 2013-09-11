@@ -1,0 +1,30 @@
+{
+    // ---------------------------  README -----------------------------------
+    //  Copy these key/values to User/Preferences.sublime-settings
+    //  They have NO effect here
+
+    // If `true` will disable bindings like ctrl+alt+n etc
+    // Handy for our italian friends :)
+    "alt_gr": false,
+
+    // If `true` will insert id="$1" snippet on pressing '#', similar on '.'
+    // Useful for `raw html`, but annoying for some templating langs.
+    "auto_id_class": false,
+
+    // disable expanding abbreviation by Tab key
+    "disable_tab_abbreviations": false,
+
+    // disable insertion of formatted linebreak when
+    // Enter key is pressed between opening and closing HTML tags
+    "disable_formatted_linebreak": false,
+
+    // Enables default Emmet keymap. Many users complain that Emmet actions
+    // (especially ones that bound to Alt key) behave incorrectly in 
+    // non-English keyboard layouts. Set this setting to `false` in
+    // Users’s Preferences.sublime-settings to disable all default
+    // keybindings at once
+    "enable_emmet_keymap": true,
+
+    // disable expanding abbreviation by Tab key when autocomplete popup is visible
+    "disable_tab_abbreviations_on_auto_complete": true
+}

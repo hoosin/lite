@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+quotes: none
+
+]]></content>
+	<tabTrigger>q:n</tabTrigger>
+	<scope>source.sass</scope>
+	<description>quotes:none</description>
+</snippet>

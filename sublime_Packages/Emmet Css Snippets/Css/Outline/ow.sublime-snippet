@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+outline-width: 
+]]></content>
+	<tabTrigger>ow</tabTrigger>
+	<scope>source.css, source.scss, source.sass</scope>
+	<description>outline-width</description>
+</snippet>

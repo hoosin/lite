@@ -1,0 +1,33 @@
+<snippet>
+	<content><![CDATA[
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page pageEncoding="GBK" %>
+<%@include file="/templateInclude.jsp" %>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wb="http://open.weibo.com/wb" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title><cms:article property="title">文章标题</cms:article></title>
+<meta name="keywords" content="<cms:article property='keyword' style='' istr='' astr=''>{关键字}</cms:article>"/>
+<meta name="description" content="<cms:article property='summary' textLen='100' autoformat='true' istr='' astr=''>{文章摘要}</cms:article>"/>
+<meta name="author" content="darkmirrors_gz fanghui_gz" />
+<link rel="stylesheet" href="http://js.3conline.com/pconline/2012/qzgb/art.css" />
+<!--[if IE 6]><script>document.execCommand("BackgroundImageCache", false, true)</script><![endif]-->
+</head>
+<c:set var="combineAD">
+<body>
+<cms:block property="common" name="ivy">ivy</cms:block>
+
+<!-- 栏目&文章计数器 -->
+<span class="spanclass">
+	<cms:channel property="count_code">{栏目计数器代码}</cms:channel>
+	<img src="http://acount.pconline.com.cn/wzcount/artbrowse.php?groupname=电脑网&subgroupname=&id=<cms:article property='id' />&title=&response=1"  border="0" width="0" height="0" />
+</span>
+
+<cms:block property="common" name="ivy_footer"></cms:block>
+</body>
+</html>
+]]></content>
+	<tabTrigger>cmsart</tabTrigger>
+	<description>article:文章模板</description>
+	<scope>text.html</scope>
+</snippet>

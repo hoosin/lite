@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+position: static
+
+]]></content>
+	<tabTrigger>pos:s</tabTrigger>
+	<scope>source.sass</scope>
+	<description>position:static</description>
+</snippet>

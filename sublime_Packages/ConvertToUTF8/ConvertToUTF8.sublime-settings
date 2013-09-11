@@ -1,0 +1,29 @@
+{
+	// supported encoding list, name & code in pair
+	"encoding_list" : [
+		["Chinese Simplified (GBK)", "GBK"],
+		["Chinese Traditional (BIG5)", "BIG5-HKSCS"],
+		["Korean (EUC-KR)", "EUC-KR"],
+		["Japanese (CP932)", "CP932"],
+		["Japanese (Shift_JIS)", "Shift_JIS"],
+		["Japanese (EUC-JP)", "EUC-JP"],
+		["UTF-8", "UTF-8"]
+	],
+
+	// Maximum size for encoding cache, 0 means no cache
+	"max_cache_size" : 100,
+
+	// Maximum lines to detect, 0 means unlimited
+	"max_detect_lines" : 600,
+
+	// Action when previewing file: no_action or convert_and_open
+	"preview_action" : "no_action",
+
+	// Encoding for new file, empty means using sublime text's "default_encoding" setting
+	"default_encoding_on_create" : "",
+
+	// Convert encoding options when loading/saving: always, never
+	"convert_on_load" : "always",
+	"convert_on_save" : "always"
+
+}

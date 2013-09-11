@@ -1,0 +1,12 @@
+<snippet>
+    <content><![CDATA[
+<script id="comment_tag">
+	document.body.insertBefore(document.createElement("script"),document.body.firstChild).src = 
+	"http://cmt.pc${1:online}.com.cn/entry.jsp?url="+escape(window.location.href)
+	+"&referer="+escape(document.referrer)+"&tag=&title=&limit=&column=&contentLimit=&briefLimit=";
+</script>
+]]></content>  // 缩写展开后的代码
+    <tabTrigger>cmt</tabTrigger>  // 快捷输入的缩写
+    <description>评论</description>  // 片段的描述
+    <scope>text.html</scope>  // 仅对 html 文件有效
+</snippet>

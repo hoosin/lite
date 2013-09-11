@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+/*底部样式*/
+html body { background:#333;}
+#pcgames #footer .ftop {background:none;color:#fff;text-align:center;border-top:1px solid #878787}
+#pcgames #footer .ftop a{color:#fff}
+body #footer,body #footer a{ color:#fff;}
+]]></content>
+	<tabTrigger>game_f</tabTrigger>
+	<scope>source.css</scope>
+</snippet>

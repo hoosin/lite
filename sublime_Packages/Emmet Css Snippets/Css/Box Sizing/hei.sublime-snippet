@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+height: 
+]]></content>
+	<tabTrigger>hei</tabTrigger>
+	<scope>source.css, source.scss, source.sass</scope>
+	<description>height</description>
+</snippet>

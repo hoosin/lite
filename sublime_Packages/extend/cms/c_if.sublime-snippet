@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<c:if test="\${${1:vst.count}}"></c:if>
+]]></content>
+	<tabTrigger>ci</tabTrigger>
+	<description>c:if 条件语句</description>
+	<scope>text.html</scope>
+</snippet>

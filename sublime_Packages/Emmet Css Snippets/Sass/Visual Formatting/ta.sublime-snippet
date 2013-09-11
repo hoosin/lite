@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+top: auto
+
+]]></content>
+	<tabTrigger>t:a</tabTrigger>
+	<scope>source.sass</scope>
+	<description>top:auto</description>
+</snippet>

@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+/*底部样式*/
+html body { background:#fff;}
+body #Footer { background:none;}
+body #Footer .bottom_bar { background:none;}
+body #Footer .bottom_bar .links_exp ,body #Footer .bottom_bar .links_exp a { color:#000;}
+body #Footer .bottom_info .websites ,body #Footer .bottom_info .websites a { color:#000;}
+body #Footer .bottom_info .Infos ,body #Footer .bottom_info .Infos a { color:#000;}
+]]></content>
+	<tabTrigger>baby_f</tabTrigger>
+	<scope>source.css</scope>
+</snippet>

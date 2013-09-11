@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[
+/*专题公用样式*/
+dl,dt,dd { margin: 0; padding: 0}
+img { vertical-align: top;}
+em { font-style:normal}
+a { color: #333;} a:hover { color: #f60;}
+
+.mark,.fl { float:left} .subMark,.fr { float:right}
+.layA ,.layB ,.layAB { float: left}.layC { float:right}
+.layA { width:350px; margin-right:10px}.layB { width:390px;}.layC { width:230px;}
+.layAB { width:750px;}
+.pDes { text-indent: 24px;}
+.more { color: #c00}.more:hover { color: #c00}
+.f14 { font-size: 14px;}
+
+ { background: url('images/bg.png') 0 0 no-repeat;}
+
+.doc,.header { background: url('images/banner.jpg') center 0 no-repeat;}
+
+.header,.wraper { width:1000px; margin:0 auto;}
+
+.header {}
+.wraper { text-align: left; position: relative; *left: 1px; color: #333}
+
+]]></content>
+	<tabTrigger>zt</tabTrigger>
+	<scope>source.css</scope>
+</snippet>

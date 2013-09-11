@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+/*底部样式*/
+html body { background:#000;}
+body #footer{ background:none;}
+body #footer .channelLinks { background:none;}
+body #footer .companyLinks { background:none;}
+body #footer .companyLinks { border:0 none;}
+html body #footer .channelLinks ,html body #footer .channelLinks a:link { color:#fff;}
+body #footer .channelLinks a:hover ,body #footer .channelLinks a:visited { color:#fff;}
+html body div#footer div.companyLinks ,html body div#footer div.companyLinks a:link { color:#fff;}
+body #footer .companyLinks a:hover ,body #footer .companyLinks a:visited{ color:#fff;}
+body #footer .copyRight table tbody tr td ,body #footer .copyRight table tbody .trTop td  ,body #footer .copyRight a { color:#fff;}
+]]></content>
+	<tabTrigger>lady_f</tabTrigger>
+	<scope>source.css</scope>
+</snippet>

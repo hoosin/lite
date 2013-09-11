@@ -1,0 +1,47 @@
+<snippet>
+    <content><![CDATA[
+<style type="text/css">
+.focusPic { width:350px;position:relative; zoom:1; overflow: hidden;}
+.focusPic .slide li {display:none; position:relative;}
+.focusPic .slide li .sTit { height: 24px; line-height: 24px; padding-left: 6px; display: block; background: #333; overflow: hidden; text-align: left; color: #fff}
+.focusPic .slide li .sTit a,.focusPic .slide li .sTit a:hover { color: #fff;}
+.focusPic .control { height: 20px; position: absolute; right: 2px; bottom: 2px; overflow:hidden;}
+.focusPic .control li {width:18px;height:20px; line-height: 18px; margin-left:2px; float:left; display: inline; text-align:center; overflow:hidden;}
+.focusPic .control li a { border: 1px solid #777; display:block;background:#e8e8e8;font-family:Tahoma;color:#777;}
+.focusPic .control li a:hover, .focusPic .control li.current a{ background:#f60; color:#fff;text-decoration:none; border-color: #c00}
+.focusPic .control .last{ margin:0}
+</style>
+
+<div id="focusPic" class="focusPic">
+    <div class="slide">
+        <ul>
+            <li>
+                <a href="#" target="_blank"><img width="$1" height="$2" alt="" src="http://dummyimage.com/$1x$2/f1f1f1/999"></a>
+                <span class="sTit"><a href="#" target="_blank">测试测试测试</a></span>
+            </li>
+        </ul>
+    </div>
+    <div class="info">
+        <!--最后一个li 加 class="last"-->
+        <ul class="control clearfix">
+            li*$3>a>
+        </ul>
+    </div>
+</div>
+<script src="http://js.3conline.com/min/temp/v2/core-pc_v1,dpl-tab_v2.js"></script>
+<script type="text/javascript">
+    /*2012新版焦点图*/
+    new pc.tab({
+        target: pc.getElems('#focusPic .slide li'),
+        control:  pc.getElems('#focusPic .control li'),
+        effect: 'base',
+        autoPlay:true,
+        stay:3500,
+        lazy:true
+    });
+</script>
+	]]></content>  // 缩写展开后的代码
+    <tabTrigger>focus</tabTrigger>  // 快捷输入的缩写
+    <description>标题+控制按钮在右侧</description>  // 片段的描述
+    <scope>text.html</scope>  // 仅对 html 文件有效
+</snippet>

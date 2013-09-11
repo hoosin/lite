@@ -1,0 +1,8 @@
+{
+	"auto_complete_selector": "source,text",
+	"font_size": 15,
+	"ignored_packages":
+	[
+		"Vintage"
+	]
+}

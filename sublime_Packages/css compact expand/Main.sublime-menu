@@ -1,0 +1,51 @@
+[
+ {
+    	"caption": "编辑(E)",
+        "mnemonic": "E",
+        "id": "edit",
+        "children":
+        [
+            { "caption": "-", "id": "permute" },
+        	{
+        		"caption":"CSS格式化",
+        		"children":[
+	        		{ "command": "compact_expand_css", "args": { "action": "compact" },"caption":"紧凑格式"},
+		            { "command": "compact_expand_css", "args": { "action": "expand" },"caption":"扩张格式"},
+		            { "command": "compact_expand_css", "args": { "action": "toggle" },"caption":"切换格式"}
+        		]
+        	}
+        ]
+    },
+    {
+
+        "caption": "Preferences",
+        "mnemonic": "n",
+        "id": "preferences",
+        "children":
+        [
+            {
+                "caption": "Package Settings",
+                "mnemonic": "P",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "CSS格式化",
+                        "children":
+                        [
+                            {
+                                "command": "open_file", "args":
+                                {
+                                    "file": "${packages}/css compact expand/Default (Windows).sublime-keymap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "Key Bindings – User"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+
+    }
+]

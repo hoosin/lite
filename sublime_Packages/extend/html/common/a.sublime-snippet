@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[
+<a href="#" target="_blank"></a>
+]]></content>
+    <tabTrigger>a</tabTrigger>
+    <description>a[target=_blank]</description>
+    <scope>text.html</scope>
+</snippet>

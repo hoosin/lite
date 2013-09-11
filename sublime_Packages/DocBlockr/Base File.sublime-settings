@@ -1,0 +1,107 @@
+{
+  // If true, when in a docblock, pressing tab after a @tag line (like @param, @return)
+  // will indent to the description. This is useful if you are writing a long description
+  // and want that block of text to stay aligned.
+  "jsdocs_deep_indent": true,
+
+  // If true, then pressing enter while in a double-slash comment (like this one)
+  // will automatically add two slashes to the next line as well
+  "jsdocs_extend_double_slash": true,
+
+  // the number of spaces to add after the leading *
+  "jsdocs_indentation_spaces": 1,
+
+  // The number of spaces to add after the leading * in lines under the first line of each
+  // paragraph. This is only used together with automatic line wrapping. For example, a value
+  // of 3 might look like this:
+  //
+  // /**
+  //  * Duis sed arcu non tellus eleifend ullamcorper quis non erat. Curabitur
+  //  *   metus elit, ultrices et tristique a, blandit at justo.
+  //  * @param  {String} foo Lorem ipsum dolor sit amet.
+  //  * @param  {Number} bar Nullam fringilla feugiat pretium. Quisque
+  //  *   consectetur, risus eu pellentesque tincidunt, nulla ipsum imperdiet
+  //  *   massa, sit amet adipiscing dolor.
+  //  * @return {[Type]}
+  //  */
+  "jsdocs_indentation_spaces_same_para": 1,
+
+  // whether the words following the @tags should align.
+  // Possible values are 'no', 'shallow', 'deep'
+  // For backwards compatibility, false is equivalent to 'no', true is equivalent to 'shallow'
+  //
+  // 'shallow' will just align the first words after the tag. eg:
+  // @param    {MyCustomClass} myVariable desc1
+  // @return   {String} foo desc2
+  // @property {Number} blahblah desc3
+  //
+  // 'deep' will align each component of the tags, eg:
+  // @param    {MyCustomClass} myVariable desc1
+  // @return   {String}        foo        desc2
+  // @property {Number}        blahblah   desc3
+  "jsdocs_align_tags": "deep",
+
+  // Any additional boilerplate tags which should be added to each block. Should be an array of strings.
+  // Note that this only applies when a docblock is opened directly preceding a function.
+  // Tab points can be added by using snippet syntax, eg: ${1:default text}
+  "jsdocs_extra_tags": [],
+
+  // If extra tags are defined, by default they go between the description and the param/return tags. If this is set to
+  // true, the extra tags are placed at the very end.
+  "jsdocs_extra_tags_go_after": false,
+
+  // A map to determine the value of variables, should hungarian notation (or similar) be in use
+  "jsdocs_notation_map": [],
+
+  // Since there seems to be no agreed standard for "@return" or "@returns", use this setting to rename it as you wish.
+  "jsdocs_return_tag": "@return",
+
+  // Add a '[description]' placeholder for the return tag?
+  "jsdocs_return_description": true,
+
+  // Add a '[description]' placeholder for the param tag?
+  "jsdocs_param_description": true,
+
+  // Whether there should be blank lines added between the description line, and between tags of different types.
+  // If true, the output might look like this:
+  //
+  // /**
+  //  * [description]
+  //  *
+  //  * @param  {String} foo
+  //  * @param  {Number} bar
+  //  *
+  //  * @return {[Type]}
+  //  */
+  "jsdocs_spacer_between_sections": false,
+
+  // Whether each section should be indented to the same level, or indent each one individually.
+  // (When true, the @param section will lose the extra space immediately after each '@param').
+  "jsdocs_per_section_indent": false,
+
+  // Minimum spaces between cols (default is 1). For example, a value
+  // of 2 might look like this:
+  //
+  // /**
+  //  * Duis sed arcu non tellus eleifend ullamcorper quis non erat. Curabitur
+  //  *
+  //  * @param   {String}  foo  Lorem ipsum dolor sit amet.
+  //  * @param   {Number}  bar  Nullam fringilla feugiat pretium. Quisque
+  //  *
+  //  * @return  {[Type]}       description
+  //  */
+  "jsdocs_min_spaces_between_columns": 1,
+
+  // indicates whether the @method tag should be added automatically
+  "jsdocs_autoadd_method_tag": false,
+
+  // If set to true, DocBlockr won't parse any code, providing no default templates. All other functions work as normal.
+  "jsdocs_simple_mode": false,
+
+  // If set to true, primitives such as "Number" and "String" will be documented as "number" and "string".
+  "jsdocs_lower_case_primitives": false,
+
+  // This property affects the default tag added to `var` declarations in Javascript/Coffeescript. If `false`, the
+  // default is used ("var"), otherwise it can be set to any String, eg: "property"
+  "jsdocs_override_js_var": false
+}
