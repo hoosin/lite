@@ -13,11 +13,13 @@ lite
 ###2.项目包含：
 
 ```
+	note：包含前端规范标准；
 
-	**note：**
-				包含前端规范标准。
-				====
-	**bug：**
-				包含常见问题。
-	
+	bug：包含常见问题；
+
+	sublime_Packages：sublime 插件；
+
+	interview：面试；
+
+	knowledge：前端知识点；
 ```
