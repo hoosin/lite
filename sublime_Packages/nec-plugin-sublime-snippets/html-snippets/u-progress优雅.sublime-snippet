@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+
+<div class="u-progress"><span class="pgtrack"></span><span class="pgbar" style="width:50%"></span></div>
+<div class="u-progress u-progress-c1"><span class="pgtrack"></span><span class="pgbar" style="width:30%"></span></div>
+<div class="u-progress u-progress-c2"><span class="pgtrack"></span><span class="pgbar" style="width:60%"></span></div>
+<div class="u-progress u-progress-c3"><span class="pgtrack"></span><span class="pgbar" style="width:90%"></span></div>
+]]></content>
+	<tabTrigger>u-progress</tabTrigger>
+	<scope>text.html</scope>
+	<description>[优雅]水平进度条</description>
+</snippet>

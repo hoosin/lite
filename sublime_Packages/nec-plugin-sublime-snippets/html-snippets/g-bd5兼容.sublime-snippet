@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+
+<div class="g-bd5 f-cb">
+    <div class="g-sd51">
+        <p>左侧定宽</p>
+    </div>
+    <div class="g-mn5">
+        <div class="g-mn5c">
+            <p>中间自适应</p>
+        </div>
+    </div>
+    <div class="g-sd52">
+        <p>右侧定宽</p>
+    </div>
+</div>
+]]></content>
+	<tabTrigger>g-bd5</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]三列中间自适应布局</description>
+</snippet>

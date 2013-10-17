@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+
+<div class="g-bd3 f-cb">
+    <div class="g-sd31">
+        <p>左侧定宽</p>
+    </div>
+    <div class="g-sd32">
+        <p>左侧定宽</p>
+    </div>
+    <div class="g-mn3">
+        <div class="g-mn3c">
+            <p>右侧自适应</p>
+        </div>
+    </div>
+</div>
+]]></content>
+	<tabTrigger>g-bd3</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]三列右侧自适应布局</description>
+</snippet>

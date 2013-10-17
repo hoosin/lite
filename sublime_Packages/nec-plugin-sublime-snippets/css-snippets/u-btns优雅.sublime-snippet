@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+/* 通用自定义按钮组合 */
+.u-btns{display:inline-block;*display:inline;*zoom:1;position:relative;padding-left:1px;}
+.u-btns .u-btn{float:left;margin-left:-1px;border-radius:0;}
+.u-btns .u-btn:first-child{border-radius:5px 0 0 5px;}
+.u-btns .u-btn:nth-last-of-type(1){border-radius:0 5px 5px 0;}
+.u-btns .u-btn:only-of-type{border-radius:5px;}]]></content>
+	<tabTrigger>u-btns</tabTrigger>
+	<scope>source.css</scope>
+	<description>[优雅]通用自定义按钮组合</description>
+</snippet>

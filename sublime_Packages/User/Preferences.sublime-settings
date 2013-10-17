@@ -1,6 +1,7 @@
 {
 	"auto_complete_selector": "source,text",
-	"font_size": 15,
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"font_size": 18,
 	"ignored_packages":
 	[
 		"Vintage"

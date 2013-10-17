@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+
+<input type="text" class="u-ipt"/>
+<input type="text" class="u-ipt u-ipt-err"/>
+<input type="text" class="u-ipt u-ipt-1"/>
+<input type="text" class="u-ipt u-ipt-1 u-ipt-err"/>
+]]></content>
+	<tabTrigger>u-ipt</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]简易单行文本输入框</description>
+</snippet>

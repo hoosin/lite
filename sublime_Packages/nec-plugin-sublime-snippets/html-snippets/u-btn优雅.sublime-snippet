@@ -1,0 +1,19 @@
+<snippet>
+	<content><![CDATA[
+
+<button type="button" class="u-btn">蓝色</button>
+<a href="#" class="u-btn">蓝色</a>
+<button type="button" class="u-btn u-btn-c1">红色</button>
+<button type="button" class="u-btn u-btn-c2">黄色</button>
+<button type="button" class="u-btn u-btn-c3">绿色</button>
+<button type="button" class="u-btn u-btn-c4">灰色</button>
+<button type="button" class="u-btn"><span class="btntxt">下拉</span><span class="btnsel"></span></button>
+<button type="button" class="u-btn u-btn-c4"><span class="btnsel"></span></button>
+<button type="button" class="u-btn u-btn-c4"><span class="btntxt">灰色下拉</span><span class="btnsel"></span></button>
+<button type="button" class="u-btn u-btn-lg"><span class="btntxt">较大的</span><span class="btnsel"></span></button>
+<button type="button" class="u-btn u-btn-sm">较小的</button>
+]]></content>
+	<tabTrigger>u-btn</tabTrigger>
+	<scope>text.html</scope>
+	<description>[优雅]通用自定义按钮</description>
+</snippet>

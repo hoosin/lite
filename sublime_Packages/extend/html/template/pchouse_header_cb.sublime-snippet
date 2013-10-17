@@ -1,0 +1,69 @@
+<snippet>
+	<content><![CDATA[
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>家居网专题：内容宽度1000px</title>
+<meta name="keywords" content="关键字,关键字,关键字" />
+<meta name="description" content="描述。……" />
+<meta name="Author" content="author_bj">
+<link href="http://js.3conline.com/pchouse/global.css" rel="stylesheet" type="text/css" />
+<style>
+/*
+以下样式用于专题背景很复杂的情况，去除底部的背景，使底部风格和页面统一
+body #footer .aLinks {background:none; border:none;color:#fff;width:auto; margin:20px auto 10px}
+body #footer,body #footer .aLinks a,body #footer .aLinks a:hover,body #footer .fLink1 a,body #footer .fLink1 a:hover,body #footer .fLink2 a,body #footer .fLink2 a:hover{color:#fff;}
+*/
+</style>
+</head>
+
+<body>
+<script>if(!window._addIvyID) document.write("<scr"+"ipt src='http://www.pconline.com.cn/_hux_/house/default/index.js'><\/scr"+"ipt>");</script>
+<!--栏目计数器/文章计数器-->
+<span class="spanclass">
+<script>
+document.write('<img src="http://count.pchouse.com.cn/count.php?channel=2166&screen=' + screen.width + '*' + screen.height + '&refer=' + escape(document.referrer)+"&anticache="+new Date().getTime()+location.hash.replace(/^#ad=/,"&ad=")+'" border="0" width="0"  height="0" />');
+document.write('<img src="http://acount.pchouse.com.cn/wzcount/artbrowse.php?groupname=家居网&subgroupname=&id=&title=&response=1"  border="0" width="0" height="0" />');
+</script>
+</span>
+
+<!--头部-->
+<script src="http://www.pchouse.com.cn/global/zt_header/index.html"></script>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<!--页面脚本区S-->
+<!--所有页面用到的js脚本都必须放到此位置，包括外链js和内嵌js-->
+<script src="xxxx.js"></script>
+<script>
+
+</script>
+<!--页面脚本区E-->
+<script src="http://www.pchouse.com.cn/global/footer/index.html"></script>
+<script>_submitIvyID();</script>
+</body>
+</html>
+
+]]></content>
+	<tabTrigger>zthouse</tabTrigger>
+	<scope>text.html</scope>
+</snippet>

@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+
+<div class="g-bd f-cb">
+    <div class="g-mn">
+        <p>左侧定宽</p>
+    </div>
+    <div class="g-sd">
+        <p>右侧定宽</p>
+    </div>
+</div>
+]]></content>
+	<tabTrigger>g-bd</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]两列定宽布局</description>
+</snippet>

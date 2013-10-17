@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+/* 两列右侧自适应布局 */
+.g-bd1{margin:0 0 10px;}
+.g-sd1{position:relative;float:left;width:190px;margin-right:-190px;}
+.g-mn1{float:right;width:100%;}
+.g-mn1c{margin-left:200px;}]]></content>
+	<tabTrigger>g-bd1</tabTrigger>
+	<scope>source.css</scope>
+	<description>[兼容]两列右侧自适应布局</description>
+</snippet>

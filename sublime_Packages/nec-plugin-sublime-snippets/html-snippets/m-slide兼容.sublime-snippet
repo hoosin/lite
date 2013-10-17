@@ -1,0 +1,77 @@
+<snippet>
+	<content><![CDATA[
+
+<div class="m-slide">
+    <ol>
+        <li class="z-crt"><a href="#"><img src="http://nec.netease.com/img/m/1.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="http://nec.netease.com/img/m/2.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="http://nec.netease.com/img/m/3.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="http://nec.netease.com/img/m/4.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="http://nec.netease.com/img/m/5.jpg" alt=""/></a></li>
+    </ol>
+    <span class="u-pointer"><i class="first z-crt"></i><i></i><i></i><i></i><i></i></span>
+</div>
+<div class="m-slide">
+    <ol>
+        <li class="z-crt"><a href="#"><img src="http://nec.netease.com/img/m/1.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="http://nec.netease.com/img/m/2.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="http://nec.netease.com/img/m/3.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="http://nec.netease.com/img/m/4.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="http://nec.netease.com/img/m/5.jpg" alt=""/></a></li>
+    </ol>
+    <span class="u-pointer u-pointer-rt"><i class="first z-crt"></i><i></i><i></i><i></i><i></i></span>
+</div>
+<!-- JS只需改变className（以下示例仅作参考）： -->
+<script type="text/javascript">
+(function(_slides){
+    each(_slides,function(_slide,i){
+        var _ctrls = _slide.getElementsByTagName('i');
+        var _lists = _slide.getElementsByTagName('li');
+        each(_ctrls,function(_ctrl,i){
+            _ctrl.onclick=function(){
+                each(_lists,function(_list,i){
+                    delClass(_list,"z-crt");
+                });
+                each(_ctrls,function(_ctrl,i){
+                    delClass(_ctrl,"z-crt");
+                });
+                addClass(_lists[i],"z-crt");
+                addClass(_ctrls[i],"z-crt");
+            }
+        });
+    });
+    function hasClass(_object,_clsname){
+        var _clsname = _clsname.replace(".","");
+        var _sCls = " "+(_object.className)+" ";
+        return (_sCls.indexOf(" "+_clsname+" ") != -1) ? true : false;
+    }
+    function toClass(_str){
+        var _str = _str.toString();
+        _str = _str.replace(/(^\s*)|(\s*$)/g,"");
+        _str = _str.replace(/\s{2,}/g," ");
+        return _str;
+    }
+    function addClass(_object,_clsname){
+        var _clsname = _clsname.replace(".","");
+        if(!hasClass(_object,_clsname)){
+            _object.className = toClass(_object.className+(" "+_clsname));
+        }
+    }
+    function delClass(_object,_clsname){
+        var _clsname = _clsname.replace(".","");
+        if(hasClass(_object,_clsname)){
+            _object.className = toClass(_object.className.replace(new RegExp("(?:^|\\s)"+_clsname+"(?=\\s|$)","g")," "));
+        }
+    }
+    function each(_objects,_fn){
+        for(var i=0,len=_objects.length;i<len;i++){
+            _fn(_objects[i],i);
+        }
+    }
+})(document.getElementsByTagName('div'));
+</script>
+]]></content>
+	<tabTrigger>m-slide</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]单片式幻灯</description>
+</snippet>

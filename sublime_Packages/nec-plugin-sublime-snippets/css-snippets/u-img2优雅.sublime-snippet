@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+/* 有边图片容器-默认定宽定高、图片拉伸 */
+.u-img2{display:block;position:relative;width:104px;height:104px;padding:2px;border:1px solid #ddd;}
+.u-img2,.u-img2 img{border-radius:5px;}
+.u-img2 img{display:block;width:100%;height:100%;}
+/* 图片高适应 */
+.u-img2-ha,.u-img2-ha img{height:auto;}]]></content>
+	<tabTrigger>u-img2</tabTrigger>
+	<scope>source.css</scope>
+	<description>[优雅]有边图片容器</description>
+</snippet>

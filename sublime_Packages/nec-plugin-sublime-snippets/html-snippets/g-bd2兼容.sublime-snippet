@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[
+
+<div class="g-bd2 f-cb">
+    <div class="g-mn2">
+        <div class="g-mn2c">
+            <p>左侧自适应</p>
+        </div>
+    </div>
+    <div class="g-sd2">
+        <p>右侧定宽</p>
+    </div>
+</div>
+]]></content>
+	<tabTrigger>g-bd2</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]两列左侧自适应布局</description>
+</snippet>

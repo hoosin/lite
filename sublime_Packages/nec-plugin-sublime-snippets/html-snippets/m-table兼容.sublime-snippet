@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+
+<table class="m-table">
+    <thead>
+        <tr><th class="cola">格边框</th><th>表头</th><th class="cola">表头</th><th class="cola">表头</th><th class="colb">表头</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+        <tr class="even"><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+        <tr><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+        <tr class="even"><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+        <tr><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+    </tbody>
+</table>
+<table class="m-table m-table-row">
+    <thead>
+        <tr><th class="cola">行边框</th><th>表头</th><th class="cola">表头</th><th class="cola">表头</th><th class="colb">表头</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+        <tr class="even"><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+        <tr><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+        <tr class="even"><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+        <tr><td>内容</td><td>内容内容内容内容内容内容内容</td><td>内容内容</td><td>内容内容</td><td>内容内容内容</td></tr>
+    </tbody>
+</table>
+]]></content>
+	<tabTrigger>m-table</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]简易数据表格</description>
+</snippet>

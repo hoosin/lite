@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+/* 水平进度条-默认蓝色 */
+.u-progress{width:200px;height:12px;overflow:hidden;border-radius:3px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.2);background:#f7f7f7;}
+.u-progress .pgbar,.u-progress .pging{display:block;width:100%;height:100%;}
+.u-progress .pgbar{background:#3a9ed8;background:-webkit-gradient(linear,0% 0%,0% 100%,from(#6fbee5),to(#3a9ed8));background:-webkit-linear-gradient(#6fbee5,#3a9ed8);background:-moz-linear-gradient(#6fbee5,#3a9ed8);background:-ms-linear-gradient(#6fbee5,#3a9ed8);background:linear-gradient(#6fbee5,#3a9ed8);-webkit-transition:width 0.5s linear;-moz-transition:width 0.5s linear;-ms-transition:width 0.5s linear;transition:width 0.5s linear;}
+.u-progress .pging{background:-webkit-gradient(linear,0% 0%,100% 100%,from(rgba(0,0,0,0)),to(rgba(255,255,255,0.2)),color-stop(25%,rgba(0,0,0,0)),color-stop(25%,rgba(255,255,255,0.2)),color-stop(50%,rgba(255,255,255,0.2)),color-stop(50%,rgba(0,0,0,0)),color-stop(75%,rgba(0,0,0,0)),color-stop(75%,rgba(255,255,255,0.2)));background:-webkit-linear-gradient(-45deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 25%,rgba(255,255,255,0.2) 25%,rgba(255,255,255,0.2) 50%,rgba(0,0,0,0) 50%,rgba(0,0,0,0) 75%,rgba(255,255,255,0.2) 75%,rgba(255,255,255,0.2));background:-moz-linear-gradient(-45deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 25%,rgba(255,255,255,0.2) 25%,rgba(255,255,255,0.2) 50%,rgba(0,0,0,0) 50%,rgba(0,0,0,0) 75%,rgba(255,255,255,0.2) 75%,rgba(255,255,255,0.2));background:-ms-linear-gradient(-45deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 25%,rgba(255,255,255,0.2) 25%,rgba(255,255,255,0.2) 50%,rgba(0,0,0,0) 50%,rgba(0,0,0,0) 75%,rgba(255,255,255,0.2) 75%,rgba(255,255,255,0.2));background:linear-gradient(-45deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 25%,rgba(255,255,255,0.2) 25%,rgba(255,255,255,0.2) 50%,rgba(0,0,0,0) 50%,rgba(0,0,0,0) 75%,rgba(255,255,255,0.2) 75%,rgba(255,255,255,0.2));-webkit-background-size:30px 30px;-moz-background-size:30px 30px;-ms-background-size:30px 30px;background-size:30px 30px;-webkit-animation:pging 1s linear infinite;-moz-animation:pging 1s linear infinite;-ms-animation:pging 1s linear infinite;animation:pging 1s linear infinite;}
+@-webkit-keyframes pging{0%{background-position:0 0;}100%{background-position:30px 0;}}
+@-moz-keyframes pging{0%{background-position:0 0;}100%{background-position:30px 0;}}
+@-ms-keyframes pging{0%{background-position:0 0;}100%{background-position:30px 0;}}
+@keyframes pging{0%{background-position:0 0;}100%{background-position:30px 0;}}
+/* 较佳，绿色 */
+.u-progress-c1 .pgbar{background:#50b050;background:-webkit-gradient(linear,0% 0%,0% 100%,from(#69c769),to(#50b050));background:-webkit-linear-gradient(#69c769,#50b050);background:-moz-linear-gradient(#69c769,#50b050);background:-ms-linear-gradient(#69c769,#50b050);background:linear-gradient(#69c769,#50b050);}
+/* 中等，黄色 */
+.u-progress-c2 .pgbar{background:#f8960b;background:-webkit-gradient(linear,0% 0%,0% 100%,from(#fbb24c),to(#f8960b));background:-webkit-linear-gradient(#fbb24c,#f8960b);background:-moz-linear-gradient(#fbb24c,#f8960b);background:-ms-linear-gradient(#fbb24c,#f8960b);background:linear-gradient(#fbb24c,#f8960b);}
+/* 较差，红色 */
+.u-progress-c3 .pgbar{background:#cc1c23;background:-webkit-gradient(linear,0% 0%,0% 100%,from(#f0232b),to(#cc1c23));background:-webkit-linear-gradient(#f0232b,#cc1c23);background:-moz-linear-gradient(#f0232b,#cc1c23);background:-ms-linear-gradient(#f0232b,#cc1c23);background:linear-gradient(#f0232b,#cc1c23);}]]></content>
+	<tabTrigger>u-progress</tabTrigger>
+	<scope>source.css</scope>
+	<description>[高级]水平进度条</description>
+</snippet>

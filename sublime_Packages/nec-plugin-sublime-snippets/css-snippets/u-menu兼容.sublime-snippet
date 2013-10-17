@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+/* 下拉式菜单-默认左对齐 */
+.u-menu{display:none;position:absolute;z-index:100;top:100%;left:0;*zoom:1;*width:100px;margin:1px 0 0;overflow:hidden;border:1px solid #d0d0d0;border-width:1px 0;line-height:1.5;font-size:12px;background:#fff;}
+.u-menu li{border:1px solid #d0d0d0;border-width:0 1px;*vertical-align:top;}
+.u-menu li a{display:block;*zoom:1;padding:7px 12px 6px;margin:-1px 0;border-top:1px solid #e8e8e8;overflow:hidden;*vertical-align:top;word-wrap:normal;white-space:nowrap;_white-space:normal;text-overflow:ellipsis;color:#333;}
+.u-menu li a:hover{color:#333;background:#f7f7f7;}
+.u-menu li a:active{background:#f0f0f0;}
+/* 显示 */
+.u-menu-show{display:block;}
+/* 分组 */
+.u-menu-gp li.menusep,.u-menu-gp li.menusep .menuline{height:0;line-height:0;font-size:0;overflow:hidden;}
+.u-menu-gp li.menusep{padding:5px 0;}
+.u-menu-gp li.menusep .menuline{display:block;border:0;border-top:1px solid #e8e8e8;}
+.u-menu-gp li a{border:0;}
+/* 宽度限制 */
+.u-menu-min{min-width:100%;}
+.u-menu-max{max-width:100%;}
+/* 右对齐 */
+.u-menu-rt{left:auto;right:0;}]]></content>
+	<tabTrigger>u-menu</tabTrigger>
+	<scope>source.css</scope>
+	<description>[兼容]下拉式菜单</description>
+</snippet>

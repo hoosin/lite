@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+/* 三列右侧自适应布局 */
+.g-bd3{margin:0 0 10px;}
+.g-sd31,.g-sd32{position:relative;float:left;width:230px;}
+.g-sd31{width:190px;margin-right:10px;}
+.g-mn3{float:right;width:100%;margin-left:-430px;}
+.g-mn3c{margin-left:440px;}]]></content>
+	<tabTrigger>g-bd3</tabTrigger>
+	<scope>source.css</scope>
+	<description>[兼容]三列右侧自适应布局</description>
+</snippet>

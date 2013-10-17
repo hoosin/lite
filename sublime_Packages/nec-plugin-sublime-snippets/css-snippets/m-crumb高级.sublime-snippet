@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+/* 多行式面包屑导航-默认竖线分隔 */
+.m-crumb{overflow:hidden;line-height:1.5;}
+.m-crumb ul{margin-left:-20px;}
+.m-crumb li{float:left;word-wrap:normal;white-space:nowrap;}
+.m-crumb li:before{display:inline-block;width:20px;text-align:center;content:'|';font-size:12px;color:#ccc;font-family:\5b8b\4f53;}
+/* 箭头分隔 */
+.m-crumb-arr li:before{content:'\3E';}
+/* 空白分隔 */
+.m-crumb-blank ul{margin-left:-10px;}
+.m-crumb-blank li:before{width:10px;content:'';}]]></content>
+	<tabTrigger>m-crumb</tabTrigger>
+	<scope>source.css</scope>
+	<description>[高级]多行式面包屑导航</description>
+</snippet>

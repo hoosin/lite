@@ -1,0 +1,70 @@
+<snippet>
+	<content><![CDATA[
+
+<div class="m-page">
+    <a href="#" class="first pageprv z-dis"><span class="pagearr">&lt;</span></a>
+    <a href="#">1</a>
+    <a href="#" class="z-crt">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <i>...</i>
+    <a href="#">10</a>
+    <a href="#" class="last pagenxt"><span class="pagearr">&gt;</span></a>
+</div>
+<div class="m-page">
+    <a href="#" class="first">1</a>
+    <a href="#" class="z-crt">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <i>...</i>
+    <a href="#" class="last">10</a>
+</div>
+<div class="m-page">
+    <a href="#" class="first pageprv z-dis"><span class="pagearr">&lt;</span>上一页</a>
+    <a href="#" class="last pagenxt">下一页<span class="pagearr">&gt;</span></a>
+</div>
+<div class="m-page m-page-lt">
+    <a href="#" class="first pageprv"><span class="pagearr">&lt;</span>上一页</a>
+    <a href="#">1</a>
+    <a href="#" class="z-crt">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <i>...</i>
+    <a href="#">10</a>
+    <a href="#" class="last pagenxt z-dis">下一页<span class="pagearr">&gt;</span></a>
+</div>
+<div class="m-page m-page-rt">
+    <a href="#" class="first pageprv z-dis"><span class="pagearr">&lt;</span>上一页</a>
+    <a href="#">1</a>
+    <a href="#" class="z-crt">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <i>...</i>
+    <a href="#">10</a>
+    <a href="#" class="last pagenxt">下一页<span class="pagearr">&gt;</span></a>
+</div>
+<div class="m-page m-page-rt m-page-sr">
+    <a href="#" class="first pageprv z-dis"><span class="pagearr">&lt;</span>上一页</a>
+    <a href="#">1</a>
+    <a href="#" class="z-crt">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <i>...</i>
+    <a href="#">10</a>
+    <a href="#" class="last pagenxt">下一页<span class="pagearr">&gt;</span></a>
+</div>
+<div class="m-page m-page-sr m-page-sm">
+    <a href="#" class="first pageprv z-dis"><span class="pagearr">&lt;</span>上一页</a>
+    <a href="#">1</a>
+    <a href="#" class="z-crt">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <i>...</i>
+    <a href="#">10</a>
+    <a href="#" class="last pagenxt">下一页<span class="pagearr">&gt;</span></a>
+</div>
+]]></content>
+	<tabTrigger>m-page</tabTrigger>
+	<scope>text.html</scope>
+	<description>[优雅]简易翻页器</description>
+</snippet>

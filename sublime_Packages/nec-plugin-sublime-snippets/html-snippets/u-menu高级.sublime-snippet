@@ -1,0 +1,33 @@
+<snippet>
+	<content><![CDATA[
+
+<menu class="u-menu z-show">
+    <li><a href="#">下拉式菜单</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+</menu>
+<menu class="u-menu u-menu-rt u-menu-gp z-show">
+    <li><a href="#">分组，右对齐</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+    <li></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+</menu>
+<menu class="u-menu u-menu-min u-menu-gp z-show">
+    <li><a href="#">至少撑满，分组</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+</menu>
+<menu class="u-menu u-menu-max z-show">
+    <li><a href="#">最多撑满</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+    <li><a href="#">下拉式菜单菜单项下拉式菜单菜单项下拉式菜单菜单项</a></li>
+    <li><a href="#">下拉式菜单菜单项</a></li>
+</menu>
+]]></content>
+	<tabTrigger>u-menu</tabTrigger>
+	<scope>text.html</scope>
+	<description>[高级]下拉式菜单</description>
+</snippet>

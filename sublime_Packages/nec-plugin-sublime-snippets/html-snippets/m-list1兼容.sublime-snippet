@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+
+<div class="m-list1">
+    <ul class="f-cb">
+        <li><a href="#">列表文字</a></li>
+        <li><a href="#">文字或链接</a></li>
+        <li><a href="#">文字或链接</a></li>
+        <li><a href="#">文字</a></li>
+    </ul>
+</div>
+<div class="m-list1 m-list1-c1">
+    <ul class="f-cb">
+        <li><a href="#">文字</a></li>
+        <li><a href="#">文字或链接</a></li>
+        <li><a href="#">文字或链接</a></li>
+        <li><a href="#">文字</a></li>
+    </ul>
+</div>
+]]></content>
+	<tabTrigger>m-list1</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]水平文字链接列表</description>
+</snippet>

@@ -1,0 +1,35 @@
+<snippet>
+	<content><![CDATA[
+
+<div class="m-nav">
+    <ul>
+        <li class="first"><a href="#">首页</a></li>
+        <li><a href="#">栏目1</a></li>
+        <li><a href="#">栏目2</a></li>
+        <li><a href="#">栏目3</a></li>
+    </ul>
+    <span class="corner corner-l"></span><span class="corner corner-r"></span>
+</div>
+<div class="m-nav m-nav-1">
+    <ul>
+        <li class="first"><a href="#">首页</a></li>
+        <li><a href="#">栏目1</a></li>
+        <li><a href="#">栏目2</a></li>
+        <li><a href="#">栏目3</a></li>
+    </ul>
+    <span class="corner corner-l"></span><span class="corner corner-r"></span>
+</div>
+<div class="m-nav m-nav-2">
+    <ul>
+        <li class="first"><a href="#">首页</a></li>
+        <li><a href="#">栏目1</a></li>
+        <li><a href="#">栏目2</a></li>
+        <li><a href="#">栏目3</a></li>
+    </ul>
+    <span class="corner corner-l"></span><span class="corner corner-r"></span>
+</div>
+]]></content>
+	<tabTrigger>m-nav</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]文本型圆角背景导航</description>
+</snippet>

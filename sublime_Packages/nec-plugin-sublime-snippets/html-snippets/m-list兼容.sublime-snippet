@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+
+<ul class="m-list">
+    <li><a href="#">列表项文字</a></li>
+    <li><a href="#">列表项文字或链接</a></li>
+    <li><a href="#">列表项文字</a></li>
+    <li><a href="#">列表项列表项列表项文字</a></li>
+</ul>
+]]></content>
+	<tabTrigger>m-list</tabTrigger>
+	<scope>text.html</scope>
+	<description>[兼容]简易文字链接列表</description>
+</snippet>

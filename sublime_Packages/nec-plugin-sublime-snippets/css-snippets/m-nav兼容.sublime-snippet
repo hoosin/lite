@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+/* 文本型圆角背景导航 */
+.m-nav,.m-nav li,.m-nav li a,.m-nav .corner{height:40px;line-height:40px;}
+.m-nav,.m-nav li,.m-nav .corner{background:url(nav.png) no-repeat -9999px -9999px;}
+.m-nav{position:relative;margin:0 6px;text-align:center;font-size:0;letter-spacing:-0.307em;*letter-spacing:normal;*word-spacing:-1px;color:#fff;background-repeat:repeat-x;background-position:0 0;}
+.m-nav li,.m-nav li a{display:inline-block;*display:inline;*zoom:1;}
+.m-nav li{padding:0 0 0 1px;font-size:14px;letter-spacing:normal;word-spacing:normal;background-position:0 -150px;}
+.m-nav li.first{background:none;}
+.m-nav li a,.m-nav li a:hover{text-decoration:none;color:#fff;}
+.m-nav li a{padding:0 20px;font-weight:bold;}
+.m-nav .corner{position:absolute;top:0;width:6px;overflow:hidden;}
+.m-nav .corner-l{left:-6px;background-position:0 -50px;}
+.m-nav .corner-r{left:100%;background-position:0 -100px;}
+/* 文本型圆角背景导航-居左 */
+.m-nav-1{text-align:left;}
+/* 文本型圆角背景导航-居右 */
+.m-nav-2{text-align:right;}]]></content>
+	<tabTrigger>m-nav</tabTrigger>
+	<scope>source.css</scope>
+	<description>[兼容]文本型圆角背景导航</description>
+</snippet>

@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+/* 通用自定义按钮组合 */
+.u-btns{display:inline-block;*display:inline;*zoom:1;position:relative;padding-left:1px;}
+.u-btns .u-btn{float:left;margin-left:-1px;border-radius:0;}]]></content>
+	<tabTrigger>u-btns</tabTrigger>
+	<scope>source.css</scope>
+	<description>[兼容]通用自定义按钮组合</description>
+</snippet>

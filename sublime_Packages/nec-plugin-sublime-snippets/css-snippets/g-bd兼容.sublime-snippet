@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+/* 两列定宽布局 */
+.g-bd{width:950px;margin:0 auto;}
+.g-sd{float:right;width:230px;}
+.g-mn{float:left;width:710px;}]]></content>
+	<tabTrigger>g-bd</tabTrigger>
+	<scope>source.css</scope>
+	<description>[兼容]两列定宽布局</description>
+</snippet>

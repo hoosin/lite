@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+/* 带点文字链接列表-默认方点 */
+.m-list2{padding-top:1px;line-height:1.5;}
+.m-list2 ul{margin-top:-6px;}
+.m-list2 li{position:relative;padding-left:10px;margin-top:5px;zoom:1;}
+.m-list2 li i.dot{position:absolute;top:0.75em;left:0;width:0;height:0;overflow:hidden;margin-top:-3px;border:2px solid;}
+/* 固定文字较大 */
+.m-list2-lg{font-size:14px;}]]></content>
+	<tabTrigger>m-list2</tabTrigger>
+	<scope>source.css</scope>
+	<description>[兼容]带点文字链接列表</description>
+</snippet>

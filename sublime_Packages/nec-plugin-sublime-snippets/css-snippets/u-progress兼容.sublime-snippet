@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+/* 水平进度条-默认蓝色 */
+.u-progress{width:200px;height:12px;overflow:hidden;background:#f7f7f7;}
+.u-progress .pgtrack,.u-progress .pgbar{display:block;overflow:hidden;}
+.u-progress .pgtrack{height:10px;border-width:1px;border-style:solid;border-color:#ddd #eee #f5f5f5;}
+.u-progress .pgbar{width:100%;height:100%;margin-top:-12px;background:#3a9ed8;}
+/* 较佳，绿色 */
+.u-progress-c1 .pgbar{background:#50b050;}
+/* 中等，黄色 */
+.u-progress-c2 .pgbar{background:#f8960b;}
+/* 较差，红色 */
+.u-progress-c3 .pgbar{background:#cc1c23;}]]></content>
+	<tabTrigger>u-progress</tabTrigger>
+	<scope>source.css</scope>
+	<description>[兼容]水平进度条</description>
+</snippet>
