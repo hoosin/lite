@@ -1,0 +1,25 @@
+<snippet>
+	<content><![CDATA[
+/* reset */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+margin: 0; padding: 0;}
+body, button, input, select, textarea {font: 12px/1.5 tahoma,arial,宋体;}
+h1, h2, h3, h4, h5, h6 {font-size: 100%;}
+address, cite, dfn, em, var {font-style: normal;}
+code, kbd, pre, samp {font-family: courier new,courier,monospace;}
+small {font-size: 12px;} 
+ul, ol {list-style: none; }/*outside:none;*/
+a{text-decoration: none;}
+a:hover {text-decoration: none;}
+sup {vertical-align: text-top;}
+sub {vertical-align: text-bottom;}
+legend {color: #000000;}
+fieldset, img {border: 0 none;}
+button, input, select, textarea {font-size: 100%;}
+table { border-collapse: collapse;border-spacing: 0;}
+
+]]></content>
+	<tabTrigger>rst</tabTrigger>
+	<scope>source.css</scope>
+	<description>[重置]阿里版-样式表</description>
+</snippet>
