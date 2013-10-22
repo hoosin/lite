@@ -1,11 +1,10 @@
 <snippet>
 	<content><![CDATA[
-<data:innerintf url="http://pdlib.pconline.com.cn/product/cms/small_top_json.jsp" kind="json" result="${1:result}"/>
-<c:forEach var='data' items='${1}' begin='' end='' varStatus="vs">
-	${3}
+<c:forEach var="data" items="\${${1:result}.data}" begin="" end="" varStatus="vs">
+	${2}
 </c:forEach>
 ]]></content>
-	<tabTrigger>ce</tabTrigger>
+	<tabTrigger>c:foreach</tabTrigger>
 	<description>c:foreach 循环</description>
 	<scope>text.html</scope>
 </snippet>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:article property="text" autoformat="true">{文章内容}</cms:article>
+]]></content>
+	<tabTrigger>cms:art-text</tabTrigger>
+	<description>article:文章内容</description>
+	<scope>text.html</scope>
+</snippet>

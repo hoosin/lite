@@ -4,7 +4,7 @@
     <cms:article property="title" autolink="true" target="_blank" useTitle="true"${6: textLen="-1" istr="" astr="" extra=""}>{标题}</cms:article>${0}
 </cms:outline>
 ]]></content>
-	<tabTrigger>cmsa</tabTrigger>
+	<tabTrigger>cms:out-article</tabTrigger>
 	<description>outline:普通文章</description>
 	<scope>text.html</scope>
 </snippet>

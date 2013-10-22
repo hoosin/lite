@@ -2,7 +2,7 @@
 	<content><![CDATA[
 <cms:article property='_url'>{文章url}</cms:article>
 ]]></content>
-	<tabTrigger>cmsu</tabTrigger>
+	<tabTrigger>cms:art-url</tabTrigger>
 	<description>article:文章链接_url</description>
 	<scope>text.html</scope>
 </snippet>

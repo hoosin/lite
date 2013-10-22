@@ -5,7 +5,7 @@
 	<cms:article property="_pictitle" autolink="true" target="_blank" useTitle="true" ${6:textLen="-1" istr="" astr="" extra="" hrefAd="" hrefParam="" }>{图片标题}</cms:article>
 </cms:outline>
 ]]></content>
-	<tabTrigger>cmsp</tabTrigger>
+	<tabTrigger>cms:out-picnews</tabTrigger>
 	<description>outline:图片新闻</description>
 	<scope>text.html</scope>
 </snippet>

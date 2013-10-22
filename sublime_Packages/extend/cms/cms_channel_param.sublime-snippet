@@ -1,8 +1,8 @@
 <snippet>
 	<content><![CDATA[
-<c:set var="${1:areas}"><cms:channel property="${2}${1}"></cms:channel></c:set>
-	]]></content>
-	<tabTrigger>cmsparam</tabTrigger>
+<c:set var="${1:areas}"><cms:channel property="\$${1}"></cms:channel></c:set>
+]]></content>
+	<tabTrigger>cms:cha-param</tabTrigger>
 	<description>channel:栏目变量</description>
 	<scope>text.html</scope>
 </snippet>

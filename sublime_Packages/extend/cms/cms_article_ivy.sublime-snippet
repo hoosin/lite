@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:article property="_ivy_pvcode" ></cms:article>
+]]></content>
+	<tabTrigger>cms:art-param</tabTrigger>
+	<description>article:文章ivy</description>
+	<scope>text.html</scope>
+</snippet>

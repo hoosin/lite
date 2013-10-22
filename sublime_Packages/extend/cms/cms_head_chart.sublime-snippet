@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+<%@page pageEncoding="GBK" %>
+<%@include file="/templateInclude.jsp" %>
+]]></content>
+	<tabTrigger>cms:header</tabTrigger>
+	<description>cms头部文件</description>
+	<scope>text.html</scope>
+</snippet>

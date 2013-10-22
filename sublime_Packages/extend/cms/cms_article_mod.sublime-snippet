@@ -27,7 +27,7 @@
 </body>
 </html>
 ]]></content>
-	<tabTrigger>cmsart</tabTrigger>
+	<tabTrigger>cms:art-mod</tabTrigger>
 	<description>article:文章模板</description>
 	<scope>text.html</scope>
 </snippet>

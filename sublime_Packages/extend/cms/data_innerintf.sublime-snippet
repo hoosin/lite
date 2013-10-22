@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+<data:innerintf url="${1:url}" kind="json" result="${2:result}"/>
+<c:forEach var="data" items="\${${2}.data}" begin="" end="" varStatus="vs">
+	${3:data.id}
+</c:forEach>
+]]></content>
+	<tabTrigger>data:json</tabTrigger>
+	<description>innerintf:读取Json接口</description>
+	<scope>text.html</scope>
+</snippet>

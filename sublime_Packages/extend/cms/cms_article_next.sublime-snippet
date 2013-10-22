@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:article  property="_next"${1: target="_blank" extra=""}>下一篇文章</cms:article>
+]]></content>
+	<tabTrigger>cms:art-next</tabTrigger>
+	<description>article:下一篇文章</description>
+	<scope>text.html</scope>
+</snippet>

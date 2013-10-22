@@ -2,7 +2,7 @@
 	<content><![CDATA[
 <cms:include page="${1}" ssi="false" />
 ]]></content>
-	<tabTrigger>cmsin</tabTrigger>
+	<tabTrigger>cms:include</tabTrigger>
 	<description>cms:include</description>
 	<scope>text.html</scope>
 </snippet>

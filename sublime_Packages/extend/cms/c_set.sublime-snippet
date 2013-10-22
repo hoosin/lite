@@ -2,7 +2,7 @@
 	<content><![CDATA[
 <c:set var="${1:param}">${2}</c:set>
 ]]></content>
-	<tabTrigger>cs</tabTrigger>
+	<tabTrigger>c:set</tabTrigger>
 	<description>c:set 设置变量</description>
 	<scope>text.html</scope>
 </snippet>

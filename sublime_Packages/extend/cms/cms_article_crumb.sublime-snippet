@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:article property="_curpage" only="false" autolink="true" target="_blank" linkstr=" > ">当前频道位置</cms:article>
+]]></content>
+	<tabTrigger>cms:art-crumb</tabTrigger>
+	<description>article:面包屑</description>
+	<scope>text.html</scope>
+</snippet>

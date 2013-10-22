@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:pager property="all" style="simple5"${1: hrefextra="" istr="" astr=""}>分页栏</cms:pager>
+]]></content>
+	<tabTrigger>cms:pager</tabTrigger>
+	<description>pager:分页</description>
+	<scope>text.html</scope>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:article  property="_prev"${1: target="_blank" extra=""}>上一篇文章</cms:article>
+]]></content>
+	<tabTrigger>cms:art-prev</tabTrigger>
+	<description>article:上一篇文章</description>
+	<scope>text.html</scope>
+</snippet>

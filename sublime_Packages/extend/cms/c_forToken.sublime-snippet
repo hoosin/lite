@@ -5,7 +5,7 @@
 	${0}
 </c:forTokens>
 ]]></content>
-	<tabTrigger>ct</tabTrigger>
+	<tabTrigger>c:forTokens</tabTrigger>
 	<description>c:forTokens 分割循环</description>
 	<scope>text.html</scope>
 </snippet>

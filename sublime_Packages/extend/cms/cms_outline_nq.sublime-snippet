@@ -4,7 +4,7 @@
   	<cms:article property="text" autoformat="true">{内嵌}</cms:article>
 </cms:outline>
 ]]></content>
-	<tabTrigger>cmsn</tabTrigger>
+	<tabTrigger>cms:out-nq</tabTrigger>
 	<description>outline:内嵌文章</description>
 	<scope>text.html</scope>
 </snippet>

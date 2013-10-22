@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:article property='id'>{文章ID}</cms:article>
+]]></content>
+	<tabTrigger>cms:art-id</tabTrigger>
+	<description>article:id</description>
+	<scope>text.html</scope>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:article property='keyword' style='' istr='' astr=''>{关键字}</cms:article>
+]]></content>
+	<tabTrigger>cms:art-keyword</tabTrigger>
+	<description>article:关键字</description>
+	<scope>text.html</scope>
+</snippet>

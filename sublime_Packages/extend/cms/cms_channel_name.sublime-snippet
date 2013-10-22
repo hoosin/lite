@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:channel name="" id="" property="name">channel name</cms:channel>
+]]></content>
+	<tabTrigger>cms:cha-name</tabTrigger>
+	<description>channel:栏目名</description>
+	<scope>text.html</scope>
+</snippet>

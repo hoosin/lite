@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<cms:pager property="prev">{下一页}</cms:pager>
+]]></content>
+	<tabTrigger>cms:pager-prev</tabTrigger>
+	<description>pager:上一页</description>
+	<scope>text.html</scope>
+</snippet>

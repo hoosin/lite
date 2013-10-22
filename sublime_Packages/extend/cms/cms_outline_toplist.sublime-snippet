@@ -3,8 +3,8 @@
 <cms:outline name="${1:栏目名}" id="" property="toplist" beforeday="-1" startpos="${2:1}" num="${3:1}" ordertype="1">
     <cms:article property="title" autolink="true" target="_blank" useTitle="true" ${5:textLen="-1" istr="" astr="" extra=""}>{标题}</cms:article>
 </cms:outline>
-	]]></content>
-	<tabTrigger>cmsl</tabTrigger>
-	<description>outline:普通文章</description>
+]]></content>
+	<tabTrigger>cms:out-toplist</tabTrigger>
+	<description>outline:文章排行</description>
 	<scope>text.html</scope>
 </snippet>

@@ -1,8 +1,8 @@
 <snippet>
 	<content><![CDATA[
 <cms:article property="${1:_toprelainfo|_relainfo}" relainfotype="${2:channel}">{关联信息}</cms:article>
-	]]></content>
-	<tabTrigger>cmsr</tabTrigger>
+]]></content>
+	<tabTrigger>cms:art-relainfo</tabTrigger>
 	<description>article:文章关联信息</description>
 	<scope>text.html</scope>
 </snippet>
