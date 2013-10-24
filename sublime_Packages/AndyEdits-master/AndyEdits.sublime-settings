@@ -1,0 +1,14 @@
+{
+    "linux_python2.6_lib": "/usr/lib/python2.6/lib-dynload",
+    // a small icon appearing in the gutter: default true
+    "use_icon": true,
+    // valid ST icon values are dot, circle, bookmark and cross,
+    // or set to false to use the pencil (or your own icon)
+    "ST_icon": false,
+    // will affect the colour of the icon and outlining; default 'comment'
+    // (experiment with "keyword", "variable", etc.., as it is governed by 
+    // your chosen theme.)
+    "icon_scope": "class",
+    // affects the icon colour for the current edit-region
+    "icon_current": "comment"
+}

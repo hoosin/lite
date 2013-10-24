@@ -1,0 +1,8 @@
+SublimeLinter 1.5.4 changelog
+=============================
+
+CHANGES/FIXES
+-------------
+- jshint.js has been updated to the latest master version.
+- [issue #128] An "unsafe" option has been added to jshint. If set 
+  true, any UTF-8 characters are allowed in the source.

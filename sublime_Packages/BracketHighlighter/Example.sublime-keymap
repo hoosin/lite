@@ -1,0 +1,153 @@
+[
+    // Toggle Global Enable
+    {
+        "keys": ["ctrl+alt+super+e"],
+        "command": "bh_toggle_enable"
+    },
+    // Search to end of file for bracket
+    {
+        "keys": ["ctrl+alt+super+b"],
+        "command": "bh_key",
+        "args":
+        {
+            "lines" : true
+        }
+    },
+    // Go to left bracket
+    {
+        "keys": ["ctrl+alt+super+up"],
+        "command": "bh_key",
+        "args":
+        {
+            "lines" : true,
+            "plugin":
+            {
+                "type": ["__all__"],
+                "command": "bh_modules.bracketselect",
+                "args": {"select": "left"}
+            }
+        }
+    },
+    // Go to right bracket
+    {
+        "keys": ["ctrl+alt+super+down"],
+        "command": "bh_key",
+        "args":
+        {
+            "lines" : true,
+            "plugin":
+            {
+                "type": ["__all__"],
+                "command": "bh_modules.bracketselect",
+                "args": {"select": "right"}
+            }
+        }
+    },
+    // Remove brackets
+    {
+        "keys": ["ctrl+alt+super+r"],
+        "command": "bh_remove_brackets"
+    },
+    // Toggle string escape mode for sub bracket search in strings
+    {
+        "keys": ["ctrl+alt+super+x"],
+        "command": "bh_toggle_string_escape_mode"
+    },
+    // Select text between brackets
+    {
+        "keys": ["ctrl+alt+super+s"],
+        "command": "bh_key",
+        "args":
+        {
+            "lines" : true,
+            "plugin":
+            {
+                "type": ["__all__"],
+                "command": "bh_modules.bracketselect"
+            }
+        }
+    },
+    // Select tag name of HTML/XML tag (both opening name and closing)
+    {
+        "keys": ["ctrl+alt+super+t"],
+        "command": "bh_key",
+        "args":
+        {
+            "plugin":
+            {
+                "type": ["cfml", "html", "angle"],
+                "command": "bh_modules.tagnameselect"
+            }
+        }
+    },
+    // Select the attribute to the right of the cursor (will wrap inside the tag)
+    {
+        "keys": ["ctrl+alt+super+right"],
+        "command": "bh_key",
+        "args":
+        {
+            "plugin":
+            {
+                "type": ["cfml", "html", "angle"],
+                "command": "bh_modules.tagattrselect",
+                "args": {"direction": "right"}
+            }
+        }
+    },
+    // Select the attribute to the left of the cursor (will wrap inside the tag)
+    {
+        "keys": ["ctrl+alt+super+left"],
+        "command": "bh_key",
+        "args":
+        {
+            "plugin":
+            {
+                "type": ["cfml", "html", "angle"],
+                "command": "bh_modules.tagattrselect",
+                "args": {"direction": "left"}
+            }
+        }
+    },
+    // Convert single quote string to double quoted string and vice versa
+    // Will handle escaping or unescaping quotes within the string
+    {
+        "keys": ["ctrl+alt+super+q"],
+        "command": "bh_key",
+        "args":
+        {
+            "lines" : true,
+            "plugin":
+            {
+                "type": ["single_quote", "double_quote", "py_single_quote", "py_double_quote"],
+                "command": "bh_modules.swapquotes"
+            }
+        }
+    },
+    // Fold contents between brackets
+    {
+        "keys": ["ctrl+alt+super+["],
+        "command": "bh_key",
+        "args":
+        {
+            "plugin": {
+                "type": ["__all__"],
+                "command" : "bh_modules.foldbracket"
+            }
+        }
+    },
+    // Swap brackets with another type
+    {
+        "keys": ["ctrl+alt+super+e"],
+        "command": "swap_brackets"
+    },
+    // Surround selection with brackets from quick panel
+    {
+        "keys": ["ctrl+alt+super+w"],
+        "command": "wrap_brackets"
+    },
+    // Toggle high visibility mode
+    {
+        "keys": ["ctrl+alt+super+v"],
+        "command": "bh_toggle_high_visibility"
+    }
+]

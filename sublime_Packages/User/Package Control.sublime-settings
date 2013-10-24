@@ -2,16 +2,23 @@
 	"installed_packages":
 	[
 		"Alignment",
+		"AndyEdits",
 		"AndyJS2",
 		"Autoprefixer",
+		"BracketHighlighter",
 		"ConvertToUTF8",
 		"css compact expand",
 		"DocBlockr",
 		"Emmet",
 		"Emmet Css Snippets",
+		"Git",
 		"JavaScript Snippets",
 		"JsFormat",
 		"Package Control",
-		"Tag"
+		"Prefixr",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"Tag",
+		"TortoiseSVN"
 	]
 }

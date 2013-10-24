@@ -1,0 +1,32 @@
+=====================
+SublimeLinter for ST3
+We need your help!
+=====================
+
+According to the Package Control site, SublimeLinter is the 4th most popular
+plugin for Sublime Text, with 224K installs. That's an incredible number.
+Thank you to everyone!
+
+We all want SublimeLinter to become fully compatible with Sublime Text 3,
+and we want it to be better supported. In moving to ST3 (and python 3),
+we decided to start from scratch with a new architecture that allows us
+to get the most out of both. And we plan to join forces with Ryan Hileman
+and merge sublimelint and SublimeLinter, so everyone will benefit.
+
+To find out more about what you can expect from SublimeLinter3,
+read about it here:
+
+https://github.com/SublimeLinter/SublimeLinter3#sublimelinter3
+
+To make this happen any time soon, we need your help. I have lots of other
+projects that currently have a higher priority than SublimeLinter3. If you
+value SublimeLinter and want to see it running on ST3 sooner rather than later,
+please consider donating. If we can raise $3-5K, I'll move SublimeLinter3
+to top of my priority list and finish it off within a week or two.
+
+See the link above for info on donating.
+
+Thanks again,
+
+- Aparajita Fishman
+  SublimeLinter maintainer

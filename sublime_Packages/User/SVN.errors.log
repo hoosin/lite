@@ -1,0 +1,48 @@
+2013-10-24 15:17:57
+Traceback (most recent call last):
+  File "./sublimesvn/threads.py", line 23, in run_with_except_hook
+  File "./sublimesvn/proc.py", line 97, in run
+ProcessError
+2013-10-24 15:18:21
+Traceback (most recent call last):
+  File "./sublimesvn/threads.py", line 23, in run_with_except_hook
+  File "./sublimesvn/proc.py", line 97, in run
+ProcessError
+2013-10-24 15:18:22
+Traceback (most recent call last):
+  File "./sublimesvn/threads.py", line 23, in run_with_except_hook
+  File "./sublimesvn/proc.py", line 97, in run
+ProcessError
+2013-10-24 15:18:35
+Traceback (most recent call last):
+  File "./sublimesvn/threads.py", line 23, in run_with_except_hook
+  File "./sublimesvn/proc.py", line 97, in run
+ProcessError
+2013-10-24 15:18:45
+Traceback (most recent call last):
+  File "./sublimesvn/threads.py", line 23, in run_with_except_hook
+  File "./sublimesvn/proc.py", line 97, in run
+ProcessError
+2013-10-24 15:18:57
+Traceback (most recent call last):
+  File "./sublimesvn/threads.py", line 23, in run_with_except_hook
+  File "./sublimesvn/proc.py", line 97, in run
+ProcessError
+2013-10-24 15:20:21
+Traceback (most recent call last):
+  File "./sublimesvn/threads.py", line 23, in run_with_except_hook
+  File "./sublimesvn/proc.py", line 97, in run
+ProcessError
+2013-10-24 15:20:21
+Traceback (most recent call last):
+  File "./sublimesvn/threads.py", line 23, in run_with_except_hook
+  File "./sublimesvn/proc.py", line 97, in run
+ProcessError: svn: E155021: This client is too old to work with the working copy at
+'E:\wamp\www\2013' (format 31).
+You need to get a newer Subversion client. For more details, see
+  http://subversion.apache.org/faq.html#working-copy-format-change
+2013-10-24 15:20:28
+Traceback (most recent call last):
+  File "./sublimesvn/threads.py", line 23, in run_with_except_hook
+  File "./sublimesvn/proc.py", line 97, in run
+ProcessError

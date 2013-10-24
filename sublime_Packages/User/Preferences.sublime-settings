@@ -1,9 +1,10 @@
 {
 	"auto_complete_selector": "source,text",
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"font_size": 18,
 	"ignored_packages":
 	[
-		"Vintage"
-	]
+		"Vintage",
+		"Emmet Css Snippets"
+	],
+	"word_wrap": true
 }

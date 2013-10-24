@@ -1,0 +1,407 @@
+{
+    //Debug logging
+    "debug_enable": false,
+
+    // Path to find icons at
+    "icon_path": "BracketHighlighter/icons",
+
+    // When only either the left or right bracket can be found
+    // this defines if the unmatched bracket should be shown.
+    "show_unmatched" : true,
+
+    // Enable high visibility by default when sublime starts up
+    // If sublime is already running and this gets changed,
+    // you will not see any changes (restart requrired to see change)
+    "high_visibility_enabled_by_default": false,
+
+    // High visibility style and color for high visibility mode
+    // (solid|outline|underline)
+    "high_visibility_style": "outline",
+
+    // (scope|__default__|__bracket__)
+    "high_visibility_color": "__bracket__",
+
+    // Match brackets only when the cursor is touching the inside of the bracket
+    "match_only_adjacent": false,
+
+    // Character threshold to search
+    "search_threshold": 5000,
+
+    // Ignore threshold
+    "ignore_threshold": false,
+
+    // Set mode for string escapes to ignore (regex|string)
+    "bracket_string_escape_mode": "string",
+
+    // Set max number of multi-select brackets that will be searched automatically
+    "auto_selection_threshold" : 10,
+
+    // Disable gutter icons when doing multi-select
+    "no_multi_select_icons": false,
+
+    // Rules that define the finding and matching of brackets
+    // that are contained in a common scope.
+    // Useful for bracket pairs that are the same but
+    // share a common scope.  Brackets are found by
+    // Finding the extent of the scope and using regex
+    // to look at the beginning and end to identify bracket.
+    // Use only if they cannot be targeted with traditional bracket
+    // rules.
+    "scope_brackets": [
+        // Quotes
+        {
+            "name": "py_single_quote",
+            "open": "u?r?((?:'')?')",
+            "close": "((?:'')?')",
+            "style": "single_quote",
+            "scopes": ["string"],
+            "language_filter": "whitelist",
+            "language_list": ["Python"],
+            "sub_bracket_search": "true",
+            "enabled": true
+        },
+        {
+            "name": "py_double_quote",
+            "open": "u?r?((?:\"\")?\")",
+            "close": "((?:\"\")?\")",
+            "style": "double_quote",
+            "scopes": ["string"],
+            "language_filter": "whitelist",
+            "language_list": ["Python"],
+            "sub_bracket_search": "true",
+            "enabled": true
+        },
+        {
+            "name": "single_quote",
+            "open": "(')",
+            "close": "(')",
+            "style": "single_quote",
+            "scopes": ["string"],
+            "language_filter": "blacklist",
+            "language_list": ["Plain text"],
+            "sub_bracket_search": "true",
+            "enabled": true
+        },
+        {
+            "name": "double_quote",
+            "open": "(\")",
+            "close": "(\")",
+            "style": "double_quote",
+            "scopes": ["string"],
+            "language_filter": "blacklist",
+            "language_list": ["Plain text"],
+            "sub_bracket_search": "true",
+            "enabled": true
+        },
+        // Regex for different Languages
+        {
+            "name": "jsregex",
+            "open": " *(/)",
+            "close": "(/)[igm]*",
+            "style": "regex",
+            "scopes": ["string"],
+            "language_filter": "whitelist",
+            "language_list": ["JavaScript"],
+            "sub_bracket_search": "true",
+            "enabled": true
+        },
+        {
+            "name": "perlregex",
+            "open": "(?:m|s|tr)(.|\n)",
+            "close": "(.|\n)(?:[igmos]*)",
+            "style": "regex",
+            "scopes": ["string.regexp"],
+            "language_filter": "whitelist",
+            "language_list": ["Perl"],
+            "sub_bracket_search": "true",
+            "enabled": true
+        },
+        {
+            "name": "rubyregex",
+            "open": " *(/)",
+            "close": "(/)[imxo]*",
+            "style": "regex",
+            "scopes": ["string"],
+            "language_filter": "whitelist",
+            "language_list": ["Ruby"],
+            "sub_bracket_search": "true",
+            "enabled": true
+        },
+        // Markdown
+        {
+            "name": "mditalic",
+            "open": "(\\*|_)",
+            "close": "(\\*|_)",
+            "style": "default",
+            "scopes": ["markup.italic"],
+            "language_filter": "whitelist",
+            "language_list": ["Markdown"],
+            "sub_bracket_search": "true",
+            "enabled": true
+        },
+        {
+            "name": "mdbold",
+            "open": "(\\*\\*|__)",
+            "close": "(\\*\\*|__)",
+            "style": "default",
+            "scopes": ["markup.bold"],
+            "language_filter": "whitelist",
+            "language_list": ["Markdown"],
+            "sub_bracket_search": "true",
+            "enabled": true
+        }
+    ],
+
+    // Rule definitions for finding and matching brackets.
+    // Brackets are found by using regex and can use scope
+    // qualifiers exclude certain matches.
+    // Once all matches are found, the closest pair surrounding
+    // the cursor are selected.
+    "brackets": [
+        // Basic brackets
+        {
+            "name": "curly",
+            "open": "(\\{)",
+            "close": "(\\})",
+            "style": "curly",
+            "scope_exclude": ["string", "comment"],
+            "scope_exclude_exceptions": ["string.other.math.block.environment.latex"],
+            "language_filter": "blacklist",
+            "language_list": ["Plain text"],
+            "find_in_sub_search": "true",
+            "ignore_string_escape": true,
+            "enabled": true
+        },
+        {
+            "name": "round",
+            "open": "(\\()",
+            "close": "(\\))",
+            "style": "round",
+            "scope_exclude_exceptions": ["string.other.math.block.environment.latex"],
+            "scope_exclude": ["string", "comment"],
+            "language_filter": "blacklist",
+            "language_list": ["Plain text"],
+            "find_in_sub_search": "true",
+            "ignore_string_escape": true,
+            "enabled": true
+        },
+        {
+            "name": "square",
+            "open": "(\\[)",
+            "close": "(\\])",
+            "style": "square",
+            "scope_exclude": ["string", "comment"],
+            "scope_exclude_exceptions": ["string.other.math.block.environment.latex"],
+            "language_filter": "blacklist",
+            "language_list": ["Plain text"],
+            "find_in_sub_search": "true",
+            "ignore_string_escape": true,
+            "enabled": true
+        },
+        // HTML
+        {
+            "name": "html",
+            "open": "(<)(?=[\\w\\:\\-]+(?:(?:\\s+[\\w\\-:]+(?:\\s*=\\s*(?:\"[^\"]*\"|'[^']*'|[^>\\s]+))?)*)\\s*\\/?>|\\/[\\w\\:\\-]+[^>]*>)",
+            "close": "(?<=<)(?:[\\w\\:\\-]+(?:(?:\\s+[\\w\\-:]+(?:\\s*=\\s*(?:\"[^\"]*\"|'[^']*'|[^>\\s]+))?)*)\\s*\\/?|\\/[\\w\\:\\-]+[^>]*)(>)",
+            "style": "tag",
+            "scope_exclude": ["string", "comment"],
+            "language_filter": "whitelist",
+            "language_list": ["HTML", "HTML 5", "XML", "PHP"],
+            "plugin_library": "bh_modules.tags",
+            "find_in_sub_search": "only",
+            "enabled": false
+        },
+        // CFML
+        {
+            "name": "cfml",
+            "open": "(<)(?=[\\w\\:\\-]+(?:(?:\\s+[\\w\\-\\.:]+(?:\\s*=\\s*(?:\"[^\"]*\"|'[^']*'|[^>\\s]+))?)*|(?:(?<=cfif)|(?<=cfelseif))[^>]+)\\s*\\/?>|\\/[\\w\\:\\-]+[^>]*>)",
+            "close": "(?<=<)(?:[\\w\\:\\-]+(?:(?:\\s+[\\w\\-\\.:]+(?:\\s*=\\s*(?:\"[^\"]*\"|'[^']*'|[^>\\s]+))?)*|(?:(?<=cfif)|(?<=cfelseif))[^>]+)\\s*\\/?|\\/[\\w\\:\\-]+[^>]*)(>)",
+            "style": "tag",
+            "scope_exclude": ["string", "comment"],
+            "language_filter": "whitelist",
+            "language_list": ["HTML+CFML", "ColdFusion", "ColdFusionCFC"],
+            "plugin_library": "bh_modules.tags",
+            "find_in_sub_search": "only",
+            "enabled": false
+        },
+        // PHP Angle
+        {
+            "name": "php_angle",
+            "open": "(<\\?)(?:php)?",
+            "close": "(\\?>)",
+            "style": "angle",
+            "scope_exclude": ["string", "comment", "keyword.operator"],
+            "language_filter": "whitelist",
+            "language_list": ["HTML", "HTML 5", "PHP"],
+            "enabled": true
+        },
+        // Angle
+        {
+            "name": "angle",
+            "open": "(<)(?!\\?)",
+            "close": "(?<!\\?)(>)",
+            "style": "angle",
+            "scope_exclude": ["string", "comment", "keyword.operator", "source.ruby.rails.embedded.html", "source.ruby.embedded.html"],
+            "language_filter": "whitelist",
+            "language_list": ["HTML", "HTML 5", "XML", "PHP", "HTML (Rails)", "HTML (Jinja Templates)", "HTML (Twig)", "HTML+CFML", "ColdFusion", "ColdFusionCFC"],
+            "plugin_library": "bh_modules.tags",
+            "enabled": true
+        },
+        // CSSedit groups
+        {
+            "name": "cssedit_groups",
+            "open": "(/\\* *@group .*\\*/)",
+            "close": "(/\\* *@end *\\*/)",
+            "style": "default",
+            "scope_exclude": [],
+            "language_filter": "whitelist",
+            "language_list": ["CSS"],
+            "enabled": true
+        },
+        // Ruby embedded HTML
+        {
+            "name": "ruby_embedded_html",
+            "open": "((?:(?<=<%)|(?<=^))\\s*\\b(?:if|case|until|unless|while|begin|class|module|def\\b[\\p{Ll}\\p{Lu}]*)|\\bdo)\\b",
+            "close": "\\b(end)\\b",
+            "style": "default",
+            "scope_exclude": ["text.html", "source", "comment", "string"],
+            "scope_exclude_exceptions": ["source.ruby.rails.embedded.html", "source.ruby.embedded.html"],
+            "plugin_library": "bh_modules.rubykeywords",
+            "language_filter": "whitelist",
+            "language_list": ["HTML", "HTML 5", "PHP", "HTML (Rails)"],
+            "enabled": true
+        },
+        // Ruby conditional statements
+        {
+            "name": "ruby",
+            "open": "(^\\s*\\b(?:if|case|until|unless|while|begin|class|module|def\\b[\\p{Ll}\\p{Lu}]*)|\\bdo)\\b",
+            "close": "\\b(end)\\b",
+            "style": "default",
+            "scope_exclude": ["string", "comment"],
+            "plugin_library": "bh_modules.rubykeywords",
+            "language_filter": "whitelist",
+            "language_list": ["Ruby", "Ruby on Rails"],
+            "enabled": true
+        },
+        // C/C++ compile switches
+        {
+            "name": "c_compile_switch",
+            "open": "(\\#(?:if|ifdef|ifndef))\\b",
+            "close": "(\\#endif)\\b",
+            "style": "default",
+            "scope_exclude": ["string", "comment"],
+            "language_filter": "whitelist",
+            "language_list": ["C++", "C", "Objective-C"],
+            "enabled": true
+        },
+        // PHP conditional keywords
+        {
+            "name": "php_keywords",
+            "open": "(?:^\\s*|<\\?(?:php)?\\s*)?\\b(if|foreach|for|while|switch)\\b(?=.*:\\s*(?:\\?>\\s*)?$)",
+            "close": "(?:^\\s*|<\\?(?:php)?\\s*)?\\b(endif|endfor|endforeach|endwhile|endswitch)\\b(?=\\s*;\\s*(?:\\?>\\s*)?$)",
+            "style": "default",
+            "language_filter": "whitelist",
+            "scope_exclude": ["string", "comment"],
+            "plugin_library": "bh_modules.phpkeywords",
+            "language_list": ["HTML", "HTML 5", "XML", "PHP", "HTML+CFML", "ColdFusion", "ColdFusionCFC"],
+            "enabled": true
+        },
+        // Erlang conditional statements
+        {
+            "name": "erlang",
+            "open": "\\s*(\\b(?:if|case|begin|try|fun(?=\\s*\\()|receive)\\b)",
+            "close": "\\b(end)\\b",
+            "style": "default",
+            "scope_exclude": ["string", "comment"],
+            "language_filter": "whitelist",
+            "language_list": ["Erlang", "HTML (Erlang)"],
+            "enabled": true
+        }
+    ],
+
+    // Define region highlight styles
+    "bracket_styles": {
+        // "default" and "unmatched" styles are special
+        // styles. If they are not defined here,
+        // they will be generated internally with
+        // internal defaults.
+
+        // "default" style defines attributes that
+        // will be used for any style that does not
+        // explicitly define that attribute.  So if
+        // a style does not define a color, it will
+        // use the color from the "default" style.
+        "default": {
+            "icon": "dot",
+            // BH1's original default color for reference
+            // "color": "entity.name.class",
+            "color": "brackethighlighter.default",
+            "style": "underline"
+        },
+
+        // This particular style is used to highlight
+        // unmatched bracekt pairs.  It is a special
+        // style.
+        "unmatched": {
+            "icon": "question",
+            // "color": "brackethighlighter.unmatched",
+            "style": "outline"
+        },
+        // User defined region styles
+        "curly": {
+            "icon": "curly_bracket"
+            // "color": "brackethighlighter.curly",
+            // "style": "underline"
+        },
+        "round": {
+            "icon": "round_bracket"
+            // "color": "brackethighlighter.round",
+            // "style": "underline"
+        },
+        "square": {
+            "icon": "square_bracket"
+            // "color": "brackethighlighter.square",
+            // "style": "underline"
+        },
+        "angle": {
+            "icon": "angle_bracket"
+            // "color": "brackethighlighter.angle",
+            // "style": "underline"
+        },
+        "tag": {
+            "icon": "tag",
+            // "color": "brackethighlighter.tag",
+            "style": "outline"
+        },
+        "single_quote": {
+            "icon": "single_quote"
+            // "color": "brackethighlighter.quote",
+            // "style": "underline"
+        },
+        "double_quote": {
+            "icon": "double_quote"
+            // "color": "brackethighlighter.quote",
+            // "style": "underline"
+        },
+        "regex": {
+            "icon": "regex"
+            // "color": "brackethighlighter.quote",
+            // "style": "underline"
+        }
+    },
+
+    /* Plugin settings */
+
+    // Style to use for matched tags
+    "tag_style": "tag",
+
+    // Scopes to exclude from tag searches
+    "tag_scope_exclude": ["string", "comment"],
+
+    // Determine which style of tag-matching to use in which syntax
+    "tag_mode": {
+        "xhtml": ["XML"],
+        "html": ["HTML", "HTML 5", "PHP", "HTML (Jinja Templates)", "HTML (Rails)", "HTML (Twig)"],
+        "cfml": ["HTML+CFML", "ColdFusion", "ColdFusionCFC"]
+    }
+}
