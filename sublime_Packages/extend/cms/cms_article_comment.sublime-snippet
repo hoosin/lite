@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:article property="comment_script">{评论代码，分页中每页都出现}</cms:article>
-]]></content>
-	<tabTrigger>cms:art-comment</tabTrigger>
-	<description>article:评论</description>
-	<scope>text.html</scope>
-</snippet>

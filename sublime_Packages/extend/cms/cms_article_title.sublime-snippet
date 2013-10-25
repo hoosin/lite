@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:article property="title">文章标题</cms:article>
-]]></content>
-	<tabTrigger>cms:art-title</tabTrigger>
-	<description>article:标题</description>
-	<scope>text.html</scope>
-</snippet>

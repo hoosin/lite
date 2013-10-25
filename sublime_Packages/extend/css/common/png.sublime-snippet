@@ -1,8 +1,0 @@
-<snippet>
-    <content><![CDATA[
- background:url(http://www1.pconline.com.cn/2012/index/images/pic50_bg.png) 0 0 no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src='http://www1.pconline.com.cn/2012/index/images/pic50_bg.png');
-]]></content>  // 缩写展开后的代码
-    <tabTrigger>png</tabTrigger>  // 快捷输入的缩写
-    <description>png24滤镜</description>  // 片段的描述
-    <scope>source.css</scope>  // 仅对 html 文件有效
-</snippet>

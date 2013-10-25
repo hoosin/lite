@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:article property="author" istr="" astr="">佚名</cms:article>
-]]></content>
-	<tabTrigger>cms:art-author</tabTrigger>
-	<description>article:文章作者</description>
-	<scope>text.html</scope>
-</snippet>

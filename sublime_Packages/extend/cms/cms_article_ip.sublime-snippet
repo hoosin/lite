@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:article  property="_ip" istr="" astr="">PV</cms:article>
-]]></content>
-	<tabTrigger>cms:art-ip</tabTrigger>
-	<description>article:ip</description>
-	<scope>text.html</scope>
-</snippet>

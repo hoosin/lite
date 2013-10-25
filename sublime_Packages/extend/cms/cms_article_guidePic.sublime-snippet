@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:article property="_articleguidepic">[标签体文本]</cms:article>
-]]></content>
-	<tabTrigger>cms:art-guidePic</tabTrigger>
-	<description>article:导读图</description>
-	<scope>text.html</scope>
-</snippet>

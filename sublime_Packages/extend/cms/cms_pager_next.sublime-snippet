@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:pager property="next">{下一页}}</cms:pager>
-]]></content>
-	<tabTrigger>cms:pager-next</tabTrigger>
-	<description>pager:下一页</description>
-	<scope>text.html</scope>
-</snippet>

@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:channel property="count_code">channel count_code</cms:channel>
-]]></content>
-	<tabTrigger>cms:cha-cout</tabTrigger>
-	<description>channel:栏目计数器</description>
-	<scope>text.html</scope>
-</snippet>

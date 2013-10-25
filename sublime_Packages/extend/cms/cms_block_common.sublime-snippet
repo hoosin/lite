@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:block property="${1:channel|common}" ${2:id=""} name="${3:ivy_index_tl1}">{代码块}</cms:block>
-]]></content>
-	<tabTrigger>cms:block</tabTrigger>
-	<description>block:栏目/公共代码块</description>
-	<scope>text.html</scope>
-</snippet>

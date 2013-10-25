@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:article  property="_pv" istr="" astr="">PV</cms:article>
-]]></content>
-	<tabTrigger>cms:art-pv</tabTrigger>
-	<description>article:PV</description>
-	<scope>text.html</scope>
-</snippet>

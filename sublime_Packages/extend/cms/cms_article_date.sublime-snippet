@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<cms:article property="publish_date" dateformat="${1:yyyy-}MM-dd" istr="" astr="">{文章发布时间}</cms:article>
-]]></content>
-	<tabTrigger>cms:art-date</tabTrigger>
-	<description>article:文章发布时间</description>
-	<scope>text.html</scope>
-</snippet>
