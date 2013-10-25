@@ -1,0 +1,6 @@
+<snippet>
+	<content><![CDATA[font-family: ${1:<font-name>,} sans-serif;$2]]></content>
+	<tabTrigger>san</tabTrigger>
+    <description>CSS - font-family: sans-serif;</description>
+    <scope>source.css, source.less, source.scss, source.stylus</scope>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[@media (min-width: $1) {
+	$2
+}]]></content>
+	<tabTrigger>med</tabTrigger>
+    <description>CSS - @media {}</description>
+    <scope>source.css, source.less, source.scss, source.stylus</scope>
+</snippet>

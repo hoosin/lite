@@ -1,0 +1,6 @@
+<snippet>
+	<content><![CDATA[top: ${1:0};$2]]></content>
+	<tabTrigger>top</tabTrigger>
+    <description>CSS - top: 0;</description>
+    <scope>source.css, source.less, source.scss, source.stylus</scope>
+</snippet>

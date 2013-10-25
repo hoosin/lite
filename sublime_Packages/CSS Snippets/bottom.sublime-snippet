@@ -1,0 +1,6 @@
+<snippet>
+	<content><![CDATA[bottom: ${1:0};$2]]></content>
+	<tabTrigger>bot</tabTrigger>
+    <description>CSS - bottom: 0;</description>
+    <scope>source.css, source.less, source.scss, source.stylus</scope>
+</snippet>

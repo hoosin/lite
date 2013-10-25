@@ -5,6 +5,5 @@
 { "keys": ["ctrl+alt+k"], "command": "prev_edit_line" },
 { "keys": ["ctrl+alt+l"], "command": "next_edit_line" },
 { "keys": ["ctrl+alt+m"], "command": "list_all_edits" },
-{ "keys": ["ctrl+alt+c"], "command": "create_edit" },
-{ "keys": ["ctrl+b"], "command": "view_in_browser"}
+{ "keys": ["ctrl+alt+c"], "command": "create_edit" }
 ]
