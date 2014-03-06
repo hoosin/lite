@@ -1,5 +1,5 @@
 <!--#include virtual="global/reset.css"-->
 .width1000{width: 1000px; margin: 0 auto;}
 #list{padding-left: 40px;}
-#list li{ width:300px; height:400px; float:left; *float:none; margin:0 10px 20px 0; border:1px solid #c00; display:inline-block; *display:inline; zoom:1; }
+#list li{ width:300px; height:400px; float:left; *float:none; margin:0 10px 20px 0; border:1px solid #dddddd; display:inline-block; *display:inline; zoom:1; text-align: center; border-radius: 5px; overflow: hidden;}
  
