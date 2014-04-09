@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+font:normal 22px/43px "Microsoft YaHei"
+]]></content>
+	<tabTrigger>fzm</tabTrigger>
+	<scope>source.css</scope>
+	<description>[字体]简写</description>
+</snippet>

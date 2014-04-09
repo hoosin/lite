@@ -1,8 +1,0 @@
-<snippet>
-    <content><![CDATA[
-require('${1:package}')${0}
-]]></content>
-    <tabTrigger>req</tabTrigger>
-    <scope>source.js</scope>
-    <description>require</description>
-</snippet>

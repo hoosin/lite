@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+<div class="header">
+    <div class="topBg main1000"></div>
+</div>
+<style type="text/css">
+@charset "gb2312";
+@import url("http://js.3conline.com/pconline/zt_base2013.css");
+body{ background: #fff; }
+body #bottom .sites,body #bottom a.bottom_a,body #bottom .mid{ color: #000}
+body #bottom .links{ background: none; }
+body .thcmt{ display: none; }
+body .cmtContent{ background: #fff; border: 1px solid #eeeeee}
+a{ color: #4b4b4b}
+a:hover{ color: #f60}
+.main1000{ margin: 0 auto; width: 1000px; }
+.header,.topBg{ background: url(../img/banner.jpg) no-repeat top center; height: 225px; }
+</style>
+]]></content>
+	<tabTrigger>banner</tabTrigger>
+	<scope>text.html</scope>
+	<description>[头部]HTML</description>
+</snippet>
