@@ -1,0 +1,5 @@
+<snippet>
+	<content><![CDATA[dequeue(${1:queueName})$0]]></content>
+	<tabTrigger>dequeue</tabTrigger>
+	<scope>source.js</scope>
+</snippet>
