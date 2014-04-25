@@ -38,10 +38,10 @@
 
 值|描述 
 :---------------|:---------------|:---------------|:---------------
-头部	|header	|主体|	main
-脚部	|footer	|容器	|wrapper
-侧栏	|side_bar|	栏目	|column
-布局	|layout	| 	 ||
+头部|header|主体|	main
+脚部|footer|容器|wrapper
+侧栏|side_bar|栏目|column
+布局|layout|||
 
 
 
