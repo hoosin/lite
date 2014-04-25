@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.1">
+    <meta name="theme" content="one 0.1">
+    <title>HTML 规范</title>
+    <link rel="stylesheet" href="../static/one.css" />
+    <link rel="stylesheet" href="../static/syntax.css" />
+  </head>
+  <body>
+    <div class="navigation" role="navigation">
+      <div class="container">
+        <a class="home" href="../">前端 Style</a>
+        <div class="menu">
+          <a href="../index.html">首页</a>
+          <a href="./">规范</a>
+          <a href="../course/index.html">教程</a>
+          <a href="../library/index.html">代码库</a>
+          <a href="../fed/index.html">FED</a>
+        </div>
+      </div>
+    </div>
+    <div class="document">
+<div class="hentry">
+  <h1 class="entry-title">HTML 规范</h1>
+  <div class="entry-meta">
+    <time class="updated" datetime="2013-04-23T08:56:53.000Z">2013-04-23</time>
+  </div>
+  <div class="entry-content"><h2 id="for-w3c">for W3C</h2><ul>
+<li>标签名全小写。</li>
+<li>属性名由小写字母、数字和下划线组成。</li>
+<li>标签是否应当关闭？<ul>
+<li><del>所有标签必须关闭，比如 <code>&lt;br /&gt;</code> 或 <code>&lt;hr /&gt;</code>。</del> </li>
+<li>可选关闭标签应当关闭。</li>
+<li>自动关闭标签不必要关闭。推荐 <code>&lt;br&gt;</code> ，不推荐 <code>&lt;br /&gt;</code> 。</li>
+</ul>
+</li>
+<li>属性值必须用双引号包括，比如 <code>&lt;img src=&quot;example.png&quot; width=&quot;30&quot; /&gt;</code>。</li>
+<li>没有值的属性必须使用自己的名称做为值，如 <code>checked</code> 、 <code>disabled</code> 、 <code>readonly</code> 、 <code>selected</code> 等。</li>
+<li>避免使用 <code>&lt;center&gt;</code> 、 <code>&lt;font&gt;</code> 、 <code>&lt;u&gt;</code> 、 <code>&lt;s&gt;</code> 、 <code>&lt;strike&gt;</code> 、 <code>&lt;menu&gt;</code> 、 <code>&lt;dir&gt;</code> 、 <code>&lt;applet&gt;</code> 等标签。</li>
+<li>需要添加自定义属性时，使用 <code>data-</code> 作为前缀，比如 <code>&lt;img src=&quot;blank.gif&quot; data-src=&quot;pic01.jpg&quot; /&gt;</code>。</li>
+<li>内联元素中不可嵌套块级元素。</li>
+<li><code>script</code> 标签上不必写 <code>type</code> 和 <code>language</code> 。</li>
+<li><code>style</code> 标签 和 <code>link</code> 标签上不必写 <code>type</code> 。</li>
+<li>避免链接重定向，如 <code>&lt;a href=&quot;http://www.baidu.com/&quot;&gt;baidu&lt;/a&gt;</code> ，即需要在 URL 地址后面加上 <code>/</code> 。</li>
+</ul>
+<h2 id="整体结构">整体结构</h2><h3 id="文档模板">文档模板</h3><ul>
+<li>文件以 <code>&lt;!DOCTYPE html&gt;</code> 首行顶格开始。</li>
+<li>必须申明文档编码 <code>charset</code> ，且与文件本身编码一致，推荐使用 <code>&lt;meta charset=&quot;utf-8&quot;/&gt;</code> ，并置于 <code>&lt;head&gt;</code> 的第一行。</li>
+<li><code>title</code> 极为重要，紧跟在 <code>charset</code> 之后。</li>
+<li>编写恰当的 <code>keywords</code> 和 <code>description</code> 。</li>
+<li>css 置于 head 中，文件数要尽可能少。</li>
+<li>js 置于 body 底部，文件数要尽可能少。</li>
+</ul>
+<h3 id="结构顺序和视觉顺序基本保持一致">结构顺序和视觉顺序基本保持一致</h3><ul>
+<li>按照从上至下、从左到右的视觉顺序书写HTML结构。</li>
+<li>But ，有时候为了便于搜索引擎抓取，我们也会将重要内容在 HTML 结构顺序上提前。</li>
+<li>用div代替table布局，可以使HTML更具灵活性，也方便利用CSS控制。</li>
+<li>table不建议用于布局，但表现具有明显表格形式的数据，table还是首选。</li>
+</ul>
+<h3 id="保持良好的简洁的树形结构">保持良好的简洁的树形结构</h3><ul>
+<li>使用空格缩进，避免使用 Tab 缩进，空格大小为 4 。</li>
+<li><code>&lt;html&gt;</code> 、<code>&lt;body&gt;</code> 、<code>&lt;script&gt;</code> 、<code>&lt;style&gt;</code> 标签不缩进，其他所有标签缩进</li>
+<li>每一个块级元素都另起一行，每一行都缩进对齐。</li>
+<li>删除冗余的行尾的空格。</li>
+<li>对于内容较为简单的表格，建议将tr写成单行。</li>
+<li>可以在大的模块之间用空行隔开，使模块更清晰。</li>
+</ul>
+<h3 id="注释规范">注释规范</h3><ul>
+<li><code>&lt;!-- 注释内容 --&gt;</code> 。</li>
+<li>“注释内容” 区域不可包含 <code>-</code> 。</li>
+<li>只允许使用单行HTML注释。</li>
+<li>HTML 注释最好不要使用在代码上，可以使用模板语言本身的注释。</li>
+<li>给代码块及重要功能（如 loop）加上注释，方便后台套接页面。</li>
+<li>两个浮动元素之间不允许编写 HTML 注释 （<em>for IE6 Bug</em>） 。</li>
+</ul>
+<p>代码示例：</p>
+<pre>&lt;!-- 头部 begin --&gt;
+&lt;div class=&quot;container&quot;&gt;
+    &lt;!-- LOGO begin --&gt;
+    &lt;h1&gt;&lt;a href=&quot;#&quot;&gt;Chang You&lt;/a&gt;&lt;/h1&gt;
+    &lt;!-- LOGO end --&gt;
+    &lt;!-- 导航 begin --&gt;
+    &lt;ul class=&quot;nav&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;About US&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;News&lt;/a&gt;&lt;/li&gt;
+        &lt;!-- 更多导航项 --&gt;
+    &lt;/ul&gt;
+    &lt;!-- 导航 end --&gt;
+&lt;/div&gt;
+&lt;!-- 头部 end --&gt;
+
+</pre><h3 id="其他">其他</h3><ul>
+<li>尽可能减少 div 嵌套，多考虑平级而非嵌套结构。如果可以写成 <code>&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;</code> 那么就不要写成 <code>&lt;div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;</code> 。</li>
+<li>如果结构已经可以满足视觉和语义的要求，那么就不要有额外的冗余的结构。比如 <code>&lt;div&gt;&lt;h2&gt;&lt;/h2&gt;&lt;/div&gt;</code> 已经能满足要求，那么就不要再写成 <code>&lt;div&gt;&lt;div&gt;&lt;h2&gt;&lt;/h2&gt;&lt;/div&gt;&lt;/div&gt;</code> 。</li>
+<li>一个标签上引用的className不要过多，越少越好。比如不要出现这种情况： <code>&lt;div class=&quot;class1 class2 class3 class4&quot;&gt;&lt;/div&gt;</code> 。</li>
+<li>对于一个语义化的内部标签，应尽量避免使用className。比如在这样一个列表中，li标签中的itm应去除： <code>&lt;ul class=&quot;m-help&quot;&gt;&lt;li class=&quot;itm&quot;&gt;&lt;/li&gt;&lt;li class=&quot;itm&quot;&gt;&lt;/li&gt;&lt;/ul&gt;</code> 。</li>
+</ul>
+<h2 id="内容语义">内容语义</h2><ul>
+<li>在网页中某种类型的内容必定需要某种特定的 HTML 标签来承载，也就是我们常常提到的根据你的内容语义化 HTML 结构。<ul>
+<li>合理利用 <code>&lt;img /&gt;</code> 和 <code>background-image</code> 。</li>
+<li>标题用 <code>h*</code> ，段落用 <code>p</code> ，列表用 <code>ul</code> 。</li>
+<li>表单元素的描述性内容需要使用 <code>&lt;label&gt;</code> 。</li>
+<li>视项目情形来决定是否使用 HTML5 中的标签，结合 html5shiv 。</li>
+</ul>
+</li>
+<li>在资源型的内容上加入描述文案，比如给img添加alt属性，在audio内加入文案和链接等等。<ul>
+<li>重要的图片必须添加 <code>alt</code> 属性。</li>
+</ul>
+</li>
+<li>加强“不可见”内容的可访问性。<ul>
+<li>背景图上的文字应该同时写在 html 中，并使用css <code>text-indent</code> 使其不可见，有利于搜索引擎抓取你的内容，也可以在css失效的情况下看到内容。</li>
+</ul>
+</li>
+<li>重要的或者被截断的元素必须添加 <code>title</code> 属性。</li>
+<li>以实体代替与HTML语法相同的字符，避免浏览解析错误，其他特殊符号的实体没有必要。<ul>
+<li>常用HTML字符实体（建议使用实体）： <code>&quot;</code> 、 <code>&amp;</code> 、 <code>&lt;</code> 、 <code>&gt;</code> 、 <code>空格</code> 。</li>
+<li>常用特殊字符实体（不建议使用实体）： © ® · « » × ÷ ‰ ¥ 。</li>
+</ul>
+</li>
+</ul>
+<h2 id="附录">附录</h2><h3 id="代码示例">代码示例</h3><pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;/&gt;
+    &lt;title&gt;Standard Demo&lt;/title&gt;
+    &lt;meta name=&quot;keywords&quot; content=&quot;&quot;/&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;&quot;/&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;/&gt;
+    &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;img/favicon.ico&quot;/&gt;
+    &lt;link rel=&quot;apple-touch-icon&quot; href=&quot;img/touchicon.png&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;../css/core.css&quot;/&gt;
+    &lt;style&gt;
+    .nav {
+        font-size: 14px;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- 头部 begin --&gt;
+&lt;div class=&quot;header&quot;&gt;&lt;/div&gt;
+&lt;!-- 头部 end --&gt;
+&lt;!-- 内容区域 begin --&gt;
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;main&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;aside&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- 内容区域 end --&gt;
+&lt;!-- 尾部 begin --&gt;
+&lt;div class=&quot;footer&quot;&gt;
+    &lt;p&gt;By XingKaiZhang.&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- 尾部 end --&gt;
+&lt;script src=&quot;../js/light.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+alert(&#39;Standard Demo&#39;);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre><h3 id="特殊符号对照">特殊符号对照</h3><pre>&gt;            &amp;gt;
+&lt;            &amp;lt;
+&            &amp;amp;
+&quot;            &amp;quot;
+space        &amp;nbsp;
+
+©            &amp;copy;
+®            &amp;reg;
+·            &amp;middot;
+«            &amp;laquo;
+»            &amp;raquo;
+×            &amp;times;
+÷            &amp;divide;
+‰            &amp;permil;
+¥            &amp;yen;
+
+
+</pre><h3 id="常用标签">常用标签</h3><pre>&lt;html&gt;&lt;/html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;&lt;/body&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;link /&gt;                            // 引用样式或icon
+&lt;meta /&gt;                            // 文档信息
+&lt;script&gt;&lt;/script&gt;                   // 引用脚本
+&lt;style&gt;&lt;/style&gt;                     // 引用样式
+
+&lt;div&gt;&lt;/div&gt;                         // 块级容器
+&lt;span&gt;&lt;/span&gt;                       // 内联容器
+
+&lt;h1&gt;&lt;/h1&gt;                           // 标题，h2，h3，h4，h5，h6
+&lt;p&gt;&lt;/p&gt;                             // 段落
+&lt;a&gt;&lt;/a&gt;                             // 超链接或锚
+&lt;del&gt;&lt;/del&gt;                         // 文本删除
+&lt;em&gt;&lt;/em&gt;                           // 强调文本
+&lt;strong&gt;&lt;/strong&gt;                   // 强调文本
+&lt;sub&gt;&lt;/sub&gt;                         // 下标
+&lt;sup&gt;&lt;/sup&gt;                         // 上标
+&lt;br /&gt;
+&lt;img /&gt;                             // 图像
+&lt;iframe&gt;&lt;/iframe&gt;                   // 内嵌一个网页
+
+&lt;ul&gt;                                // 无序列表
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;                                // 有序列表
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;dl&gt;                                // 定义列表
+    &lt;dt&gt;&lt;/dt&gt;
+    &lt;dd&gt;&lt;/dd&gt;
+    &lt;dd&gt;&lt;/dd&gt;
+    &lt;dt&gt;&lt;/dt&gt;
+    &lt;dd&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;
+    &lt;thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+
+&lt;form&gt;
+    &lt;label&gt;&lt;/label&gt;
+    &lt;button&gt;&lt;/button&gt;
+    &lt;input /&gt;
+    &lt;select&gt;
+        &lt;option&gt;&lt;/option&gt;
+    &lt;select&gt;
+    &lt;textarea&gt;&lt;/textarea&gt;
+&lt;/form&gt;</pre></div>
+</div>
+</div>
+    <div class="footer">
+      <p>By zhangxingkai CY2848. Tel: 15810885265</p>
+      <p class="copyright">powered by <a href="http://lab.lepture.com/nico/">nico</a> 0.4.1</p>
+    </div>
+    <script src="http://static.alipayobjects.com/seajs/1.2.1/sea.js" data-main="../static/one.js"></script>
+  </body>
+</html>
