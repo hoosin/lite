@@ -1,7 +1,7 @@
 HTML规范
 ---
 
-##本文来源[请这样去写你的HTML](http://sofish.de/1688)
+##本文来源：[请这样去写你的HTML](http://sofish.de/1688)
 
 ###1. 文档声明：<!Doctype>
 
