@@ -1,3 +1,5 @@
+# 简版 clearfix
+```css
 /**
  * For modern browsers
  * 1. The space content is one way to avoid an Opera bug when the
@@ -24,3 +26,4 @@
 .clearfix {
     *zoom: 1;
 }
+```
