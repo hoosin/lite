@@ -56,19 +56,19 @@ o：表示以上未涉及到的其他对象，例如：```oButton```，```oDate`
 
 #3.其他注意事项
 
-1：所有命名最好使用英语表示。
+1.所有命名最好使用英语表示。
 
-2：所有变量名应该明确而必要，尽量避免不必要的容易混淆的缩写。
+2.所有变量名应该明确而必要，尽量避免不必要的容易混淆的缩写。
 
-3：netease.events.mouse.Handler，而不是 ```netease.events.mouse.MouseEventHandler```。
+3.netease.events.mouse.Handler，而不是 ```netease.events.mouse.MouseEventHandler```。
 
-4：对应的方法应该使用对应的动词，例如：```get/set, add/remove, create/destroy, start/stop, insert/delete, begin/end```。
+4.对应的方法应该使用对应的动词，例如：```get/set, add/remove, create/destroy, start/stop, insert/delete, begin/end```。
 
-5：应该避免双重否定意义的变量，例如：```bIsNotError bIsNotFound```，不可取。
+5.应该避免双重否定意义的变量，例如：```bIsNotError bIsNotFound```，不可取。
 
-6：变量应该在最小的范围内定义，并尽可能的保持最少的活动时间。
+6.变量应该在最小的范围内定义，并尽可能的保持最少的活动时间。
 
-7：循环变量最好在循环中定义。例如：
+7.循环变量最好在循环中定义。例如：
 
 
 ```javascript
@@ -77,16 +77,16 @@ o：表示以上未涉及到的其他对象，例如：```oButton```，```oDate`
 	} 
 ```
 
-8：尽量避免复杂的条件语句，可以使用临时的```boolean```变量代替。
+8.尽量避免复杂的条件语句，可以使用临时的```boolean```变量代替。
 
-9：一定要避免在条件中执行语句，例如：
+9.一定要避免在条件中执行语句，例如：
  
 ```javascript
 	if((i=3)>2){} 
 ```
 以上办法不可取。
 
-10：不要在代码中重复使用相同意义的数字，用一个变量代替，比如 ```nTotal=100; num= total``` 。
+10.不要在代码中重复使用相同意义的数字，用一个变量代替，比如 ```nTotal=100; num= total``` 。
 
 邮箱事业部页面在window只允许定义三种变量——1：全局变量；2：常量；3：类。任何业务逻辑都需要通过类方法或者示例方法实现。前两种变量在之前文章中已经介绍，在此不再累述，接下来详细介绍类定义和使用的规范。
 
