@@ -9,14 +9,14 @@
 
 ###1.2 CSS命命规则
 
-1. 样式类名全部用小写，首字符必须是字母，禁止数字或其他特殊字符。由以字母开头的小写字母（a-z）、数字（0-9）、下划线（_）组成。
+1. 样式类名全部用小写，首字符必须是字母，禁止数字或其他特殊字符。由以字母开头的小写字母```（a-z）```、数字```（0-9）```、一杠 ```（-）```组成。
 
-2. 可以是单个单词，也可以是组合单词，要求能够描述清楚模块和元素的含义，使其具有语义化。避免使用 123456…red,blue,left,right之类的（如颜色、字号大小等）矢量命名，如class="left_news"、class="2" ，以避免当状态改变时名称失去意义。尽量用单个单词简单描述class名称。
+2. 可以是单个单词，也可以是组合单词，要求能够描述清楚模块和元素的含义，使其具有语义化。避免使用 ```123456…,red,blue,left,right```之类的（如颜色、字号大小等）矢量命名，如class="left-news"、class="2" ，以避免当状态改变时名称失去意义。尽量用单个单词简单描述class名称。
 
-3. 双单词或多单词组合方式：形容词_名词、命名空间_名次、命名空间_形容词_名词。例如：news_list、mod_feeds、mod_my_feeds、cell_title
+3. 双单词或多单词组合方式：形容词-名词、命名空间-名次、命名空间-形容词-名词。例如：```news-list、mod-feeds、mod-my-feeds、cell-title```
 
 ###1.3 Class 和 id的使用方法
-把id留给后台开发和JS使用，除此之外页面的page id(如首页的外层需要一个ID id="page_index")，页面结构（header main footer）允许用id命名。其他禁止id使用在样式表CSS命名中，一律使用class命名。
+把id留给后台开发和JS使用，除此之外页面的page id(如首页的外层需要一个ID ```id="page-index"```)，页面结构（header main footer）允许用id命名。其他禁止id使用在样式表CSS命名中，一律使用class命名。
 
 ###1.4 命名空间
 
@@ -26,11 +26,11 @@
 
 通过统一的命名规范定义命名的范围，成为CSS  class & id命名空间。
 
-布局: 以语义化的单词layout作为命名空间，例如主栏布局命名 layout_main，只改变layout_命名空间后面的命名，layout始终保留。布局的命名空间为layout_xxx。
+布局: 以语义化的单词layout作为命名空间，例如主栏布局命名 layout-main，只改变layout-命名空间后面的命名，layout始终保留。布局的命名空间为layout-xxx。
 
-模块：页面是由一个或多个模块组成，模块的英文单词是module，规范简写成mod，如新闻模块mod_news，照片展示模块mod_photo_show。模块的命名空间为mod_xxx 。
+模块：页面是由一个或多个模块组成，模块的英文单词是module，规范简写成mod，如新闻模块```mod-news```，照片展示模块```mod-photo-show```。模块的命名空间为```mod-xxx``` 。
 
-元件：元件是属于模块内部的，也可以说模块是由元件和它内部的自有元素组成。如用户照片信息元件cell_user_photo。元件的命名空间为cell_xxx 。
+元件：元件是属于模块内部的，也可以说模块是由元件和它内部的自有元素组成。如用户照片信息元件```cell-user-photo```。元件的命名空间为```cell-xxx``` 。
 
 
 ###1.5 通用命名
@@ -41,24 +41,24 @@ ID名称|命名|ID名称	|命名
 :---------------|:---------------|:---------------|:---------------
 头部|header|主体|	main
 脚部|footer|容器|wrapper
-侧栏|side_bar|栏目|column
+侧栏|side-bar|栏目|column
 布局|layout|||
 
 ####(2)模块结构命名
 
 Class名称|命名|Class名称|命名
 :---------------|:---------------|:---------------|:---------------
-模块(如：新闻模块)	|mod (mod_news)	|标题栏	|title
-内容	|content	|次级内容	|sub_content
+模块(如：新闻模块)	|mod (mod-news)	|标题栏	|title
+内容	|content	|次级内容	|sub-content
 
 
 ####(3)导航结构命名
 
 Class名称|命名|Class名称|命名
 :---------------|:---------------|:---------------|:---------------
-导航	|nav	|主导航	|main_nav
-子导航|	sub_nav	|顶部导航	|top_nav
-菜单	|menu	|子菜单	|sub_menu
+导航	|nav	|主导航	|main-nav
+子导航|	sub-nav	|顶部导航	|top-nav
+菜单	|menu	|子菜单	|sub-menu
 
  
 ####(4)一般元素命名
@@ -100,12 +100,12 @@ Class名称|命名|Class名称|命名
 
 
 ####(5)全局皮肤样式
-######文字颜色(命名空间text_xxx)
-text_c1, text_c2,text_c3……
-######背景颜色(命名空间bg _xxx)
-bg_c1,bg_c2,bg_c3……
-######边框颜色(命名空间border_xxx)
-border_c1,border_c2,border_c3……
+######文字颜色(命名空间text-xxx)
+```text-c1, text-c2,text-c3……```
+######背景颜色(命名空间bg -xxx)
+```bg-c1,bg-c2,bg-c3……```
+######边框颜色(命名空间border-xxx)
+```border-c1,border-c2,border-c3……```
 
 
 
