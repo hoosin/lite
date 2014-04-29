@@ -1,5 +1,5 @@
 /***
- *   model:returnTop.js
+ *  model:returnTop.js
  *  author:hoosin
 ***/
 $(function() {
