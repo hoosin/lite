@@ -6,11 +6,11 @@
 ### 目录结构
 
     .
-	├── node         [笔记](https://github.com/hoosin/lite/tree/master/node)
-    ├── interview    [面试](https://github.com/hoosin/lite/tree/master/interview)
-    ├── knowledge    [知识体系](https://github.com/hoosin/lite/tree/master/knowledge)
-    ├── standard     [前端规范](https://github.com/hoosin/lite/tree/master/standard)
-    └── img          [素材](img)
+	├── node         笔记
+    ├── interview    面试
+    ├── knowledge    知识体系
+    ├── standard     前端规范
+    └── img          素材
 
 
 ![站在巨人的肩膀](img/super.jpg)
