@@ -6,11 +6,11 @@
 ### 目录结构
 
     .
-	├── node         笔记
-    ├── interview    面试
-    ├── knowledge    知识体系
-    ├── Standard     前端规范
-    └── img          素材
+	├── node         [笔记](/node)
+    ├── interview    [面试](/interview)
+    ├── knowledge    [知识体系](/knowledge)
+    ├── standard     [前端规范](/standard)
+    └── img          [素材](/img)
 
 
 ![站在巨人的肩膀](img/super.jpg)
