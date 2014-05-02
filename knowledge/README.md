@@ -4,7 +4,7 @@
 
 Nicholas C. Zakas认为前端工程师应该具备的基本知识（[观点原文](http://www.nczonline.net/blog/2010/01/05/interviewing-the-front-end-engineer/) | [中文翻译](http://www.cn-cuckoo.com/2010/01/08/how-nicholas-c-zakas-interviewing-the-front-end-engineer-1332.html)）
 
-* __DOM结构__: 两个节点之间可能存在哪些关系以及如何在节点之间任意移动。[阅读](https://github.com/alvinhui/alvinhui.github.io/tree/master/basic-knowledge/part1/DOM-structure)
+* __DOM结构__: 两个节点之间可能存在哪些关系以及如何在节点之间任意移动。[阅读](part1/DOM-structure)
 * __DOM操作__: 怎样添加、删除、移动、复制、创建和查找节点。[阅读](https://github.com/alvinhui/alvinhui.github.io/tree/master/basic-knowledge/part1/DOM-manipulation)
 * __事件__: 怎样使用事件以及IE和DOM事件模型之间存在哪些主要差别。[阅读](https://github.com/alvinhui/alvinhui.github.io/tree/master/basic-knowledge/part1/Event)
 * __XMLHttpRequest__: 这是什么、怎样完整地执行一次GET请求、怎样检测错误。[阅读](https://github.com/alvinhui/alvinhui.github.io/tree/master/basic-knowledge/part1/XMLHttpRequest)
