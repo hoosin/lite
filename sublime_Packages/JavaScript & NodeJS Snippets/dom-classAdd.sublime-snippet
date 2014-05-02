@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-${1:document}.classList.add('${2:class}');
-]]></content>
-	<tabTrigger>ca</tabTrigger>
-	<scope>source.js</scope>
-	<description>classList.add</description>
-</snippet>

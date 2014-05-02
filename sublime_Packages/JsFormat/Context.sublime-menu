@@ -1,7 +1,0 @@
-[
-    { 
-    	"id": "jsformatmenu",
-    	"command": "js_format",
-    	"caption": "JsFormat"
-    }
-]

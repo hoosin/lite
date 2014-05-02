@@ -1,8 +1,0 @@
-[
-  // reparse a comment block's placeholders
-  { "keys": ["alt+w"], "command": "jsdocs_reparse",
-    "context": [
-      { "key": "selector", "operator": "equal", "operand": "comment.block" }
-    ]
-  }
-]

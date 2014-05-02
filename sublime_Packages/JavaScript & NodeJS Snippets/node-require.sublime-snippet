@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-require('${1:module}');
-]]></content>
-	<tabTrigger>re</tabTrigger>
-	<scope>source.js</scope>
-	<description>require</description>
-</snippet>

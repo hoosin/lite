@@ -1,9 +1,0 @@
-<snippet>
-	<content><![CDATA[
-/* 简易文字链接列表 */
-.m-list{line-height:21px;}
-.m-list a,.m-list a:hover{text-decoration:none;color:#777;}]]></content>
-	<tabTrigger>m-list</tabTrigger>
-	<scope>source.css</scope>
-	<description>[兼容]简易文字链接列表</description>
-</snippet>

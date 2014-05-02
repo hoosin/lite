@@ -1,2 +1,0 @@
-Sublime Alignment 2.1.0 Changelog:
-- Added support for Sublime Text 3 thanks to kevinsperrine

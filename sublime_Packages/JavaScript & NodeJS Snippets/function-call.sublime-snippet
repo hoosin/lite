@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-${1:methodName}.call(${2:context}, ${3:arguments})
-]]></content>
-	<tabTrigger>call</tabTrigger>
-	<scope>source.js</scope>
-	<description>method.call()</description>
-</snippet>

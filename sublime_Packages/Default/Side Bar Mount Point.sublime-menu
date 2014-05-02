@@ -1,4 +1,0 @@
-[
-	{ "caption": "-", "id": "folder_commands" },
-	{ "caption": "从项目删除文件夹", "command": "remove_folder", "args": { "dirs": []} }
-]

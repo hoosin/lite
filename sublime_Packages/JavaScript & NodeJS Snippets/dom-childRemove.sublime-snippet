@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-${1:document}.removeChild('${2}');
-]]></content>
-	<tabTrigger>rc</tabTrigger>
-	<scope>source.js</scope>
-	<description>removeChild</description>
-</snippet>
