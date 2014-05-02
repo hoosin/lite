@@ -6,7 +6,7 @@
 ### 目录结构
 
     .
-    ├──	node     	 笔记
+	├── node         笔记
     ├── interview    面试
     ├── knowledge    知识体系
     ├── Standard     前端规范
