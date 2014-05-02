@@ -16,7 +16,7 @@ Nicholas C. Zakas认为前端工程师应该具备的基本知识（[观点原�
 * __盒模型__: 外边距、内边距和边框之间的关系，IE < 8中的盒模型有什么不同。[read](part1/Box)
 * __块级元素与行内元素__: 怎么用CSS控制它们、它们怎样影响周围的元素以及你觉得应该如何定义它们的样式。[read](part1/Block-Inline)
 * __浮动元素__: 怎么使用它们、它们有什么问题以及怎么解决这些问题。[read](part1/Float)
-* __html5__: html5汇总。[read](part1/html5)
+* __html5__: html5相关汇总。[read](part1/html5)
 
 
 

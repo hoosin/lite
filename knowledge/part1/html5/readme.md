@@ -1,4 +1,4 @@
-html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
+##html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
 
 * HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
 
@@ -29,3 +29,9 @@ html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的�
    <script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script> 
    <![endif]--> 
 如何区分： DOCTYPE声明\新增的结构元素\功能元素
+
+##HTML5的离线储存？
+
+localStorage    长期存储数据，浏览器关闭后数据不丢失；
+
+sessionStorage  数据在浏览器关闭后自动删除。
