@@ -1,0 +1,361 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>关于CSS2规范</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="cover.html">
+<link rel="next" href="intro.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="cover.html">上一篇</a> &nbsp;
+<a href="intro.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">1 关于CSS2规范</H1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="about.html#q1" class="tocxref">1.1 阅读规范</a>
+    <li class="tocline2"><a href="about.html#q2" class="tocxref">1.2 规范的组成</a>
+    <li class="tocline2"><a href="about.html#q3" class="tocxref">1.3 约定</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="about.html#q4" class="tocxref">1.3.1 文档的语言元素和属性</a>
+      <li class="tocline3"><a href="about.html#property-defs" class="tocxref">1.3.2 CSS属性定义</a>
+      <ul class="toc">
+        <li class="tocline4"><a href="about.html#q6" class="tocxref"> 值</a>
+        <li class="tocline4"><a href="about.html#q7" class="tocxref"> 初始</a>
+        <li class="tocline4"><a href="about.html#q8" class="tocxref"> 适用于</a>
+        <li class="tocline4"><a href="about.html#q9" class="tocxref"> 继承性</a>
+        <li class="tocline4"><a href="about.html#q10" class="tocxref"> 百分比值</a>
+        <li class="tocline4"><a href="about.html#q11" class="tocxref"> 媒介分组</a>
+      </ul>
+      <li class="tocline3"><a href="about.html#shorthand" class="tocxref">1.3.3 缩写属性</a>
+      <li class="tocline3"><a href="about.html#q13" class="tocxref">1.3.4 注解和示例</a>
+      <li class="tocline3"><a href="about.html#q14" class="tocxref">1.3.5 图形和详细解释</a>
+    </ul>
+    <li class="tocline2"><a href="about.html#q15" class="tocxref">1.4 感谢</a>
+    <li class="tocline2"><a href="about.html#copyright" class="tocxref">1.5 版权信息</a>
+  </ul>
+</div>
+
+<h2><a name="q1">1.1 阅读规范</a></h2>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;本规范写作时考虑到两种类型的读者：CSS的作者和CSS的实现者。我们希望本规范可以帮助作者，提供他们需要的相应的工具来写出高效、动人而可读的文档，而不需要牵涉到CSS实现的众多细节。而对于实现者来说，他们可以找到所有需要的内容来开发<a href="conform.html#conformance">与CSS规范一致的用户端程序</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本规范的开始是CSS的一般呈现，越到最后，规范越技术化和专业化。通过总的目录，每一部分开始前的目录和索引，规范的电子版本和印刷版本都提供了简便的导航机制，可以快速地找到需要的信息。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;规范写作时考虑到两种呈现方式：电子的和印刷的。尽管两种呈现应该相似，用户还是会找到一些差别。例如，（很显然地）在印刷版本中，连接将不起作用；而在电子版本中，将不显示页码。如果这两者有差异，则电子版本是本文档的权威性的版本。
+
+<h2><a name="q2">1.2 规范的组成</a></h2>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;本规范由下列部分组成：
+
+<dl>
+
+<dt><Strong>第2部分：CSS2简介</strong>
+
+<dd>简介中包括了CSS2的一个简明指南和CSS2设计准则的讨论。
+
+<dt><strong>第3到第20部分：CSS2参考手册</strong>
+
+<dd>大量的参考手册包括了CSS2语言参考。该参考定义了可以写入CSS2样式表的东西（语法，属性，属性值）以及用户端必须如何解释样式表以保持<a
+href="conform.html#conformance">一致性</a>。
+
+
+<dt><strong>附录：</strong>
+
+<dd>附录包括的内容有：<a href="sample.html">HTML 4.0的示例样式表</a>，<a href="changes.html">相对CSS1的改进</a>，<a href="notes.html">实现和性能的注解</a>，<a href="grammar.html">CSS2的语法</a>，正规和非正规的<a href="refs.html">参考资料</a>的列表以及三个索引：一个是
+<a href="propidx.html">属性索引</a>，一个是<a href="descidx.html">描述子索引</a>，还有一个是<a href="indexlist.html">总的索引</a>。
+</dl>
+
+<H2><a name="q3">1.3 约定</a></H2>
+
+<H3><a name="q4">1.3.1 </a><a href="conform.html#doclanguage">文档的语言</a>元素和属性</H3>
+
+<ul>
+<li>CSS属性，描述子以及伪类名以单引号分割。
+<li>CSS值以单引号分割。
+<li>文档的语言元素名以大写字母表示。
+<li>文档的语言属性名以小写字母表示，并以双引号分割。
+</ul>
+
+<H3>1.3.2 <a name="property-defs">CSS属性定义</a></H3>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;每一个CSS属性定义的开始是关键信息的摘要，包含了这样一些内容：</p>
+
+<div class="propdef">
+<dl><dt>
+<a name="propdef-property-name" class="propdef-title"><strong>'属性名'</strong></a>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>合法取值和语法
+<tr valign=baseline><td><em>初始：</em>&nbsp;&nbsp;<td>初始值
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>该属性适用的元素
+<tr valign=baseline><td><em>继承性：</em>&nbsp;&nbsp;<td>该属性是否可以继承
+<tr valign=baseline><td><em>百分比值：</em>&nbsp;&nbsp;<td>百分比值代表的含义
+<tr valign=baseline><td><em>媒介分组：</em>&nbsp;&nbsp;<td>该属性适用的媒介分组
+</table>
+</dl>
+</div>
+
+
+<h4><a name="q6">值</a></h4>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;这一部分描述属性的合法值的范围。值类型的指定可以有这样几种方法：
+
+<ol>
+<li> <a name="syndata.html#keywords">关键词</a>值（如auto，disc等）
+
+<li> 基本数据类型，出现在"&lt;"和"&gt;"之间（如&lt;长度&gt;，&lt;百分比&gt;等）。电子版本中，每一个基本数据类型实例都连向它的定义。
+
+<li>和与其名称相同的属性取值范围一致的类型（如&lt;'border-width'&gt;，&lt;'background-attachment'&gt;等）。这种情况下，类型名就是属性名（带有引号），并出现在"&lt;"和"&gt;"之间（如&lt;'border-width'&gt;）。电子版本中，每一个这样的非术语类型的实例都连向相应的属性定义。
+
+<li>和属性名不同的非术语类型。这种情况下，这以非术语名出现在"&lt;"和"&gt;"之间，如&lt;border-width&gt;。注意&lt;border-width&gt;和&lt;'border-width'&gt;之间的差别。后者的定义有赖于前者的定义术语。非术语的定义靠近它在规范中第一次出现的地方。在电子版本中，该类型的每一个实例都连向相应的值的定义。
+</ol>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;这些定义中其它的词是关键词，必须原样出现，不带引号（如：red）。而除号（/）和逗号（,)也必须原样出现。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;值可以按如下方法来安排：:</p>
+
+<ul>
+<li>几个并列的词表示所有的词必须出现，次序和列出时一样。
+<li>竖线（|）分割两个或多个选择：其中只有一个出现。
+<li>双竖线（||）分割两个或多个选择：其中一个或多个出现，次序任意。
+<li>方框（[&nbsp;]）用来分组。 
+</ul>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;并列要优先于双竖线，双竖线优先于竖线。因此，下面两行的含义是一样的：
+<PRE>
+    a b   |   c || d e
+  [ a b ] | [ c || [ d e ]]
+</PRE>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;每一个类型，关键词或方框组可以紧跟下列修改项中的一个：</p>
+
+  <UL>
+    <LI>
+      星号（*）表示前述的类型、词或分组出现0或多次。
+
+    <LI>
+      加号（+）表示前述的类型、词或分组出现以或多次。
+
+    <LI>
+      问号（?）表示前述的类型、词或分组是可选的。
+
+    <LI>
+      以花括号（{A,B}）分割的以对数值表示前述的类型、词或分组至少出现A次，最多出现B次。
+  </UL>
+
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;下面是不同的值类型的示例：
+
+<BLOCKQUOTE>
+    <EM>值：</EM> N | NW | NE<BR>
+    <EM>值：</EM> [ &lt;length&gt; | thick | thin ]{1,4}<BR>
+    <EM>值：</EM> [&lt;family-name&gt; , ]* &lt;family-name&gt;<BR>
+    <EM>值：</EM> &lt;uri&gt;? &lt;color&gt; [ / &lt;color&gt; ]?<BR>
+    <EM>值：</EM> &lt;uri&gt; || &lt;color&gt;<BR>
+</BLOCKQUOTE>
+
+<h4><a name="q7">初始</a></h4>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;这一部分指定了属性的初始值。如果该属性是继承的，初始值就是赋予<a href="conform.html#doctree">文档树</a>中根元素的值。请参考<a href="cascade.html">层叠</a>一段，以了解样式表指定值，继承值和初始值之间的相互作用。
+
+<h4><a name="q8">适用于</a></h4>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这一部分列出了属性适用于的元素。所有的元素都被认为具有所有的属性，只是有些属性对于某些类型的元素不具有渲染效果。例如，<a href="text.html#propdef-white-space" class="noxref"><span class="propinst-white-space">'white-space'</span></a>仅对块类元素起作用。
+
+<h4><a name="q9">继承性</a></h4>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这一部分列出了该属性值是否从前继元素那里继承而来。请参考<a href="cascade.html">层叠</a>一段，以了解样式表指定值，继承值和初始值之间的相互作用。
+
+
+<h4><a name="q10">百分比值</a></h4>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这一部分指出如果百分比值出现在属性值中，那么百分比值应该如何得到解释。如果指明"N/A"，则该属性不接收百分比作为它的值。
+
+<h4><a name="q11">媒介分组</a></h4>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这一部分指出该属性适用的<a href="media.html#media-groups">媒介分组</a>。<a href="conform.html">一致性</a>条件指出，如果用户端支持包含在这些<a href="media.html#media-groups">媒介分组</a>中的<a href="media.html#media-types">媒介类型</a>的渲染，则必须支持这一属性。
+
+<H3>1.3.3 <a name="shorthand">缩写属性</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;有些属性是<a name="x0"><span class="index-def" title="shorthand property"><dfn>缩写属性</dfn></span></a>，亦即它们允许作者用一个属性来设置多个属性值。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;例如，<a href="fonts.html#propdef-font" class="noxref"><span class="propinst-font">'font'</span></a>属性是缩写属性，可以用来一次性设置<a href="fonts.html#propdef-font-style" class="noxref"><span class="propinst-font-style">'font-style'</span></a>，<a href="fonts.html#propdef-font-variant" class="noxref"><span class="propinst-font-variant">'font-variant'</span></a>，<a href="fonts.html#propdef-font-weight" class="noxref"><span class="propinst-font-weight">'font-weight'</span></a>，<a href="fonts.html#propdef-font-size" class="noxref"><span class="propinst-font-size">'font-size'</span></a>，<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>及<a href="fonts.html#propdef-font-family" class="noxref"><span class="propinst-font-family">'font-family'</span></a>等属性。</p>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;在缩写属性中如果有一些值省略，每一个“省略”的属性就被赋予其初始值（参见<a href="cascade.html">层叠</a>一段）。
+
+<div class="example"><P style="display:none">示例：</P><p>
+应用这一规则的示例如下：</p>
+
+<pre>
+H1 { 
+  font-weight: bold; 
+  font-size: 12pt;
+  line-height: 14pt; 
+  font-family: Helvetica; 
+  font-variant: normal;
+  font-style: normal;
+  font-stretch: normal;
+  font-size-adjust: none
+}
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;可以简写为一个缩写属性：</p>
+
+<pre>
+H1 { font: bold 12pt/14pt Helvetica }
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本例中，<a href="fonts.html#propdef-font-variant" class="noxref"><span class="propinst-font-variant">'font-variant'</span></a>，<a href="fonts.html#propdef-font-stretch" class="noxref"><span class="propinst-font-stretch">'font-stretch'</span></a>，<a href="fonts.html#propdef-font-size-adjust" class="noxref"><span class="propinst-font-size-adjust">'font-size-adjust'</span></a>以及<a href="fonts.html#propdef-font-style" class="noxref"><span class="propinst-font-style">'font-style'</span></a>采用它们的初始值。</p>
+</div>
+
+<h3><a name="q13">1.3.4 注解和示例</a></h3>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;所有演示非法用法的示例都有清晰的标记，“非法示例”。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;所有的HTML示例均和HTML 4.0严格DTD（定义见<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="normref">[HTML40]</span></a>）一致，除非另外指定了文档类型声明。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;所有的注解都仅供参考。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;规范的示例和注解在源HTML中加以标记，CSS1用户端将以一种特别的方式加以渲染。
+
+<h3><a name="q14">1.3.5 图形和详细解释</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本规范电子版中的大部分图形都伴随有一个“详细解释”，说明它们代表的内容。图形右下角的"[D]"是指向详细解释的连接。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;图形和详细解释仅供参考。
+
+<H2><a name="q15">1.4 感谢</a></H2> 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本规范是W3C工作组关于层叠样式表和格式化属性的工作成果。除了规范的编者，工作组成员有：
+
+Brad Chase (Bitstream), Chris Wilson (Microsoft), Daniel Glazman
+(Electricit&eacute; de France), Dave Raggett (W3C/HP), Ed Tecot
+(Microsoft), Jared Sorensen (Novell), Lauren Wood (SoftQuad), Laurie
+Anna Kaplan (Microsoft), Mike Wexler (Adobe), Murray Maloney (Grif),
+Powell Smith (IBM), Robert Stevahn (HP), Steve Byrne (JavaSoft),
+Steven Pemberton (CWI), Thom Phillabaum (Netscape), Douglas Rand
+(Silicon Graphics), Robert Pernett (Lotus), Dwayne Dicks (SoftQuad)和Sho Kuwamoto (Macromedia)。感谢他们不懈的努力。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;工作组邀请的一些专家也做出了贡献：George Kersher, Glenn Rippel (Bitstream), Jeff Veen (HotWired), Markku T. Hakkinen (The Productivity Works), Martin D&uuml;rst (W3C, formerly  Universit&auml;t Z&uuml;rich), Roy Platon (RAL), Todd Fahrner (Verso), Tim Boland (NIST), Eric Meyer (Case Western Reserve University)和Vincent Quint (W3C)。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;网络字体部分主要归功于Brad Chase (Bitstream)
+David Meltzer (Microsoft Typography)和Steve Zilles (Adobe)。与字体相关的段落中，下面这些人做出了不同方式的贡献：Alex Beamon (Apple), Ashok Saxena (Adobe), Ben Bauermeister (HP), Dave Raggett (W3C/HP), David Opstad (Apple), David Goldsmith (Apple), Ed Tecot (Microsoft), Erik van Blokland (LettError), Fran&ccedil;ois Yergeau (Alis), Gavin Nicol (Inso), Herbert van Zijl (Elsevier), Liam Quin, Misha Wolf (Reuters), Paul Haeberli (SGI), 和已去世的Phil Karlton (Netscape).
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;页面介质一段很多部分由Robert Stevahn (HP)和Stephen Waters (Microsoft)编写。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Robert Stevahn (HP), Scott Furman (Netscape)和Scott
+Isaacs (Microsoft)是CSS定位一段编写的主要贡献者。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Mike Wexler (Adobe)是工作手稿过渡稿的编者，描述了CSS2的很多新的特性。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://cs.cornell.edu/home/raman">T.V. Raman</a> (Adobe)基于他AsTeR（技术读物音频系统）的工作，对语音样式表（ACSS）和语音呈现概念作出了关键的贡献。他提供了ACSS规范的一个初步的草稿，我们才形成了现在的规范。包含在<a
+href="sample.html">HTML 4.0的示例样式表</a>中的语音属性值是他的设计。目前，他每天都使用它们，并和Emacspeak和Emacs W3浏览器（由William Perry编写，他实现了W3这一边的语音扩展）配合。 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Todd Fahrner (Verso)研究了当前和过去的浏览器来写出附录中的示例样式表。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;感谢Jan K&auml;rrman，<a
+href="http://www.tdb.uu.se/~jan/html2ps.html">html2ps</a>的作者，在创建本规范的PostScript版本中给予了很大的帮助。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;通过电子的和生活中的接触，下列人员对CSS2的开发作出了贡献：Alan Borning, Robert Cailliau, Liz Castro, James Clark, Dan Connolly, Donna Converse, Daniel Dardailler, Al Gilman, Daniel Greene, Scott Isaacs, Geir Ivars&oslash;y, Vincent Mallet, Kim Marriott, Brian Michalowski, Lou Montulli, Henrik Frystyk Nielsen, Jacob Nielsen, Eva von Pepel, William Perry, David Siegel, Peter Stuckey, and Jason White.
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于CSS的许多关键问题，www-style@w3.org上的讨论很有影响力。特别地，我们感谢Bjorn Backlund, Todd Fahrner, Lars Marius Garshol, Sue Jordan, Ian Hickson, Susan Lesch, Andrew Marshall, MegaZone, Eric Meyer, Russell O'Connor, David Perrell, Liam Quinn, Jon Seymour, Neil St. Laurent, Taylor, Brian Wilson以及Chris Wilson。感谢你们的参与。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;感谢Web Accessibility Initiative Protocols及Formats Technical Review Working Group (WAI PF)为提高CSS2的可读性提供的帮助。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;感谢Philippe Le H&eacute;garet，其CSS验证器帮助我们提出正确的示例并提供了完整的语法。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;特别感谢Arnaud Le Hors，其工作使本文档运作正常。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Adam Costello仔细浏览了本规范，从而对其做了改进。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;最后，感谢Tim Berners-Lee。没有他，也没有这一切。
+
+
+<H2>1.5 <a name="copyright">版权信息</a></H2>
+
+<p><strong>Copyright &copy; 1997 <a href="http://www.w3.org/">World Wide
+Web Consortium</a>, (<a href="http://www.lcs.mit.edu/">Massachusetts
+Institute of Technology</a>, <a href="http://www.inria.fr/">Institut
+National de Recherche en Informatique et en Automatique</a>, <a
+href="http://www.keio.ac.jp/">Keio University</a>).  All Rights
+Reserved.</strong>
+
+<p>Documents on the <a href="http://www.w3.org/">W3C</a> site are
+provided by the copyright holders under the following license. By
+obtaining, using and/or copying this document, or the W3C document
+from which this statement is linked, you agree that you have read,
+understood, and will comply with the following terms and
+conditions:</p>
+
+<p>Permission to use, copy, and distribute the contents of this
+document, or the W3C document from which this statement is linked, in
+any medium for any purpose and without fee or royalty is hereby
+granted, provided that you include the following on <i>ALL</i> copies
+of the document, or portions thereof, that you use:
+
+<ol>
+  <li>A link or URI to the original W3C document.</li>
+
+  <li>The pre-existing copyright notice of the original author, if it
+  doesn't exist, a notice of the form: &quot;Copyright &copy; <a
+  href="http://www.w3.org/">World Wide Web Consortium</a>, (<a
+  href="http://www.lcs.mit.edu/">Massachusetts Institute of
+  Technology</a>, <a href="http://www.inria.fr/">Institut National de
+  Recherche en Informatique et en Automatique</a>, <a
+  href="http://www.keio.ac.jp/">Keio University</a>). All Rights
+  Reserved.&quot; </li>
+
+  <li><em>If it exists</em>, the STATUS of the W3C document.</li>
+</ol>
+
+<p>When space permits, inclusion of the full text of this
+<b>NOTICE</b> should be provided. In addition, credit shall be
+attributed to the copyright holders for any software, documents, or
+other items or products that you create pursuant to the implementation
+of the contents of this document, or any portion thereof. </p>
+
+<p>No right to create modifications or derivatives is granted pursuant
+to this license.</p>
+
+<p><b>THIS DOCUMENT IS PROVIDED &quot;AS IS,&quot; AND COPYRIGHT HOLDERS
+MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING,
+BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, NON-INFRINGEMENT, OR TITLE; THAT THE CONTENTS OF
+THE DOCUMENT ARE SUITABLE FOR ANY PURPOSE; NOR THAT THE IMPLEMENTATION
+OF SUCH CONTENTS WILL NOT INFRINGE ANY THIRD PARTY PATENTS,
+COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS.</b></p>
+
+<p><b>COPYRIGHT HOLDERS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT,
+SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF ANY USE OF THE
+DOCUMENT OR THE PERFORMANCE OR IMPLEMENTATION OF THE CONTENTS
+THEREOF.</b></p>
+
+<p>The name and trademarks of copyright holders may NOT be used in
+advertising or publicity pertaining to this document or its contents
+without specific, written prior permission. Title to copyright in this
+document will at all times remain with copyright holders. </p>
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p><a href="cover.html">上一篇</a> &nbsp;
+<a href="intro.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</BODY>
+</HTML>
+

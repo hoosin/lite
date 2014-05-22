@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>视觉效果</title>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="visudet.html">
+<link rel="next" href="generate.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</head>
+<body>
+<div class="navbar" align="center">
+<p><a href="visudet.html">上一篇</a> &nbsp;
+<a href="generate.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<h1 align="center">11 视觉效果</h1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="visufx.html#overflow-clipping" class="tocxref">11.1 溢出和剪切</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visufx.html#overflow" class="tocxref">11.1.1 溢出：<span class="propinst-overflow">'overflow'</span>属性</a>
+      <li class="tocline3"><a href="visufx.html#clipping" class="tocxref">11.1.2 剪切：<span class="propinst-clip">'clip'</span>属性</a>
+    </ul>
+    <li class="tocline2"><a href="visufx.html#visibility" class="tocxref">11.2 可视性：<span class="propinst-visibility">'visibility'</span>属性</a>
+  </ul>
+</div>
+
+<H2>11.1 <a name="overflow-clipping">溢出和剪切</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;通常情况下，块的内容由框的边包围。某些情况下，一个框可能<a name="x0"><span class="index-def" title="overflow|box::overflow"><dfn>溢出</dfn></span></a>，即它的内容部分或全部在框的外面，例如：</P>
+
+<ul>
+<li>一条线可能被分割，使线框比块框宽。
+<li>块类框太宽而包含块容纳不下。可能是由于一个元素的<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>属性设置了一个值而使生成的块框超出了包含块的边。
+<li>一个元素的高度超过了显式地指定给它的包含块的高度（即包含块的高度由<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>属性指定，而不是由内容高度指定）。
+<li>一个框<a href="visuren.html#absolute-positioning">绝对定位</a>。
+<li>具有<a href="box.html#margin-properties">负的边距</a>。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一旦有溢出产生，<a href="visufx.html#propdef-overflow" class="noxref"><span class="propinst-overflow">'overflow'</span></a>属性指定一个框如何（以及是否）被剪切。<a href="visufx.html#propdef-clip" class="noxref"><span class="propinst-clip">'clip'</span></a>属性指定了剪切区域的尺寸和形状。指定一个小的剪切区域可能造成否则可见的内容被剪切。
+
+<H3>11.1.1 <a name="overflow">溢出</a>：<a href="visufx.html#propdef-overflow" class="noxref"><span class="propinst-overflow">'overflow'</span></a>属性</H3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'overflow'"><a name="propdef-overflow" class="propdef-title"><strong>'overflow'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>visible | hidden | scroll | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>visible
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块类和替换元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定当一个块类元素的内容溢出了元素的框（它作为内容的包含块）时，是否剪切。取值含义如下：</p>
+
+<dl>
+
+<dt><strong>visible</strong> 
+<dd>该值规定内容不被剪切，即它可以在块框之外得到渲染。
+<dt><strong>hidden</strong> 
+<dd>该值规定内容被剪切而且对于剪切区域之外的内容不提供滚动机制而得到浏览；用户无法访问被剪切的内容。剪切区域的尺寸和形状由<a href="visufx.html#propdef-clip" class="noxref"><span class="propinst-clip">'clip'</span></a>属性指定。
+<dt><strong>scroll</strong> 
+<dd>该值规定内容被剪切，而如果用户端使用屏幕上可见的滚动机制（如滚动条或偏移条），不管它的内容是否剪切，该机制应该被显示。这避免了在动态环境中滚动条一会出现一会消失的问题。如果设置了该值而目标媒介是'print'或'projection'，溢出部分的内容应该被打印。
+<dt><strong>auto</strong> 
+<dd>'auto'值的表现取决于用户端，但是对于溢出的框应该提供一个滚动机制。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;即使<a href="visufx.html#propdef-overflow" class="noxref"><span class="propinst-overflow">'overflow'</span></a>设置为'visible'，内容也可能被操作系统剪切到用户端的文档窗口中。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;考虑如下的引用块（BLOCKQUOTE），它相对它的包含块（由DIV创建）来说太大了。下面是源文档：</p>
+
+<PRE class="html-example">
+&lt;DIV&gt;
+&lt;BLOCKQUOTE&gt;
+&lt;P&gt;I didn't like the play, but then I saw
+it under adverse conditions - the curtain was up.
+&lt;DIV class="attributed-to"&gt;- Groucho Marx&lt;/DIV&gt;
+&lt;/BLOCKQUOTE&gt;
+&lt;/DIV&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面是控制生成框的尺寸和样式的样式表：
+<PRE>
+DIV { width : 100px; height: 100px;
+      border: thin solid red;
+      }
+
+BLOCKQUOTE   { width : 125px; height : 100px;
+      margin-top: 50px; margin-left: 50px; 
+      border: thin dashed black
+      }
+
+DIV.attributed-to { text-align : right; }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="visufx.html#propdef-overflow" class="noxref"><span class="propinst-overflow">'overflow'</span></a>的初始值是'visible'，因此BLOCKQUOTE格式化时不考虑剪切，结果可能是：</P>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/overflow1.gif" alt="Rendered overflow"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-overflow1" href="images/longdesc/overflow1-desc.html" title="Long description for example with unclipped overflow">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;另一方面，将DIV元素的<a href="visufx.html#propdef-overflow" class="noxref"><span class="propinst-overflow">'overflow'</span></a>设置为'hidden'，将根据包含块剪切BLOCKQUOTE：
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/overflow2.gif" alt="Clipped overflow"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-overflow2" href="images/longdesc/overflow2-desc.html" title="Long description for example with clipped overflow">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;'scroll'值将指示支持图形滚动机制的用户端显示一个滚动机制使用户可以访问被剪切的内容。
+</div>
+
+<H3>11.1.2 <a name="clipping">剪切</a>：<a href="visufx.html#propdef-clip" class="noxref"><span class="propinst-clip">'clip'</span></a>属性</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个<a name="x3"><span class="index-def" title="clipping region"><dfn>剪切区域</dfn></span></a>定义了元素的<a href="conform.html#rendered-content">经渲染的内容</a>的哪一部分是可见的。缺省情况下，剪切区域和元素框的尺寸和形状是一样的。不过，剪切区域可以由<a href="visufx.html#propdef-clip" class="noxref"><span class="propinst-clip">'clip'</span></a>属性改变。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'clip'"><a name="propdef-clip" class="propdef-title"><strong>'clip'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="visufx.html#value-def-shape" class="noxref"><span class="value-inst-shape">&lt;shape&gt;</span></a> | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块类和替换元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;'clip'属性适用于那些<a href="visufx.html#propdef-overflow" class="noxref"><span class="propinst-overflow">'overflow'</span></a>属性不为'visible'的元素。取值的含义如下：</p>
+
+<dl>
+<dt><strong>auto</strong>
+<dd>剪切区域和元素框的尺寸、位置相同。
+<dt><span class="index-def" title="&lt;shape&gt;::definition of"><a
+name="value-def-shape"
+class="value-def"><strong>&lt;shape&gt;</strong></a></span>
+<dd>CSS2中，唯一合法的&lt;shape&gt;值是：rect（<a href="visufx.html#value-def-top" class="noxref"><span class="value-inst-top">&lt;top&gt;</span></a> <a href="visufx.html#value-def-right" class="noxref"><span class="value-inst-right">&lt;right&gt;</span></a> <a href="visufx.html#value-def-bottom" class="noxref"><span class="value-inst-bottom">&lt;bottom&gt;</span></a> <a href="visufx.html#value-def-left" class="noxref"><span class="value-inst-left">&lt;left&gt;</span></a>），其中<a href="visufx.html#value-def-top" class="noxref"><span class="value-inst-top">&lt;top&gt;</span></a>，<a href="visufx.html#value-def-bottom" class="noxref"><span class="value-inst-bottom">&lt;bottom&gt;</span></a>，<a href="visufx.html#value-def-right" class="noxref"><span class="value-inst-right">&lt;right&gt;</span></a>及<a href="visufx.html#value-def-left" class="noxref"><span class="value-inst-left">&lt;left&gt;</span></a>指定了相对于相应框的边的偏移。
+
+<p><span class="index-def" title="&lt;top&gt;::definition of"><a name="value-def-top" class="value-def">&lt;top&gt;</a></span>，<span class="index-def" title="&lt;right&gt;::definition of"><a name="value-def-right" class="value-def">&lt;right&gt;</a></span>，<span class="index-def" title="&lt;bottom&gt;::definition of"><a name="value-def-bottom" class="value-def">&lt;bottom&gt;</a></span>及<span class="index-def" title="&lt;left&gt;::definition of"><a name="value-def-left" class="value-def">&lt;left&gt;</a></span>可以是一个<a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a>值或'auto'。也允许负数值。取值为'auto'意味着剪切区域的这一边和元素生成框的边一致（即'auto'意味着'0'。）
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果坐标近似到点坐标，需要小心的是，如果&lt;left&gt; + &lt;right&gt;等于元素的宽度（或&lt;top&gt; + &lt;bottom&gt;等于元素的高度）时，没有像素点可见；与之相反，如果这些值为0，将没有任何像素点被隐藏。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;元素的前辈可能也有剪切区域（如果它们的<a href="visufx.html#propdef-overflow" class="noxref"><span class="propinst-overflow">'overflow'</span></a>属性不是'visible'）；被渲染的部分是各剪切区域的交集。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果剪切区域超出了用户端文档窗口的边界，操作系统可能将内容剪切到该窗口。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如下两个规则：</P>
+<PRE>
+P { clip: rect(5px, 10px, 10px, 5px); }
+P { clip: rect(5px, -5px, 10px, 5px); }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;将产生如下图所示，由虚线包围的长方形剪切区域：</p>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<IMG src="images/clip.gif" alt="Two clipping regions"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-clip" href="images/longdesc/clip-desc.html" title="Long description for example of clipping region">[D]</A></SPAN></p>
+</div>
+</div>
+
+<div class="note"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<em><strong>注意。</strong>在CSS2中，所有的剪切区域是长方形的。我们预期将来的扩展将允许非长方形的剪切。
+</em>
+</div>
+
+<H2>11.2 <a name="visibility">可视性</a>：<a href="visufx.html#propdef-visibility" class="noxref"><span class="propinst-visibility">'visibility'</span></a>属性</H2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'visibility'"><a name="propdef-visibility" class="propdef-title"><strong>'visibility'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>visible | hidden | collapse | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>inherit
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="visufx.html#propdef-visibility" class="noxref"><span class="propinst-visibility">'visibility'</span></a>属性指定一个元素生成的框是否被渲染。不可见的框仍然影响布局（设置<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性为'none'将禁止框的生成）。取值含义如下：</p>
+
+<dl>
+<dt><strong>visible</strong>
+<dd>生成的框是可见的。
+<dt><strong>hidden</strong>
+<dd>生成框是不可见的（完全透明），但仍然影响布局。
+<dt><strong>collapse</strong>
+<dd>请参见表格中的<a href="tables.html#dynamic-effects">动态行列效果</a>一节。如果使用在不是行列元素上，'collapse'的含义和'hidden'相同。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性可以和脚本协同使用而产生动态效果。
+
+<div class="html-example"><p>&nbsp;&nbsp;&nbsp;&nbsp;下例中，按下任意一个表单的按钮激发用户定义的脚本函数，使相应的框成为可见而另外一个不可见。由于这些框的尺寸和位置相同，看起来的效果是一个框替代了另外一个框。（脚本代码是假想的。在CSS兼容的用户端，它可能有用也可能没用。）
+
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;STYLE type=&quot;text/css&quot;&gt;
+&lt;!--
+   #container1 { position: absolute; 
+                 top: 2in; left: 2in; width: 2in }
+   #container2 { position: absolute; 
+                 top: 2in; left: 2in; width: 2in;
+                 visibility: hidden; }
+--&gt;
+&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;P&gt;Choose a suspect:&lt;/P&gt;
+&lt;DIV id="container1"&gt;
+   &lt;IMG alt="Al Capone" 
+        width="100" height="100" 
+        src="suspect1.jpg"&gt;
+   &lt;P&gt;Name: Al Capone&lt;/P&gt;
+   &lt;P&gt;Residence: Chicago&lt;/P&gt;
+&lt;/DIV&gt;
+
+&lt;DIV id="container2"&gt;
+   &lt;IMG alt="Lucky Luciano" 
+        width="100" height="100" 
+        src="suspect2.jpg"&gt;
+   &lt;P&gt;Name: Lucky Luciano&lt;/P&gt;
+   &lt;P&gt;Residence: New York&lt;/P&gt;
+&lt;/DIV&gt;
+
+&lt;FORM method="post" 
+      action="http://www.suspect.org/process-bums"&gt;
+   &lt;P&gt;
+   &lt;INPUT name="Capone" type="button" 
+          value="Capone" 
+          onclick='show("container1");hide("container2")'&gt;
+   &lt;INPUT name="Luciano" type="button" 
+          value="Luciano" 
+          onclick='show("container2");hide("container1")'&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+
+</div>
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="visudet.html">上一篇</a> &nbsp;
+<a href="generate.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</body>
+</html>

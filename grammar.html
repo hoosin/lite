@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>附录D：CSS2语法</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="notes.html">
+<link rel="next" href="refs.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="notes.html">上一篇</a> &nbsp;
+<a href="refs.html">下一篇</a> &nbsp;<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a>&nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">附录D. CSS2语法</H1>
+<div class="subtoc">
+<p><strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="grammar.html#q1" class="tocxref">D.1 语法</a>
+    <li class="tocline2"><a href="grammar.html#q2" class="tocxref">D.2 词汇扫描</a>
+    <li class="tocline2"><a href="grammar.html#tokenizer-diffs" class="tocxref">D.3 CSS2和CSS1中表征化的对比</a>
+  </ul>
+</div>
+<P><em>&nbsp;&nbsp;&nbsp;&nbsp;本附录是规范性的。</em>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;以下语法定义了CSS2的语法。然而在某种情况下，作为本规范的CSS2的一个超集施加了本语法中没有表述的额外的语意约束。遵守规则的UA必须也同时遵照<a href="./syndata.html#syntax">向下兼容的解析规则</a>，<a
+href="./about.html#property-defs">属性及值说明</a>以及单位说明。另外，文档语种可能施加约束。例如HTML增加了&quot;class&quot;属性的可能取值的约束。
+<h2><a name="q1">D.1 语法</a></h2>
+
+<P> &nbsp;&nbsp;&nbsp;&nbsp;以下的语法是<a name="x0"><span class="index-inst"
+title="LL(1)">LL(1)（但是注意，大多数UA不应该直接使用它，因为它并不说明</span></a><a
+href="syndata.html#parsing-errors">解析约定</a>，而只是CSS2语法）。最终产品的格式会对使用进行优化，而某些Yacc（参见<a href="refs.html#ref-YACC" rel="biblioentry" class="noxref"><span class="normref">[YACC]</span></a>）之外的快捷符号会被使用：</P>
+
+<ul>
+<li><strong>*</strong>: 0或更多
+<li><strong>+</strong>: 1或更多
+<li><strong>?</strong>: 0或1 
+<li><strong>|</strong>: 分割的备选项
+<li><strong>[&nbsp;]</strong>: 分组
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;最终的产品是：
+<pre>
+stylesheet
+  : [ CHARSET_SYM S* STRING S* ';' ]?
+    [S|CDO|CDC]* [ import [S|CDO|CDC]* ]*
+    [ [ ruleset | media | page | font_face ] [S|CDO|CDC]* ]*
+  ;
+import
+  : IMPORT_SYM S*
+    [STRING|URI] S* [ medium [ ',' S* medium]* ]? ';' S*
+  ;
+media
+  : MEDIA_SYM S* medium [ ',' S* medium ]* '{' S* ruleset* '}' S*
+  ;
+medium
+  : IDENT S*
+  ;
+page
+  : PAGE_SYM S* IDENT? pseudo_page? S*
+    '{' S* declaration [ ';' S* declaration ]* '}' S*
+  ;
+pseudo_page
+  : ':' IDENT
+  ;
+font_face
+  : FONT_FACE_SYM S*
+    '{' S* declaration [ ';' S* declaration ]* '}' S*
+  ;
+operator
+  : '/' S* | ',' S* | /* empty */
+  ;
+combinator
+  : '+' S* | '>' S* | /* empty */
+  ;
+unary_operator
+  : '-' | '+'
+  ;
+property
+  : IDENT S*
+  ;
+ruleset
+  : selector [ ',' S* selector ]*
+    '{' S* declaration [ ';' S* declaration ]* '}' S*
+  ;
+<a name="x1"><span class="index-inst" title="selector">selector</span></a>
+  : simple_selector [ combinator simple_selector ]*
+  ;
+simple_selector
+  : element_name? [ HASH | class | attrib | pseudo ]* S*
+  ;
+class
+  : '.' IDENT
+  ;
+element_name
+  : IDENT | '*'
+  ;
+attrib
+  : '[' S* IDENT S* [ [ '=' | INCLUDES | DASHMATCH ] S*
+    [ IDENT | STRING ] S* ]? ']'
+  ;
+pseudo
+  : ':' [ IDENT | FUNCTION S* IDENT S* ')' ]
+  ;
+declaration
+  : property ':' S* expr prio?
+  | /* empty */
+  ;
+prio
+  : IMPORTANT_SYM S*
+  ;
+expr
+  : term [ operator term ]*
+  ;
+term
+  : unary_operator?
+    [ NUMBER S* | PERCENTAGE S* | LENGTH S* | EMS S* | EXS S* | ANGLE S* |
+      TIME S* | FREQ S* | function ]
+  | STRING S* | IDENT S* | URI S* | RGB S* | UNICODERANGE S* | hexcolor
+  ;
+function
+  : FUNCTION S* expr ')' S*
+  ;
+/*
+ * There is a constraint on the <a name="x2"><span class="index-inst" title="color">color</span></a> that it must
+ * have either 3 or 6 hex-digits (i.e., [0-9a-fA-F])
+ * after the "#"; e.g., "#000" is OK, but "#abcd" is not.
+ */
+hexcolor
+  : HASH S*
+  ;
+</pre>
+
+<h2><a name="q2">D.2 词汇扫描</a></h2>
+
+<p> &nbsp;&nbsp;&nbsp;&nbsp;下面的是<a name="x3"><span class="index-def"
+title="tokenizer">词汇分析器，以</span></a>Flex（参见<a href="refs.html#ref-FLEX" rel="biblioentry" class="noxref"><span class="normref">[FLEX]</span></a>）语法写成。词汇分析器对大小写不敏感。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;出现了两次"\377"，代表了当前版本的Flex可以处理的最高序字符数（十进制的255）。它们应该被认为是"\4177777"（十进制1114111），这也是<a name="x4"><span class="index-inst"
+title="unicode">Unicode</span></a>/<a name="x5"><span class="index-inst"
+title="iso-10646">ISO-10646</span></a>中最高可能数序点。
+<pre>
+%option case-insensitive
+
+h		[0-9a-f]
+nonascii	[\200-\377]
+unicode		\\{h}{1,6}[ \t\r\n\f]?
+escape		{unicode}|\\[ -~\200-\377]
+nmstart		[a-z]|{nonascii}|{escape}
+nmchar		[a-z0-9-]|{nonascii}|{escape}
+string1		\"([\t !#$%&amp;(-~]|\\{nl}|\'|{nonascii}|{escape})*\"
+string2		\'([\t !#$%&amp;(-~]|\\{nl}|\"|{nonascii}|{escape})*\'
+
+ident		{nmstart}{nmchar}*
+name		{nmchar}+
+num		[0-9]+|[0-9]*"."[0-9]+
+string		{string1}|{string2}
+url		([!#$%&amp;*-~]|{nonascii}|{escape})*
+w		[ \t\r\n\f]*
+nl		\n|\r\n|\r|\f
+range		\?{1,6}|{h}(\?{0,5}|{h}(\?{0,4}|{h}(\?{0,3}|{h}(\?{0,2}|{h}(\??|{h})))))
+
+%%
+
+[ \t\r\n\f]+		{return S;}
+
+\/\*[^*]*\*+([^/][^*]*\*+)*\/	/* ignore comments */
+
+"&lt;!--"			{return CDO;}
+"-->"			{return CDC;}
+"~="			{return INCLUDES;}
+"|="			{return DASHMATCH;}
+
+{string}		{return STRING;}
+
+{ident}			{return IDENT;}
+
+"#"{name}		{return HASH;}
+
+"@import"		{return IMPORT_SYM;}
+"@page"			{return PAGE_SYM;}
+"@media"		{return MEDIA_SYM;}
+"@font-face"		{return FONT_FACE_SYM;}
+"@charset"		{return CHARSET_SYM;}
+"@"{ident}		{return ATKEYWORD;}
+
+"!{w}important"		{return IMPORTANT_SYM;}
+
+{num}em			{return EMS;}
+{num}ex			{return EXS;}
+{num}px			{return LENGTH;}
+{num}cm			{return LENGTH;}
+{num}mm			{return LENGTH;}
+{num}in			{return LENGTH;}
+{num}pt			{return LENGTH;}
+{num}pc			{return LENGTH;}
+{num}deg		{return ANGLE;}
+{num}rad		{return ANGLE;}
+{num}grad		{return ANGLE;}
+{num}ms			{return TIME;}
+{num}s			{return TIME;}
+{num}Hz			{return FREQ;}
+{num}kHz		{return FREQ;}
+{num}{ident}		{return DIMEN;}
+{num}%			{return PERCENTAGE;}
+{num}			{return NUMBER;}
+
+"url("{w}{string}{w}")"	{return URI;}
+"url("{w}{url}{w}")"	{return URI;}
+{ident}"("		{return FUNCTION;}
+
+U\+{range}		{return UNICODERANGE;}
+U\+{h}{1,6}-{h}{1,6}	{return UNICODERANGE;}
+
+.			{return *yytext;}
+</pre>
+
+<h2>D.3 <a name="tokenizer-diffs">CSS2和CSS1中表征化的对比</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS1建议（<a href="refs.html#ref-CSS1" rel="biblioentry" class="noxref"><span class="informref">[CSS1]</span></a>）和我们上面讨论的在语法方面还有一些不同。大部分是因为CSS2中有而CSS1中没有的新增词汇。另外一些是因为语法经过了改写以便更易阅读。但是，还有一些不兼容的改变，因为CSS1语法中本来是错误的。具体解释如下。
+<ul>
+<li>CSS1样式只能用单字节字符编码，例如ASCII和ISO-8859-1。CSS2没有这样的限制。实践中，推广CSS1词汇分析器没有什么问题，某些UA可以接受2字节编码。
+<li>CSS1只允许在反斜杠（\）后跟四个十六进制数字来代表Unicode字符，CSS2<a
+href="syndata.html#escaped-characters">允许六个</a>。 另外，CSS2允许用空白来分割转义序列。例如，根据CSS1，字符串"\abcdef"有三个字符（\abcd，e和f），根据CSS2则只有一个。
+<li>制表符（ASCII 9）不允许在字符串中。但是，由于CSS1中字符串只用在字体名和URL中，因此唯一可能引起不兼容的地方是样式表中包含了一个字体名，而这个字体名中包含制表符。
+<li>同样，新行（<a href="syndata.html#strings">用反斜杠转义</a>）在CSS1字符串中也是不允许的。
+<li>CSS2解析标识符后面紧跟的数字为一个DIMEN标记（也就是未知单位），CSS1解析为一个数字和一个标识符。这意味着，在CSS1中，声明'font:
+10pt/1.2serif'是正确的，等同于'font: 10pt/12pt serif'；CSS2中，要求在&quot;serif&quot;前有一个空格。（有些UA接受第一种方式，但不接受第二种方式。）
+<li>CSS1中，类名可以以数字开始（".55ft"），除非它是一个尺寸（".55in"）。CSS2中，这样的类会被解析为未知尺寸（以便将来增加单位）。要使".55ft"成为一个合法的类，CSS2需要转义第一个数字（".\55ft"）
+</ul>
+
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p><a href="notes.html">上一篇</a> &nbsp;
+<a href="refs.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a>&nbsp;
+</div>
+</body>
+</html>
+

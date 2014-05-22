@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>一致性：要求和推荐</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="intro.html">
+<link rel="next" href="syndata.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="intro.html">上一篇</a> &nbsp;
+<a href="syndata.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">3 一致性：要求和推荐</H1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="conform.html#q1" class="tocxref">3.1 定义</a>
+    <li class="tocline2"><a href="conform.html#conformance" class="tocxref">3.2 一致性</a>
+    <li class="tocline2"><a href="conform.html#q3" class="tocxref">3.3 出错情况</a>
+    <li class="tocline2"><a href="conform.html#text-css" class="tocxref">3.4 <span class="index-def" title="text/css">text/css内容类型</span></a>
+  </ul>
+</div>
+
+<H2><a name="q1">3.1 定义</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;从本段开始，我们开始讨论CSS2的正式说明。首先是作者、用户和实现者之间的约定。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本文档中的关键词<a name="x0"><span class="index-def" title="MUST">“必须”</span></a>，<a name="x1"><span class="index-def" title="MUST NOT">“不可以”</span></a>，<a name="x2"><span class="index-def" title="REQUIRED">“要求”</span></a>，<a name="x3"><span class="index-def" title="SHALL">“要”</span></a>，<a name="x4"><span class="index-def" title="SHALL NOT">“不要”</span></a>，<a name="x5"><span class="index-def" title="SHOULD">“应该”</span></a>，<a name="x6"><span class="index-def" title="SHOULD NOT">“不应该”</span></a>，<a name="x7"><span class="index-def" title="RECOMMENDED">“推荐”</span></a>，<a name="x8"><span class="index-def" title="MAY">“可以”</span></a>，以及<a name="x9"><span class="index-def" title="OPTIONAL">“可选”</span></a>应根据RFC 2119的描述而加以解释（参见<a href="refs.html#ref-RFC2119" rel="biblioentry" class="noxref"><span class="normref">[RFC2119]</span></a>）。不过，考虑到可阅读性，这些词在规范中不做特别显示。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;有时，规范会向作者和用户端推荐一些好的实践。这些推荐不是标准化的，而与规范保持一致也不依赖于它们的实现。这些推荐包含了“我们推荐……”，“本规范推荐……”或类似的语句。</P>
+
+<dl>
+<dt><strong><a name="x10"><span class="index-def" title="style sheet">样式表</span></a></strong>
+
+<dd>规定一个文档呈现的一系列语句。
+
+<p>样式可能有三个不同的来源：<a href="#author">作者</a>，<a href="#user">用户</a>以及<a
+href="#user-agent">用户端</a>。这些来源之间的相互作用的讨论请参见<a href="cascade.html">层叠和继承</a>一章。
+
+<dt><strong><a name="valid-style-sheet">有效的样式表</a></strong>
+
+<dd>一个样式表的<a name="x11"><span class="index-def" title="valid style sheet">有效性</span></a>取决于样式表所使用的CSS级别。所有有效的CSS1样式表都是有效的CSS2样式表。不过，某些<a href="changes.html#changes-from-css1">相对CSS1的语义的改进</a>意味着一些CSS1的样式会和CSS2中的有一些语义上的差别。
+
+<p>有效的CSS2样式表必须根据<a href="grammar.html">CSS2语法</a>来编写。进一步说，它必须只包含本规范中定义的@规则，属性名以及属性值。样式表中如果有一个<a name="x12"><span class="index-def" title="illegal"><strong>非法的</strong></span></a>（无效的）@规则，属性名或属性值，那它就是一个无效的样式表。
+
+<dt><strong><a name="x13"><span class="index-def" title="source document">源文档</span></a></strong>
+
+<dd>一个或多个样式表引用到的文档。以将文档表示为<a href="#element">元素</a>树的某种语言进行编码。每一个元素包括标记元素类型的名称，可选的一些<a href="#attribute">属性</a>，以及（可能是空的）<a href="#content">内容</a>。</dd>
+
+<dt><strong><span class="index-def" title="document language"><a
+name="doclanguage">文档语言</a></span></strong>
+
+<dd>源文档的编码语言（如HTML或一个XML应用）。
+
+<dt><strong><span class="index-def" title="element"><a
+name="element">元素</a></span></strong>
+
+<dd>（一个SGML术语，参见<a href="refs.html#ref-ISO8879" rel="biblioentry" class="noxref"><span class="normref">[ISO8879]</span></a>。）文档语言的最基本的语法构造。大部分样式表规则使用这些元素的名称（如HTML中的"P"，"TABLE"，"OL"）来指定它们的渲染信息。
+
+<dt><strong><span class="index-def" title="replaced element">
+<a name="replaced-element">替换元素</a></span></strong>
+
+<dd>CSS格式器只知道其内在尺寸的一个元素。HTML中，IMG，INPUT，TEXTAREA，SELECT以及OBJECT元素都是替换元素的例子。例如，IMG元素的内容通常由它的"src"属性指定的图形所代替。CSS并不定义如何找到内在尺寸。
+
+<dt><strong><span class="index-def" title="intrinsic
+dimensions"><a name="intrinsic">内在尺寸</a></span></strong>
+
+<dd>由元素自身，而不是其周围环境所定义的元素的宽度和高度。CSS2中假定，所有的替换元素且只有替换元素才具有内在尺寸。
+
+<dt><strong><span class="index-def" title="attribute"><a
+name="attribute">属性</a></span></strong>
+
+<dd>与一个元素相关联的值，包括一个名字，以及相关的（文字）值。
+
+<dt><strong><span class="index-def" title="content"><a
+name="content">内容</a></span></strong>
+
+<dd>源文档中和元素相关联的内容；并不是所有的元素都有内容，这时就称为<strong><a name="x20"><span class="index-def" title="empty">空</span></a></strong>。元素的内容可以包含文本，也可以包含一系列子元素，这时该元素就被称为这些子元素的<strong><a name="x21"><span class="index-def" title="parent">父元素</span></a></strong>。
+
+<dt><strong><span class="index-def" title="rendered
+content|content::rendered"><a name="rendered-content">经渲染的内容</a></span></strong>
+
+<dd>相应的样式表应用后，经渲染的元素的内容。<a href="#replaced-element">替换元素</a>经渲染的内容来自源文档之外。经渲染的内容也可以是一元素的备用文本（如HTML"alt"属性的值），还可以包含由样式显式或隐式插入的内容，如编号，符号等。
+
+<dt><strong><span class="index-def" title="document tree">
+<a name="doctree">文档树</a></span></strong>
+
+<dd>源文档中元素树的编码。树中，每一个元素恰好由一个父元素。<strong><span class="index-def" title="root"><a name="root">根</a></span></strong>元素是例外，它没有父元素。
+
+<dt><strong><a name="x26"><span class="index-def"
+title="child">子元素</span></a></strong>
+
+<dd>当且仅当元素B是元素A的父元素时，元素A称为元素B的子元素。
+
+<dt><strong><a name="x27"><span class="index-def"
+title="descendant">后代</span></a></strong>
+
+<dd>如果：(1)元素A是元素B的子元素；或(2)元素A是元素C的子元素，而元素C又是元素B的后代，则元素A称为元素B的后代。
+
+<dt><strong><a name="x28"><span class="index-def"
+title="ancestor">前辈</span></a></strong>
+
+<dd>当且仅当元素B是元素A的后代时，元素A称为元素B的前辈。
+
+<dt><strong><a name="x29"><span class="index-def"
+title="sibling">同胞</span></a></strong>
+
+<dd>当且仅当元素A和元素B具有共同的父元素时，元素A称为元素B的同胞。在文档树中，如果元素A出现在元素B之前，则元素A称为元素B的胞兄；如果元素A出现在元素B之后，则元素A称为元素B的胞弟。
+
+<dt><strong><span class="index-def" title="preceding
+element|element::preceding"><a name="preceding">前继元素</a></span></strong>
+
+<dd>当且仅当(1)元素A是元素B的前辈；或(2)元素A是元素B的胞兄时，元素A称为元素B的前继元素。
+<dt><strong><a name="x32"><span class="index-def" title="following
+element|element::following">后继元素</span></a></strong>
+
+<dd>当且仅当元素B是元素A的前继元素时，元素A称为元素B的后继元素。
+
+<dt><strong><strong><a name="author">作者</a></strong></strong>
+<dd>作者就是写出文档和相关样式表的人。<a name="x34"><span class="index-def" title="authoring tool"><strong>编写工具</strong></span></a>生成文档和相关的样式表。</dd>
+
+<dt><strong><strong><a name="user">用户</a></strong></strong> 
+<dd>用户就是和用户端交互，来浏览、聆听或使用一文档和相关的样式表的人。用户可以提供一个个人样式表，来指定个人喜好。
+</dd>
+
+<dt><strong><strong><a name="user-agent">用户端（UA）</a></strong></strong>
+<dd><a name="x35"><span class="index-def" title="user agent|UA">用户端</span></a>是一种程序，它根据本规范的条文，解释以文档语言写成的文档，并应用相关的样式表。用户端可以显示文档，阅读文档，打印文档或将它转换为另外一个格式。</dd>
+</dl>
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面是以HTML编码的源文档的一个例子：
+
+<PRE>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;   
+  &lt;TITLE&gt;My home page&lt;/TITLE&gt;
+  &lt;BODY&gt;
+    &lt;H1&gt;My home page&lt;/H1&gt;
+    &lt;P&gt;Welcome to my home page! Let me tell you about my favorite
+		composers:
+    &lt;UL&gt;
+      &lt;LI&gt; Elvis Costello
+      &lt;LI&gt; Johannes Brahms
+      &lt;LI&gt; Georges Brassens
+    &lt;/UL&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;它产生了如下的树：</P>
+
+<div class="figure">
+<p><IMG src="images/doctree.gif" alt="Sample document tree"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-doctree" href="images/longdesc/doctree-desc.html" title="Long description for sample document tree diagram">[D]</A></SPAN></p>
+</div>
+
+<p>根据HTML的定义，在解析过程中，即使源文档中不包含HEAD元素，它也被自动引入，并成为文档树的一部分。与此类似，解析器也知道P和LI结束的地方，尽管源文档中没有&lt;/P&gt;和&lt;/LI&gt;标记。
+</div>
+
+
+<h2>3.2 <a name="conformance">一致性</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本节只定义和CSS2规范的<a name="x37"><span class="index-def" title="conformance">一致性</span></a>。将来也许会有其它级别的CSS，需要用户端实现一系列不同的性能来保持与它们的一致。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一般地，用户端要声明与本规范一致，必须遵循如下几点：</P>
+
+<ol>
+<li>它必须支持一个或多个CSS2<a href="media.html">媒介类型</a>。
+<li>对于每一个源文档，它必须尝试获得对于支持的媒介类型而言合适的所有相关的样式表。如果它不可以获取所有的相关的样式表（如由于网络故障），它必须使用那些它可以获取的样式表来显示文档。
+<li>它必须按照本规范来解析样式表。特别地，它必须理解所有的@规则，块，声明和选择子（参见<a href="grammar.html">CSS2语法</a>）。一旦用户端碰到一个适用于某个支持的媒介类型的属性，用户端必须根据属性定义来解析并获得值。这意味着用户端必须接收所有合法的值而必须<a name="x38"><span class="index-inst" title="ignore">忽略</span></a>带有非法值的声明。用户端必须<a name="x39"><span class="index-inst" title="ignore">忽略</span></a>适用于不支持的<a href="media.html">媒介类型</a>的规则。
+
+<li>对于<a href="#doctree">文档树</a>中的每一个元素，它必须根据属性的定义以及<a href="cascade.html">层叠和继承</a>为其所适用的每一个属性指定一个值。</a>.
+
+<li>如果源文档带有备选样式表（如HTML4.0<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="informref">[HTML40]</span></a>中的"alternate"关键词)，用户端必须允许用户从中选择一个样式表，并应用那个选择的样式表。
+</ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;并不是每一个用户端都必须遵循每一点，不过：</p>
+
+<ul>
+<li>用户端如果<em>接受</em>样式，必须满足1-3点。
+
+<li>编写工具只要求输出<a href="#valid-style-sheet">有效的样式表</a>。
+
+<li>用户端如果以相关联的样式表<em>渲染</em>一个文档，必须满足1-5点，并根据本规范设定的媒介相关的要求来渲染文档。在用户端的要求下，<a href="cascade.html#actual-value">值</a>可以是近似的。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果由于特定设备的限制（如用户端无法在单色显示器或页面上显示颜色），而使用户端无法实现本规范的某一部分，这并不意味着不一致。</P>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本规范推荐用户端允许用户指定用户样式表。
+
+
+<h2><a name="q3">3.3 出错情况</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一般地，本文档并不规定用户端的错误处理（如在找不到由一个URI指向的资源时，应如何处理）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;不过，用户端必须遵守<a href="syndata.html#parsing-errors">解析错误的处理规则</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于用户端在如何处理出错情况时可能有所不同，作者和用户不可以依赖于某一特定的错误修复方法。
+
+<H2>3.4 <span class="index-def" title="text/css"><a
+name="text-css">text/css内容类型</a></span></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;以独立文件存在的CSS样式表在Internet上传送时是以伴随着编码信息的一系列字节来进行的（参见<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="normref">[HTML40]</span></a>，第五章）。传送的结构，称为<span class="index-def" title="message entity"><a name="message-entity"><strong>信息实体</strong></a></span>。其定义在RFC 2045及RFC 2068中（参见<a href="refs.html#ref-RFC2045" rel="biblioentry" class="noxref"><span class="normref">[RFC2045]</span></a>及<a href="refs.html#ref-RFC2068" rel="biblioentry" class="noxref"><span class="normref">[RFC2068]</span></a>）。带有内容类型"text/css"的信息实体代表一个独立的CSS文档。"text/css"内容类型注册在（<a href="refs.html#ref-2318" rel="biblioentry" class="noxref"><span class="normref">[RFC2318]</span></a>）。
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p><a href="intro.html">上一篇</a> &nbsp;
+<a href="syndata.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</BODY>
+</html>
+

@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>媒介类型</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="cascade.html">
+<link rel="next" href="box.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="cascade.html">上一篇</a> &nbsp;
+<a href="box.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">7 媒介类型</H1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="media.html#q1" class="tocxref">7.1 媒介类型简介</a>
+    <li class="tocline2"><a href="media.html#q2" class="tocxref">7.2 指定媒介相关的样式表</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="media.html#at-media-rule" class="tocxref">7.2.1 @media规则</a>
+    </ul>
+    <li class="tocline2"><a href="media.html#media-types" class="tocxref">7.3 可识别的媒介类型</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="media.html#media-groups" class="tocxref">7.3.1 媒介组</a>
+    </ul>
+  </ul>
+</div>
+
+<H2><a name="q1">7.1 媒介类型简介</a></H2>
+
+&nbsp;&nbsp;&nbsp;&nbsp;样式表最重要的一个特性是它规定了在不同的媒介上文档应该如何呈现：屏幕上，纸面上，带有语音合成器，带有盲文设备等等。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;某些CSS特性是只为特定的媒介而设计（如，<a href="aural.html#propdef-cue-before" class="noxref"><span class="propinst-cue-before">'cue-before'</span></a>属性是为语音用户端设计的）。偶尔地，不同媒介类型的样式表可以共享一个属性，不过对于那个属性要赋予不同的值。例如，<a href="fonts.html#propdef-font-size" class="noxref"><span class="propinst-font-size">'font-size'</span></a>属性用于屏幕和打印媒介。不过这两个媒介是如此地不同，因此对于共同的属性需要不同的值；在计算机屏幕上的文档一般要用比纸面上的文档大一些的字体。经验也告诉我们，屏幕上无衬线字体要容易阅读一些，而在纸面上有衬线的字体要容易阅读一些。基于这些原因，有必要声明一个样式表——或样式表的一段——适用于特定的媒介类型。
+
+<H2><a name="q2">7.2 指定媒介相关的样式表</a></H2>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;目前有两个方法来指定样式表的媒介相关性：</p>
+
+<UL>
+<LI>在样式表中通过<a name="x0"><span class="index-inst" title="@media">@media</span></a>或<a name="x1"><span class="index-inst" title="@import">@import</span></a>@规则来指定目标媒介。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+@import url("loudvoice.css") aural;
+@media print {
+  /* 打印样式表如下 */
+}
+</PRE>
+</div>
+
+<LI>在文档语言中指定目标媒介。例如，在HTML 4.0（<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="informref">[HTML40]</span></a>）中，LINK元素的"media"属性指定一个外部样式表的目标媒介：
+
+<div class="html-example"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<PRE>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+   &lt;HEAD&gt;
+      &lt;TITLE&gt;Link to a target medium&lt;/TITLE&gt;
+      &lt;LINK rel="stylesheet" type="text/css" 
+	 media="print, handheld" href="foo.css"&gt;
+   &lt;/HEAD&gt;
+   &lt;BODY&gt;
+      &lt;P&gt;The body...
+   &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+</div>
+</UL>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="cascade.html#at-import">@import</a>规则定义在<a href="cascade.html">层叠</a>一章。
+
+
+<H3>7.2.1 <a name="at-media-rule">@media规则</a></H3> 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个<a name="x2"><span class="index-def" title="media">@media</span></a>规则以一系列规则（以花括号分割）来指定目标<a href="#media-types">媒介类型</a>（以逗号分割）。<a name="x3"><span class="index-inst" title="@media">@media</span></a>结构允许不同媒介的样式表规则存在于同一样式表中：</P>
+
+<pre class="example">
+  @media print {
+    BODY { font-size: 10pt }
+  }
+  @media screen {
+    BODY { font-size: 12pt }
+  }
+  @media screen, print {
+    BODY { line-height: 1.2 }
+  }
+</pre>
+
+
+<H2>7.3 <a name="media-types">可识别的媒介类型</a></H2> 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS<a name="x4"><span class="index-def" title="media type"><dfn>媒介类型</dfn></span></a>名称是一系列CSS属性。用户端如果声明支持一个媒介类型名，它必须实现适用于那个媒介类型的所有属性。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS媒介类型名称的选择反映了相关的目标设备，而对于这些设备而言相关的属性是有意义的。下面的CSS媒介类型列表中，附加的说明不是正规的。它们只是给出一个感觉，让我们知道这一媒介类型应该引用什么样的设备。
+
+<dl>
+<dt><strong>all</strong>
+<dd>适用于所有的设备。
+
+<dt><strong>aural</strong> 
+<dd>应用于语音合成器。参见<a href="./aural.html">语音样式表</a>以获得详细说明。
+
+<dt><strong>braille</strong>
+<dd>应用于盲文触摸式反馈设备。
+
+<dt><strong>embossed</strong>
+<dd>应用于盲文页面打印机。
+
+<dt><strong>handheld</strong>
+<dd>应用于手持设备（通常有小屏幕，单色，带宽有限制）。
+
+<dt><strong>print</strong> 
+<dd>应用于不透明的页面材料，以及文档在打印预览的状态。请参见<a href="page.html">页面媒介</a>一章，那里有专用于页面媒介格式化的信息。
+
+<dt><strong>projection</strong>
+<dd>应用于投影演示，例如投影仪或打印到透明胶片时。请参见<a href="page.html">页面媒介</a>一章，那里有专用于页面媒介格式化的信息。
+
+<dt><strong>screen</strong> 
+<dd>主要应用于彩色计算机屏幕。
+
+<dt><strong>tty</strong>
+<dd>应用于使用固定字符宽栅格的媒介，如电传，终端，或显示能力有限的手提设备。作者不应该在"tty"媒介类型中使用<a href="syndata.html#pixel-units">点单位</a>。
+
+<dt><strong>tv</strong>
+<dd>应用于电视类型的设备（低分辨率，彩色，屏幕滚动能力有限，有声音）。 
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;媒介类型名是大小写敏感的。 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于科技发展迅速，CSS2并不规定一个确定的可以用作<a name="x5"><span class="index-inst" title="@media">@media</span></a>值的媒介类型列表。
+
+<div class="note"><p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>CSS以后的版本可能扩充这一列表。作者不应该依赖于还没有被CSS规范定义的媒介类型名。
+</em>
+</div>
+
+<H3>7.3.1 <a name="media-groups">媒介组</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;每一个CSS属性定义都指定了<a href="conform.html#conformance">与CSS一致的用户端</a>应该实现的属性所适用的媒介类型。由于属性通常可以适用于若干个媒介，每一个属性的“适用媒介”一段列出了<a name="x6"><span class="index-def" title="media group">媒介组</span></a>而不是单一的媒介类型。每一个属性适用于在定义中列出的媒介组中的所有媒介类型。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2定义了如下的媒介组：</P>
+<ul>
+<li>
+<span class="index-def" title="'continuous' media group"><a name="continuous-media-group"><strong>continuous</strong></a></span>或<span class="index-def" title="'paged' media group"><a name="paged-media-group"><strong>paged</strong></a></span>。
+"Both"意味着有疑问的属性适用于这两个组。
+<li><span class="index-def" title="'visual' media group"><a name="visual-media-group"> <strong>visual</strong></a>，</span><span class="index-def" title="'aural' media group"><a name="aural-media-group"><strong>aural</strong></a></span>或<span class="index-def" title="'tactile' media group"><a name="tactile-media-group"><strong>tactile</strong></a></span>。
+<li><span
+class="index-def" title="'grid' media group"><a
+name="grid-media-group"><strong>grid</strong></a></span>（对于字符栅格设备）或<span
+class="index-def" title="'bitmap' media group"><a name="bitmap-media-group"><strong>bitmap</strong></a></span>。"Both"意味着有意味的属性适用于这两个组。
+<li><span class="index-def" title="'interactive media group"><a name="interactive-media-group"><strong>interactive</strong></a></span>（对于允许用户交互的设备）或<span class="index-def" title="'static' media group"><a name="static-media-group"><strong>static</strong></a></span>（对于不允许用户交互的设备）。
+"Both" means that the property in question applies to both media
+groups.
+<li><span class="index-def" title="'all'
+media group"> <a name="all-media-group"><strong>all</strong></a></span>（包含所有的媒介类型）。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的表格说明了媒介组和媒介类型的关系：</P>
+
+<TABLE border 
+       summary="Relationship between media groups and media types">
+<CAPTION>媒介组和媒介类型的关系</CAPTION>
+<TR><TH>媒介类型<TH colspan="4">媒介组
+<TR><TH>&nbsp;
+    <TH>continuous/paged
+    <TH>visual/aural/tactile
+    <TH>grid/bitmap
+    <TH>interactive/static
+<TR><TH>aural<TD align="center">continuous<TD align="center">aural<TD align="center">N/A<TD align="center">both</TR>
+<TR><TH>braille<TD align="center">continuous<TD align="center">tactile<TD align="center">grid<TD align="center">both</TR>
+<TR><TH>emboss<TD align="center">paged<TD align="center">tactile<TD align="center">grid<TD align="center">both</TR>
+<TR><TH>handheld<TD align="center">both<TD align="center">visual<TD
+align="center">both<TD align="center">both</TR>
+<TR><TH>print<TD align="center">paged<TD align="center">visual<TD
+align="center">bitmap<TD align="center">static</TR>
+<TR><TH>projection<TD align="center">paged<TD align="center">visual<TD align="center">bitmap<TD align="center">static</TR>
+<TR><TH>screen<TD align="center">continuous<TD align="center">visual<TD align="center">bitmap<TD align="center">both</TR>
+<TR><TH>tty<TD align="center">continuous<TD align="center">visual<TD align="center">grid<TD align="center">both</TR>
+<TR><TH>tv<TD align="center">both<TD align="center">visual, aural<TD align="center">bitmap<TD align="center">both</TR>
+</TABLE>
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="cascade.html">下一篇</a> &nbsp;
+<a href="box.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</BODY>
+</html>
+

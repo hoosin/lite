@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>附录B：自CSS1的改变</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="sample.html">
+<link rel="next" href="notes.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="sample.html">上一篇</a> &nbsp;
+<a href="notes.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">属性</a>&nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">附录B. 自CSS1的改变</H1>
+<div class="subtoc">
+<p><strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="changes.html#q1" class="tocxref">B.1 新功能</a>
+    <li class="tocline2"><a href="changes.html#q2" class="tocxref">B.2 更新的描述</a>
+    
+    <li class="tocline2"><a href="changes.html#changes-from-css1" class="tocxref">B.3 相对CSS1的语义的改进</a>
+  </ul>
+</div>
+<P><em>&nbsp;&nbsp;&nbsp;&nbsp;该附录是提示性的，而不是规范性的。</em></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;CSS2建于CSS1，所有合法的CSS1样式表也是合法的CSS2样式表。CSS1规范（参见<a href="refs.html#ref-CSS1" rel="biblioentry" class="noxref"><span class="normref">[CSS1]</span></a>）和本规范的改变可以分为三个部分：新功能，CSS1功能的更新的描述以及相对CSS1的改进。
+<H2><a name="q1">B.1 新功能</a></H2>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;除了CSS1中的功能，CSS2还支持：</p>
+
+<UL>
+
+<LI><A HREF="media.html">媒介类型</A>的概念。
+<LI>所有属性的<a href="cascade.html#value-def-inherit">'inherit'</a>值。
+<LI><A HREF="page.html">页面介质</A>
+<LI><A HREF="aural.html">音频样式表</A>
+<LI>一些国际化特性，包括<a
+href="generate.html#lists">列表数字样式</a>，支持<a
+href="visuren.html#direction">双向文本</a>以及支持语言敏感的<a href="generate.html#quotes">引号</a>。
+<LI><A HREF="fonts.html#font-selection">扩展的字体选择</A>机制，包括只能匹配，合成以及可下载字体。同时，引进了系统字体的概念以及一个新属性<a href="fonts.html#propdef-font-size-adjust" class="noxref"><span
+class="propinst-font-size-adjust">'font-size-adjust'</span></a>。
+
+<LI><A HREF="tables.html">表格</A>，包括新的<a href="visuren.html#propdef-display" class="noxref"><span
+class="propinst-display">'display'</span></a>及<a href="visudet.html#propdef-vertical-align" class="noxref"><span
+class="propinst-vertical-align">'vertical-align'</span></a>取值。
+<LI><A HREF="visuren.html#relative-positioning">相对</A>及<A
+HREF="visuren.html#absolute-positioning">绝对定位</A>，包括<A HREF="visuren.html#fixed-positioning">固定定位</A>。
+<LI>新的框类型（和块和行间一起）：<a
+href="visuren.html#compact">compact</a>及<a href="visuren.html#run-in">run-in</a>。
+<LI>在可视格式化模型中控制内容<a
+href="visufx.html#overflow">溢出</a>，<a
+href="visufx.html#clipping">剪切</a>及<a
+href="visufx.html#visibility">可视性</a>的能力。
+<LI>在可视格式化模型中设置最小和最大<a
+href="visudet.html#min-max-widths">宽度</a>及<a
+href="visudet.html#min-max-heights">高度</a>的能力。
+<LI>扩展的<A HREF="selector.html">选择子</A>机制，包括子选择子，相邻选择子以及属性选择子。
+<LI><A HREF="generate.html#generated-text">生成的内容</a>，<a href="generate.html#counters">自动记数和编号</A>以及<a href="generate.html#markers">标记</a>。
+<LI>文本阴影，通过新的<a href="text.html#propdef-text-shadow" class="noxref"><span
+class="propinst-text-shadow">'text-shadow'</span></a>属性获得。
+<LI>一些新的<A
+HREF="selector.html#pseudo-classes">伪类</A>，:first-child，:hover，:focus，:lang。
+<LI>系统<A HREF="ui.html#system-colors">颜色</A>以及<A href="ui.html#system-fonts">字体</a>。
+<LI><A href="ui.html#cursor-props">光标</a>。
+<LI><A href="ui.html#dynamic-outlines">动态外廓</a>。
+</UL>
+
+
+
+<H2><a name="q2">B.2 更新的描述</a></H2>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;CSS1规范短而精简。本规范容量更大，也更易读。很多新的增加的内容描述了新的功能，但是CSS1特性的描述也得以扩展。除了下面描述的几个情况外，重新写的描述并不意味着语法或语义的改变。
+<H2>B.3 <a name="changes-from-css1"></a>相对CSS1的语义的改进</H2>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;尽管所有CSS1样式表都是合法的CSS2样式表，但是还是有一些情况下，CSS1样式表在解释为CSS2样式表时含义是不同的。大部分改变是因为规范中体现了来自实现中的经验反馈，不过也有一些错误的修正。
+<UL>
+<LI>"!important"的含义被改变。CSS1中，作者样式表中的"!important"优先于用户样式表。CSS2中这一优先级被倒转了。
+<LI>CSS2中<A HREF="syndata.html#color-units">颜色值</A>根据设备域而剪裁，而不是象CSS1中根据sRGB域。
+<LI>CSS1简单的判定，如果'margin-left'和'width'同时设置的话，'margin-right'会被忽略。CSS2中，选择释放'margin-right'还是'margin-left'取决于书写方向。
+<LI>SS1中，某些属性（如'padding'）取值可以参照父元素的宽度。这是个错误；该值应该永远参照块级元素的宽度，本规范考虑到这个并引入了“包含块”概念。
+<LI>'display'的初始值在CSS2中是'inline'，而CSS1中是'block'。
+<LI>CSS1中'clear'属性适用于所有元素。这是个错误，CSS2中该属性只适用于块级元素。
+<LI>CSS1中，<a name="x0"><span class="index-inst"
+title="pseudo-classes:::link|:link|link
+(pseudo-class)">':link'，</span></a><a name="x3"><span class="index-inst"
+title="pseudo-classes:::visited|:visited|visited
+(pseudo-class)">':visited'和</span></a><a name="x6"><span class="index-inst"
+title="pseudo-classes:::active|:active|active
+(pseudo-class)">':active'是互斥的；</span></a>CSS2中，<a
+href="selector.html#dynamic-pseudo-classes">':active'</a>可以和<a href="selector.html#link-pseudo-classes">':link'或':visited'</a>同时出现。
+<LI>字体尺寸表<a href="fonts.html#propdef-font-size" class="noxref"><span
+class="propinst-font-size">'font-size'</span></a>相邻索引间的建议比例因子从1.5缩小到1.2。
+<LI><a href="fonts.html#propdef-font-size" class="noxref"><span class="propinst-font-size">'font-size'</span></a>的计算值而不是实际值被继承。
+<LI> CSS1对于'inside'（<a href="generate.html#propdef-list-style-position" class="noxref"><span
+class="propinst-list-style-position">'list-style-position'</span></a>中）的描述允许文本的左边距被影响，而不是列表符号。CSS2中，这样的解释被去除了。
+<li>请同时参考<a
+href="grammar.html#tokenizer-diffs">CSS2和CSS1中表征化的对比</a>中的<em>规范</em>段落。
+</UL>
+
+
+
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p><a href="sample.html">上一篇</a> &nbsp;
+<a href="notes.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a>&nbsp;
+</div>
+</BODY>
+</HTML>
+

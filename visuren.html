@@ -1,0 +1,1391 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>可视化格式模型</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="box.html">
+<link rel="next" href="visudet.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="box.html">上一篇</a> &nbsp;
+<a href="visudet.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">9 可视化格式模型</H1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="visuren.html#q1" class="tocxref">9.1 可视化格式模型简介</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visuren.html#q2" class="tocxref">9.1.1 视点</a>
+      <li class="tocline3"><a href="visuren.html#containing-block" class="tocxref">9.1.2 <span class="index-def" title="containing block">包含块</span></a>
+    </ul>
+    <li class="tocline2"><a href="visuren.html#box-gen" class="tocxref">9.2 控制包含框的生成</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visuren.html#q5" class="tocxref">9.2.1 块类元素和块控制框</a>
+      <ul class="toc">
+        <li class="tocline4"><a href="visuren.html#anonymous-block-level" class="tocxref"> 匿名块控制框</a>
+      </ul>
+      <li class="tocline3"><a href="visuren.html#q7" class="tocxref">9.2.2 行内类元素和行内控制框</a>
+      <ul class="toc">
+        <li class="tocline4"><a href="visuren.html#anonymous" class="tocxref">匿名行内控制框</a>
+      </ul>
+      <li class="tocline3"><a href="visuren.html#compact" class="tocxref">9.2.3 压缩的控制框</a>
+      <li class="tocline3"><a href="visuren.html#run-in" class="tocxref">9.2.4 插入的控制框</a>
+      <li class="tocline3"><a href="visuren.html#display-prop" class="tocxref">9.2.5 <span class="propinst-display">'display'</span>属性</a>
+    </ul>
+    <li class="tocline2"><a href="visuren.html#positioning-scheme" class="tocxref">9.3 定位方案</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visuren.html#choose-position" class="tocxref">9.3.1 选择定位方案：<span class="propinst-position">'position'</span>属性</a>
+      <li class="tocline3"><a href="visuren.html#position-props" class="tocxref">9.3.2 控制框偏移：<span class="propinst-top">'top'</span>，<span class="propinst-right">'right'</span>，<span class="propinst-bottom">'bottom'</span>，<span class="propinst-left">'left'</span></a>
+    </ul>
+    <li class="tocline2"><a href="visuren.html#normal-flow" class="tocxref">9.4 常规流向</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visuren.html#block-formatting" class="tocxref">9.4.1 块格式化的内容</a>
+      <li class="tocline3"><a href="visuren.html#inline-formatting" class="tocxref">9.4.2 行内格式化的内容</a>
+      <li class="tocline3"><a href="visuren.html#relative-positioning" class="tocxref">9.4.3 相对定位</a>
+    </ul>
+    <li class="tocline2"><a href="visuren.html#floats" class="tocxref">9.5 浮动</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visuren.html#float-position" class="tocxref">9.5.1 浮动的定位：<span class="propinst-float">'float'</span>属性</a>
+      <li class="tocline3"><a href="visuren.html#flow-control" class="tocxref">9.5.2 控制紧接浮动的排列：<span class="propinst-clear">'clear'</span>属性</a>
+    </ul>
+    <li class="tocline2"><a href="visuren.html#absolute-positioning" class="tocxref">9.6 绝对定位</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visuren.html#fixed-positioning" class="tocxref">9.6.1 固定定位</a>
+    </ul>
+    <li class="tocline2"><a href="visuren.html#q24" class="tocxref">9.7 'display'，'position'及'float'间的相互关系</a>
+    <li class="tocline2"><a href="visuren.html#comparison" class="tocxref">9.8 常规流向，浮动和绝对定位的对比</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visuren.html#q26" class="tocxref">9.8.1 常规流向</a>
+      <li class="tocline3"><a href="visuren.html#q27" class="tocxref">9.8.2 相对定位</a>
+      <li class="tocline3"><a href="visuren.html#q28" class="tocxref">9.8.3 控制框的浮动</a>
+      <li class="tocline3"><a href="visuren.html#q29" class="tocxref">9.8.4 绝对定位</a>
+    </ul>
+    <li class="tocline2"><a href="visuren.html#q30" class="tocxref">9.9 分层的呈现</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visuren.html#z-index" class="tocxref">9.9.1 指定堆叠层次：<span class="propinst-z-index">'z-index'</span>属性</a>
+    </ul>
+    <li class="tocline2"><a href="visuren.html#direction" class="tocxref">9.10 文本方向：<span class="propinst-direction">'direction'</span>及<span class="propinst-unicode-bidi">'unicode-bidi'</span>属性</a>
+  </ul>
+</div>
+
+<H2><a name="q1">9.1 可视化格式模型简介</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本章和下一章描述了<a name="x0"><span class="index-def" title="visual formatting model">可视化格式模型</span></a>：用户端在图形<a href="media.html">媒介</a>下如何处理<a href="conform.html#doctree">文档树</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;可视化格式模型中，每一个文档树中的元素根据<a href="box.html">包含框模型</a>产生零个或多个控制框。这些框的布局由下列内容控制：</p>
+
+<ul>
+<li><a href="box.html#box-dimensions">框的尺寸</a>和<a href="#box-gen">类型</a>。
+<li><a href="#positioning-scheme">定位方案</a>（常规流向，浮动和绝对）。
+<li><a href="conform.html#doctree">文档树</a>中元素间的关系。
+<li>外部信息（例如，视点大小，图形的<a href="conform.html#intrinsic">内在</a>尺寸等）。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本章和下一章中定义的属性适用于<a href="media.html#continuous-media-group">连续媒介</a>和<a href="media.html#paged-media-group">页面媒介</a>。不过<a href="box.html#margin-properties">边距属性</a>的含义在应用到页面媒介时会有些不同（详细内容请参见<a href="page.html#page-model">页面模型</a>）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;可视化格式模型并不指定格式化的所有方面（例如，它并不指定字符间距算法）。<a href="conform.html#conformance">与CSS一致的用户端</a>在处理本规范未包含的格式化情形时，表现可能有所不同。
+
+<h3><a name="q2">9.1.1 视点</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="media.html#continuous-media-group">连续媒介</a>的用户端通常提供给用户一个<span class="index-def" title="viewport"><a name="viewport"><dfn>视点</dfn></a></span>（屏幕上的一个窗口或浏览区域），通过它用户来浏览文档。当视点尺寸改变时，用户端可能改变文档的布局（参见<a href="#initial-containing-block">初始包含块</a>）。如果视点比文档的初始包含块小，用户端可能提供滚动机制。对于一个<a href="intro.html#canvas">渲染区域</a>而言，最多只能有一个视点，不过用户端可以对多个渲染区域加以渲染（即对同一文档提供不同的视点）。
+
+
+<H3>9.1.2 <span class="index-def" title="containing block"><a name="containing-block">包含块</a></span>
+</H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2中，很多框的位置和尺寸的计算都基于一个被称为<a name="x3"><span class="index-def" title="containing block"><dfn>包含块</dfn></span></a>的长方形盒子的四边。通常地，生成的框表现为其派生框的包含块；我们说一个框“建立”了它的派生框的包含块。短语“一个框的包含块”意味着“该框所存在的那个包含块”，而不是它所生成的块。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;基于框的包含块，每一个框都有一个定位，不过它不被包含块所限制；它可能<a href="visufx.html#overflow">溢出</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="conform.html#doctree">文档树</a>的根生成一个框，作为后继布局的<span class="index-def" title="initial containing block|containing block::initial"><a name="initial-containing-block"><dfn>初始包含块</dfn></a></span>。 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;初始包含块的宽度可以由根元素的<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>属性指定。如果该属性取值为'auto'，用户端提供初始宽度（如，用户端使用<a href="#viewport">视点</a>的当前宽度）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;初始包含块的高度可以由根元素的<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>属性指定。如果该属性取值为'auto'，包含块的高度将调整以适应文档内容。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;初始包含块不可以被定位或浮动（即，用户端<a href="syndata.html#ignore">忽略</a>根元素的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>和<a href="visuren.html#propdef-float" class="noxref"><span class="propinst-float">'float'</span></a>属性）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;包含块尺寸如何计算的<a href="visudet.html#containing-block-details">细节</a>的描述在<a href="visudet.html">下一篇</a>。
+
+<H2>9.2 <a name="box-gen">控制包含框的生成</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的几节描述了CSS2中可能生成的包含框的类型。一个框的类型部分地影响它在可视化格式模型中的表现。以下讨论的<a href="visuren.html#propdef-display" class="noxref"><span
+class="propinst-display">'display'</span></a>属性决定了框的类型。
+
+<H3><a name="q5">9.2.1 块类元素和块控制框</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-def" title="block-level element"><a name="block-level"><dfn>块类元素</dfn></a></span>是源文档中那些在视觉上被格式化为块（如：段落）的那些元素。某些<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性的取值产生块类元素：'block'，'list-item'，'compact'和'run-in'（某些时候；参见<a href="#compact">压缩的控制框</a>和<a href="#run-in">插入的控制框</a>），以及'table'。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;块类元素生成一个<span class="index-def" title="principal block box"><a name="principal-box"><dfn>原始块控制框</dfn></a></span>，它只包含<span class="index-def" title="block box"><a name="block-box"><dfn>块控制框</dfn></a></span>。原始块控制框生成派生框和生成内容的<a href="#containing-block">包含块</a>，并且是在任何定位方案中都要牵涉到的框。元素块控制框参与<a href="#block-formatting">块格式化的内容</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;某些块类元素在原始框之外生成额外的框：'list-item'元素和那些带有<A HREF="generate.html#markers">标记</A>的元素。这些额外的框根据原始框来定位。
+
+<h4> <a name="anonymous-block-level">匿名块控制框</a></h4>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;有这样一个文档：
+
+<pre>
+&lt;DIV>
+  Some text
+  &lt;P>More text
+&lt;/DIV>
+</pre>
+
+（并假定DIV和P都设置了'display: block'），DIV看来包含行内和块内容。为了使格式化简单一些，我们假定有一个<em><a name="x9"><span class="index-def" title="anonymous">匿名块控制框</span></a></em>围绕在"Some text"周围。
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/anon-block.gif" alt="diagram showing the three
+boxes for the example above"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-anon-block" href="images/longdesc/anon-block-desc.html" title="Long description for anonymous block box">[D]</A></SPAN> <p class="caption">图形显示上例中三个控制框，其中一个是匿名的。
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;换句话说：如果一个块控制框（如上例中为DIV生成的框）在其中包含另外一个块框（如上例中的P），我们强迫它在其内<em>只</em>包含块框，而将任何的行内框都包含在一个匿名块框之内。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这一模型对下面的例子适用。如果如下的规则：</p>
+
+<PRE>
+/* Note: HTML UAs may not respect these rules */
+BODY { display: inline }
+P    { display: block }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;应用在如下的HTML文档中：</p>
+
+<PRE class="html-example">
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Anonymous text interrupted by a block&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+<em>This is anonymous text before the P.</em>
+&lt;P&gt;This is the content of P.&lt;/&gt;
+<em>This is anonymous text after the P.</em>
+&lt;/BODY&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;BODY元素包含一个匿名文本块（C1），后跟另一个匿名文本块（C2）。最后的控制框是BODY的一个匿名块控制框，包含C1周围的一个匿名块控制框，P块控制框，以及另外一个C2周围的匿名块控制框。
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;匿名框的属性从包含它的非匿名框那里继承而来（本例中，是DIV的控制框）。不能继承的属性取它们的初始值。例如，匿名框的字体从DIV继承，但是边距为0。
+
+<H3><a name="q7">9.2.2 行内类元素和行内控制框</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-def" title="inline-level element"><a name="inline-level"><dfn>行内元素</dfn></a></span>源文档中那些不形成新的内容块的元素；内容在行内分布（如，段落内着重的文本，行内图形等等）。某些<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性的取值形成洋行内元素：'inline'，'inline-table'，'compact'和'run-in'（某些时候；参见<a href="#compact">压缩的控制框</a>和<a href="#run-in">插入的控制框</a>）。行内元素生成<a name="inline-box">行内控制框</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;行内控制框可以参与几个格式化的内容：</p>
+
+<ul>
+<li>在块控制框内，一个行内控制框参与<a href="#inline-formatting">行内格式化的内容</a>。
+<li><a href="#compact">压缩</a>的行内控制框在一个块控制框的边距中得到一个位置。
+<li><a href="generate.html#markers">标记</a>控制框也在块控制框之外得到一个位置。
+</ul>
+
+<h4> <a name="anonymous">匿名行内控制框</a></h4>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在如下的文档中：
+
+<pre>
+&lt;P>Some &lt;EM>emphasized&lt;/em> text&lt;/P>
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;P元素生成一个块控制框，其内还有几个行内框。"emphasized"的框是一个行内元素（EM）产生的行内框，而其它的框（"Some"和"text"）是块类元素（P）产生的。后者就称为<a name="x11"><span class="index-def" title="anonymous inline boxes">匿名行内控制框</span></a>，因为它们没有与之相关的行内元素。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这样的行内框从其父块框那里继承可以继承的属性。非继承属性取它们的初始值。例子中，初始匿名框的颜色继承自P，而背景是透明的。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果根据上下文可以确定匿名框是哪种类型，匿名行内控制框和匿名块控制框在本规范中都被称为匿名控制框（匿名框）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在格式化<a href="tables.html#anonymous-boxes">表格</a>时，还会出现更多类型的匿名框。
+
+<H3>9.2.3 <a name="compact">压缩的控制框</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个<a name="x12"><span class="index-def" title="compact box"><dfn>压缩的控制框</dfn></span></a>表现行为如下：</p>
+
+<ul>
+<li>如果一个<a href="#block-box">块</a>框（既不是浮动也不是<a href="#absolutely-positioned">绝对定位</a>）跟随在一个压缩的控制框之后，则压缩的控制框格式化为一个单行的行内框。结果的框的宽度和块框的一个侧边距相比。是选择左边距还是右边距取决于产生该压缩框和后继框的<a href="#containing-block">包含块</a>的元素中指定的<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>属性。如果行内框的宽度小于或等于边距，行内框在边距内得到定位，描述见后。
+
+<li>否则，压缩框成为一个块框。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;压缩框在边距中的定位方法如下：它在块的第一个<a href="#line-box">行框</a>的外边（左边或右边），不过它影响那个<a href="visudet.html#line-height">行框高度</a>的计算。压缩框的<a href="visudet.html#propdef-vertical-align" class="noxref"><span class="propinst-vertical-align">'vertical-align'</span></a>属性确定压缩框相对于该行框的垂直位置。压缩框的水平位置总是在块框的边距内。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果一个元素不可以被格式化在一行内，它就不能放置在下一个块的边距中。例如，一个HTML中的'compact'元素包含一个BR元素总是被格式化为一个块框（适用BR元素的缺省样式，即插入一个新行）。要在边距中放置多行文本，使用<a href="visuren.html#propdef-float" class="noxref"><span class="propinst-float">'float'</span></a>属性可能更加合适。
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下例演示了一个压缩的控制框：
+
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;A compact box example&lt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      DT { display: compact }
+      DD { margin-left: 4em }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;DL&gt;
+      &lt;DT&gt;Short
+        &lt;DD&gt;&lt;P&gt;Description goes here.
+      &lt;DT&gt;too long for the margin
+        &lt;DD&gt;&lt;P&gt;Description goes here.
+    &lt;/DL&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本例可能格式化为：
+
+<pre>
+<b>short</b>    Description goes here
+
+<b>too long for the margin</b>
+         Description goes here
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="text.html#propdef-text-align" class="noxref"><span class="propinst-text-align">'text-align'</span></a>属性可以用来在边距内对齐压缩的元素：对齐边距的左边（'left'），对齐右边（'right'）或居中（'center'）。值'justify'不适用，并被理解为或者是'left'，或者是'right'，取决于压缩元素在其中格式化的块类元素的<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>。（如果方向是'ltr'，则靠左；如果方向是'right'，则靠右。）
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;请参见<a href="generate.html#compact-run-in-gen">生成的内容</a>一节，以了解压缩的框和生成的内容之间互相作用的内容。
+
+<H3>9.2.4 <a name="run-in">插入的控制框</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个<a name="x13"><span class="index-def" title="run-in box"><dfn>插入的控制框</dfn></span></a>表现如下：</p>
+
+<ul>
+<li>如果一个<a href="#block-box">块</a>框（不是浮动，也不是<a href="#absolutely-positioned">绝对定位</a>）跟随在一个插入的控制框之后，则该插入框成为该块框的第一个行内框。
+<li>否则，该插入框成为一个块框。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个'run-in'框在插入标题时很有用，如下例：
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;A run-in box example&lt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      H3 { display: run-in }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;H3&gt;A run-in heading.&lt;/H3&gt;
+    &lt;P&gt;And a paragraph of text that
+       follows it.
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本例可能被格式化为：
+
+<pre>
+  <b>A run-in heading.</b> And a
+  paragraph of text that 
+  follows it.
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;插入元素的属性继承自源树中它的父元素，而不是来自视觉上它成为其一部分的那个块框。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;请参见<a href="generate.html#compact-run-in-gen">生成的内容</a>一节，以了解插入框如何与生成的内容交互作用的信息。
+
+<h3>9.2.5 <a name="display-prop"></a> <a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性</h3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'display'"><a name="propdef-display" class="propdef-title"><strong>'display'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>inline | block | list-item | run-in | compact | marker |table | inline-table | table-row-group | table-header-group |table-footer-group | table-row | table-column-group | table-column |table-cell | table-caption | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>inline
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#all-media-group" class="noxref">所有</a>
+</table>
+</dl>
+</div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性取值的含义如下：</P>
+
+<dl>
+<dt><span class="index-def" title="'block', definition of"><a name="value-def-block"><strong>block</strong></a></span>
+<dd>该值使一个元素生成一个原始块框。
+
+<dt><span class="index-def" title="'inline', definition of"><a name="value-def-inline"><strong>inline</strong></a></span>
+<dd>该值使一个元素生成一个或多个行内框。
+
+<dt><span class="index-def" title="'list-item', definition of"><a name="value-def-list-item"><strong>list-item</strong></a></span>
+<dd>该值使一个元素（如HTML中的LI）生成一个原始块框和一个列表项行内框。要了解列表和列表格式化的信息，请参见<a href="generate.html#lists">列表</a>一节。
+
+<dt><span class="index-def" title="marker', definition of"><a name="value-def-marker"><strong>marker</strong></a></span> 
+<dd>该值声明了在一个框之前或之后的<a href="generate.html">生成的内容</a>为一个标记。该值只能和与块类元素相连的<a href="generate.html#before-after-content">:before和:after伪元素</a>结合使用。在其它情况下，该值被理解为'inline'。更多的信息请参见<a href="generate.html#markers">标记</a>一节。
+
+<dt><strong>none</strong>
+<dd><a name="x19"><span class="index-def" title="'none'::as display value">该值</span></a>使一个元素在<a href="intro.html#formatting-structure">格式化结构</a>中<b>不</b>产生框（即，该元素对布局没有影响）。派生的元素也不产生任何框；该行为<strong>不能</strong>由设置派生元素的<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性而被超越。
+
+<p>请注意'none'的显示特性并不生成一个不可见的框；它根本不生成框。CSS包含了机制使一个元素能够在格式化结构中生成框而影响格式化，但本身不可见。请参见<a href="visufx.html#visibility">可视性</a>一节以获得详细叙述。
+
+<dt><span class="index-def" title="'run-in', definition of"><a name="value-def-run-in"><strong>插入</strong></a></span>和<span class="index-def" title="'compact', definition of"><a name="value-def-compact"><strong>压缩</strong></a></span>
+<dd>根据上下文，这些值要么生成块框，要么生成行内框。对于插入和压缩框适用的属性基于它们最终的状态（行内或块类）。例如，<a href="text.html#propdef-white-space" class="noxref"><span class="propinst-white-space">'white-space'</span></a>属性仅在框成为块框时才适用。
+
+<dt><span class="index-inst" title="'table'"><a name="value-inst-table"><strong>table</strong></a></span>，<span class="index-inst" title="'inline-table'"><a name="value-inst-inline-table"><strong>inline-table</strong></a></span>，<span class="index-inst" title="'table-row-group'"><a name="value-inst-table-row-group"><strong>table-row-group</strong></a></span>，<span class="index-inst" title="'table-column'"><a name="x25" href="tables.html#value-def-table-column" class="noxref"><span class="value-inst-table-column"><strong>table-column</strong></span></a></span>，<span class="index-inst" title="'table-column-group'"><a name="value-inst-table-column-group"><strong>table-column-group</strong></a></span>，<span class="index-inst" title="'table-header-group'"><a name="value-inst-table-header-group"><strong>table-header-group</strong></a></span>，<span class="index-inst" title="'table-footer-group'"><a name="value-inst-table-footer-group"><strong>table-footer-group</strong></a></span>，<span class="index-inst" title="'table-row'"><a name="value-inst-table-row"><strong><strong>table-row</strong></strong></a></span>，<span class="index-inst" title="'table-cell'"><a name="value-inst-table-cell"><strong><strong>table-cell</strong></strong></a></span>和<span class="index-inst" title="'table-caption'"><a name="value-inst-table-caption"><strong>table-caption</strong></a></span>
+<dd>这些值使一个元素表现为类似一个表格元素（还要考虑在<a href="tables.html">表格</a>一章中讨论到的限制）。</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，尽管<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>的<a href="cascade.html#initial-value">初始值</a>是'inline'，用户端的<a href="cascade.html#default-style-sheet">缺省样式表</a>可以<a href="cascade.html">超越</a>它。参见附录中的HTML 4.0<a href="sample.html">示例样式表</a>。
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这里是一些<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性的例子：
+
+<PRE>
+P   { display: block }
+EM  { display: inline }
+LI  { display: list-item } 
+IMG { display: none }      /* Don't display images */
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-inst" title="conformance"><a name="x32" href="conform.html#conformance">一致的</a></span>HTML用户端可以<span class="index-inst" title="ignore"><a name="x33" href="syndata.html#ignore">忽略</a></span>掉<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性。
+
+<h2>9.3 <a name="positioning-scheme">定位方案</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2中，一个控制框的布局可以根据三种<a name="x34"><span class="index-def" title="positioning scheme"><dfn>定位方案</dfn></span></a>：</p>
+
+<ol>
+<li><a href="#normal-flow">常规流向</a>。CSS2中，常规流向包含<a href="#block-box">块</a>框的<a href="#block-formatting">块格式化</a>，<a href="#inline-box">行内</a>框的<a href="#inline-formatting">行内格式化</a>，块框或行内框的<a href="#relative-positioning">相对定位</a>，以及<a href="#compact">压缩</a>和<a href="#run-in">插入</a>框的定位。
+<li><a href="#floats">浮动</a>。在浮动模型中，一个框首先根据常规流向布局，再将它从流中取出并尽可能地向左或向右偏移。内容可以排列在一个浮动的边上。
+<li><a href="#absolute-positioning">绝对定位</a>。在绝对定位模型中，一个框整个地从常规流向中脱离（它对后续的同胞没有影响），并根据一个包含块来分配其定位。
+</ol>
+
+<div class="note">
+<em><strong>注意。</strong>CSS2的定位方案帮助作者使它们的文档更容易阅读，而不需要使用定位技巧（如不可见的图形）来达到布局效果。
+</em>
+</div>
+
+<h3>9.3.1 <a name="choose-position">选择定位方案：</a><a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>属性</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>和<a href="visuren.html#propdef-float" class="noxref"><span class="propinst-float">'float'</span></a>属性指定选择哪个CSS2定位方案来计算框的定位。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'position'"><a name="propdef-position" class="propdef-title"><strong>'position'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>static | relative | absolute | fixed | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>static
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素，除了生成的内容
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性取值的含义如下：</P>
+
+<dl>
+<dt><strong>static</strong>
+<dd>该框是一个常规的控制框，布局根据<a href="#normal-flow">常规流向</a>。<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>和<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>属性不适用。
+
+<dt><strong>relative</strong>
+
+<dd>框的位置根据<a href="#normal-flow">常规流向</a>计算（被称为常规流向中的位置）。然后框<a href="#relative-positioning">相对于</a>它的常规位置而偏移。如果B框是相对定位的，接下去的框的定位计算并不考虑B的偏移。
+
+<dt><strong>absolute</strong>
+<dd>框的位置（可能还有它的尺寸）是由<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>，<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>，<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>和<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>属性决定。这些属性指定了基于框的<a href="#containing-block">包含块</A>的偏移。绝对定位的框从常规流向中脱离。这意味着它们对其后的同胞的定位没有影响。同样的，尽管<a href="#absolutely-positioned">绝对定位</a>框有边距，它们不会和其它边距发生<a href="box.html#collapsing-margins">重合</a>（塌缩）。
+
+<dt><strong>fixed</strong>
+<dd>框的定位的计算基于'absolute'模型，不过还要额外地根据一些参考而得到<a href="#fixed-positioning">固定</a>。在<a href="media.html#continuous-media-group">连续媒介</a>的情况下，框的位置基于<a href="#viewport">视点</A>固定（媒介滚动时并不移动）。在<a href="media.html#paged-media-group">页面媒介</a>的情况下，框的位置基于页面而固定，即使该页面通过一个<a href="#viewport">视点</A>而呈现（例如在打印预览的情况下）。作者可能希望以媒介相关的方式来指定'fixed'。例如，一个作者可能希望一个框总是在一个屏幕<a href="#viewport">视点</A>的顶端，但并不是在每一个打印页的顶端。这两个规则可以使用<a href="media.html#at-media-rule">@media规则</a>加以分割，如：
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>   
+@media screen { 
+  H1#first { position: fixed } 
+}
+@media print { 
+  H1#first { position: static }
+}
+</PRE>   
+</div>
+</dl>
+
+<H3>9.3.2 <a name="position-props">控制框偏移</a>：<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>，<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>，<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>，<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果一个元素的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>属性值的取值不是'static'的话，该元素被称为<span class="index-def" title="positioned element/box"><a name="positioned-element"><dfn>定位的</dfn></a></span>。定位的元素生成定位框，其定位基于四个属性：</p>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'top'"><a name="propdef-top" class="propdef-title"><strong>'top'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>定位的元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>基于包含块的高度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定一个框的内容的顶边相对该框的<a href="#containing-block">包含块</a>的顶边向下偏移的量。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'right'"><a name="propdef-right" class="propdef-title"><strong>'right'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>定位的内容
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>基于包含块的宽度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定一个框的内容的右边相对该框的<a href="#containing-block">包含块</a>的右边向左偏移的量。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'bottom'"><a name="propdef-bottom" class="propdef-title"><strong>'bottom'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>定位的内容
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>基于包含块的高度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定一个框的内容的底边相对该框的<a href="#containing-block">包含块</a>的底边向上偏移的量。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'left'"><a name="propdef-left" class="propdef-title"><strong>'left'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>定位的内容
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>基于包含块的宽度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定一个框的内容的左边相对该框的<a href="#containing-block">包含块</a>的左边向右偏移的量。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这四个属性的取值的含义如下：</p>
+
+<dl>
+<dt><strong><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a></strong>
+<dd>偏移是距离参照边的固定值。
+
+<dt><strong><a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a></strong>
+
+<dd>偏移是包含块宽度（对于<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>和<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>）或高度（对于<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a> 和<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>）的百分比。对于'top'和'bottom'，如果包含块的高度没有显式指定（即它取决于内容的高度），百分比值将解释为'auto'。
+<dt><strong>auto</strong>
+<dd>该值的效果取决于与之相关的属性中的哪一个也设置了'auto'。详细的内容请参见<a href="#absolutely-positioned">绝对定位</a>，非替换元素的<a href="visudet.html#abs-non-replaced-width">宽度</a>和<a href="visudet.html#abs-non-replaced-height">高度</a>一节。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于<a href="#absolutely-positioned">绝对定位</a>框，偏移是基于框的<a href="#containing-block">包含块</a>。对于相对定位框，偏移是基于该框本身的外边界（即根据常规流向给予框一个位置，偏移相对于这些属性而计算）。
+
+<H2>9.4 <a name="normal-flow">常规流向</a></H2> 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;常规流向中的框属于一个<a name="x41"><span class="index-def" title="formatting context">格式化内容</span></a>，可能是块或者是行内，但不能同时都是。<a href="#block-box">块</a>框参与<a href="#block-formatting">块格式化</a>内容。<a href="#inline-box">行内框</a>参与<a href="#inline-formatting">行内格式化</a>内容。
+
+<h3>9.4.1 <a name="block-formatting">块格式化的内容</a></h3> 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在块格式化内容中，框一个接一个地垂直放置，起点是一个包含块的顶部。两个同胞框之间的垂直距离取决于<a href="box.html#propdef-margin" class="noxref"><span class="propinst-margin">'margin'</span></a>属性。在块格式化内容中相邻的框的垂直边距会<a href="box.html#collapsing-margins">重合</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在块格式化内容中，每一个框左外边与包含块的左边相接触（对于从右到左的格式化，右外边接触右边），即使存在浮动也是如此（尽管一个框的<em>内容</em>区域会由于浮动而压缩）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;有关在页面媒介中分页的信息，请参见<a href="page.html#allowed-page-breaks">允许的分页</a>一节。
+
+<H3>9.4.2 <a name="inline-formatting">行内格式化的内容</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在行内格式化内容中，框一个接一个地水平排列，起点是包含块的顶部。水平边距，边框和边白在框之间得到保留。框在垂直方向的对齐可以有不同的方式：它们的顶部或底部对齐，或对齐在其中的文字的基线。包含形成一条线的那些框的长方形区域成为一个<span class="index-def" title="line box"><a name="line-box"><dfn>线框</dfn></a></span>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;线框的宽度取决于一个<A HREF="#containing-block">包含块</A>。它的高度取决于<a href="visudet.html#line-height">行高的计算</a>一节中给出的规则。对于线框包含的框来说，它的高度总是足够的。不过，它可能比它包含的最高的框要高（例如，框对齐而引起基线对齐）。如果B框的高度小于包含它的线框的高度，B的垂直对齐由<a href="visudet.html#propdef-vertical-align" class="noxref"><span class="propinst-vertical-align">'vertical-align'</span></a>属性决定。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果几个行内框在水平方向无法放入一个线框内，它们可以分配在两个或多个垂直层叠的线框中。因此，一个段落就是线框的垂直方向上的堆叠。线框堆叠时没有垂直方向的分割并且永不重合。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一般而言，线框的左边接触到其包含块的左边，右边接触到包含块的右边。不过，浮动框可能出现在包含块的边和线框的边之间。因此，尽管同一个行内格式化内容中的线框通常宽度相同（等于包含块的宽度），它们可能由于<a href="#floats">浮动</a>而减少了可用的水平空间而改变宽度。同一行内格式化内容的线框通常高度不一样（如，一行包含了一个高的图形，而其它行只包含文本）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果一行中线框宽度之和小于包含它们的线框的宽度，它们在线框内的水平分布取决于<a href="text.html#propdef-text-align" class="noxref"><span class="propinst-text-align">'text-align'</span></a>属性。如果属性取值为'justify'，用户端也可能延伸行内框。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于一个行内框可能不会超过一个线框的宽度，长的行内框将分成几个框，而这些框分布在几个线框内。如果一个行内框发生分割，边距、边框和边白在分割发生的地方没有视觉上的效果。如果在双向嵌入内发生分割，边距、边框和边白的格式化可能没有被完全定义。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;行内框还可能由于<a href="#direction">双向文本处理</a>而<em>在同一个线框内</em>被分割为好几个框。
+
+<div class="html-example"><p>&nbsp;&nbsp;&nbsp;&nbsp;下面是一个行内框构造的例子。接下来的一段（HTML块类元素P产生）包含由元素EM和STRONG间隔的匿名文本：
+
+<PRE>
+&lt;P&gt;Several &lt;EM&gt;emphasized words&lt;/EM&gt; appear
+&lt;STRONG&gt;in this&lt;/STRONG&gt; sentence, dear.&lt;/P&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;P元素产生一个块框，包含了五个行内框，其中的三个是匿名的：</p>
+
+<ul>
+<li>匿名："Several"
+<li>EM: "emphasized words"
+<li>匿名："appear"
+<li>STRONG: "in this"
+<li>匿名："sentence, dear."
+</ul>
+ 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;为了格式化这一段，用户端将这五个框排入线框。本例中，为P元素生成的框生成了行内框的包含块。如果包含块足够宽，所有的行内框将放在一个线框内：
+
+<PRE>
+ Several <EM>emphasized words</EM> appear <STRONG>in this</STRONG> sentence, dear.
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果不是，行内框将被分割并分布在几个线框之内。前面这一段可能被分割如下：
+
+<PRE>
+Several <EM>emphasized words</EM> appear
+<STRONG>in this</STRONG> sentence, dear.
+</PRE>
+
+或者这样：
+
+<PRE>
+Several <EM>emphasized</EM>  
+<EM>words</EM> appear <STRONG>in this</STRONG> 
+sentence, dear.
+</PRE>
+
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;上例中，EM框被分割为两个EM框（称为"split1"和"split2"）。边距、边框、边白或文本修饰在split1之后或split2之前没有视觉上的效果。
+
+<div class="html-example"><p>&nbsp;&nbsp;&nbsp;&nbsp;考虑下面这个例子：
+
+<PRE>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Example of inline flow on several lines&lt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      EM {
+        padding: 2px; 
+        margin: 1em;
+        border-width: medium;
+        border-style: dashed;
+        line-height: 2.4em;
+      }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;P&gt;Several &lt;EM&gt;emphasized words&lt;/EM&gt; appear here.&lt;/P&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;根据P的宽度，这些框可能分配如下：</P>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/inline-layout.gif" alt="Image illustrating the effect of line breaking on the display of margins, borders, and padding."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-inline-layout" href="images/longdesc/inline-layout-desc.html" title="Long description for illustration of margin/border behavior on split inline box">[D]</A></SPAN></p>
+</div>
+
+<ul>
+<li>在"emphasized"之前和"words"之后插入了边距。
+<li>在"emphasized"之前、之上和之下，"words"之后、之上和之下插入了边白。在每个单词的三边渲染了虚线边框。
+</ul>
+</div>
+
+<H3>9.4.3 <a name="relative-positioning">相对定位</a></H3>  
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一旦一个框按照<a href="#normal-flow">常规流向</a>得到定位，它还可以相对该位置而偏移。这就是<a name="x43"><span class="index-def" title="relative positioning"><dfn>相对定位</dfn></span></a>。这样来偏移一个框（B1）将不会对后继的框（B2）有任何影响：给予B2的位置就好象B1没有偏移，并且在B1偏移后，B2也不会重新定位。这意味着相对定位可能产生框的重合。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;相对定位的控制框保持它们通常的大小，包括分行以及原来为它们保留的位置。一个相对定位的框创建一个新的<a href="#containing-block">包含块</a>来包含常规流向中的子元素 和定位的派生元素。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;要产生一个相对定位的框，可以设置元素的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>属性为'relative'。偏移量由<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>，<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>，<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>和<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>属性指定。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;相对定位框的动态移动在脚本环境中可以产生动画效果（也参见<a href="visufx.html#propdef-visibility" class="noxref"><span class="propinst-visibility">'visibility'</span></a>属性）。相对定位也可以用来作为上标和下标的通用形式，只是行高不会因考虑定位而自动调整。更多的信息参见<a href="visudet.html#line-height">行高的计算</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;相对定位的例子参见<a href="#comparison">常规流向，浮动和绝对定位的对比</a>。
+
+<H2>9.5 <a name="floats">浮动</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;浮动框就是一个框在当前行向左或向右偏移。浮动框最有趣的特性是内容可以在它的边的周围排列（或设置<a href="visuren.html#propdef-clear" class="noxref"><span class="propinst-clear">'clear'</span></a>属性而被禁止）。内容排列在左浮动框的右边，而排列在右浮动框的左边。下面是关于浮动定位和内容排列的简介；决定浮动行为的确切的<a href="#float-rules">规则</a>在<a href="visuren.html#propdef-float" class="noxref"><span class="propinst-float">'float'</span></a>属性的描述中给出。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个浮动框必须有一个显式的宽度（通过<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>属性指定，或对于<a href="conform.html#replaced-element">替换元素</a>是它的<a href="conform.html#intrinsic">内在</a>宽度）。任何浮动框都成为一个<a href="#block-box">块框</a>，它不断向左或向右偏移直到它的外边接触到包含块的边或另外一个浮动的外边。浮动框的顶部和当前线框的顶部对齐（如果没有线框，则对齐前面一个块框的底部）。如果当前行没有足够的水平空间来包含该浮动，则它逐行向下移动直到某一行有足够的空间容纳它。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于一个浮动框并不在流向中，在该浮动框之前或之后创建的非定位框垂直排列，就好象该浮动框并不存在一样。不过紧接着该浮动创建的线框将缩短而给浮动框以空间。在浮动框之前当前行的任何内容将重新排列在浮动框另一边第一个可用的行上。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;几个浮动可以相邻，本模型也适用于一行中的相邻浮动。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的规则将所有<samp>class="icon"</samp>的IMG框浮动到左边（并将左边距设置为）：</p>
+
+<PRE>
+IMG.icon { 
+  float: left;
+  margin-left: 0;
+}
+</PRE>
+</div>
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;考虑如下HTML源文件和样式表：</p>
+
+<PRE>  
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Float example&lt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      IMG { float: left }
+      BODY, P, IMG { margin: 2em }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;P&gt;&lt;IMG src=img.gif alt="This image will illustrate floats"&gt;
+       Some sample text that has no other...
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;IMG框浮动到左边。跟随的内容在浮动的右边进行格式化，开始于浮动的同一行。由于浮动的出现，浮动右边的线框缩短了，但是在浮动之后恢复它们“正常”的宽度（由P元素生成的包含块的宽度）。本文档可能被格式化为：</P>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/floateg.gif"
+     alt="Image illustrating how floating boxes interact with
+margins."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-floateg" href="images/longdesc/floateg-desc.html" title="Long description of float and text flow example">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果文档是如下的内容，格式化效果一样：
+
+<PRE>
+&lt;BODY&gt;
+  &lt;P&gt;Some sample text 
+  &lt;IMG src=img.gif alt="This image will illustrate floats"&gt;
+           that has no other...
+&lt;/BODY&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这是因为浮动左边的内容将被浮动占据，并重新定位到它的右边。
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;浮动框的边距从不和其相邻的框的边距<a href="box.html#collapsing-margins">重合</a>。因此，在上例中，P框和浮动的IMG框间的垂直边距并不<a href="box.html#collapsing-margins">重合</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个浮动可以覆盖常规流向中其它的框（如与浮动相邻的常规流向框的边距为负数）。如果一个行内框覆盖一个浮动框，该行内框的内容、背景和边框在该浮动前面渲染。如果一个块框覆盖一个浮动框，块框的背景和边框在浮动后面渲染，并只有在浮动为透明时才可见。块框的内容在浮动前面渲染。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面是另外一个演示，说明了一个浮动覆盖了常规流向中的元素边框时的情况。
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/float2p.gif" alt="Image showing a floating image
+that overlaps the borders of two paragraphs: the borders are
+interrupted by the image."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-float2p" href="images/longdesc/float2p-desc.html" title="Long description of how floats overlap with boxes in normal
+      flow">[D]</A></SPAN>
+
+<p class="caption">一个浮动的图形使被它覆盖的块框的边框不可见。
+</div>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子展示了如何使用<a href="visuren.html#propdef-clear" class="noxref"><span class="propinst-clear">'clear'</span></a>属性来禁止内容在一个浮动周围排列。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;假定有这样一个规则：
+
+<pre>
+P { clear: left }
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;则格式化可能看上去是这样的：
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/floatclear.gif" alt="Image showing a floating
+image and the effect of 'clear: left' on the two paragraphs."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-floatclear" href="images/longdesc/floatclear-desc.html" title="Long description of how floats overlap with boxes in normal
+      flow">[D]</A></SPAN>
+
+<p class="caption">两个段落都设置了'clear: left'，这使得第二段被“往下推”到浮动之下的位置——它的顶边距也相应扩大来与之配合（参见<a href="visuren.html#propdef-clear" class="noxref"><span class="propinst-clear">'clear'</span></a>属性）。
+</div>
+</div>
+
+
+<h3>9.5.1 <a name="float-position">浮动的定位：</a><a href="visuren.html#propdef-float" class="noxref"><span class="propinst-float">'float'</span></a>属性</h3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'float'"><a name="propdef-float" class="propdef-title"><strong>'float'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>left | right | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>none
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>除了定位的元素和生成的内容之外的所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定一个框是否应该向左，向右浮动或不浮动。它适用于产生控制框但不是<a href="#absolutely-positioned">绝对定位</a>的所有元素。该属性取值的含义如下：</p>
+
+<dl>
+<dt><strong>left</strong>
+<dd>该元素产生一个<a href="#block-box">块</a>框，并向左浮动。内容在该框的右边排列，起点是框的顶部（除非还设置了<a href="visuren.html#propdef-clear" class="noxref"><span class="propinst-clear">'clear'</span></a>属性）。 <a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>被忽略，除非它的值是'none'。
+
+<dt><strong>right</strong>
+<dd>和'left'相同，不过内容排列在框的左边，起点是框的顶部。
+
+<dt><strong>none</strong>
+<dd>该框不浮动。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-def" title="float rules"><a
+name="float-rules">下面是一些更精确的规则</a></span>来控制浮动的表现：</p>
+
+<OL>
+<LI>向左浮动的框的左<a href="box.html#outer-edge">外边</a>不可以出现在它的<a href="#containing-block">包含块</a>左边界之左。对于向右浮动的元素也有类似的规则。
+<LI>如果当前的框向左浮动，并且在源文档中先前有元素产生了任何向左浮动的框，那么对于每一个这样的先前的框，要么当前框的左<a href="box.html#outer-edge">外边</a>出现先前框的右<a href="box.html#outer-edge">外边</a>之右，要么它的顶部必须在先前的框的底部之下。对于向右浮动的框也有类似的规则。
+<LI>向左浮动的框的右<a href="box.html#outer-edge">外边</a>不可以出现在它右边的任何向右浮动的框的左<a href="box.html#outer-edge">外边</a>之右。对于向右浮动的元素也有类似的规则。
+<LI>一个浮动框的<a href="box.html#outer-edge">顶边</a>不可以高于它的<a href="#containing-block">包含块</a>的顶。
+<LI>浮动框的<a href="box.html#outer-edge">顶边</a>不可以高于源文档中先前的元素产生的<a href="#block-box">块</a>或<a href="#floats">浮动</a>框的顶。
+<LI>一个元素的<a href="box.html#outer-edge">顶边</a>不可以高于源文档中先前的元素产生的包含一个框的任何<span class="index-inst" title="line-box"><a name="x46" href="#line-box">线框</a></span>的顶。
+<LI>向左浮动的框如果在它左边有另外一个向左浮动的框，它的右外边不可以出现在它的包含块的右边之右。（或者比较宽松的要求是：一个左浮动不可以超出右边，除非它已经尽可能地靠左排列。）对于向右浮动的元素也有类似的规则。
+<LI>一个浮动框要放置得尽可能的高。
+<LI>一个左浮动框必须尽量靠左放置，一个右浮动框必须尽量靠右放置。在更高的位置和更靠左或靠右的位置间，选择前者。
+</OL>
+
+<H3>9.5.2 <a name="flow-control">控制紧接浮动的排列：</a><a href="visuren.html#propdef-clear" class="noxref"><span class="propinst-clear">'clear'</span></a>属性</H3> 
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'clear'"><a name="propdef-clear" class="propdef-title"><strong>'clear'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>none | left | right | both | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>none
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块类元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性表明一个元素的框的哪一边<em>不</em>可以和一个先前的浮动框相邻。（它可以包含浮动的后代；<a href="visuren.html#propdef-clear" class="noxref"><span class="propinst-clear">'clear'</span></a>对它们没有影响。）
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性仅适用于<a href="#block-level">块类</a>元素（包括浮动）。对于<a href="#compact">压缩</a>和<a href="#run-in">插入框</a>，该属性适用于压缩框或插入框属于的最后的块框。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当应用于非浮动的块框时，取值的含义如下：</P>
+
+<dl>
+<dt><strong>left</strong>
+<dd>生成的框的顶边距将增加，直到它的顶边出现在源文档中先前的元素产生的任何向左浮动的框的底外边之下。
+<dt><strong>right</strong>
+<dd>生成的框的顶边距将增加，直到它的顶边出现在源文档中先前的元素产生的任何向右浮动的框的底外边之下。
+<dt><strong>both</strong>
+<dd>生成的框将移到源文档中先前的元素产生的浮动框之下。
+<dt><strong>none</strong>
+<dd>对考虑到浮动后的框的位置没有约束。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果属性设置在浮动元素上，结果是对浮动定位的<a href="#float-rules">规则</a>做了改动，加入了额外的约束（#10）：
+
+<ul>
+<li>浮动的顶<a href="box.html#outer-edge">外边</a>必须在所有先前的左浮动框的底部之下（如果'clear:left'）或所有先前的右浮动框的底部之下（如果'clear:right')，或两个都要（'clear: both'）。
+</ul>
+ 
+<H2>9.6 <a name="absolute-positioning">绝对定位</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在绝对定位模型中，一个框基于它的包含块而显式地偏移。它完全从常规流向中脱离（对后继的同胞没有影响）。一个绝对定位框为它的常规流向子元素和定位派生元素生成一个新的包含块。不过，绝对定位元素的内容不会在其它框的周围排列。它们可能会也可能不会挡住另外一个框的内容，这取决于互相重合的框的<a href="#stack-level">堆叠层次</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本规范中如果引用到一个<span class="index-def" title="absolutely positioned element"><a name="absolutely-positioned"><dfn>绝对定位元素</dfn></a></span>（或它的框）隐含着该元素的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>属性设置为'absolute'或'fixed'。
+
+<H3>9.6.1 <a name="fixed-positioning">固定定位</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;固定定位是绝对定位的一个子类。唯一的区别是，对于固定定位框，它的包含块有<a href="#viewport">视点</A>创建。对于<a href="media.html#continuous-media-group">连续媒介</a>，固定框并不随着文档的滚动而移动。从这个意义上说，它们类似于<a href="colors.html#background-properties">固定的背景图形</a>。对于<a href="page.html">页面媒介</a>，固定定位框在每页里重复。需要在每一页底部放置一个签名时，这个方法很有用。
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;作者可以使用固定定位来创建类似框架的呈现。考虑如下的框架布局：</P>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/frame.gif"
+     alt="Image illustrating a frame-like layout with position='fixed'."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-frame" href="images/longdesc/frame-desc.html" title="Long description for frame layout example">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;可以通过如下的HTML文档和样式表来达到这一效果：</P>
+
+<PRE>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;A frame document with CSS2&lt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      BODY { height: 8.5in } /* Required for percentage heights below */
+      #header {
+        position: fixed;
+        width: 100%;
+        height: 15%;
+        top: 0;
+        right: 0;
+        bottom: auto;
+        left: 0;
+      }
+      #sidebar {
+        position: fixed;
+        width: 10em;
+        height: auto;
+        top: 15%;
+        right: auto;
+        bottom: 100px;
+        left: 0;
+      }
+      #main {
+        position: fixed;
+        width: auto;
+        height: auto;
+        top: 15%;
+        right: 0;
+        bottom: 100px;
+        left: 10em;
+      }
+      #footer {
+        position: fixed;
+        width: 100%;
+        height: 100px;
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;DIV id="header"&gt; ...  &lt;/DIV&gt;
+    &lt;DIV id="sidebar"&gt; ...  &lt;/DIV&gt;
+    &lt;DIV id="main"&gt; ...  &lt;/DIV&gt;
+    &lt;DIV id="footer"&gt; ...  &lt;/DIV&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+</DIV>
+
+<h2><a name="q24">9.7 'display'，'position'和'float'间的相互关系</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;影响框的生成和布局的三个属性——<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>，<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>和<a href="visuren.html#propdef-float" class="noxref"><span
+class="propinst-float">'float'</span></a>——间的相互关系如下：</p>
+
+<ol>
+<li>如果<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>设置为'none'，用户端必须<a href="syndata.html#ignore">忽略</a>掉<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>和<a href="visuren.html#propdef-float" class="noxref"><span class="propinst-float">'float'</span></a>。在这种情况下，元素不产生框。
+
+<li>否则，<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>设置为'absolute'或'fixed'，<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>设置为'block'且<a href="visuren.html#propdef-float" class="noxref"><span class="propinst-float">'float'</span></a>设置为'none'。框的位置将由<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>，<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>，<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>和<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>属性和该框的包含块确定。
+
+<li>否则，如果<a href="visuren.html#propdef-float" class="noxref"><span class="propinst-float">'float'</span></a>的值不是'none'，<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>设置为'block'并且该框浮动。
+
+<li>否则，应用指定的其它<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性。
+</ol>
+
+<div class="note"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<em><strong>注意。</strong> CSS2并没有规定这些属性的值被脚本改变后布局的表现。例如，如果一个元素设置了'width:
+auto'并且重新定位，会发生什么？内容是重新排列，还是保留原来的格式？答案已经超出了本规范的范围，而且在初期的CSS2实现中，表现可能互不相同。
+</em>
+</div>
+
+<H2>9.8 <a name="comparison">常规流向，浮动和绝对定位的对比</a></H2>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;为了演示常规流向，相对定位，浮动和绝对定位间的区别，我们提供一系列的例子，它们都基于如下的HTML片段：
+
+<pre class="html-example">
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Comparison of positioning schemes&lt;/TITLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;P&gt;Beginning of body contents.
+      &lt;SPAN id="outer"&gt; Start of outer contents.
+      &lt;SPAN id="inner"&gt; Inner contents.&lt;/SPAN&gt;
+      End of outer contents.&lt;/SPAN&gt;
+      End of body contents.
+    &lt;/P&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在文档中，我们假定有如下规则：</p>
+
+<PRE class="example">
+BODY { display: block; line-height: 200%; 
+       width: 400px; height: 400px }
+P    { display: block }
+SPAN { display: inline }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;各个例子中，由<em>outer</em>和<em>inner</em>元素产生的框的最终的位置都不同。每一个演示中，图形左边的数字表明双重空白间隔行（为了看起来更清楚）在<a
+href="#normal-flow">常规流向</a>中的位置。（注意：图形的水平和垂直比例是不同的。</p>
+
+<H3><a name="q26">9.8.1 常规流向</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;考虑如下的<em>outer</em>和<em>inner</em>的CSS声明，它们并不改变<a href="#normal-flow">常规流向</a>框：</p>
+
+<PRE class="example">
+#outer { color: red }
+#inner { color: blue }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;P元素包含所有的行内内容：<a href="#anonymous">匿名行内文本</a>以及两个SPAN元素。因此所有的内容将在一个行内格式化内容中得到排列，包含在一个由P元素生成的包含块中，看起来如下图：</p>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/flow-generic.gif"
+     alt="Image illustrating the normal flow of text between parent and sibling boxes."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-flow-generic" href="images/longdesc/flow-generic-desc.html" title="Long description for normal flow example">[D]</A></SPAN></p>
+</div>
+
+<H3><a name="q27">9.8.2 相对定位</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;要看到<a href="#relative-positioning">相对定位</a>的效果，我们规定：</P>
+
+<PRE class="example">
+#outer { position: relative; top: -12px; color: red }
+#inner { position: relative; top: 12px; color: blue }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;文本正常排列直到<em>outer</em>元素。<em>outer</em>的文本在第一行结尾排列到它的正常流向的位置和尺寸。然后包含文字行内框（分三行排列）移动了'-12px'单位（向上）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>inner</em>的内容，作为<em>outer</em>的子元素，正常地应该紧接"of outer contents"排列（在第1.5行）。不过，<em>inner</em>的内容自身相对<em>outer</em>内容偏移'12px'（向下），而回到它原来的位置第二行。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意跟随在<em>outer</em>之后的内容并不受<em>outer</em>相对定位的影响。</P>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/flow-relative.gif"
+     alt="Image illustrating the effects of relative positioning on a
+box's content."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-flow-relative" href="images/longdesc/flow-relative-desc.html" title="Long description for relative flow example">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;还要注意，如果<em>outer</em>的偏移是'-24px'，那么<em>outer</em>的文本和主体文本会重合。
+
+<H3><a name="q28">9.8.3 控制框的浮动</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;现在考虑<a href="#floats">浮动</a>了<em>inner</em>元素的效果，我们通过如下规则将它的文本向右浮动：
+
+<PRE class="example">
+#outer { color: red }
+#inner { float: right; width: 130px; color: blue }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;文本正常排列直到<em>inner</em>框，它从流向中脱离并浮动到右边距（它的<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>是显式指定的）。浮动左边的线框被缩短，文档的其余文本在之中排列。</p>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/flow-float.gif"
+     alt="Image illustrating the effects of floating a box."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-flow-float" href="images/longdesc/flow-float-desc.html" title="Long description of example illustrating floating">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;要显示<a href="visuren.html#propdef-clear" class="noxref"><spanclass="propinst-clear">'clear'</span></a>属性的效果，我们在例子中加入一个<em>同胞</em>元素：
+
+<PRE class="html-example">
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Comparison of positioning schemes II&lt;/TITLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;P&gt;Beginning of body contents.
+      &lt;SPAN id=outer&gt; Start of outer contents.
+      &lt;SPAN id=inner&gt; Inner contents.&lt;/SPAN&gt;
+      &lt;SPAN id=sibling&gt; Sibling contents.&lt;/SPAN&gt;
+      End of outer contents.&lt;/SPAN&gt;
+      End of body contents.
+    &lt;/P&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;和如下规则：
+
+<PRE class="example">
+#inner { float: right; width: 130px; color: blue }
+#sibling { color: red }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这就使<em>inner</em>框和以前一样向右浮动，而文档的其余文本排列在空白的地方：</P>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/flow-clear.gif"
+     alt="Image illustrating the effects of floating a box without
+setting the clear property to control the flow of text around the
+box."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-flow-clear" href="images/longdesc/flow-clear-desc.html" title="Long description of example illustrating floating
+without clear">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;但是，如果<em>同胞</em>元素的<a href="visuren.html#propdef-clear" class="noxref"><span class="propinst-clear">'clear'</span></a>属性设置为'right'（即，生成的<em>同胞</em>框不接受在右边有浮动框相邻的位置），则<em>同胞</em>的内容在浮动之下开始排列：
+
+<PRE class="example">
+#inner { float: right; width: 130px; color: blue }
+#sibling { clear: right; color: red }
+</PRE>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/flow-clear2.gif" 
+alt="Image illustrating the effects of floating an element with setting the clear property to control the flow of text around the element."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-flow-clear2" href="images/longdesc/flow-clear2-desc.html" title="Long description of example illustrating floating
+with clear">[D]</A></SPAN></p>
+</div>
+
+<H3><a name="q29">9.8.4 绝对定位</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;最后，我们考虑<a href="#absolute-positioning">绝对定位</a>的效果。考虑如下的<em>outer</em>和<em>inner</em>的CSS声明：</p>
+
+<PRE class="example">
+#outer { 
+    position: absolute; 
+    top: 200px; left: 200px; 
+    width: 200px; 
+    color: red;
+}
+#inner { color: blue }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这就使<em>outer</em>框的顶的定位基于它的包含块。定位框的包含块由最靠近的定位的前辈创建（或者，如果不存在这样的前辈，则采用<a href="#initial-containing-block">初始包含块</a>，在本例中即为如此）。<em>outer</em>框的顶部在包含块顶部 '200px'之下，左边在包含块左边'200px'。<em>outer</em>框的子框的排列相对于<em>outer</em>框正常排列。</P>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/flow-absolute.gif"
+   alt="Image illustrating the effects of absolutely positioning a box."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-flow-absolute" href="images/longdesc/flow-absolute-desc.html" title="Long description for example illustrating absolute positioning">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子展示了一个相对定位框中的一个绝对定位的子框。尽管<em>outer</em>父框并没有实际偏移，设置它的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>属性为'relative'意味着这个框可以作为定位派生内容的包含块。由于<em>outer</em>框是一个行内框并跨越几行分布，第一个行内框的顶和左边（在图形中用粗点线标出）作为<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>和<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>偏移的参考。
+
+<PRE class="example">
+#outer { 
+  position: relative; 
+  color: red 
+}
+#inner { 
+  position: absolute; 
+  top: 200px; left: -100px; 
+  height: 130px; width: 130px; 
+  color: blue;
+}
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;结果可能看起来是这样的：</p>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/flow-abs-rel.gif"
+     alt="Image illustrating the effects of absolutely positioning a
+box with respect to a containing block."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-flow-abs-rel" href="images/longdesc/flow-abs-rel-desc.html" title="Long description for example illustrating positioning
+with respect to a positioned ancestor">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果我们不定位<em>outer</em>框：</P>
+
+<PRE class="example">
+#outer { color: red }
+#inner {
+  position: absolute; 
+  top: 200px; left: -100px; 
+  height: 130px; width: 130px; 
+  color: blue;
+}
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>inner</em>框的包含块成为<a href="#initial-containing-block">初始包含块</a>（在我们的例子中）。下面的例子展示了这种情况下，<em>inner</em>框最终的位置。</P>
+
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/flow-static.gif"
+     alt="Image illustrating the effects of absolutely positioning a box with respect to a containing block established by a normally positioned parent."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-flow-static" href="images/longdesc/flow-static-desc.html" title="Long description illustrating absolute positioning
+with respect to the initial containing block">[D]</A></SPAN></p>
+</div>
+
+<div class="html-example"><p>&nbsp;&nbsp;&nbsp;&nbsp;相对和绝对定位可以用来实现更改条，下例是这一实现的演示。考虑如下文档：
+
+<pre>
+&lt;P style=&quot;position: relative; margin-right: 10px; left: 10px;&quot;&gt;
+I used two red hyphens to serve as a change bar. They
+will &quot;float&quot; to the left of the line containing THIS
+&lt;SPAN style=&quot;position: absolute; top: auto; left: -1em; color: red;&quot;&gt;--&lt;/SPAN&gt;
+word.&lt;/P&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;可能呈现为：</p>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/changebar.gif"
+     alt="Image illustrating the use of floats to create a changebar effect."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-changebar" href="images/longdesc/changebar-desc.html" title="Long description for change bar example">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;首先，该段落（包含块在图形中也显示出来）正常排列。然后它从包含块的左边偏移'10px'（从而为该偏移保留了'10px'的右边距）。两个作为更改条的连字号从常规流向中脱离，并定位在它的包含块（有最终位置的P创建）的当前行（由于'top: auto'），相对左边移动'-1em'。结果是更改条看上去“浮动”在当前行的左边。</p>
+</div>
+
+<H2><a name="q30">9.9 分层的呈现</a></H2>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>下面的段落中，“在前面”是指当用户面对屏幕时，更靠近用户。</em></P>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2中，每一个框都有一个三维的定位。除了它们的水平和垂直定位，框排列在一个“Z轴”上，格式化时一个框在另一个框的顶上。Z轴定位在框有视觉上的重合时特别重要。本节讨论框如何在Z轴上定位。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;每个框属于一个<a name="x49"><span class="index-def" title="stacking context"><dfn>堆叠内容</dfn></span></a>。某个给顶的堆叠内容中的每个框都有一个整数的<span class="index-def" title="stack level"><a name="stack-level"><dfn>堆叠层次</dfn></a></span>，它规定了该框在同一堆叠内容中相对于其它框在Z轴上的位置。堆叠层次大的框总是在堆叠层次小的框的前面格式化。框可以有负的堆叠层次。如果堆叠内容中的框具有相同的堆叠层次，它们根据文档树中出现的次序而由底到顶堆叠。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="conform.html#root">根</a>元素创建了一个<a name="x51"><span class="index-def" title="root stacking context"><dfn>根堆叠内容</dfn></span></a>，不过其它元素可能生成<a name="x52"><span class="index-def" title="local stacking context"><dfn>局部堆叠内容</dfn></span></a>。堆叠内容是可继承的。一个局部堆叠内容是原子化的；在其它堆叠内容中的框不可以出现在任何它的框之间。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;创建局部堆叠内容的一个元素生成一个框，包含两个堆叠层次：洋是它创建的堆叠内容（总是'0'），另一个是它所属的堆叠内容（由<a href="visuren.html#propdef-z-index" class="noxref"><span class="propinst-z-index">'z-index'</span></a>属性指定）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个元素的框和它的父框具有相同的堆叠层次，除非另外由<a href="visuren.html#propdef-z-index" class="noxref"><span class="propinst-z-index">'z-index'</span></a>属性指定了一个不同的堆叠层次。
+
+<H3>9.9.1 <a name="z-index">指定堆叠层次</a>：<a href="visuren.html#propdef-z-index" class="noxref"><span class="propinst-z-index">'z-index'</span></a>属性</H3> 
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'z-index'"><a name="propdef-z-index" class="propdef-title"><strong>'z-index'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>auto | <a href="syndata.html#value-def-integer" class="noxref"><span class="value-inst-integer">&lt;integer&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>定位元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于一个定位框，<a href="visuren.html#propdef-z-index" class="noxref"><span class="propinst-z-index">'z-index'</span></a>属性指定了：
+
+<ol>
+<li>当前堆叠内容中框的堆叠层次。
+<li>该框是否生成局部堆叠内容。
+</ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;取值的含义如下：</p>
+
+<dl>
+<dt><span class="index-inst" title="&lt;integer&gt;"><a name="x54" href="syndata.html#value-def-integer" class="noxref"><span
+class="value-inst-integer"><strong>&lt;integer&gt;</strong></span></a></span>
+<dd>该整数是生成的框在当前堆叠内容中的堆叠层次。该框也生成了一个局部堆叠内容，在其中它的堆叠层次是'0'。
+<dt><strong>auto</strong>
+<dd>生成的框在当前堆叠内容中的堆叠层次和它的父框相同。该框不生成新的局部堆叠内容。
+</dl>
+
+<div class="html-example"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在下面的例子中，各个框（以它们的"id"属性命名）的堆叠层次是："text2"=0，"image"=1，"text3"=2，"text1"=3。"text2"的堆叠层次从它的根框继承而来。其它的由<a href="visuren.html#propdef-z-index" class="noxref"><span class="propinst-z-index">'z-index'</span></a>属性指定。
+
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Z-order positioning&lt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      .pile { 
+        position: absolute; 
+        left: 2in; 
+        top: 2in; 
+        width: 3in; 
+        height: 3in; 
+      }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;P&gt;
+      &lt;IMG id="image" class="pile" 
+           src="butterfly.gif" alt="A butterfly image"
+           style="z-index: 1"&gt;
+
+    &lt;DIV id="text1" class="pile" 
+         style="z-index: 3"&gt;
+      This text will overlay the butterfly image.
+    &lt;/DIV&gt;
+
+    &lt;DIV id="text2"&gt;
+      This text will be beneath everything.
+    &lt;/DIV&gt;
+
+    &lt;DIV id="text3" class="pile" 
+         style="z-index: 2"&gt;
+      This text will underlay text1, but overlay the butterfly image
+    &lt;/DIV&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+</div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本例演示了<em>透明</em>的概念。一个框的缺省行为是允许在它后面的框透过它内容中透明的区域而可见。本例中，每个框透明地覆盖它下面的框。这一行为可以通过使用某个现成的<a href="colors.html#background-properties">背景属性</a>而被超越。
+
+<h2>9.10 <a name="direction">文本方向：</a><a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>及<a href="visuren.html#propdef-unicode-bidi" class="noxref"><span class="propinst-unicode-bidi">'unicode-bidi'</span></a>属性
+</h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在某些脚本中，文字是从右到左书写的。某些文档中，特别是以阿拉伯或希伯来文写成的文档中，以及一些混合语言的内容中，单一（视觉上显示的）块中文字的排列也有不同的方向。这一现象称为<a name="x55"><span class="index-def" title="bidirectionality (bidi)"><dfn>双向排列</dfn></span></a>或简称为“双向”。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Unicode标准（<a href="refs.html#ref-UNICODE" rel="biblioentry" class="noxref"><span class="normref">[UNICODE]</span></a>，3.11节）定义了一个复杂的算法来确定文字正确的方向。该算法包含了基于字符属性的隐式部分，以及对于嵌入和超越的显式控制。CSS2依赖这一算法来获得正确的双向渲染。<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>及<a href="visuren.html#propdef-unicode-bidi" class="noxref"><span class="propinst-unicode-bidi">'unicode-bidi'</span></a>属性允许作者规定文档语言的元素和属性如何与该算法相匹配。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果一个文档中包含右到左的字符，并且用户端显示这些字符（以正确的字符图标显示，而不是任意地用问号、十六进制符号或一个黑框等来代替），该用户端必须采用双向排列算法。这一看上去是单向的要求反映了这样一个事实，即尽管并不是每一个希伯来文或阿拉伯文的文档包含混合方向的文本，这样的文档比那些以从左到右语言写成的文档（可能包含右到左的文字）更可能包含左到右的文本（如，数字，其它语言的文字）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于文字的方向性取决于文档语言的结构和语意，在大多数情况下，这些属性应该只由文档类型描述（DTD）的设计者或特殊文档的作者使用。如果一个缺省样式表指定了这些属性，作者和用户不应该指定超越它们的规则。一个常见的例外可能是，如果一个用户端在用户的要求下将犹太语（通常以希伯来字母写成）音译为拉丁字母时，用户端超越了双向表现。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;HTML 4.0规范（[HTML40]，8.2节）定义了HTML元素的双向排列行为。<a href="conform.html#conformance">一致的</a>HTML用户端可能在作者和用户的样式表里忽略<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>和<a href="visuren.html#propdef-unicode-bidi" class="noxref"><span class="propinst-unicode-bidi">'unicode-bidi'</span></a>属性。在<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="normref">[HTML40]</span></a>中指定的那些可能产生双向行为的规则出现在<a href="sample.html#bidi">示例样式表</a>中。HTML 4.0规范也包含了有关双向排列事项的更多的信息。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'direction'"><a name="propdef-direction" class="propdef-title"><strong>'direction'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>ltr | rtl | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>ltr
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素，但参见描述
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定了块的基本书写方向，以及Unicode双向算法中嵌入和超越的方向（参见<a href="visuren.html#propdef-unicode-bidi" class="noxref"><span class="propinst-unicode-bidi">'unicode-bidi'</span></a>）。另外，它还规定了<a href="tables.html">表格</a>列布局的方向，水平<a href="visufx.html#overflow">溢出</a>的方向，以及块设置了'text-align: justify'时，最后一个不完全的行的位置。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性取值的含义如下：</P>
+
+<dl>
+<dt><strong>ltr</strong> 
+<dd>左到右的方向。
+<dt><strong>rtl</strong>
+<dd>右到左的方向。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;要使<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>属性对行内元素有影响，<a href="visuren.html#propdef-unicode-bidi" class="noxref"><span class="propinst-unicode-bidi">'unicode-bidi'</span></a>属性的值必须是'embed'或'override'。
+
+<div class="note">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong><a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>属性指定给表格列元素时，并不被列内的单元格继承，这是因为列不存在于文档树中。因此，对于<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="normref">[HTML40]</span></a>，11.3.2.1节中描述的"dir"属性的继承规则，CSS不可能很容易地保持。
+</em>
+</div>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'unicode-bidi'"><a name="propdef-unicode-bidi" class="propdef-title"><strong>'unicode-bidi'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>normal | embed | bidi-override | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>normal
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素，但参见描述
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>no
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性取值的含义如下：</p>
+
+<dl>
+<dt><strong>normal</strong>
+<dd>基于双向算法，元素不打开一个额外的嵌入层次。对于行内元素，在元素的边界中隐含了重排列的工作。
+
+<dt><strong>embed</strong>
+<dd>如果元素是行内的，基于双向算法，该值打开一个额外的嵌入层次。该嵌入层次的方向由<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>属性给出。在元素内，重排列隐式地完成。这相当于在元素的开头加入一个LRE（U+202A；对于'direction: ltr'）或RLE（U+202B；对于'direction: rtl'），在元素的结尾加入一个PDF（U+202C）。
+
+<dt><strong>bidi-override</strong>
+<dd>如果元素是行内的，或者是只包含行内元素的块类元素，该值创建一个超越。这意味着在元素内，重排列严格按照<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>属性的顺序；双向算法的隐式部分被忽略。这相当于在元素的开头加入一个LRO（U+202D；对于'direction: ltr'）或RLO（U+202E；对于'direction: rtl'），在元素的结尾加入一个PDF（U+202C）。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;每一个块类元素的字符的最终的顺序就如同：双向控制代码如上所述加入，标记被剥离，结果的字符顺序传递给用于普通文字的Unicode双向算法实现，该实现产生和样式文本一样的分行。在这一处理中，非文字实体如图形被认为是中性字符，除非它们的<a href="visuren.html#propdef-unicode-bidi" class="noxref"><span class="propinst-unicode-bidi">'unicode-bidi'</span></a>属性不是设置为'normal'。在这一情况下，它们被认为是为该元素指定的<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>中的重要字符。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;请注意，为了能够在一个单一方向（要么全部左到右，要么全部右到左）中排列行内框，必须创建更多的行内框（包括匿名行内框），而且某些行内框在排列之前，可能必须分割或重排。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于Unicode算法限制嵌入的层次为15层，将<a href="visuren.html#propdef-unicode-bidi" class="noxref"><span class="propinst-unicode-bidi">'unicode-bidi'</span></a>设置为非'normal'的使用，必须小心，除非确定是合适的。特别地，使用'inherit'值时要特别小心。不过，对于那些一般来说显示为块的元素，更应该设置'unicode-bidi: embed'，这样在显示改变到行内时，可以将元素保持在一起（见下例）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子显示了包含双向文字的一个XML文档。它演示了一个重要的设计原则：<a name="x58"><span class="index-inst" title="DTD">DTD</span></a>设计者应该在语言语言（元素和属性）和任何相关联的样式表中考虑双向因素。样式表的设计应该是双向规则和其它样式表规则分离。双向规则不应该被其它样式表规则超越，从而文档语言或DTD的双向行为得以保留。
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+本例中，小写字母表示左到右的字符而大写字母表示右到左的字符：
+
+<pre class="xml-example">
+&lt;HEBREW&gt;
+  &lt;PAR&gt;HEBREW1 HEBREW2 english3 HEBREW4 HEBREW5&lt;/PAR&gt;
+  &lt;PAR&gt;HEBREW6 &lt;EMPH&gt;HEBREW7&lt;/EMPH&gt; HEBREW8&lt;/PAR&gt;
+&lt;/HEBREW&gt;
+&lt;ENGLISH&gt;
+  &lt;PAR&gt;english9 english10 english11 HEBREW12 HEBREW13&lt;/PAR&gt;
+  &lt;PAR&gt;english14 english15 english16&lt;/PAR&gt;
+  &lt;PAR&gt;english17 &lt;HE-QUO&gt;HEBREW18 english19 HEBREW20&lt;/HE-QUO&gt;&lt;/PAR&gt;
+&lt;/ENGLISH&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于这是一个XML，样式表负责设置书写方向。样式表如下：</p>
+
+<pre class="example">
+/* Rules for bidi */
+HEBREW, HE-QUO  {direction: rtl; unicode-bidi: embed}
+ENGLISH         {direction: ltr; unicode-bidi: embed} 
+
+/* Rules for presentation */
+HEBREW, ENGLISH, PAR  {display: block}
+EMPH                  {font-weight: bold}
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;HEBREW元素是一个块，基本方向是右到左，ENGLISH元素是一个块，基本方向是左到右。PAR元素是块，基本方向从父元素继承。因此，前两个PAR从右顶部开始阅读，最后的三个从左顶布开始阅读。请注意元素名选择HEBREW和ENGLISH只是为了明显表示而已；一般情况下，元素名应该反映结构而不反映语言。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;EMPH元素是行内元素，而且它的<a href="visuren.html#propdef-unicode-bidi" class="noxref"><span class="propinst-unicode-bidi">'unicode-bidi'</span></a>设置为'normal'（初始值），它对文字的排列没有影响。另一方面，HE-QUO元素创建一个嵌入。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果行宽足够的长，这些文字的格式化效果可能是：
+
+<pre class="ascii-art">
+               5WERBEH 4WERBEH english3 2WERBEH 1WERBEH
+
+                                8WERBEH <b>7WERBEH</b> 6WERBEH
+
+english9 english10 english11 13WERBEH 12WERBEH
+
+english14 english15 english16
+
+english17 20WERBEH english19 18WERBEH
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，HE-QUO嵌入使HEBREW18出现在english19之右。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果需要分行，可能效果是：
+
+<pre class="ascii-art">
+       2WERBEH 1WERBEH
+  -EH 4WERBEH english3
+                 5WERB
+
+   -EH <b>7WERBEH</b> 6WERBEH
+                 8WERB
+
+english9 english10 en-
+glish11 12WERBEH
+13WERBEH
+
+english14 english15
+english16
+
+english17 18WERBEH
+20WERBEH english19
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于HEBREW18必须在english19前阅读，它在english19所在行的上面。仅仅是在前一格式化例子中分割长行不会有用。还要注意english19的第一个音节可能可以放在上一行中。但是，为了避免在一行的中间出现一个连字符，在右到左的内容中，左到右单词的连字通常被禁止。反之亦然。
+</div>
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="box.html">上一篇</a> &nbsp;
+<a href="visudet.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</BODY>
+</HTML>
+
