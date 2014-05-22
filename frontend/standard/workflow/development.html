@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="nico 0.4.1">
+    <meta name="theme" content="one 0.1">
+    <title>前后端流程优化</title>
+    <link rel="stylesheet" href="../../static/one.css" />
+    <link rel="stylesheet" href="../../static/syntax.css" />
+  </head>
+  <body>
+    <div class="navigation" role="navigation">
+      <div class="container">
+        <a class="home" href="../../">前端 Style</a>
+        <div class="menu">
+          <a href="../../index.html">首页</a>
+          <a href="../index.html">规范</a>
+          <a href="../../course/index.html">教程</a>
+          <a href="../../library/index.html">代码库</a>
+          <a href="../../fed/index.html">FED</a>
+        </div>
+      </div>
+    </div>
+    <div class="document">
+<div class="hentry">
+  <h1 class="entry-title">前后端流程优化</h1>
+  <div class="entry-meta">
+    <time class="updated" datetime="2013-06-18T08:20:12.000Z">2013-06-18</time>
+  </div>
+  <div class="entry-content"><blockquote>
+<p>Just do it.</p>
+</blockquote>
+<h2 id="背景">背景</h2><p>我们现在的开发模式：</p>
+<ol>
+<li>产品经理 / 产品策划给出产品需求说明书（PRD）。</li>
+<li>若 PRD 不存在较大的争议，后端开发人员开始进行技术评估（可行性分析），然后产出技术方案，最后模块划分，具体功能实现。</li>
+<li>产品策划或者交互设计师给出原型界面。</li>
+<li>交互设计师设计交互稿（非必选）（但重要）。</li>
+<li>视觉设计师给出视觉稿。</li>
+<li>前端参与视觉和交互的评审以确定可行性，然后开始切图 -&gt; Demo。</li>
+<li>后端套接页面，前端支持。</li>
+<li>...</li>
+</ol>
+<p>随着互联网的发展，前端涉及到的产品形态也不像原来那样单一，淘宝<a href="http://weibo.com/lifesinger">玉伯</a>在他的<a href="https://github.com/aralejs/aralejs.org/issues/50">研发模式的思考</a>一文中指出了前端的产品形态：</p>
+<blockquote>
+<ol>
+<li><p>前端涉及的产品形态，在业界可分为两大类：Web Pages 和 Web Apps 。</p>
+</li>
+<li><p>Web Pages 是<strong>浏览类</strong>的，用户主要是来看的：以内容展现为主，辅有少量交互。前端提供基础类库，开发工具化、外包化。典型：首页、营销活动、频道等等。</p>
+</li>
+<li><p>Web Apps 则以交互为主，用户主要是来用的。可分为两种：</p>
+<ol>
+<li><strong>体验类</strong>：包含大量交互，同时用户体验很重要。比如 GMail, 支付宝收银台、淘宝购物车等等。</li>
+<li><strong>功能类</strong>：包含大量交互，以功能为主，体验不是第一位的。比如后台系统、认证流程等。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h2 id="问题">问题</h2><p>对于 Web Pages 类的产品，我们目前的开发模式还是比较适合的。但是，我们现在的项目大多不是 Web Pages 的类型，
+我们项目类型属于 Web Apps 。此类项目需要前端与后端进行更密切的协作。</p>
+<p>所以，目前我们这种前端与后端之间瀑布流式的协作模式暴露出越来越多的问题：</p>
+<ol>
+<li><p>后端套接页面容易出错。</p>
+<p>样式错乱是套接页面时最容易发生的情况，通过约定的注释可以减少此类情况，但不是最终办法。</p>
+<p>另一个容易犯的错误是不小心删掉了某些东东，然后就要纠结半天，才能修正错误。</p>
+</li>
+<li><p>后端套接页面时，前端需要频繁的跑到后端的电脑旁提供支持，来来回回，好不容易才搞定，效率很低。</p>
+<p>交互越来越复杂，前端制作 Demo 时，经常发生需要后台提供交互接口的情况，业务 JS 开发很难一步到位。一般而言，前端会伪造数据，等到交付后台后再修改代码。伪造数据很吃力，后续修改代码也很不方便。而且，这种情况下存在前后端没有仔细讨论交互接口约定的隐患，这是非常严重的，因为它有可能导致套接页面时的代码大调整。</p>
+<p>总结起来，就是沟通协作成本太大。</p>
+</li>
+<li><p>前端编写 Demo 时需要花费很多精力。</p>
+<p>目前前端制作 Demo 时，是直接编写 HTML 。由于产品可以划分出很多共用的模块哦，因此，在制作的过程中，需要太多的复制/粘贴、查找/替换，需要花费很多精力来维护 Demo 。</p>
+</li>
+</ol>
+<p>在经历了传统模式的非人折磨后，小小前端希望有更好的开发环境。</p>
+<h2 id="思路">思路</h2><p>仔细分析上面的一些问题，前两个问题展现了一个事实：现有的开发模式，前后端耦合过度，不能够实现从前端到后端的无缝衔接与平滑过渡。</p>
+<p>玉伯有一个观点说的很好：</p>
+<blockquote>
+<p><strong>核心是：解耦，让更合适的人做更合适的事。</strong></p>
+</blockquote>
+<p>所以，我们先来解耦，前端与后端的耦合有两点：</p>
+<ol>
+<li>前端开发需要依赖后台提供的接口。</li>
+<li>后台开发阶段，仍然需要前端协同进行模板页面开发与业务 JS 编写。</li>
+</ol>
+<p>因此，重点在前端开发的各个阶段解除对于后端数据的依赖：</p>
+<ol>
+<li>前端编码阶段：解除对于control层的依赖，自由定义数据格式。</li>
+<li>前端联调阶段：页面级别控制切换采用模拟数据或者是真实数据。</li>
+<li>前端维护阶段：直接从线上环境摘取数据，在线调试前端代码，适应各种场景。</li>
+</ol>
+<p>我们可以想出来的办法：</p>
+<ol>
+<li><p>前端负责模板页面的开发。</p>
+<p>从设计稿到 HTML 再到模板页面的工序存在着极大的浪费，而且前文有提到，维护 HTML 的成本还是比较高的，不如直接写模板页面来的实在。如果需要的就是 HTML 页面，可以编写一个工具，根据模板自动生成静态页面，也是好的主意。</p>
+<p>前端负责模板开发，可以减少之前的开发模式所带来的沟通协作成本。</p>
+</li>
+<li><p>使用简单的方式模拟前后端交互接口，并且可以无缝的切换到后台接口。</p>
+<p>我们仔细分析前后端交互，分为同步和异步：</p>
+<ul>
+<li>同步是指内容由服务器端响应时生成页面内容输出到浏览器页面上。</li>
+<li>异步是指前端通过ajax的形式调用服务器接口（后台开发）获取内容。</li>
+</ul>
+<p>不管是哪一种情况，前端都不需要关心后台为了提供数据而进行的复杂的业务逻辑，前端需要关心的是：</p>
+<ul>
+<li>后台提供的同步或者异步<strong>数据</strong></li>
+<li>页面之间的跳转逻辑</li>
+</ul>
+<p>由于 Node.js 的出现，前端可以编写轻量型的 Controller 来模拟后台接口与跳转逻辑，并且相对独立的进行模板的开发；后端可以专心数据库设计以及具体的业务逻辑实现。双方开发完成后就可以进行无缝的衔接。</p>
+</li>
+</ol>
+<h2 id="实现方案">实现方案</h2><p>我们的实现方案已经在 FED 中体现。</p>
+<p>以 Node.js 为基础，使用 Express 提供轻量级 Mock Controller 开发，制定以 Freemarker 为模板语言的模板开发规范与快速开发原型，提供前端独立进行模板开发的功能，并可以无缝的衔接后台 Controller。</p>
+<p>并且由于前端开发日益复杂，所以 FED 通过插件的形式提供前端开发的流程管理，计划实现单元测试、Hint、文档生成、文件合并、代码压缩、图片压缩、版本管理、部署等功能。</p>
+<p><strong>TODO</strong></p>
+<h2 id="新的开发流程">新的开发流程</h2><ol>
+<li>前后端一起约定数据接口与页面跳转逻辑</li>
+<li>后端着手功能实现</li>
+<li>前端编写 Mock Controller</li>
+<li>前端编写 Template 和 Style</li>
+<li>前端与后端进行整合</li>
+<li>联调测试</li>
+</ol>
+<p><strong>TODO</strong></p>
+<h2 id="实施要点">实施要点</h2><ol>
+<li>前端开发框架的选择与定制</li>
+<li>FED 插件编写</li>
+<li>前端需要学习模板语言，比如 Freemarker</li>
+<li>后端要习惯通过 Restful 方式提供后台接口</li>
+<li>要开发一套模板组件以及相关模板开发规范</li>
+<li>...</li>
+</ol>
+<p><strong>TODO</strong></p>
+<h2 id="参考资料">参考资料</h2><p><strong>TODO</strong></p>
+</div>
+</div>
+</div>
+    <div class="footer">
+      <p>By zhangxingkai CY2848. Tel: 15810885265</p>
+      <p class="copyright">powered by <a href="http://lab.lepture.com/nico/">nico</a> 0.4.1</p>
+    </div>
+    <script src="http://static.alipayobjects.com/seajs/1.2.1/sea.js" data-main="../../static/one.js"></script>
+  </body>
+</html>
