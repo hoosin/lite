@@ -1,0 +1,438 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>文本</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="fonts.html">
+<link rel="next" href="tables.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="fonts.html">上一篇</a> &nbsp;
+<a href="tables.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">16 文本</H1>
+<div class="subtoc">
+<p><strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="text.html#indentation-prop" class="tocxref">16.1 缩进：<span class="propinst-text-indent">'text-indent'</span>属性</a>
+    <li class="tocline2"><a href="text.html#alignment-prop" class="tocxref">16.2 对齐：<span class="propinst-text-align">'text-align'</span>属性</a>
+    <li class="tocline2"><a href="text.html#q3" class="tocxref">16.3 装饰</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="text.html#lining-striking-props" class="tocxref">16.3.1 下划线，上划线，删除线，闪烁：<span class="propinst-text-decoration">'text-decoration'</span>属性</a>
+      <li class="tocline3"><a href="text.html#text-shadow-props" class="tocxref">16.3.2 文本阴影：<span class="propinst-text-shadow">'text-shadow'</span>属性</a>
+    </ul>
+    <li class="tocline2"><a href="text.html#spacing-props" class="tocxref">16.4 字母间距和词间距：<span class="propinst-letter-spacing">'letter-spacing'</span>及<span class="propinst-word-spacing">'word-spacing'</span>属性</a>
+    <li class="tocline2"><a href="text.html#caps-prop" class="tocxref">16.5 转为大写：<span class="propinst-text-transform">'text-transform'</span>属性</a>
+    <li class="tocline2"><a href="text.html#white-space-prop" class="tocxref">16.6 空白：<span class="propinst-white-space">'white-space'</span>属性</a>
+  </ul>
+</div>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;以下各小节定义的属性将影响字符、空白、词以及段落的视觉呈现。
+<H2>16.1 <a name="indentation-prop">缩进</a>：<a href="text.html#propdef-text-indent" class="noxref"><span class="propinst-text-indent">'text-indent'</span></a>属性</H2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'text-indent'"><a name="propdef-text-indent" class="propdef-title"><strong>'text-indent'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>0
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块级元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>相对于包含块的宽度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">视觉</a>
+</table>
+</dl>
+</div>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定了一个块中文本第一行的缩进。更精确的说，指定了流入块的第一个<a href="visuren.html#line-box">线框</a>的第一个框的缩进。该框从线框的左边开始缩进（对于从右到左的布局是从右缩进）。用户端应该将该缩进渲染为空白。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp值的含义如下：</P>
+
+<dl>
+<dt><span class="index-inst" title="&lt;length&gt;"><a name="x1" href="syndata.html#value-def-length" class="noxref"><span
+class="value-inst-length"><strong>&lt;length&gt;</strong></span></a></span>
+<dd>缩进是固定长度。
+<dt><span class="index-inst" title="&lt;percentage&gt;"><a name="x2" href="syndata.html#value-def-percentage" class="noxref"><span
+class="value-inst-percentage"><strong>&lt;percentage&gt;</strong>
+</span></a></span>
+<dd>缩进是包含块宽度的百分比。</dl>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<a href="text.html#propdef-text-indent" class="noxref"><span
+class="propinst-text-indent">'text-indent'</span></a>的值可以是负数，但是也许会有因实现不同的限制。 
+
+<div class="example"><P style="display:none">范例：</P>
+	<P>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子将造成'3em'的文本缩进。
+
+<PRE>
+  P { text-indent: 3em }
+</PRE>
+</div>
+
+<H2>16.2 <a name="alignment-prop">对齐：</a><a href="text.html#propdef-text-align" class="noxref"><span class="propinst-text-align">'text-align'</span></a>属性</H2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'text-align'"><a name="propdef-text-align" class="propdef-title"><strong>'text-align'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>left | right | center | justify | <a href="syndata.html#value-def-string" class="noxref"><span class="value-inst-string">&lt;string&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>取决于用户端及书写方向
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块级元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">视觉</a>
+</table>
+</dl>
+</div>
+
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;该属性描述了在一个块内行间内容的对齐方式。取值的含义如下：</P>
+
+<dl>
+<dt><strong>left</strong>，<strong>right</strong>，<strong>center</strong>及<strong>justify</strong>
+<dd>分别意味着左对齐、右对齐、中间对齐、两端对齐文本。
+<dt><span class="index-inst" title="&lt;string&gt;"><a name="x4" href="syndata.html#value-def-string" class="noxref"><span
+class="value-inst-string"><strong>&lt;string&gt;</strong></span></a></span>
+<dd>指定一个字符串，规定了表格中单元格的对齐方式（参见<a href="tables.html#column-alignment">列的水平对齐</a>中的详细描述和例子）。该值<em>只</em>对<a href="tables.html">表格</a>的单元格有效。如果设置在其它元素之上，它被解释为'left'或'right'——取决于<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>是'ltr'还是'rtl'。
+</dl>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;一个文字块是一系列的<a href="visuren.html#line-box">线框</a>。取值为'left'/'right'/'center'时，该属性规定了每个线框内的行间框相对线框的左边、右边的对齐；对齐并不是针对<a href="visuren.html#viewport">视点</a>的。取值为'justify'时，用户端在调整位置的时候，也还可能拉伸行间框。（参见<a href="text.html#propdef-letter-spacing" class="noxref"><span class="propinst-letter-spacing">'letter-spacing'</span></a>和<a href="text.html#propdef-word-spacing" class="noxref"><span class="propinst-word-spacing">'word-spacing'</span></a>.)
+
+<div class="example"><P style="display:none">范例：</P>
+	<P>&nbsp;&nbsp;&nbsp;&nbsp;本例中需要注意，由于<a href="text.html#propdef-text-align" class="noxref"><span class="propinst-text-align">'text-align'</span></a>是可继承的，所有在带有'class=center'修饰的DIV元素里的块级元素都会将他们的行内文本居中对齐。 
+
+<PRE>
+DIV.center { text-align: center }
+</PRE>
+</div>
+
+<div class="note"><P>
+<em><strong>注意：</strong>实际采用的对齐算法取决于用户端以及书写的语言。</em>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<em><span class="index-inst" title="conformance"><a name="x5" href="conform.html#conformance">与CSS2一致的用户端</a></span>可能将'justify'理解为'left'或'right'，取决于该元素的缺省书写方向是左到右还是右到左。</em>
+</div>
+
+<H2><a name="q3">16.3 装饰</a></H2>
+
+<H3>16.3.1 <a name="lining-striking-props">下划线，上划线，删除线，闪烁</a>：<a href="text.html#propdef-text-decoration" class="noxref"><span class="propinst-text-decoration">'text-decoration'</span></a>属性</H3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'text-decoration'"><a name="propdef-text-decoration" class="propdef-title"><strong>'text-decoration'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>none | [ underline || overline || line-through || blink ] | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>无
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否（见后文）
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">视觉</a>
+</table>
+</dl>
+</div>
+
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;该属性描述了加在某元素文本上的装饰。如果属性指定给一个<a href="visuren.html#block-level">块级</a>元素，它会影响该元素的所有行间级后代。如果它指定给（或影响）一个<a href="visuren.html#inline-level">行间</a>元素，它会影响该元素产生的所有框。如果该元素没有内容或没有文本内容（例如HTML中的IMG元素），用户端必须<a href="syndata.html#ignore">忽略</a>该属性。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;取值的含义如下：</p>
+
+<dl>
+<dt><strong>none</strong>
+<dd>没有任何文本修饰。
+<dt><strong>underline</strong>
+<dd>每行文本均有下划线。
+<dt><strong>overline</strong>
+<dd>每行文本均有上划线。
+<dt><strong>line-through</strong>
+<dd>每行文本中间都有删除线。
+<dt><strong>blink</strong>
+<dd>文本闪烁（交替显示、隐藏）。<a href="conform.html#conformance">一致的用户端</a>并未被要求支持该值。
+</dl>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;文本修饰要求的颜色应该从<a href="colors.html#propdef-color" class="noxref"><span class="propinst-color">'color'</span></a>属性值中派生。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;该属性不可被继承，但是一个块框的派生框应该具有相同的装饰格式（比如，都应该有下划线）。装饰的颜色应该保持一致，即使派生的元素设定了不同的<a href="colors.html#propdef-color" class="noxref"><span class="propinst-color">'color'</span></a>值。
+
+<div class="example"><P style="display:none">范例：</P>
+	<P>&nbsp;&nbsp;&nbsp;&nbsp;下例的HTML中，作为超连接的A元素的所有文本内容都将有下划线：</p>
+
+<PRE>
+A[href] { text-decoration: underline }
+</PRE>
+</div>
+
+<H3>16.3.2 <a name="text-shadow-props">文本阴影</a>：<a href="text.html#propdef-text-shadow" class="noxref"><span class="propinst-text-shadow">'text-shadow'</span></a>属性</H3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'text-shadow'"><a name="propdef-text-shadow" class="propdef-title"><strong>'text-shadow'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>none | [<a href="syndata.html#value-def-color" class="noxref"><span class="value-inst-color">&lt;color&gt;</span></a> || <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a>? ,]*
+[<a href="syndata.html#value-def-color" class="noxref"><span class="value-inst-color">&lt;color&gt;</span></a> || <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a>?] | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>无
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否（见后文）
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">视觉</a>
+</table>
+</dl>
+</div>
+
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;改属性接受一个逗号分割的阴影效果列表，并应用到该元素的文本上。阴影效果按照给定的顺序应用，因此有可能出现互相覆盖，但是它们永不会覆盖文本本身。阴影效果不会改变框的尺寸，但可能延伸到它的边界之外。阴影效果的<A
+href="visuren.html#stack-level">堆叠层次</a>和元素本身的层次是一样的。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;每个阴影效果必须指定阴影偏移，而模糊半径、阴影颜色是可选参数。
+<P>&nbsp;&nbsp;&nbsp;&nbsp;阴影偏移由两个<span class="index-inst"
+title="&lt;length&gt;"><a name="x8" href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a></span>值指定到文本的距离。第一个长度值指定距离文本右边的水平距离，负值将会把阴影放置在文本的左边。第二个长度值指定距离文本下边的垂直距离，负值将会把阴影放置在文本上方。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;在阴影偏移之后，可以指定一个模糊半径。模糊半径是个长度值，指出模糊效果的范围。如何计算模糊效果的具体算法并没有指定。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;在阴影效果的长度值之前或之后还可以选择指定一个颜色值。颜色值会被用作阴影效果的基础。如果没有指定颜色，那么将使用<a href="colors.html#propdef-color" class="noxref"><span class="propinst-color">'color'</span></a>属性值来替代。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;文本阴影可以使用在<a
+href="selector.html#first-letter">:first-letter</a>和<a
+href="selector.html#first-line">:first-line</a>伪元素上。
+
+<div class="example"><P style="display:none">范例：</P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子将在元素文本的右边、下边设置文本阴影。由于并未指定颜色，阴影将和元素本身的颜色相同。由于也没有指定模糊半径，文本阴影将不会模糊：</p>
+
+<PRE>
+H1 { text-shadow: 0.2em 0.2em }
+</PRE>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;下例中将在元素文本的右下方放置阴影。阴影的模糊半径是5px，颜色是红的。
+
+<PRE>
+H2 { text-shadow: 3px 3px 5px red }
+</PRE>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子指定了一个阴影效果的列表。第一个阴影将放置在元素文本的右下方，红色，无模糊。第二个将覆盖第一个阴影，黄色，模糊，文本的左下方。第三个将放置在文本的右上方，无模糊。由于第三个阴影没有指定颜色，因此元素的<a href="colors.html#propdef-color" class="noxref"><span class="propinst-color">'color'</span></a>属性值将被使用：</p>
+
+<PRE>
+H2 { text-shadow: 3px 3px red, yellow -3px 3px 2px, 3px -3px }
+</PRE>
+
+</DIV>
+
+<div class="example"><P style="display:none">范例：</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;考虑这个例子：
+
+<PRE>
+SPAN.glow { 
+    background: white; 
+    color: white;
+    text-shadow: black 0px 0px 5px;
+}
+</PRE>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;在这里，<a href="colors.html#propdef-background" class="noxref"><span class="propinst-background">'background'</span></a>和<a href="colors.html#propdef-color" class="noxref"><span class="propinst-color">'color'</span></a>属性取值是一样的，而<a href="text.html#propdef-text-shadow" class="noxref"><span class="propinst-text-shadow">'text-shadow'</span></a>属性用来创建一种“日蚀”效果：</p>
+
+<P><IMG SRC="images/eclipse-outline.gif" alt="Solar eclipse effect"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-eclipse-outline" href="images/longdesc/eclipse-outline-desc.html" title="Long description of text shadow example">[D]</A></SPAN></p>
+</DIV>
+
+<div class="note"><P>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意：</strong>该属性在CSS1中未定义。某些阴影效果（例如最后的示例）在只支持CSS1的UA中会将文本渲染成看不见。
+</em>
+</div>
+
+<H2>16.4 <a name="spacing-props">字母间距和词间距：</a><a href="text.html#propdef-letter-spacing" class="noxref"><span class="propinst-letter-spacing">'letter-spacing'</span></a>及<a href="text.html#propdef-word-spacing" class="noxref"><span class="propinst-word-spacing">'word-spacing'</span></a>属性</H2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'letter-spacing'"><a name="propdef-letter-spacing" class="propdef-title"><strong>'letter-spacing'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>normal | <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>normal
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">视觉</a>
+</table>
+</dl>
+</div>
+
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定了文本字符间的间距特性。取值的含义如下：</P>
+
+<dl>
+<dt><strong>normal</strong>
+<dd>间距是当前字体的通常间距。这个值允许用户端改变字符间的距离以对齐文本。
+<dt><span class="index-inst" title="&lt;length&gt;"><a name="x10" href="syndata.html#value-def-length" class="noxref"><span
+class="value-inst-length"><strong>&lt;length&gt;</strong></span></a></span>
+<dd>该值指出在缺省的字符间距之外，<em>额外</em>的字符间间距。数值可以是负数，但是可能有与实现相关的限制。用户端不可以因对齐文本而进一步增加或减少字符间距。
+</dl>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;字符间距的算法与用户端相关。字符间距还可能受到对齐（参见<a href="text.html#propdef-text-align" class="noxref"><span class="propinst-text-align">'text-align'</span></a>属性）的影响。
+
+<div class="example"><P style="display:none">范例：</P>
+	<P>&nbsp;&nbsp;&nbsp;&nbsp;本例中，BLOCKQUOTE元素中的字符间距增加了'0.1em'：
+
+<PRE>
+BLOCKQUOTE { letter-spacing: 0.1em }
+</PRE>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;下例中，将不允许用户端变更字符间距：</p>
+
+<PRE>
+BLOCKQUOTE { letter-spacing: 0cm }   /* Same as '0' */
+</PRE>
+</div>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;如果两个字符间经合成的间距和缺省的间距不同，用户端不应该使用<a name="x11"><span class="index-inst" title="ligatures">补救措施</span></a>。
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-inst" title="conformance"><a name="x12"
+href="conform.html#conformance">与CSS2一致的用户端</a></span>可能会将<a href="text.html#propdef-letter-spacing" class="noxref"><span class="propinst-letter-spacing">'letter-spacing'</span></a>属性的值理解为'normal'。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'word-spacing'"><a name="propdef-word-spacing" class="propdef-title"><strong>'word-spacing'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>normal | <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>normal
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">视觉</a>
+</table>
+</dl>
+</div>
+
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定了单词之间的间距特性。取值含义如下：</p>
+
+<dl>
+<dt><strong>normal</strong>
+<dd>正常的单词间间距，由当前字体和/或UA定义。
+<dt><span class="index-inst" title="&lt;length&gt;"><a name="x14" href="syndata.html#value-def-length" class="noxref"><span
+class="value-inst-length"><strong>&lt;length&gt;</strong></span></a></span>
+<dd>该取值表示在缺省的词间距之外，<em>额外</em>的词间距。取值可以是负数，但是可能有与实现相关的限制。
+</dl>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;词间距的算法与用户端相关。词间距还可能受到对齐（参见<a href="text.html#propdef-text-align" class="noxref"><span
+class="propinst-text-align">'text-align'</span></a>属性）的影响。
+
+<div class="example"><P style="display:none">范例：</P>
+	<P>&nbsp;&nbsp;&nbsp;&nbsp;本例中，H1元素中的每个单词的词间距将增加'1em'：
+
+<PRE>
+H1 { word-spacing: 1em }
+</PRE>
+</div>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-inst" title="conformance"><a name="x15" href="conform.html#conformance">与CSS2一致的用户端</a></span>可能将<a href="text.html#propdef-word-spacing" class="noxref"><span class="propinst-word-spacing">'word-spacing'</span></a>属性的值理解为'normal'。
+
+
+
+<H2>16.5 <a name="caps-prop">转为大写：</a><a href="text.html#propdef-text-transform" class="noxref"><span class="propinst-text-transform">'text-transform'</span></a>属性</H2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'text-transform'"><a name="propdef-text-transform" class="propdef-title"><strong>'text-transform'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>capitalize | uppercase | lowercase | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>无
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">视觉</a>
+</table>
+</dl>
+</div>
+
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;该属性控制某元素文本的大小写效果。取值的含义如下：</p>
+
+<DL>
+  <DT><strong>capitalize</strong>
+  <DD>将每个单词的首字符变为大写。
+  <DT><strong>uppercase</strong>
+  <DD>将每个单词的所有字符变为大写。
+  <DT><strong>lowercase</strong>
+  <DD>将每个单词的所有字符变为小写。
+  <DT><strong>none</strong>
+  <DD>没有大小写转换效果。
+</DL>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;每个情况下实际的转换取决于书写语言本身。参见RFC 2070（<a href="refs.html#ref-RFC2070" rel="biblioentry" class="noxref"><span class="normref">[RFC2070]</span></a>）中关于找到元素语言方法的讨论。
+<P>&nbsp;&nbsp;&nbsp;&nbsp;对于不是来自Latin-1字符集中的字符，以及元素的语言的转换不同于ISO 10646（<a href="refs.html#ref-ISO10646" rel="biblioentry" class="noxref"><span class="normref">[ISO10646]</span></a>）中给出的大小写转换表的话，<span class="index-inst" title="conformance"><a name="x17" href="conform.html#conformance">与CSS2一致的用户端</a></span>可能将<a href="text.html#propdef-text-transform" class="noxref"><span class="propinst-text-transform">'text-transform'</span></a>的值认为是'none'。
+
+<div class="example"><P style="display:none">范例：</P>
+	<P>&nbsp;&nbsp;&nbsp;&nbsp;本例中，H1元素中所有的文本都将转换为大写文本：
+<PRE>
+H1 { text-transform: uppercase }
+</PRE>
+</div>
+
+<H2>16.6 <a name="white-space-prop">空白：</a><a href="text.html#propdef-white-space" class="noxref"><span class="propinst-white-space">'white-space'</span></a>属性</H2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'white-space'"><a name="propdef-white-space" class="propdef-title"><strong>'white-space'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>normal | pre | nowrap | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>normal
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块级元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">视觉</a>
+</table>
+</dl>
+</div>
+
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;该属性声明了元素内的<a href="syndata.html#whitespace">空白</a>是如何处理的。取值的含义如下：	</P>
+
+
+
+<dl>
+<dt><strong>normal</strong>
+<dd>该值告诉用户端，合并一系列的空白，在必要的时分行以填充线框。在生成的内容中，出现"\A"的话，有可能引起额外的分行（就象HTML中的BR元素）。
+<dt><strong>pre</strong>
+<dd>该值阻止用户端合并一系列的空白。只有在源文件中出现新行时，或者在生成的内容中出现"\A"时才分行。
+<dt><strong>nowrap</strong>
+<dd>该值象'normal'那样合并空白，但是阻止文本内的分行，除非那些分行是由生成的内容中的"\A"造成的（就象HTML中的BR元素）。
+</dl>
+
+<div class="example"><P style="display:none">范例：</P>
+	<P>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子中显示了对于PRE和P元素，我们所期待的<a href="syndata.html#whitespace">空白</a>的行为应该如何，以及HTML中的"nowrap"属性。
+<PRE>
+PRE        { white-space: pre }
+P          { white-space: normal }
+TD[nowrap] { white-space: nowrap }
+</PRE>
+</div>
+
+<P><span class="index-inst" title="conformance"><a name="x19"
+href="conform.html#conformance">与CSS2一致的用户端</a></span>可能<span class="index-inst" title="ignore"><a name="x20" href="syndata.html#ignore">忽略</a></span>作者和用户样式表中的<a href="text.html#propdef-white-space" class="noxref"><span
+class="propinst-white-space">'white-space'</span></a>属性，但是必须在缺省样式表中为它指定一个值。
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p><a href="fonts.html">上一篇</a> &nbsp;
+<a href="tables.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</BODY>
+</HTML>
+

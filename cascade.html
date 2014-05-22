@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>指定属性值，层叠和继承</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="selector.html">
+<link rel="next" href="media.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="selector.html">上一篇</a> &nbsp;
+<a href="media.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">6 指定属性值，层叠和继承</H1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="cascade.html#q1" class="tocxref">6.1 指定值，计算值，实际值</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="cascade.html#specified-value" class="tocxref">6.1.1 <span class="index-def" title="specified value">指定值</span></a>
+      <li class="tocline3"><a href="cascade.html#computed-value" class="tocxref">6.1.2 <span class="index-def" title="computed value">计算值</span></a>
+      <li class="tocline3"><a href="cascade.html#actual-value" class="tocxref">6.1.3 <span class="index-def" title="actual value">实际值</span></a>
+    </ul>
+    <li class="tocline2"><a href="cascade.html#inheritance" class="tocxref">6.2 继承</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="cascade.html#value-def-inherit" class="tocxref">6.2.1 <span class="index-def" title="inherit, definition of">'inherit'</span>值</a>
+    </ul>
+    <li class="tocline2"><a href="cascade.html#at-import" class="tocxref">6.3 @import规则</a>
+    <li class="tocline2"><a href="cascade.html#cascade" class="tocxref">6.4 层叠</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="cascade.html#cascading-order" class="tocxref">6.4.1 层叠顺序</a>
+      <li class="tocline3"><a href="cascade.html#important-rules" class="tocxref">6.4.2 !important规则</a>
+      <li class="tocline3"><a href="cascade.html#specificity" class="tocxref">6.4.3 选择子特征的计算</a>
+      <li class="tocline3"><a href="cascade.html#q12" class="tocxref">6.4.4 非CSS呈现提示的优先性</a>
+    </ul>
+  </ul>
+</div>
+
+<H2><a name="q1">6.1 指定值，计算值，实际值</a></h2>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一旦用户端解析了一个文档并且生成了<a href="conform.html#doctree">文档树</a>，它必须为文档树中的每一个元素，根据目标<a href="media.html">媒介类型</a>所适用的每一个属性，指定一个值。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个属性的最终的值的得到需要经过三步计算：首先通过规定确定值（“指定值”），然后在需要的情况下转换成一个绝对的值（“计算值”），并根据当时的环境最终转换（“实际值”）。
+
+<h3>6.1.1 <span class="index-def" title="specified value"><a name="specified-value">指定值</a></span></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户必须先基于如下的机制（以优先级排序）来为一个属性分配一个指定值：</p>
+
+<ol>
+<li>如果值中包含<a href="#cascade">层叠</a>，使用层叠。
+
+<li>否则，如果属性是<a href="#inheritance">继承</a>的，使用它父元素的值，通常是父元素的计算值。
+
+<li>否则，使用属性的<a name="x1"><span class="index-def" title="initial value">初始值</span></a>。每一个属性的<a name="initial-value">初始值</a>出现在属性的定义中。
+</ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于<a href="conform.html#doctree">文档树</a>的根元素没有父元素，因此不能使用来自父元素的值。在这种情况下，如果有必要，可以使用初始值。
+
+
+<h3>6.1.2 <span class="index-def" title="computed value">
+<a name="computed-value">计算值</a>
+</span>
+</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;指定值可以是绝对的（即它们不是相对于另外一个值的指定值，如'red'或'2mm'）或者是相对的（即它们是相对于另外一个值的指定值，如'auto'，'2em'及'12%'）。对于绝对值，不需要经过计算来得到计算值。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;另一方面，相对值必须转换为计算值：百分比要乘以一个参考值（每一个属性都会定义参考值是什么），包含相对单位的值（em，ex，px）必须乘以相应的字体或点的尺寸以得到绝对值，'auto'值必须由各属性给出的公式加以计算，某些关键字（'smaller'，'bolder'，'inherit'）根据它们的定义而加以替换。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;大部分情形下，元素继承计算值。不过有一些属性的指定值也可以被继承（例如<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>属性的数字值）。子元素不继承计算值的情况在属性定义中有描述。
+
+<h3>6.1.3 <span class="index-def" title="actual value">
+<a name="actual-value">实际值</a></span></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;原则上说，计算值已经可以使用，不过用户端在特定的环境中可能无法使用这些值。例如，用户端可能只能渲染整数点宽的边框，因此可能对计算的宽度加以近似。实际值就是经过近似之后的计算值。
+
+<H2>6.2 <a name="inheritance">继承</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="conform.html#doctree">文档树</a>中一元素的某些值可以被其子元素继承。每一个属性<a href="about.html#property-defs">定义</a>了它能否被继承。
+
+<div class="html-example"><p>&nbsp;&nbsp;&nbsp;&nbsp;假定在一个H1元素内有一个着重元素（EM）：</p>
+
+<PRE>
+&lt;H1&gt;The headline &lt;EM&gt;is&lt;/EM&gt; important!&lt;/H1&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果对于EM元素没有指定颜色，则着重的"is"将继承父元素的颜色。因此，如果H1的颜色是蓝色，EM元素也是蓝色。
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;要设置文档的“缺省”样式属性，作者可以在文档树的根上设置属性。例如，在HTML中，HTML或BODY元素可以实现这一功能。这一方法即使在作者省略HTML中的BODY标记时，仍然可行，因为HTML解析器会补足缺掉的标记。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;比方说，由于<a href="colors.html#propdef-color" class="noxref"><span class="propinst-color">'color'</span></a>属性是可继承的，所有BODY元素的后代都继承颜色值为'black'：
+
+<PRE>
+BODY { color: black; }
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;指定的百分比值不被继承，但是计算值可以被继承。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，在下面的样式表：</P>
+
+<pre>
+BODY { font-size: 10pt }
+H1 { font-size: 120% }
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;和文档片段中：
+
+<pre class="html-example">
+&lt;BODY&gt;
+  &lt;H1&gt;A &lt;EM&gt;large&lt;/EM&gt; heading&lt;/H1&gt;
+&lt;/BODY&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;H1元素的<span class="prop-inst-font-size">'font-size'</span>属性的计算值为'12pt'（其父元素值10pt的120%）。由于<a href="fonts.html#propdef-font-size" class="noxref"><span class="propinst-font-size">'font-size'</span></a>的计算值被继承，EM元素也继承'12pt'的计算值。如果用户端没有12pt的字体，则H1和EM元素<a href="fonts.html#propdef-font-size" class="noxref"><span class="propinst-font-size">'font-size'</span></a>的实际值可能是，比方说，'11pt'。
+</div>
+
+<h3>6.2.1 <span class="index-def" title="inherit, definition of"><a name="value-def-inherit">'inherit'</a></span>值</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;每一个属性可以有一个指定值为'inherit'，即，对于给定的元素，该属性和它父元素相对属性的<a href="#computed-value">计算值</a>取一样的值。继承值通常只用作后备值，它可以通过显式地设置'inherit'而得到加强。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下例中，<a href="colors.html#propdef-color" class="noxref"><span class="propinst-color">'color'</span></a>和<a href="colors.html#propdef-background" class="noxref"><span class="propinst-background">'background'</span></a>属性设置在BODY元素中。对于所有其它元素，'color'值将被继承，而背景是透明的。如果这些规则是用户样式表的一部分，整个文档将执行白底黑字的设置。
+
+<PRE>
+BODY { 
+  color: black !important; 
+  background: white !important;
+}
+
+* { 
+  color: inherit !important; 
+  background: transparent;
+}
+</PRE>
+
+</div>
+
+<H2>6.3 <a name="at-import">@import规则</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x5"><span class="index-def" title="@import"><dfn>'@import'</dfn></span></a>规则允许用户从其它样式表中引入样式规则。任何@import规则必须出现在样式表中所有规则之前。'@import'关键字必须跟随一个要包含的样式表的URI。也允许字符串，这时它将被解释为它包含在url(...)内。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面这几行含义是一样的，演示了两种'@import'语法（一个带有"url()"，而另一个是字符串）：</p>
+
+<PRE>
+@import "mystyle.css";
+@import url("mystyle.css");
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;为了使用户端避免引入不被支持的<a href="media.html">媒介类型</a>的资源，作者可以指定媒介相关的<a name="x6"><span class="index-inst" title="@import">@import</span></a>规则。这些<a name="x7"><span class="index-def" title="conditional import|media-dependent import">条件引入</span></a>在URI之后指定了一个以逗号分割的媒介类型列表。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的规则对于同样的媒介的效果和假定引入的样式表包含在一个@media规则内是一样的，只是它可能使UA省掉无效下载的过程和时间。
+
+<pre>
+@import url("fineprint.css") print;
+@import url("bluish.css") projection, tv;
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果没有指明任何媒介类型，则引入使无条件的。将媒介指定为'all'效果一样。
+
+<H2>6.4 <a name="cascade">层叠</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;样式表可能有三个不同的来源：作者，用户和用户端。</p>
+
+<ul>
+<li><strong>作者</strong>：作者根据文档语言的协定，指定源文档的样式表。例如，在HTML中，样式表可以包含在文档或外部连接中。
+
+<li><strong>用户</strong>：用户可以为一个特定的文档指定样式信息。例如，用户可以指定一个包含样式表的文件，或者用户端可以提供一个接口以生成用户样式表（或表现为如此）。
+
+<li><strong>用户端</strong>：<a href="conform.html#conformance">与CSS2一致的用户端</a>必须在对文档应用其它样式表之前应用一个<span class="index-def" title="default style sheet"><a name="default-style-sheet"><dfn>缺省样式表</dfn></a></span>（或者表现为如此）。用户端的缺省样式表应该以对于文档语言而言，满足通用的呈现的方式来呈现文档语言的元素（例如，对于图形浏览器，HTML中的EM元素通常以斜体字呈现）。参见<a href="sample.html">"HTML 4.0的示例样式表</a>，那里有一个推荐使用在HTML 4.0文档中的缺省样式表。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，在用户改变了系统设置（如系统颜色）后，缺省样式表可能会改变。不过，由于用户端内部实现的限制，可能不可以改变缺省样式表内的值。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这三个来源来的样式表可能在范围上有重叠。它们根据层叠规则互相作用。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS的<a name="x10"><span class="index-def" title="cascade">层叠</span></a>对每一个样式规则指定一个权重。如果要应用若干个规则，那么权重最大的那个规则具有优先权。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;缺省时，作者的样式表规则较用户样式表规则优先级高。不过，对于"!important"规则，保留其优先级。所有的用户和作者的规则的权重都比UA缺省样式表中的规则的权重大。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;引入的规则同样层叠，它们的权重取决于它们引入的顺序。定义在一个给定的样式表中的规则超越从其它样式表中引入的规则。类似的，引入的规则本身可以引入并超越其它样式表，优先级规则同样适用。
+
+<H3>6.4.1 <a name="cascading-order">层叠顺序</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;为了找到元素/属性组合的值，用户端必须应用如下的排列顺序：</p>
+
+<OL>
+    <LI>对于目标<a href="media.html">媒介类型</a>，找到存在疑问的元素和属性的所有声明。如果相关联的选择子<A HREF="selector.html">匹配</A>存在疑问的元素，则声明适用。
+
+    <LI>声明的原始排序根据权重和来源：对于一般的声明，作者样式表超越用户样式表，用户样式表超越缺省样式表。对于<a name="x11"><span class="index-def" title="important">"!important"</span></a>声明，用户样式表超越作者样式表，作者样式表超越缺省样式表。引入的样式表和引入它的样式表具有相同的来源。
+
+    <LI>声明的第二排序基于选择子的<a href="#specificity">特殊性</a>：特殊的选择子超越一般的选择子。伪元素和伪类分别被视为一般元素和一般类。
+
+   <LI>最后，根据先后次序来排列：如果两条规则具有相同的权重，相同的来源和相同的特殊性，则后出现的规则超越先出现的规则。引入的样式表中的规则被认为出现在样式表本身的所有规则之前。
+</OL>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;除了个别声明的"!important"设置，上述策略给予作者的样式表比用户样式表更大的权重。因此用户端允许用户通过一个下拉菜单而关闭某一样式表的影响就很重要。
+
+<H3>6.4.2 <a name="important-rules">!important规则</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS试图在作者样式表和用户样式表的权力之间创建一个平和。缺省情况下，作者样式表的规则超越用户样式表的规则（见层叠规则3）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;不过，为了平衡，一个"!important"声明（关键字"!"和"important"出现在声明之后）将比一个一般的声明更具有优先级。作者和用户的样式表都可以包含"!important"声明， 并且用户的"!important"规则超越作者的"!important"规则。这一CSS特性使用户对于呈现可以进行特殊要求的控制（如更大的字体，颜色组合等），从而改进了文档的可读性。
+
+<div class="note"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<em><strong>注意！</strong>这是自CSS1来的语义的变化。在CSS1中，作者的"!important"规则超越用户的"!important"规则。</em>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;将一个<a name="x12"><span class="index-inst" title="shorthand property">缩写属性</span></a>（如<a href="colors.html#propdef-background" class="noxref"><span class="propinst-background">'background'</span></a>）声明为"!important"等同于将它所有的子属性都声明为"!important"。
+
+<div class="example"><P style="display:none">例子：</P> 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下例中，用户样式表中的第一条规则包含一个"!important"声明，它超越了作者样式表中相应的声明。第二个声明也将超越相应的作者样式表中的声明，因为它也被标记为"!important"。不过，用户样式表中的第三条规则不是"!important"，因而将不能超越作者样式表中的第二条规则（它恰好设置了一个缩写属性的样式）。同样的，第三条作者的规则将不能超越第二条作者的规则，因为第二条规则是
+"!important"。这表明，"!important"声明在作者样式表中也起作用。
+
+<PRE>
+/* 来自用户样式表 */
+P { text-indent: 1em ! important }
+P { font-style: italic ! important }
+P { font-size: 18pt }
+
+/* 来自作者样式表 */
+P { text-indent: 1.5em !important }
+P { font: 12pt sans-serif !important }
+P { font-size: 24pt }
+</PRE>
+</div>
+
+
+<H3>6.4.3 <a name="specificity">选择子特殊性的计算</a></H3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个选择子的特殊性是这样计算的：</p>
+
+<ul>
+<li>计算选择子中ID属性的数量（计为a）
+<li>计算选择子中其它属性和伪类的数量（计为b）
+<li>计算选择子中元素名的数量（计为c）
+<li>忽略伪元素。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;将三个数字相连（数字进制要以大的为准），得到特殊性。
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;一些例子：
+
+<PRE>
+*             {}  /* a=0 b=0 c=0 -&gt; specificity =   0 */
+LI            {}  /* a=0 b=0 c=1 -&gt; specificity =   1 */
+UL LI         {}  /* a=0 b=0 c=2 -&gt; specificity =   2 */
+UL OL+LI      {}  /* a=0 b=0 c=3 -&gt; specificity =   3 */
+H1 + *[REL=up]{}  /* a=0 b=1 c=1 -&gt; specificity =  11 */
+UL OL LI.red  {}  /* a=0 b=1 c=3 -&gt; specificity =  13 */ 
+LI.red.level  {}  /* a=0 b=2 c=1 -&gt; specificity =  21 */
+#x34y         {}  /* a=1 b=0 c=0 -&gt; specificity = 100 */ 
+</PRE>
+</div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;HTML中，一个元素的“style”属性的值是样式表规则。这些规则没有选择子，不过为了层叠算法第三步的要求，它们被认为具有一个ID选择子（特殊性：a=1，b=0，c=0）。考虑到第四步的要求，它们被认为是在其它所有规则之后。
+
+<div class="html-example"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+&lt;HEAD&gt;
+&lt;STYLE type="text/css"&gt;
+  #x97z { color: blue }
+&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;P ID=x97z style="color: red"&gt;
+&lt;/BODY&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;上面这个例子中，P元素的颜色是红色的。虽然两个声明的特殊性是一样的，但是由于层叠规则4，"style"属性中的声明将超越STYLE元素中的声明。
+</div>
+
+<H3><a name="q12">6.4.4 非CSS呈现提示的优先性</a></H3> 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户端可能给予那些不是来自样式表的呈现提示以优先考虑，例如HTML中的FONT元素或"align"属性。如果是这样，这些非CSS呈现提示必须被转换到相应的CSS规则，且其特殊性为零。这些规则被认为是写在作者样式表的开头，并且可能被后续的样式表规则超越。
+
+<div class="note">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>在转换时期，这一策略使得样式属性和样式表的共存更加容易。
+</em>
+</div>
+
+<div class="note">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>在CSS1中，非CSS呈现提示的特殊性为1，而不是0。这一改变是因为CSS2引入了全局选择子，而它的特殊性为0。
+</em>
+</div>
+
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="selector.html">上一篇</a> &nbsp;
+<a href="media.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</BODY>
+</html>
+
+

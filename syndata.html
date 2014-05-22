@@ -1,0 +1,798 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>CSS2语法和基本数据类型</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="conform.html">
+<link rel="next" href="selector.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="conform.html">上一篇</a> &nbsp;
+<a href="selector.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">4 CSS2语法和基本数据类型</H1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="syndata.html#syntax" class="tocxref">4.1 语法</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="syndata.html#tokenization" class="tocxref">4.1.1 表征化</a>
+      <li class="tocline3"><a href="syndata.html#keywords" class="tocxref">4.1.2 关键字</a>
+      <li class="tocline3"><a href="syndata.html#q4" class="tocxref">4.1.3 字符和大小写</a>
+      <li class="tocline3"><a href="syndata.html#q5" class="tocxref">4.1.4 语句</a>
+      <li class="tocline3"><a href="syndata.html#at-rules" class="tocxref">4.1.5 <span class="index-def" title="at-rule">@规则</span></a>
+      <li class="tocline3"><a href="syndata.html#block" class="tocxref">4.1.6 块</a>
+      <li class="tocline3"><a href="syndata.html#q8" class="tocxref">4.1.7 规则集，声明块和选择子</a>
+      <li class="tocline3"><a href="syndata.html#declaration" class="tocxref">4.1.8 声明和属性</a>
+      <li class="tocline3"><a href="syndata.html#comments" class="tocxref">4.1.9 注解</a>
+    </ul>
+    <li class="tocline2"><a href="syndata.html#parsing-errors" class="tocxref">4.2 解析错误的处理规则</a>
+    <li class="tocline2"><a href="syndata.html#values" class="tocxref">4.3 值</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="syndata.html#q13" class="tocxref">4.3.1 整型和实型数</a>
+      <li class="tocline3"><a href="syndata.html#length-units" class="tocxref">4.3.2 长度</a>
+      <li class="tocline3"><a href="syndata.html#percentage-units" class="tocxref">4.3.3 百分比</a>
+      <li class="tocline3"><a href="syndata.html#uri" class="tocxref">4.3.4 URL + URN = URI</a>
+      <li class="tocline3"><a href="syndata.html#counter" class="tocxref">4.3.5 记数器</a>
+      <li class="tocline3"><a href="syndata.html#color-units" class="tocxref">4.3.6 颜色</a>
+      <li class="tocline3"><a href="syndata.html#q19" class="tocxref">4.3.7 角度</a>
+      <li class="tocline3"><a href="syndata.html#q20" class="tocxref">4.3.8 时间</a>
+      <li class="tocline3"><a href="syndata.html#q21" class="tocxref">4.3.9 频率</a>
+      <li class="tocline3"><a href="syndata.html#strings" class="tocxref">4.3.10 字符串</a>
+    </ul>
+    <li class="tocline2"><a href="syndata.html#q23" class="tocxref">4.4 CSS文档呈现</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="syndata.html#q24" class="tocxref">4.4.1 字符编码中未包含的字符的引用</a>
+    </ul>
+  </ul>
+</div>
+<H2>4.1 <a name="syntax">语法</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本节讨论了对于任一版本的CSS（包括CSS2）都相同的语法（及<a name="x0"><span class="index-def" title="forward-compatible parsing"><dfn>向下兼容的解析</dfn></span></a>规则）。CSS以后的版本将保持这一核心语法，尽管它们可以加入额外的语法限制。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这些描述是标准化的。在<a href="grammar.html">附录 D</a>中的语法规则是它们的补充和完善。
+
+<H3>4.1.1 <a name="tokenization">表征化</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS的所有级别——级别1，级别2以及将来的级别——都使用相同的核心语法。这就可以让用户端解析（尽管不是完全理解）样式表，而这些样式表可能是以用户端出现时还没有的CSS级别写成的。设计者以此来创建可以在老的用户端上工作的样式表，同时又保持使用最新级别的CSS。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在词汇级别，CSS样式表包含一系列的表征。CSS2的表征见下表所列。定义采用Lex样式规范表达式。八进制数参见ISO 10646（<a href="refs.html#ref-ISO10646" rel="biblioentry" class="noxref"><span class="normref">[ISO10646]</span></a>）。在Lex中，如果出现多重匹配，则最长的那个匹配决定了表征。
+
+<TABLE>
+<TR><TH>表征<TH>定义
+<TR><TD colspan=2><HR>
+<TR><TD>IDENT		<TD><code><var>{ident}</var></code>
+<TR><TD>ATKEYWORD	<TD><code>@<var>{ident}</var></code>
+<TR><TD>STRING		<TD><code><var>{string}</var></code>
+<TR><TD>HASH		<TD><code>#<var>{name}</var></code>
+<TR><TD>NUMBER		<TD><code><var>{num}</var></code>
+<TR><TD>PERCENTAGE	<TD><code><var>{num}</var>%</code>
+<TR><TD>DIMENSION	<TD><code><var>{num}{ident}</var></code>
+<TR><TD>URI		<TD><code>url\(<var>{w}{string}{w}</var>\)<br>
+		|url\(<var>{w}</var>([!#$%&amp;*-~]|<var>{nonascii}</var>|<var>{escape}</var>)*<var>{w}</var>\)</code>
+<TR><TD>UNICODE-RANGE	<TD><code>U\+[0-9A-F?]{1,6}(-[0-9A-F]{1,6})?</code>
+<TR><TD>CDO		<TD><code>&lt;!--</code>
+<TR><TD>CDC		<TD><code>--&gt;</code>
+<TR><TD>;		<TD><code>;</code>
+<TR><TD>{		<TD><code>\{</code>
+<TR><TD>}		<TD><code>\}</code>
+<TR><TD>(		<TD><code>\(</code>
+<TR><TD>)		<TD><code>\)</code>
+<TR><TD>[		<TD><code>\[</code>
+<TR><TD>]		<TD><code>\]</code>
+<TR><TD>S		<TD><code>[ \t\r\n\f]+</code>
+<TR><TD>COMMENT		<TD><code>\/\*[^*]*\*+([^/][^*]*\*+)*\/</code>
+<TR><TD>FUNCTION	<TD><code><var>{ident}</var>\(</code>
+<TR><TD>INCLUDES	<TD><code>~=</code>
+<TR><TD>DASHMATCH	<TD><code>|=</code>
+<TR><TD>DELIM		<TD><var>any other character not matched by
+the above rules</var>
+</TABLE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;上述包含在花括号（{}）中的宏的定义如下：
+
+<TABLE>
+<THEAD>
+<TR><TH>宏	<TH>定义
+</THEAD>
+<TR><TD colspan=2><HR>
+<TR><TD>ident	<TD><code><var>{nmstart}{nmchar}*</var></code>
+<TR><TD>name	<TD><code><var>{nmchar}+</var></code>
+<TR><TD>nmstart	<TD><code>[a-zA-Z]|<var>{nonascii}</var>|<var>{escape}</var></code>
+<TR><TD>nonascii<TD><code>[^\0-\177]</code>
+<TR><TD>unicode	<TD><code>\\[0-9a-f]{1,6}[ \n\r\t\f]?</code>
+<TR><TD>escape	<TD><code><var>{unicode}</var>|\\[ -~\200-\4177777]</code>
+<TR><TD>nmchar	<TD><code>[a-z0-9-]|<var>{nonascii}</var>|<var>{escape}</var></code>
+<TR><TD>num	<TD><code>[0-9]+|[0-9]*\.[0-9]+</code>
+<TR><TD>string	<TD><code><var>{string1}</var>|<var>{string2}</var></code>
+<TR><TD>string1	<TD><code>\"([\t !#$%&amp;(-~]|\\{nl}|\'|<var>{nonascii}</var>|<var>{escape}</var>)*\"</code>
+<TR><TD>string2	<TD><code>\'([\t !#$%&amp;(-~]|\\{nl}|\"|<var>{nonascii}</var>|<var>{escape}</var>)*\'</code>
+<TR><TD>nl	<TD><code>\n|\r\n|\r|\f</code>
+<TR><TD>w	<TD><code>[ \t\r\n\f]*</code>
+</TABLE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面是CSS的核心语法。接下去的一节讨论了如何使用它。<a href="grammar.html">附录 D</a>描述了一个更加严格的语法，它更接近于CSS级别2的语言。
+
+<PRE>
+stylesheet  : [ CDO | CDC | S | statement ]*;
+statement   : ruleset | at-rule;
+at-rule     : ATKEYWORD S* any* [ block | ';' S* ];
+block       : '{' S* [ any | block | ATKEYWORD S* | ';' ]* '}' S*;
+ruleset     : selector? '{' S* declaration? [ ';' S* declaration? ]* '}' S*;
+selector    : any+;
+declaration : property ':' S* value;
+property    : IDENT S*;
+value       : [ any | block | ATKEYWORD S* ]+;
+any         : [ IDENT | NUMBER | PERCENTAGE | DIMENSION | STRING
+              | DELIM | URI | HASH | UNICODE-RANGE | INCLUDES
+              | FUNCTION | DASHMATCH | '(' any* ')' | '[' any* ']' ] S*;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="comment">COMMENT</a>表征不在语法中出现（为了使语法更容易读）。不过，任意数目的这些表征可以出现在其它表征间的任何地方。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;上述语法中的S表征表示<A name="whitespace">空白</a>。只有字符“空格”（Unicode编码32），“制表符”（9），“换行”（10），“回车”（13）以及“换页”（12）可以出现在空白中。其它类似空格的字符，如“em-space”（8195）和“表意空格”（12288）肯定不是空白的一部分。
+
+<H3>4.1.2 <a name="keywords">关键字</a></H3>
+
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;关键字以标识符的形式出现。关键字不可以放置在引号（"..."或'...'）之间。因此，
+
+<pre>
+red
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;是一个关键字，而
+
+<pre>
+"red"
+</pre>
+
+&nbsp;&nbsp;&nbsp;&nbsp;则不是。（它是一个<a href="#strings">字符串</a>。）其它不合法的例子如：
+
+<div class="illegal-example"><P style="display:none">不合法的例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<pre>
+width: "auto";
+border: "none";
+font-family: "serif";
+background: "red";
+</pre>
+</div>
+
+
+<H3><a name="q4">4.1.3 字符和大小写</a></H3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;  下面的规则总是有效：</p>
+
+<UL>
+    <LI>所有CSS样式表都是<a name="x1"><span class="index-inst" title="case sensitivity">大小写不敏感</span></a>，除了不在CSS控制之下的那些部分。例如，HTML属性“id”和“class”的值的大小写敏感性，字体名称，及URI内容，这些都在本规范讨论范围之外。特别注意，在HTML中元素名称与大小写无关，而在XML中是大小写敏感的。
+
+    <LI>CSS2中，<span class="index-def" title="identifier|identifier, definition of"><a name="value-def-identifier"><dfn>标识符</dfn></a></span>（包括<a href="selector.html">选择子</a>中的元素名，类和ID）只能包含字符[A-Za-z0-9]以及ISO 10646字符编号161及以上，加上连字号（-）；它们不能以连字号或数字开头。它们还可以包含转义字符加任何ISO 10646字符作为一个数字编码（见下一条）。<span class="example">例如，标识符"B&amp;W?"可以写成"B\&amp;W\?"或"B\26 W\3F"。</span>
+    <p>注意，Unicode和ISO 10646是码码对应的（参见<a ref="refs.html#ref-UNICODE" rel="biblioentry" class="noxref"><span class="normref">[UNICODE]</span></a>及<a href="refs.html#ref-ISO10646" rel="biblioentry" class="noxref"><span class="normref">[ISO10646]</span></a>）。
+
+    <LI>CSS2中，反斜杠（\）字符表示三种类型的<span class="index-def" title="backslash escapes"><a name="escaped-characters">字符转义</a></span>。
+
+    <p>首先，在<a href="#strings">字符串</a>中，反斜杠后接一个新行将被忽略（即，好象字符串既不包含反斜杠，也不包含新行）。
+
+	<p>第二，它取消了特殊的CSS字符的含义。任何字符（除了十六进制数）都可以由反斜杠转义而消除了它本来的含义。例如，<samp>"\""</samp>是一个包含双引号的字符串。样式表的处理器不可以在样式表中去除这些反斜杠，否则会改变样式表的含义。
+
+   <p>第三，反斜杠转义允许作者引用在文档中不易输入的字符。在这种情况下，反斜杠后接最长为六位的十六进制数（0..9A..F），表示ISO 10646（<a href="refs.html#ref-ISO10646" rel="biblioentry" class="noxref"><span class="normref">[ISO10646]</span></a>）中对应于该数值的字符。 如果在十六进制数后跟着数字或字母，那么该十六进制数的结束要标记清楚。有两个方法可以做到：
+
+    <ol>
+    <li>带一个空格（或其它空白字符）："\26 B" ("&amp;B")
+    <li>补足十六进制数到六位："\000026B" ("&amp;B")
+    </ol>
+
+	<p>事实上，这两个方法可以结合起来。在十六进制后只忽略一个空白字符。这就意味着转义之后的真正的空白必须转义或重复一次。
+
+    <LI>反斜杠转义总是被认为是<a href="#value-def-identifier">标识符</a>或字符串的一部分（即，"\7B"不是一个标点符号，而"{"则是。"\32"可以用作类名的开头，而"2"就不可以）。
+  </UL>
+
+<H3><a name="q5">4.1.4 语句</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 任何版本的CSS的CSS样式表，包含一系列的<a name="x5"><span class="index-inst" title="statements"><em>语句</em></span></a>（见上面的语法）。有两种语句：<a name="x6"><span class="index-inst" title="at-rules"><em>@规则</em></span></a>和<a name="x7"><span class="index-inst" title="rule sets"><em>规则集</em></span></a>。语句周围可以有<a href="#whitespace">空白</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本规范中，术语“紧接在前”或“紧跟在后”表示其中没有插入空白或注解。
+<H3>4.1.5 <span class="index-def" title="at-rule">
+<a name="at-rules">@规则</a></span></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; @规则以一个关键字<DFN>@</DFN>开始，紧跟在后的是一个<a href="#value-def-identifier">标识符</a>（如'@import'，'@page'）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 一个@规则包括到下一个分号(;)或下一个<a href="#block">块</a>间的所有内容（以先出现的为分界）。CSS用户端一旦遇上不认识的@规则，它必须<span class="index-inst" title="ignore"><a name="x9" href="#ignore">忽略</a></span>这一规则，并继续其后的解析。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2用户端必须<span class="index-inst" title="ignore"><a name="x10" href="#ignore">忽略</a></span>在<a href="#block">块</a>内出现或在其它任何一个规则集之后出现的任何<a href="cascade.html#at-import">'@import'</a>规则。
+
+<div class="illegal-example"><P style="display:none">不合法的例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;假定一个CSS2解析器遇到如下的样式表：
+
+<PRE>
+@import "subs.css";
+H1 { color: blue }
+@import "list.css";
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;根据CSS2，第二个'@import'是非法的。CSS2解析器<span class="index-inst" title="ignore"><a name="x11" href="#ignore">忽略</a></span>整个@规则，从而有效的样式表缩减为：
+
+<PRE>
+@import "subs.css";
+H1 { color: blue }
+</PRE>
+</div>
+
+<div class="illegal-example"><P style="display:none">不合法的例子</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面这个例子中，第二个'@import'规则是无效的，因为它出现在一个'@media' <a href="#block">块</a>中。
+
+<PRE>
+@import "subs.css";
+@media print {
+  @import "print-main.css";
+  BODY { font-size: 10pt }
+}
+H1 {color: blue }
+</PRE>
+</div>
+
+<H3>4.1.6 <a name="block">块</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; A <a name="x12"><span class="index-inst" title="block"><em>块</em></span></a>以一个左花括号（{）开始，并以相匹配的右花括号（}）结束。在其间，可以是任何字符。但是，括号（(&nbsp;)），方括号（[&nbsp;]）和花括号（{&nbsp;}）必须成对出现，并可以嵌套。单引号（'）和双引号（"）也必须成对出现，其间的字符被解析为一个<a name="x13"><span class="index-inst" title="string">字符串</span></a>。字符串的定义参见上面的<a href="#tokenization">表征化</a>。
+
+<div class="illegal-example"><P style="display:none">不合法的例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 这里是一个块的例子。注意，双引号内的右花括号并不匹配本块开始的花括号。而第二个单引号是在<a href="#escaped-characters">转义字符</a>中，从而不匹配第一个单引号：
+
+<PRE>
+{ causta: "}" + ({7} * '\'') }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，上例尽管不是有效的CSS2，但还是一个块的定义。
+</div>
+
+<H3><a name="q8">4.1.7 规则集，声明块和选择子</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 一个规则集（也称为“规则”）包含一个选择子，以及随后的声明块。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个<a name="x14"><span class="index-def" title="declaration-block"><dfn>声明块</dfn></span></a>（下文中也称为{}块）以左花括号开始（{），以与之匹配的右花括号（}）结束。其间是零个或多个以分号（;）分割的声明的列表。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x15"><span class="index-def" title="selector"><em>选择子</em></span></a>（参见<a href="selector.html">选择子</a>一节）包含延伸到（但是不包含）第一个左花括号（{）的所有内容。 一个选择子总是和一个{}块相随。如果用户端无法解析选择子（例如，它不是有效的CSS2），它也必须<span class="index-inst" title="ignore"><a name="x16" href="#ignore">忽略</a></span>{}块。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2赋予选择子中的逗号（,）以特殊的含义。不过，由于还不知道在将来的CSS版本中逗号是否会获得其它的含义，当选择子中任何地方出错后，即使选择子的其它部分可能看起来和CSS2吻合，但是整个语句将被<span class="index-inst" title="ignore"><a name="x17" href="#ignore">忽略</a></span>。
+
+<DIV class=illegal-example><P style="display:none">不合法的例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，由于"&amp;"在CSS2中不是一个有效的表征，CSS2用户端必须<span class="index-inst" title="ignore"><a name="x18" href="#ignore">忽略</a></span>整个第二行，也不把H3的颜色设置为红色。
+<PRE>
+H1, H2 {color: green }
+H3, H4 &amp; H5 {color: red }
+H6 {color: black }
+</PRE>
+</DIV>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面是一个更复杂的例子。前两对花括号在字符串中，并不标记着选择子的结束。它是一个有效的CSS2语句。
+<PRE>
+P[example="public class foo\
+{\
+    private int x;\
+\
+    foo(int x) {\
+        this.x = x;\
+    }\
+\
+}"] { color: red }
+</PRE>
+</div>
+
+<H3>4.1.8 <a name="declaration">声明</a>和<a name="properties">属性</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个<a name="x19"><span class="index-def" title="declaration"><dfn>声明</dfn></span></a>要么为空，要么包含一个<a name="x20"><span class="index-inst" title="property">属性</span></a>，随后是一个冒号（:），随后是一个值。其间可以有<a href="#whitespace">空白</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;鉴于选择子工作的方式，同一选择子的多重声明可以组成以分号（;）分割的组。</p>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;因此，下面的规则：</p>
+<pre>
+H1 { font-weight: bold }
+H1 { font-size: 12pt }
+H1 { line-height: 14pt }
+H1 { font-family: Helvetica }
+H1 { font-variant: normal }
+H1 { font-style: normal }
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;就等同于：</p>
+
+<pre>
+H1 {
+  font-weight: bold;
+  font-size: 12pt;
+  line-height: 14pt;
+  font-family: Helvetica;
+  font-variant: normal;
+  font-style: normal
+}
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个属性是一个<a href="#value-def-identifier">标识符</a>。值中可以出现任何字符，不过括号（"(&nbsp;)"），花括号（"{&nbsp;}"），单引号（'）和双引号（"）必须匹配成对出现。而不在字符串中的分号必须<a href="#escaped-characters">转义</a>。括号，方括号和花括号可以嵌套。在引号中，字符解析为一个字符串。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x21"><span class="index-def" title="value">值</span></a>的语法由各属性单独规定。在任何情况下，值的构成包含标识符，字符串，数值，长度，百分比，URI，颜色，角度，时间和频率等。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户端必须<span class="index-inst" title="ignore"><a name="x22" href="#ignore">忽略</a></span>带有无效属性名或无效值的声明。每一个CSS2属性都有它自己的语法和语义的限制，规定它可以接受的值。
+
+<div class="illegal-example"><P style="display:none">不合法的例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，我们假定CSS2解析器遇到如下的样式表：
+
+<PRE>
+H1 { color: red; font-style: 12pt }  /* 无效值：12pt */
+P { color: blue;  font-vendor: any;  /* 无效属性：font-vendor */
+    font-variant: small-caps }
+EM EM { font-style: normal }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 第一行中，第二个声明带有一个无效值'12pt'。第二行的第二个声明包含未定义的属性'font-vendor'。CSS2解析器将<span class="index-inst" title="ignore"><a name="x23" href="#ignore">忽略</a></span>这些声明，从而有效的样式表缩减为：
+
+<PRE class="example">
+H1 { color: red; }
+P { color: blue;  font-variant: small-caps }
+EM EM { font-style: normal }
+</PRE>
+</div>
+
+<H3>4.1.9 <a name="comments">注解</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x24"><span class="index-inst" title="comments">注解</span></a>以字符"/*"开始，并以字符"*/"结束。它们可以在表征之间的任何位置出现，它们的内容对渲染没有任何影响。注解不能嵌套。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS也允许SGML注解的分割符（"&lt;!--"及"--&gt;"）出现在某些特定的地方，但是它们不分割CSS的注解。允许SGML注解的分割符可以使样式规则出现在HTML源文档中的STYLE元素内，并且对于3.2版本以前的HTML用户端是不可见的。更多的信息，请参见HTML 4.0规范（<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="informref">[HTML40]</span></a>）。
+
+
+<H2>4.2 <a name="parsing-errors">解析错误的处理规则</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;某些情况下，用户端必须忽略一个不合法的样式表的一部分。本规范定义<span class="index-def" title="ignore"><a name="ignore"><dfn>忽略</dfn></a></span>的含义是用户端解析不合法的部分（以找到它的开始和结束），但是不加以任何处理，就如同它不存在那样。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;为了保证在将来能为已有的属性加入新的值或加入新的属性，用户端在碰到如下情形时，必须遵循如下规则：</p>
+
+<UL>
+<LI><strong>未知的属性。</strong>用户端必须<span class="index-inst" title="ignore"><a name="x26" href="#ignore">忽略</a></span>带有未知属性的<a href="syndata.html#declaration">声明</a>。例如，如果有这样一个样式表：
+
+<PRE class="illegal-example">
+H1 { color: red; rotation: 70minutes }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户处理这一样式表时，如同
+
+<PRE class="example">
+H1 { color: red }
+</PRE>
+
+<LI><strong>非法值。</strong>用户端必须忽略带有非法值的声明。例如：
+
+<PRE class="illegal-example">
+IMG { float: left }       /* 正确的CSS2 */
+IMG { float: left here }  /* "here"不是'float'的值 */
+IMG { background: "red" } /* CSS2中关键字不可以加引号 */
+IMG { border-width: 3 }   /* 长度值必须指定单位 */
+</PRE>
+
+CSS2解析器将保留第一条规则并<span class="index-inst" title="ignore"><a name="x27" href="#ignore">忽略</a></span>其它的规则，就如同：
+
+<PRE class="example">
+IMG { float: left }
+IMG { }
+IMG { }
+IMG { }
+</PRE>
+
+<p>与将来的CSS规范一致的用户端还可以接受一条或多条其它的规则。</P>
+
+<LI><strong>非法关键字。</strong>用户端必须<span class="index-inst" title="ignore"><a name="x28" href="#ignore">忽略</a></span>一个无效的@关键字以及随后的所有内容，直到并包括下一个分号（;）或块（{...}），以先出现的为准。考虑如下例子：
+
+<PRE class="illegal-example">
+@three-dee {
+  @background-lighting {
+    azimuth: 30deg;
+    elevation: 190deg;
+  }
+  H1 { color: red }
+}
+H1 { color: blue }
+</PRE>
+
+<p>'@three-dee'规则不是CSS2的一部分。因此整个@规则（直到并包括第三个右花括号）都被<span class="index-inst" title="ignore"><a name="x29" href="#ignore">忽略</a></span>。CSS2用户端<span class="index-inst" title="ignore"><a name="x30" href="#ignore">忽略</a></span>它，从而有效的样式表为：</P>
+
+<PRE class="example">
+H1 { color: blue }
+</PRE>
+
+</UL>
+
+
+<H2>4.3 <a name="values">值</a></H2>
+
+<H3><a name="q13">4.3.1 整型和实型数</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;某些值的类型可以包括整型值（表示为<span class="index-def" title="&lt;integer&gt;::definition of"><a name="value-def-integer" class="value-def">&lt;integer&gt;</a></span>）或实型值（表示为<span class="index-def"
+title="&lt;number&gt;::definition of"><a name="value-def-number"
+class="value-def">&lt;number&gt;</a></span>）。实型和整型数都只以十进制符号表示。&lt;integer&gt;包括一个或多个数字"0"到数字"9"。&lt;number&gt;可以是一个&lt;integer&gt;，或者在点号（.）后接零个或多个数字。整数和实数可以前缀一个"-"或"+"来表示符号。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，很多接受整数和实数作为其值的属性实际上会有取值范围的限制，通常是非负值。
+
+<H3>4.3.2 <A NAME="length-units">长度</A></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;长度是指水平或垂直方向的度量。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;长度值的格式（本规范中表示为<span class="index-def" title="&lt;length&gt;::definition of"><a name="value-def-length" class="value-def">&lt;length&gt;</a></span>）为：一个可选的符号字符（'+'或'-'，'+'是缺省的符号），紧接在后的是一个<a href="syndata.html#value-def-number" class="noxref"><span class="value-inst-number">&lt;number&gt;</span></a>（小数点可有可无），紧接在后的是一个单位标识符（如px，deg等等）。在'0'长度之后，单位标识符可以省略的。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;某些属性允许负的长度值，不过这将使格式化模型变得复杂，并可能伴随着与实现相关得限制。如果不能支持负的长度值，它应该被转换到最接近的可以被支持的值。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="absrel-units">有两种类型的长度单位：相对的和绝对的。</a> <a name="x34"><span class="index-def" title="relative units"><em>相对长度</em></span></a>单位规定一个长度相对于另外一个长度属性。使用相对单位的样式表在从一个媒介转移到另一个媒介（如从计算机显示器到激光打印机）时，定比会相对简单一些。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;相对单位有：
+<ul>
+<li><strong>em</strong>：相关字体的<a href="fonts.html#propdef-font-size" class="noxref"><span class="propinst-font-size">'font-size'</span></a>
+<li><strong>ex</strong>：相关字体的<span class="descinst">'x-height'</span>
+<li><strong>px</strong>：相对于浏览设备的像素点
+</ul>
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+H1 { margin: 0.5em }      /* em */
+H1 { margin: 1ex }        /* ex */
+P  { font-size: 12px }    /* px */
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-def" title="em (unit)|quad width"><a name="em-width">'em'</a></span>单位等于应用该单位的元素的经计算的<a href="fonts.html#propdef-font-size" class="noxref"><span class="propinst-font-size">'font-size'</span></a>属性。例外情况是'font-size'值本身出现了'em'，这时它参考其父元素的字体尺寸。它可以用作垂直和水平的度量。（在印刷文本中，这个单位也有时被称为四方宽度。）
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-def" title="x-height|ex (unit)"><a name="ex">'ex'</a></span>单位定义为字体的<a href="fonts.html#descdef-x-height" class="noxref"><span class="descinst-x-height">'x-height'</span></a>。之所以叫x-height，是因为它通常等于小写字母'x'的高度。不过，即使字体中没有x字母，'ex'还是会有定义。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;规则：
+
+<PRE>
+H1 { line-height: 1.2em }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;指H1元素的行高比H1元素的字体尺寸大20%。另一方面：
+
+<PRE>
+H1 { font-size: 1.2em }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;指H1元素的字体尺寸比H1元素继承来的字体尺寸大20%。
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果出现在<a href="conform.html#doctree">文档树</a>根节点（如HTML中的"HTML"）时，'em'和'ex'参考属性的<a href="cascade.html#initial-value">初始值</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="pixel-units">像素点单位</a>相对于浏览设备的分辨率。在大多数情况下是指计算机的显示器。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果输出设备与典型的计算机显示器相比，像素点密度有很大的差别，用户端应该重新定比像素点值。 我们推荐将<a name="x39"><span class="index-def" title="reference pixel|pixel"><EM>参考像素点</EM></span></a>定义为具有90dpi像素点密度的设备上的一个像素点，离开读者有一臂的长度时的视角。通常的手臂长度有28英寸，因此视角大约为0.0227度。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果阅读距离是一个手臂的长度，那么1px相应于大约0.28毫米（1/90英寸）。如果打印到激光打印机，意味着阅读距离比手臂长度短（55厘米或21英寸），1px大约是0.21毫米。在300dpi的打印机上，大概会占据三个点（0.25毫米）；在600dpi的打印机上，大概会占据五个点。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的两个图形演示了视距对于像素点的尺寸的影响，以及设备分辨率的影响。在第一个图形中，阅读距离为71厘米（28英寸）时，一个像素点大小为0.28毫米；如果阅读距离为3.5米（12英尺）时，一个像素点大小为1.4毫米。</p>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/pixel1.gif" alt="Showing that pixels must become
+larger if the viewing distance increases"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-pixel1" href="images/longdesc/pixel1-desc.html" title="Long description for the illustration of a pixel's definition">[D]</A></SPAN> </p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在第二个图形中，一个大小为1px宽，1px高的区域在低分辨率的设备（计算机屏幕）上由一个点覆盖，而同样的区域在高分辨率设备（如400 dpi的激光打印机）上，需要16个点来覆盖。</p>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img
+src="images/pixel2.gif" alt="Showing that more device pixels (dots)
+are needed to cover a 1px by 1px area on a high-resolution device than
+on a low-res one"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-pixel2" href="images/longdesc/pixel2-desc.html" title="Long description for the illustration of reference
+vs. device pixel">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;子元素并不继承由其父元素指定的相对值，它们（通常）继承<a href="cascade.html#computed-value">计算值</a>。</p>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的规则中，计算出的H1元素的<a href="text.html#propdef-text-indent" class="noxref"><span class="propinst-text-indent">'text-indent'</span></a>值是36pt，而不是45pt，如果H1是BODY元素的子元素的话。
+<PRE>
+BODY {
+  font-size: 12pt;
+  text-indent: 3em;  /* i.e., 36pt */
+}
+H1 { font-size: 15pt }
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x41"><span class="index-def" title="absolute length"><em> 绝对长度</em></span></a>单位只有在其输出媒介的物理特性已知的情况下才有用。绝对单位有：
+
+<UL>
+<LI><STRONG>in</STRONG>：英寸——1英寸等于2.54厘米。
+<LI><STRONG>cm</STRONG>：厘米
+<LI><STRONG>mm</STRONG>：毫米
+<LI><STRONG>pt</STRONG>：点——CSS2所使用的点等于1/72英寸。
+<LI><STRONG>pc</STRONG>: 十二点——1 pica等于12个点。
+</UL>
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+H1 { margin: 0.5in }      /* 英寸  */
+H2 { line-height: 3cm }   /* 厘米 */
+H3 { word-spacing: 4mm }  /* 毫米 */
+H4 { font-size: 12pt }    /* 点 */
+H4 { font-size: 1pc }     /* picas */
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果指定的长度不被支持，用户端必须将其近似为实际值。
+
+<H3>4.3.3  <A NAME="percentage-units">百分比</A></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;百分比值的格式（本规范中表示为<span class="index-def" title="&lt;percentage&gt;::definition of"><a name="value-def-percentage" class="value-def">&lt;percentage&gt;</a></span>）为：一个可选的符号字符（'+'或'-'，'+'是缺省值），紧接在后的是一个<span class="index-inst" title="&lt;number&gt;"><a name="x43" href="syndata.html#value-def-number" class="noxref"><span class="value-inst-number">&lt;number&gt;</span></a></span>，紧接在后的是'%'。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;百分比值总是相对于另外一个值，如长度。允许百分比值的每一个属性也定义了百分比所参考的值。这个值可以是同一元素的另外一个属性的值，其前辈元素的属性值，或者格式化上下文的值（如<a href="visuren.html#containing-block">包含块</a>的宽度）。如果<a href="conform.html#root">根</a>元素的属性指定了百分比值，而百分比值又被定义为参考某个属性的继承值，那么结果值就是百分比乘以那个属性的<a href="cascade.html#initial-value">初始值</a>。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于子元素（通常）继承其父元素的<a href="cascade.html#computed-value">计算值</a>，下例中，P元素的子元素的<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>将继承12pt的值，而不是百分比值（120%）
+<PRE>
+P { font-size: 10pt }
+P { line-height: 120% }  /* 120% of 'font-size' */
+</PRE>
+
+</div>
+
+<H3>4.3.4 <A NAME="uri">URL + URN = URI</A></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x44"><span class="index-def" title="Uniform Resource Locator (URL)|URL (Uniform Resource Locator)">URL</span></a>(统一资源定位，参见<a href="refs.html#ref-RFC1738" rel="biblioentry" class="noxref"><span class="normref">[RFC1738]</span></a>及<a href="refs.html#ref-RFC1808" rel="biblioentry" class="noxref"><span class="normref">[RFC1808]</span></a>）提供了网络上一个资源的地址。可以预见的一个定位资源的新方法称为<a name="x46"><span class="index-def" title="URN (Uniform Resource Name)|Uniform Resource Name (URN)">URN</span></a>（统一资源名称）。两者结合称为<a name="x48"><span class="index-def" title="Resource Identifier (URI)|URI (Uniform Resource Identifier)">URI</span></a>（统一资源标识符，参见<a href="refs.html#ref-URI" rel="biblioentry" class="noxref"><span class="normref">[URI]</span></a>）。本规范使用术语URI。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本规范中，URI值表示为<span class="index-def" title="&lt;uri&gt;::definition of"><a name="value-def-uri" class="value-def">&lt;uri&gt;</a></span>。用来在属性值中指定URI的函数符号是"url()"，如：
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+BODY { background: url("http://www.bg.com/pinkish.gif") }
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;URI值的格式是：'url('，后跟可选的<a href="#whitespace">空白</a>，后跟可选的单引号或双引号，后跟URI本身，后跟可选的单引号或双引号，后跟可选的空白，后跟')'。两个引号字符必须一致。
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;没有引号的例子：
+<PRE>
+LI { list-style: url(http://www.redballs.com/redball.png) disc }
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;括号，逗号，空白字符，单引号和双引号如果出现在URI中，则必须用反斜杠转义：'\('，'\)'，'\,'。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;根据URI的类型，也可能将上述字符写成URI转义（其中"(" = %28，")" = %29，等等）。参见<a href="refs.html#ref-URI" rel="biblioentry" class="noxref"><span class="normref">[URI]</span></a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;为了创建不依赖于资源的绝对位置的模板样式表，作者可以使用相对URIs。相对URI（定义见<a href="refs.html#ref-RFC1808" rel="biblioentry" class="noxref"><span class="normref">[RFC1808]</span></a>）根据基准URI解析为完全URI。RFC 1808的第3节定义了这一过程的标准化算法。对于CSS样式表，基准URI是样式表的位置，而不是源文档的位置。
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，假定如下的规则：</p>
+
+<PRE>
+BODY { background: url("yellow") }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;定位在由如下URI指定的样式表中：</p>
+
+<PRE>http://www.myorg.org/style/basic.css</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;则源文档BODY的背景将由如下URI指定的图形资源堆叠而成（不管那个图形是什么）：
+
+<PRE>http://www.myorg.org/style/yellow</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户端在处理指定不可获得或不适用的资源的URI时，方法可能不同。
+
+<H3>4.3.5 <a name="counter">记数器</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-def" title="&lt;counter&gt;, definition of"><a
+name="value-def-counter">记数器</a></span>表示为标识符（参见<a href="generate.html#propdef-counter-increment" class="noxref"><span class="propinst-counter-increment">'counter-increment'</span></a>及<a href="generate.html#propdef-counter-reset" class="noxref"><span class="propinst-counter-reset">'counter-reset'</span></a>属性）。要引用一个记数器的值，可以采用<a name="x52"><span class="index-def" title="counter()">'counter(&lt;identifier&gt;)'</span></a>或'counter(&lt;identifier&gt;,
+&lt;list-style-type&gt;)'。缺省的样式是'decimal'。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;要引用有相同名称的嵌套记数器序列，采用'counters(&lt;identifier&gt;, &lt;string&gt;)'或'counters(&lt;identifier&gt;, &lt;string&gt;,&lt;list-style-type&gt;)'。参见<a href="generate.html">生成的内容</a>一章中的<a href="generate.html#scope">“记数器嵌套和作用范围”</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2中，记数器的值只可以由<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性引用。注意，'none'也是一个可能的&lt;list-style-type&gt;：'counter(x, none)'返回一个空字符串。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的样式表为每一章（H1）中的段落（P）进行编号。编号的方式是以罗马数字编号，后接一个点和一个空格：
+
+<pre>
+P {counter-increment: par-num}
+H1 {counter-reset: par-num}
+P:before {content: counter(par-num, upper-roman) ". "}
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;记数器如果不在任何'counter-reset'的<a href="generate.html#scope">范围</a>内，则可以认为它被根元素的'counter-reset'重新置为0。
+
+<H3>4.3.6 <a name="color-units">颜色</a></H3>
+
+<span class="index-def" title="&lt;color&gt;::definition of"><a name="value-def-color" class="value-def">&lt;颜色&gt;</a></span>或者是一个关键字，或一个RGB数字。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 颜色名称的关键字列表为：aqua，black，blue，fuchsia，gray，green，lime，maroon，navy，olive，purple，red，silver，teal，white和yellow。这16个颜色定义在HTML 4.0（<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="informref">[HTML40]</span></a>）中。除了这些颜色的关键字，用户也可以指定在用户环境中特定对象使用的颜色所对应的关键字。详细内容请参见<a href="./ui.html#system-colors">系统颜色</a>一节。
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+BODY {color: black; background: white }
+H1 { color: maroon }
+H2 { color: olive }
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;RGB颜色模型用在颜色的数字表示中。下面这些例子都指定了相同的颜色：
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+EM { color: #f00 }              /* #rgb */
+EM { color: #ff0000 }           /* #rrggbb */
+EM { color: rgb(255,0,0) }      /* 整数值范围 0 - 255 */
+EM { color: rgb(100%, 0%, 0%) } /* 实数值范围 0.0% - 100.0% */
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 以十六进制表示的RGB值的格式为：'#'号，紧接在后的是三个或六个十六进制字符。三位的RGB表示通过重复数字（而不是加零）转化到六位的RGB表示。例如，#fb0扩展为#ffbb00。这样保证了白色（#ffffff）可以简缩表示为#fff，并消除了对于显示的颜色深度的依赖性。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在函数表示中的RGB值的格式为：'rgb('，紧接在后的是用逗号分割的，三个数值（可以是三个整数值或三个百分比值），后接')'。整数值255代表100%，相当于十六进制表示的F或FF：rgb(255,255,255) = rgb(100%,100%,100%) =#FFF。数值周围可以有<a href="#whitespace">空白</a>字符。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;所有的RGB颜色都定义在sRGB颜色空间中（参见<a href="refs.html#ref-SRGB" rel="biblioentry" class="noxref"><span class="normref">[SRGB]</span></a>）。用户端呈现这些颜色的忠实度可能会有差异。但是使用sRGB给颜色呈现提供了一个没有歧义的、客观的、可衡量的定义，也可以和国际标准相关联（参见<a href="refs.html#ref-COLORIMETRY" rel="biblioentry" class="noxref"><span class="normref">[COLORIMETRY]</span></a>）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;与规范一致的用户端可以通过执行伽玛校正，来限制它们显示颜色的尝试。sRGB规定了在特定浏览条件下，显示伽玛系数为2.2。用户端应该调整在CSS中给出的颜色，和输出设备的“自然”显示伽玛系数相结合，而使有效的显示伽玛系数为2.2。更多的细节，请参见<a href="colors.html#gamma-correction">伽玛校正</a>一节。注意，只有在CSS中规定的颜色才受影响；例如，图形可能会自带颜色信息。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;超出设备范围的值要加以修正：必须修改红、绿、蓝的值，使之和设备支持的范围相吻合。对于一个典型的CRT显示器，其设备范围和sRGB相同，下面三个例子的效果一样：
+
+<div class="example"><P style="display:none">Example(s):</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+EM { color: rgb(255,0,0) }       /* integer range 0 - 255 */
+EM { color: rgb(300,0,0) }       /* clipped to rgb(255,0,0) */
+EM { color: rgb(255,-10,0) }     /* clipped to rgb(255,0,0) */
+EM { color: rgb(110%, 0%, 0%) }  /* clipped to rgb(100%,0%,0%) */
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;其它设备，如打印机，和sRGB有不同的设备范围；某些超出0..255的范围的颜色使可以呈现的（在设备范围之内），而其它一些在0..255范围内的颜色会在设备范围之外，从而被加以修正。
+</div>
+
+<div class="note"><p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意：</strong>尽管颜色给文档带来可观的信息，并使文档更加容易阅读，但是也要考虑到某些颜色的组合会给色盲的读者带来困难。如果你使用背景图形或设置了背景色，请相应地调整前景颜色。
+</em>
+</div>
+
+<H3><a name="q19">4.3.7 角度</a></H3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;角度值（文本表示为<span class="index-def" title="&lt;angle&gt;::definition of"><a name="value-def-angle">&lt;angle&gt;</a></span>）使用在<a href="./aural.html">语音样式表</a>中。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;其格式为：一个可选的符号字符（'+'或'-'，'+'使缺省值），紧接在后的是一个<span class="index-inst" title="&lt;number&gt;"><a name="x55" href="syndata.html#value-def-number" class="noxref"><span class="value-inst-number">&lt;number&gt;</span></a></span>，紧接在后的是一个角度单位标识符。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;角度单位标识符为：</p>
+
+<ul>
+<li><strong>deg</strong>：度
+<LI><strong>grad</strong>：梯度
+<LI><strong>rad</strong>：弧度
+</UL>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;角度值可以是负数。用户端应该将它们规范到0-360度。如-10度和350度是一样的。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，一个直角是'90度'或 or '100梯度'或'1.570796326794897弧度'。
+
+<H3><a name="q20">4.3.8 时间</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;时间值（文本表示为<span class="index-def" title="&lt;time&gt;::definition of"><a name="value-def-time">&lt;time&gt;</a></span>）使用在<a href="./aural.html">语音样式表</a>中。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;它们的格式是一个<span class="index-inst" title="&lt;number&gt;"><a name="x57" href="syndata.html#value-def-number" class="noxref"><span class="value-inst-number">&lt;number&gt;</span></a></span>，紧跟在后的是一个时间单位标识符。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;时间单位标识符有：</p>
+
+<UL>
+<LI><strong>ms</strong>：毫秒
+<LI><strong>s</strong>：秒
+</UL>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;时间值不可以为负数。
+
+<H3><a name="q21">4.3.9 频率</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;频率值（文本表示为<span class="index-def" title="&lt;frequency&gt;::definition of"><a name="value-def-frequency">&lt;frequency&gt;</a></span>）使用在<a href="./aural.html">语音样式表</a>中。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;它们的格式是一个<span class="index-inst" title="&lt;number&gt;"><a name="x59" href="syndata.html#value-def-number" class="noxref"><span class="value-inst-number">&lt;number&gt;</span></a></span>，紧跟在后的是一个频率单位标识符。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;频率单位标识符有：</p>
+
+<ul>
+<li><strong>Hz</strong>：赫兹
+<li><strong>kHz</strong>：千赫兹
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;频率值不可以是负数。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，200Hz（或200hz）是低音，而6kHz（或6khz）是高音。
+
+<h3>4.3.10 <a name="strings">字符串</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="index-def" title="&lt;string&gt;, definition of"><a name="value-def-string">字符串</a></span>可以包含在双引号或单引号中。在双引号对中不可以再出现双引号，除非将其转义（如'\"'或'\22'）。单引号与此类似（"\'"或"\27"）。
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<pre>
+"this is a 'string'"
+"this is a \"string\""
+'this is a "string"'
+'this is a \'string\''
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个字符串不可以直接包含<a name="x61"><span class="index-inst" title="newline">新行</span></a>。要在字符串中包含新行，可以使用转义字符"\A"（十六进制的A在Unicode中表示换行字符，在CSS中表示通用的"newline"）。参见<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性的例子。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;为了美观或其它别的原因，可以将字符串分成几行。不过在这种情况下，换行本身要加以转义。例如，下面的两个选择子是一样的：
+
+<div class="example"><P style="display:none">例子：</P>
+<PRE>
+A[TITLE="a not s\
+o very long title"] {/*...*/}
+A[TITLE="a not so very long title"] {/*...*/}
+</pre>
+</div>
+
+<H2><a name="q23">4.4 CSS文档呈现</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS样式表是通用字符集（参见<a href="refs.html#ref-ISO10646" rel="biblioentry" class="noxref"><span class="normref">[ISO10646]</span></a>）中一系列字符的序列。为了传送和寸储的需要，这些字符必须由支持US-ASCII（如ISO 8859-x，SHIFT JIS等）字符集的编码器加以<a name="x62"><span class="index-def" title="character encoding">编码</span></a>。有关字符集和字符编码的详细解释，请参阅HTML 4.0规范（<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="informref">[HTML40]</span></a>第5章），也可参见XML 1.0规范（<a href="refs.html#ref-XML10" rel="biblioentry" class="noxref"><span class="informref">[XML10]</span></a>2.2节和4.3.3节），以及附录F。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果样式表嵌套在另一个文档中，如包含在HTML的STYLE元素或"style"属性内，则该样式表和整个文档共享相同的字符编码。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果样式表存在于对立的文件中，用户端在确定文档的<a name="x64"><span class="index-inst" title="character encoding::default|default::character encoding">字符编码</span></a>时，必须遵循如下的<a name="x63"><span class="index-inst" title="character encoding::user agent's determination of">优先级</span></a>（由高到低排列）：</p>
+
+<ol>
+<li>在"Content-Type"域中的"charset"HTTP参数。
+<li><a name="x66"><span class="index-def" title="@charset">@charset</span></a>@规则。
+<li>参考文档（如在HTML中，LINK元素的"charset"属性）的语言机制。
+</ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在外部样式表中最多有一个@charset规则可以出现——它<em>不</em>可以出现在嵌套的样式表中——它也必须出现在文档的最开始，前面没有任何字符。在"@charset"之后，用户指定字符编码的名称。名称必须是在IANA注册表（参见<a href="refs.html#ref-IANA" rel="biblioentry" class="noxref"><span class="normref">[IANA]</span></a>。完整的字符集列表也参见<a href="refs.html#ref-CHARSETS" rel="biblioentry" class="noxref"><span class="informref">[CHARSETS]</span></a>）中描述的字符集名。例如：</p>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;
+@charset "ISO-8859-1";
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本规范并不强制用户端必须支持哪些字符编码。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，依靠@charset结构在理论上存在问题，因为对于字符集如何编码没有任何<em>先验</em>信息。不过在实际应用中，在Internet上广泛应用的编码都基于ASCII，UTF-16，UCS-4或者（很少见）EBCDIC。这就意味着一般而言，一个文档的开始几个字节值可以让用户端可靠低检测出编码家族，从而提供足够的信息来解码@charset规则，并确定确切的字符编码。
+
+<h3><a name="q24">4.4.1 字符编码中未包含的字符的引用</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;样式表可能引用那些在当前字符编码中无法表示的字符。这些字符必须写成ISO 10646字符的<a href="#escaped-characters">转义</a>引用。这些转义和在HTML或XML文档中数字字符引用的功能是一样的（参见<a href="refs.html#ref-HTML40" rel="biblioentry" class="noxref"><span class="normref">[HTML40]</span></a>第5章和第25章）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;转义字符机制应该用在只有少数字符需要如此操作的情况下。如果文档中的大部分字符需要转义，用户应该用更合适的编码来编码文档（比方说，如果文档包含很多希腊字符，作者可以使用"ISO-8859-7"或"UTF-8"）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果中间处理器使用不同的字符编码，它可以将这些转义序列翻译为它所使用的编码的字节序列。另一方面，中间处理器不可以改变转义序列而取消一个ASCII字符的特殊含义。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="conform.html#conformance">一致的用户端</a>必须将它们认识的任何字符编码正确地映射到Unicode（或者它们应该表现为它们可以）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，以ISO-8859-1（Latin-1）编码的文档不可以直接包含希腊字符：
+"&#954;&#959;&#965;&#961;&#959;&#962;" （希腊文："kouros"）必须写为"\3BA\3BF\3C5\3C1\3BF\3C2"。
+
+<div class="note"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<em><strong>注意：</strong>HTML 4.0中，数字字符引用的解释发生在"style"属性值中，而不在STYLE元素中。由于这一不对称性，对于"style"属性和STYLE元素，我们推荐作者使用CSS字符转义机制而不是数字字符引用。例如，我们推荐：</em></p>
+
+<pre class="html-example">
+&lt;SPAN style="voice-family: D\FC rst"&gt;...&lt;/SPAN&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em>而不是：</em></p>
+
+<pre class="html-example">
+&lt;SPAN style="voice-family: D&amp;#252;rst"&gt;...&lt;/SPAN&gt;
+</pre>
+</div>
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p><a href="conform.html">上一篇</a> &nbsp;
+<a href="selector.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</BODY>
+</html>

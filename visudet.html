@@ -1,0 +1,668 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312-80">
+<TITLE>可视化格式模型的细节</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="visuren.html">
+<link rel="next" href="visufx.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="visuren.html">上一篇</a> &nbsp;
+<a href="visufx.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">10 可视化格式模型的细节</H1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="visudet.html#containing-block-details" class="tocxref">10.1 “包含块”的定义</a>
+    <li class="tocline2"><a href="visudet.html#the-width-property" class="tocxref">10.2 内容宽度：<span class="propinst-width">'width'</span>属性</a>
+    <li class="tocline2"><a href="visudet.html#Computing_widths_and_margins" class="tocxref">10.3 宽度和边距的计算</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visudet.html#q4" class="tocxref">10.3.1 行内的非替换元素</a>
+      <li class="tocline3"><a href="visudet.html#q5" class="tocxref">10.3.2 行内的替换元素</a>
+      <li class="tocline3"><a href="visudet.html#q6" class="tocxref">10.3.3 常规流向中的块类、非替换元素</a>
+      <li class="tocline3"><a href="visudet.html#q7" class="tocxref">10.3.4 常规流向中的块类、替换元素</a>
+      <li class="tocline3"><a href="visudet.html#q8" class="tocxref">10.3.5 浮动的非替换元素</a>
+      <li class="tocline3"><a href="visudet.html#q9" class="tocxref">10.3.6 浮动的替换元素</a>
+      <li class="tocline3"><a href="visudet.html#abs-non-replaced-width" class="tocxref">10.3.7 绝对定位的非替换元素</a>
+      <li class="tocline3"><a href="visudet.html#q11" class="tocxref">10.3.8 绝对定位的替换元素</a>
+    </ul>
+    <li class="tocline2"><a href="visudet.html#min-max-widths" class="tocxref">10.4 最小和最大宽度：<span class="propinst-min-width">'min-width'</span>及<span class="propinst-max-width">'max-width'</span></a>
+    <li class="tocline2"><a href="visudet.html#the-height-property" class="tocxref">10.5 内容的高度：<span class="propinst-height">'height'</span>属性</a>
+    <li class="tocline2"><a href="visudet.html#Computing_heights_and_margins" class="tocxref">10.6 高度和边距的计算</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visudet.html#q15" class="tocxref">10.6.1 行内的非替换元素</a>
+      <li class="tocline3"><a href="visudet.html#q16" class="tocxref">10.6.2 行内的替换元素，常规流向中的块类、替换元素，浮动的替换元素</a>
+      <li class="tocline3"><a href="visudet.html#q17" class="tocxref">10.6.3 常规流向中的块类、非替换元素，浮动的非替换元素</a>
+      <li class="tocline3"><a href="visudet.html#abs-non-replaced-height" class="tocxref">10.6.4 绝对定位的非替换元素</a>
+      <li class="tocline3"><a href="visudet.html#q19" class="tocxref">10.6.5 绝对定位的替换元素</a>
+    </ul>
+    <li class="tocline2"><a href="visudet.html#min-max-heights" class="tocxref">10.7 最小和最大高度：<span class="propinst-min-height">'min-height'</span>及<span class="propinst-max-height">'max-height'</span></a>
+    <li class="tocline2"><a href="visudet.html#line-height" class="tocxref">10.8 行高的计算：<span class="propinst-line-height">'line-height'</span>及<span class="propinst-vertical-align">'vertical-align'</span>属性</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="visudet.html#q22" class="tocxref">10.8.1 差异和半差异</a>
+    </ul>
+  </ul>
+</div>
+
+<H2>10.1 <a name="containing-block-details">“包含块”的定义</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个元素的框的尺寸和位置的计算有时相对于某个特定的长方形，称为该元素的<dfn><a name="x0"><span class="index-def" title="containing block">包含块</span></a></dfn>。一个元素的包含块的定义如下：</p>
+
+<ol>
+<li><a href="conform.html#root">根元素</a>存在的包含块（出事包含块）由用户端选择。
+<li>对于其它元素，它的包含块由它的最近的块类前辈框创建，除非它是<a href="visuren.html#absolutely-positioned">绝对定位</a>的。
+<li>如果元素设置了'position: fixed'，包含块由<a href="visuren.html#viewport">视点</A>创建。
+<li>如果元素设置了'position: absolute'，包含块由最近的前辈创建（它的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>不是'static'），方法如下：
+<ol>
+<li>如果前辈是块类元素，包含块由前辈的<a href="box.html#padding-edge">边白边</a>形成。
+<li>如果前辈是行内元素，包含块取决于前辈的<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>属性：
+<ol>
+<li>如果<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'ltr'，包含块的顶、左边是该前辈创建的第一个框的顶、左内容边，它的底、右边是该前辈创建的最后一个框的底、右内容边。
+<li>如果<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'rtl'，包含块的顶、右边是该前辈创建的第一个框的顶、右内容边，它的底、左边是该前辈创建的最后一个框的底、左内容边。
+</ol>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果不存在这样的前辈，根元素框的内容边创建该包含块。
+</ol>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;不考虑定位，下面文档的包含块（C.B.）：</p>
+
+<PRE class="html-example">
+&lt;HTML&gt;
+   &lt;HEAD&gt;
+      &lt;TITLE&gt;Illustration of containing blocks&lt;/TITLE&gt;
+   &lt;/HEAD&gt;
+   &lt;BODY id="body"&gt;
+      &lt;DIV id="div1"&gt;
+      &lt;P id="p1"&gt;This is text in the first paragraph...&lt;/P&gt;
+      &lt;P id="p2"&gt;This is text &lt;EM id="em1"&gt; in the 
+      &lt;STRONG id="strong1"&gt;second&lt;/STRONG&gt; paragraph.&lt;/EM&gt;&lt;/P&gt;
+      &lt;/DIV&gt;
+   &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;是这样创建的：</P>
+
+<table border>
+<tr><th align="center">产生框的元素
+<td align="center"><strong>创建C.B.的元素</strong></tr>
+<tr><td align="center">body<td align="center">初始C.B.（与用户端相关）</tr>
+<tr><td align="center">div1<td align="center">body</tr>
+<tr><td align="center">p1<td align="center">div1</tr>
+<tr><td align="center">p2<td align="center">div1</tr>
+<tr><td align="center">em1<td align="center">p2</tr>
+<tr><td align="center">strong1<td align="center">p2</tr>
+</table>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果我们定位"div1"：</p>
+
+<PRE class="example">
+   #div1 { position: absolute; left: 50px; top: 50px }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;它的包含块不再是"body"；而是初始包含块（因为没有其它定位的前辈框）。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果我们再定位"em1"：</p>
+
+<PRE class="example">
+   #div1 { position: absolute; left: 50px; top: 50px }
+   #em1  { position: absolute; left: 100px; top: 100px }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;包含块的表格成为：</p>
+
+<table border>
+<tr><th align="center">产生框的元素
+<td align="center"><strong>创建C.B.的元素</strong></tr>
+<tr><td align="center">body<td align="center">初始C.B.</tr>
+<tr><td align="center">div1<td align="center">初始C.B.</tr>
+<tr><td align="center">p1<td align="center">div1</tr>
+<tr><td align="center">p2<td align="center">div1</tr>
+<tr><td align="center">em1<td align="center">div1</tr>
+<tr><td align="center">strong1<td align="center">em1</tr>
+</table>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;"em1"定位后，它的包含块成为最靠近的前辈定位框（即，由"div1"创建的那一个）。 
+</div>
+
+<h2>10.2 <a name="the-width-property">内容的宽度</a>：<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>属性</H2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'width'"><a name="propdef-width" class="propdef-title"><strong>'width'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素，除了行内非替换元素，表格行和行组。
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>基于包含块的宽度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定了块类元素和<a href="conform.html#replaced-element">替换</a>元素产生的框的<a ref="box.html#content-width">内容宽度</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该元素并不适用于非替换的<a ref="visuren.html#inline-level">行内</a>元素。非替换行内元素框的宽度是它们中内容渲染后（在任何子元素相对偏移<em>之前</em>）的宽度。我们应该记得行内框排列在<a href="visuren.html#line-box">线框</a>内。而线框的宽度由它们的<a href="visuren.html#containing-block">包含块</a>给出，但是可能由于出现<a href="visuren.html#floats">浮动</a>而被缩短。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;替换元素的宽度是<a href="conform.html#intrinsic">内在</a>的，并且如果该属性值不是'auto'，用户端可能将其重新定比。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;属性值的含义如下：</P>
+
+<dl>
+<dt><span class="index-inst" title="&lt;length&gt;"><a name="x2" href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length"><strong>&lt;length&gt;</strong></span></a></span>
+<dd>指定一个固定宽度。
+<dt><span class="index-inst" title="&lt;percentage&gt;"><a name="x3" href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage"><strong>&lt;percentage&gt;</strong></span></a></span>
+<dd>指定一个百分比宽度。百分比的计算基于生成框的<a href="visuren.html#containing-block">包含块</a>的宽度。
+<dt><strong>auto</strong>
+<dd>宽度取决于其它属性的值。参加以后的节。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;负的<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>值是非法的。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，下面的规则将段落的内容宽度固定为100点：</p>
+
+<PRE>
+P { width: 100px }
+</PRE>
+</div>
+
+<H2>10.3 <a name="Computing_widths_and_margins">宽度和边距的计算</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个元素的<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>，<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>，<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>，<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>和<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>属性的计算值取决于产生的框的类型，并互相影响。一般而言，计算值和指定值相同，'auto'被某个合适的值取代。不过还是有例外。下面这些情况需要加以考虑：</p>
+
+    <ol>
+      <li>行内的非替换元素
+      <li>行内的替换元素
+      <li>常规流向中的块类、非替换元素
+      <li>常规流向中的块类、替换元素
+      <li>浮动的非替换元素
+      <li>浮动的替换元素
+      <li>绝对定位的非替换元素
+      <li>绝对定位的替换元素
+    </ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;1-6包括相对定位。
+
+<h3><a name="q4">10.3.1 行内的非替换元素</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>属性不适用。对<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>，<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>，<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>或<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>指定'auto'的效果是计算值为'0'。
+
+<h3><a name="q5">10.3.2 行内的替换元素</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>，<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>，<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>或<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>指定'auto'的效果是计算值为'0'。指定<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>为'auto'将元素的<a href="conform.html#intrinsic">内在</a>宽度赋给计算值。
+
+<h3><a name="q6">10.3.3 常规流向中的块类、非替换元素</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>或<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>设置为'auto'，它们的计算值为0。在其它属性间必须保持下面的<a name="width-constraints">约束</a>：</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a> + <a href="box.html#propdef-border-left-width" class="noxref"><span class="propinst-border-left-width">'border-left-width'</span></a> + <a href="box.html#propdef-padding-left" class="noxref"><span class="propinst-padding-left">'padding-left'</span></a> + <a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a> + <a href="box.html#propdef-padding-right" class="noxref"><span class="propinst-padding-right">'padding-right'</span></a> + <a href="box.html#propdef-border-right-width" class="noxref"><span class="propinst-border-right-width">'border-right-width'</span></a> + <a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a> = <a href="#containing-block-details">包含块</a>的宽度
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;（如果边框的样式为'none'，边框宽度认为是'0'。）如果上述所有的属性指定了非'auto'的值，这些值被称为是“过度约束”，其中之一的计算值将不得不和它的指定值不同。如果<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>属性为'ltr'，<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>的指定值被忽略，并重新计算以满足上面的等式。如果<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'rtl'，对<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>采取上述的方法。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果只有一个值指定为'auto'，它的计算值从等式中得出。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>设置为'auto'，则其它的'auto'值成为'0'而<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>从等式的剩余部分得到。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>和<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>为'auto'，它们的计算值相同。
+
+<h3><a name="q7">10.3.4 常规流向中的块类、替换元素</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>或<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>为'auto'，它们的计算值为0。如果<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>指定为'auto'，它的值是元素的<a href="conform.html#intrinsic">内在</a>宽度。如果某一个边距设置为'auto'，它的计算值由上述的<a href="#width-constraints">约束</a>给出。更进一步，如果两个边距都设置了'auto'，它们的计算值相等。
+
+<h3><a name="q8">10.3.5 浮动的非替换元素</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>，<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>，<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>，<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>或<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>指定为'auto'，它们的计算值为'0'。
+
+<h3><a name="q9">10.3.6 浮动的替换元素</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>，<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>，<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>或<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>指定为'auto'，它们的计算值为'0'。如果'width'为 'auto'，它的值是元素的<a href="conform.html#intrinsic">内在</a>宽度。
+
+<h3>10.3.7 <a name="abs-non-replaced-width">绝对定位的非替换元素</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;确定这些元素计算值的约束为：
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a> + <a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a> + <a href="box.html#propdef-border-left-width" class="noxref"><span class="propinst-border-left-width">'border-left-width'</span></a> + <a href="box.html#propdef-padding-left" class="noxref"><span class="propinst-padding-left">'padding-left'</span></a> + <a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a> + <a href="box.html#propdef-padding-right" class="noxref"><span class="propinst-padding-right">'padding-right'</span></a> + <a href="box.html#propdef-border-right-width" class="noxref"><span class="propinst-border-right-width">'border-right-width'</span></a> + <a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a> + <a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a> = <a href="#containing-block-details">包含块</a>的宽度
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;（如果边框样式为'none'，边框宽度认为是'0'。这一约束的实现通过如下顺序的一系列替换而达到：</p>
+
+<ol>
+<li>如果<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>设置为'auto'而<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'ltr'，替换'auto'为：包含块左边到假定它的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>属性设置为'static'，而生成元素的第一个框的那个假想框的左边距边的距离。（但是为了不去实际计算那个框，用户端可以自由地猜想它可能在的位置。）如果假想框在包含块的左边，该值为负数。
+
+<li>如果<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>设置为'auto'而<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'rtl'，替换'auto'为：包含块右边到上述提到的那个假想框的右边距边的距离。如果假想框在包含块边的左边，该值为正数。
+
+<li>如果<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>为'auto'，将剩余<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>或<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>的'auto'替换为'0'。
+
+<li>如果<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>，<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>或<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>还是'auto'，将所有<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>或<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>的'auto'替换为'0'。
+
+<li>如果在这一步<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>和<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>还是'auto'，基于额外的约束即两个边距必须相同，解出等式。
+
+<li>如果在这一步只有一个'auto'存在，根据等式解出那个值。
+
+<li>如果在这一步各值间过度约束，要么忽略<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>的值（如果<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'rtl'），要么忽略<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>的值（如果<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'ltr'），然后解出那个值。
+</ol>
+
+<h3><a name="q11">10.3.8 绝对定位的替换元素</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这一情况和前一情形类似，但是元素有一个<a href="conform.html#intrinsic">内在</a>宽度。替换的顺序是：</p>
+
+<ol>
+<li>如果<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>为'auto'，替换为元素的<a href="conform.html#intrinsic">内在</a>宽度。
+
+<li>如果<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>设置为'auto'而<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'ltr'，替换'auto'为：包含块左边到假定它的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>属性设置为'static'，而生成元素的第一个框的那个假想框的左边距边的距离。（但是为了不去实际计算那个框，用户端可以自由地猜想它可能在的位置。）如果假想框在包含块的左边，该值为负数。
+
+<li>如果<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>设置为'auto'而<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'rtl'，替换'auto'为：包含块右边到上述提到的那个假想框的右边距边的距离。如果假想框在包含块边的左边，该值为正数。
+
+<li>如果<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>或<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>是'auto'，将所有<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>或<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>的'auto'替换为'0'。
+
+<li>如果在这一步<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>和<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>还是'auto'，基于额外的约束即两个边距必须相同，解出等式。
+
+<li>如果在这一步只有一个'auto'存在，根据等式解出那个值。
+
+<li>如果在这一步各值间过度约束，要么忽略<a href="visuren.html#propdef-left" class="noxref"><span class="propinst-left">'left'</span></a>的值（如果<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'rtl'），要么忽略<a href="visuren.html#propdef-right" class="noxref"><span class="propinst-right">'right'</span></a>的值（如果<a href="visuren.html#propdef-direction" class="noxref"><span class="propinst-direction">'direction'</span></a>为'ltr'），然后解出那个值。
+</ol>
+
+
+<H2>10.4 <a name="min-max-widths">最小和最大宽度</a>：<a href="visudet.html#propdef-min-width" class="noxref"><span class="propinst-min-width">'min-width'</span></a>及<a href="visudet.html#propdef-max-width" class="noxref"><span class="propinst-max-width">'max-width'</span></a></h2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'min-width'"><a name="propdef-min-width" class="propdef-title"><strong>'min-width'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>取决于用户端
+<tr valign=baseline><td><em>使用于：</em>&nbsp;&nbsp;<td>所有元素，除了非替换行内元素和表格元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>基于包含块的宽度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'max-width'"><a name="propdef-max-width" class="propdef-title"><strong>'max-width'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>none
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素，除了非替换行内元素和表格元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>基于包含块的宽度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这两个属性允许作者将框的宽度限制在一个确定的范围内。取值的含义如下：</p>
+
+<dl>
+<dt><span class="index-inst" title="&lt;length&gt;"><a name="x6" href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length"><strong>&lt;length&gt;</strong></span></a></span>
+<dd>指定一个固定的最小和最大的计算宽度。
+<dt><span class="index-inst" title="&lt;percentage&gt;"><a name="x7" href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage"><strong>&lt;percentage&gt;</strong></span></a></span>
+<dd>指定确定计算值的百分比。百分比的计算基于生成框的<a href="visuren.html#containing-block">包含块</a>的宽度。
+
+<dt><strong>none</strong>
+<dd>（仅用于<a href="visudet.html#propdef-max-width" class="noxref"><span class="propinst-max-width">'max-width'</span></a>）对框的宽度没有限制。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的算法描述了这两个属性如何影响<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>属性的<a href="cascade.html#computed-value">计算值</a>：</p>
+
+<OL>
+
+<LI>先根据上述<a href="#Computing_widths_and_margins">“宽度和边距的计算”</a>中的规则计算宽度（不考虑<a href="visudet.html#propdef-min-width" class="noxref"><span class="propinst-min-width">'min-width'</span></a>及<a href="visudet.html#propdef-max-width" class="noxref"><span lass="propinst-max-width">'max-width'</span></a>）。
+
+<LI>如果计算得到的<a href="visudet.html#propdef-min-width" class="noxref"><span
+class="propinst-min-width">'min-width'</span></a>大于<a href="visudet.html#propdef-max-width" class="noxref"><span class="propinst-max-width">'max-width'</span></a>，<a href="visudet.html#propdef-max-width" class="noxref"><span
+class="propinst-max-width">'max-width'</span></a>设置为<a href="visudet.html#propdef-min-width" class="noxref"><span class="propinst-min-width">'min-width'</span></a>的值。0
+
+<LI>如果计算值大于<a href="visudet.html#propdef-max-width" class="noxref"><span lass="propinst-max-width">'max-width'</span></a>，<a ref="#Computing_widths_and_margins">上述</a>规则再次使用，但是这次用<a href="visudet.html#propdef-max-width" class="noxref"><span class="propinst-max-width">'max-width'</span></a>作为<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>的指定值。
+
+<LI>如果计算值小于<a href="visudet.html#propdef-min-width" class="noxref"><span lass="propinst-min-width">'min-width'</span></a>，<a ref="#Computing_widths_and_margins">上述</a>规则再次使用，但是这次用<a href="visudet.html#propdef-min-width" class="noxref"><span class="propinst-min-width">'min-width'</span></a>作为<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>的指定值。
+
+</OL>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户端可以指定一个非负的<a href="visudet.html#propdef-min-width" class="noxref"><span class="propinst-min-width">'min-width'</span></a>属性的最小值，该值根据不同的元素，甚至根据其它属性而不同。如果<a href="visudet.html#propdef-min-width" class="noxref"><span class="propinst-min-width">'min-width'</span></a>小于该下限，或者是因为它显式地指定，或者是它设置为'auto'而其后的规则使它变得太小，用户端可以使用最小值作为计算值。
+
+<h2>10.5 <a name="the-height-property">内容的高度</a>：<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>属性</H2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'height'"><a name="propdef-height" class="propdef-title"><strong>'height'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素，除了非替换行内元素，表格列和列组
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>见描述
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定了块类元素和<a href="conform.html#replaced-element">替换</a>元素生成的框的<a href="box.html#content-height">内容高度</a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本属性不适用于非替换<a href="visuren.html#inline-level">行内</a>元素。非替换行内元素框的高度由元素的<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>值（或继承值）决定。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;取值的含义如下：</P>
+
+<dl>
+<dt><span class="index-inst" title="&lt;length&gt;"><a name="x9" href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length"><strong>&lt;length&gt;</strong></span></a></span>
+<dd>指定固定的高度。
+<dt><span class="index-inst" title="&lt;percentage&gt;"><a name="x10" href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage"><strong>&lt;percentage&gt;</strong></span></a></span>
+<dd>指定一个百分比高度。百分比的计算基于生成框的<a href="visuren.html#containing-block">包含块</a>的高度。如果包含块的高度没有显式给出（即，它取决于内容的高度），该值等同于'auto'。
+<dt><strong>auto</strong>
+<dd>高度取决于其它属性。见下面的描述。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;负的<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>值是非法的。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，下面的规则将段落的高度固定为100点：</p>
+
+<PRE>
+P { height: 100px }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;高度超过100点的段落将根据<a href="visufx.html#propdef-overflow" class="noxref"><span class="propinst-overflow">'overflow'</span></a>属性而产生<a href="visufx.html#overflow">溢出</a>。
+</div>
+
+<h2>10.6 <a name="Computing_heights_and_margins">高度和边距的计算</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在计算<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>, <a href="box.html#propdef-margin-top" class="noxref"><span class="propinst-margin-top">'margin-top'</span></a>，<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>，<a href="box.html#propdef-margin-bottom" class="noxref"><span class="propinst-margin-bottom">'margin-bottom'</span></a>和<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>的值时，必须对不同种类的框加以区别：
+
+    <ol>
+      <li>行内的非替换元素
+      <li>行内的替换元素
+      <li>常规流向中的块类、非替换元素
+      <li>常规流向中的块类、替换元素
+      <li>浮动的非替换元素
+      <li>浮动的替换元素
+      <li>绝对定位的非替换元素
+      <li>绝对定位的替换元素
+    </ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;1-6包含相对定位。
+
+<H3><a name="q15">10.6.1 行内的非替换元素</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>，<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>，<a href="box.html#propdef-margin-top" class="noxref"><span class="propinst-margin-top">'margin-top'</span></a>或<a href="box.html#propdef-margin-bottom" class="noxref"><span class="propinst-margin-bottom">'margin-bottom'</span></a>为'auto'，它们的计算值为0。<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>属性并不适用，但是框的高度由<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>属性给出。
+
+<H3><a name="q16">10.6.2 行内的替换元素，常规流向中的块类、替换元素，浮动的替换元素</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>，<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>，<a href="box.html#propdef-margin-top" class="noxref"><span class="propinst-margin-top">'margin-top'</span></a>或<a href="box.html#propdef-margin-bottom" class="noxref"><span class="propinst-margin-bottom">'margin-bottom'</span></a>为'auto'，它们的计算值为0。如果<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>为'auto'，则计算值为<a href="conform.html#intrinsic">内在</a>高度。
+
+<H3><a name="q17">10.6.3 常规流向中的块类、非替换元素，浮动的非替换元素</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>，<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>，<a href="box.html#propdef-margin-top" class="noxref"><span class="propinst-margin-top">'margin-top'</span></a>或<a href="box.html#propdef-margin-bottom" class="noxref"><span class="propinst-margin-bottom">'margin-bottom'</span></a>为'auto'，它们的计算值为0。如果<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>为'auto'，高度取决于该元素是否有任何块类子元素。如果它只包含行内子元素，高度等于最顶端的线框的顶到最底端的线框的底之间的距离。如果它包含块类子元素，高度等于最顶端的块类子框的顶边界到最底端的块类子框的底边界。只考虑常规流向中的子元素（即，浮动框和绝对定位框被忽略，只考虑相对定位框未偏移的情况）。注意，子框可以是一个<a href="visuren.html#anonymous-block-level">匿名框</a>。
+
+<H3>10.6.4 <a name="abs-non-replaced-height">绝对定位的非替换元素</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于绝对定位的元素，垂直方向的尺寸必须满足如下约束：
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;'top' + 'margin-top' + 'border-top-width' + 'padding-top' +
+'height' + 'padding-bottom' + 'border-bottom-width' + 'margin-bottom'
++ 'bottom' = 包含块的高度
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;（如果边框样式为'none'，认为宽度是'0'。）该约束的实现基于下列顺序的一系列替换：
+<ol>
+<li>如果<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>为'auto'，将它替换为：包含块的顶边到假定它的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>属性设置为'static'，而生成元素的第一个框的那个假想框的顶边距边的距离。（但是为了不去实际计算那个框，用户端可以自由地猜想它可能在的位置。）如果假想框在包含块上面，该值为负数。
+
+<li>如果<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>和<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>为'auto'，将<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>替换为0。
+
+<li>如果<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>或<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>还是'auto'，将<a href="box.html#propdef-margin-top" class="noxref"><span class="propinst-margin-top">'margin-top'</span></a>或<a href="box.html#propdef-margin-bottom" class="noxref"><span class="propinst-margin-bottom">'margin-bottom'</span></a>中的'auto'替换为'0'。
+
+<li>如果在这一步，<a href="box.html#propdef-margin-top" class="noxref"><span class="propinst-margin-top">'margin-top'</span></a>和<a href="box.html#propdef-margin-bottom" class="noxref"><span class="propinst-margin-bottom">'margin-bottom'</span></a>还是'auto'，根据附加的约束，即这两个边距必须相等来解出等式。
+<li>如果在这一步，只有一个'auto'，根据等式解出该值。
+
+<li>如果在这一步各值间过度约束，忽略<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>的值，然后解出那个值。
+</ol>
+
+
+<H3><a name="q19">10.6.5 绝对定位的替换元素</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这一情形和前述类似，只是元素有一个<a href="conform.html#intrinsic">内在</a>高度。替换的顺序变为：
+
+<ol>
+<li>如果<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>为'auto'，将其替换为元素的<a href="conform.html#intrinsic">内在</a>高度。
+
+<li>如果<a href="visuren.html#propdef-top" class="noxref"><span class="propinst-top">'top'</span></a>为'auto'，将它替换为：包含块的顶边到假定它的<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>属性设置为'static'，而生成元素的第一个框的那个假想框的顶边距边的距离。（但是为了不去实际计算那个框，用户端可以自由地猜想它可能在的位置。）如果假想框在包含块上面，该值为负数。
+
+<li>如果<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>为'auto'，将<a href="box.html#propdef-margin-top" class="noxref"><span
+class="propinst-margin-top">'margin-top'</span></a>或<a href="box.html#propdef-margin-bottom" class="noxref"><span
+class="propinst-margin-bottom">'margin-bottom'</span></a>的'auto'替换为'0'。
+
+<li>如果在这一步<a href="box.html#propdef-margin-top" class="noxref"><span class="propinst-margin-top">'margin-top'</span></a>和<a href="box.html#propdef-margin-bottom" class="noxref"><span class="propinst-margin-bottom">'margin-bottom'</span></a>还是'auto'，根据附加的约束，即两个边距必须相等来解出等式。
+
+<li>如果在这一步只有一个'auto'，根据等式解出该值。
+
+<li>如果在这一步各值间过度约束，忽略<a href="visuren.html#propdef-bottom" class="noxref"><span class="propinst-bottom">'bottom'</span></a>值，然后根据等式解出那个值。
+</ol>
+
+<H2>10.7 <a name="min-max-heights">最小和最大高度</a>：<a href="visudet.html#propdef-min-height" class="noxref"><span class="propinst-min-height">'min-height'</span></a>及<a href="visudet.html#propdef-max-height" class="noxref"><span class="propinst-max-height">'max-height'</span></a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;有时将元素的高度控制在一个特定的范围内很有用。有两个属性提供了这样的功能：
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'min-height'"><a name="propdef-min-height" class="propdef-title"><strong>'min-height'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>0
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素，除了非替换行内元素和表格元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>给予包含块的高度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'max-height'"><a name="propdef-max-height" class="propdef-title"><strong>'max-height'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>none
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素，除了非替换行内元素和表格元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>给予包含块的高度
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这两个属性允许作者将框的高度限制在一定的范围内。取值含义如下：</p>
+
+<dl>
+<dt><span class="index-inst" title="&lt;length&gt;"><a name="x13" href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length"><strong>&lt;length&gt;</strong></span></a></span>
+<dd>指定一个固定的最小或最大高度。
+<dt><span class="index-inst" title="&lt;percentage&gt;"><a name="x14" href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage"><strong>&lt;percentage&gt;</strong></span></a></span>
+<dd>指定一个百分比来确定计算值。百分比的计算基于生成框的<a href="visuren.html#containing-block">包含块</a>的高度。如果包含块的高度没有显式指定（即，它取决于内容的高度），该百分比值等同于'auto'。
+<dt><strong>none</strong>
+<dd>（仅对<a href="visudet.html#propdef-max-height" class="noxref"><span class="propinst-max-height">'max-height'</span></a>适用）对框的高度没有限制。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的算法描述了这两个属性如何影响<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>属性的<a href="cascade.html#computed-value">计算值</a>：</p>
+
+<OL>
+
+<LI>高度的计算基于上述<a href="#Computing_heights_and_margins">“高度和边距的计算”</a>的规则（不考虑<a href="visudet.html#propdef-min-height" class="noxref"><span class="propinst-min-height">'min-height'</span></a>及<a href="visudet.html#propdef-max-height" class="noxref"><span class="propinst-max-height">'max-height'</span></a>）。 
+
+<LI>如果<a href="visudet.html#propdef-min-height" class="noxref"><span class="propinst-min-height">'min-height'</span></a>的计算值大于<a href="visudet.html#propdef-max-height" class="noxref"><span class="propinst-max-height">'max-height'</span></a>，<a href="visudet.html#propdef-max-height" class="noxref"><span class="propinst-max-height">'max-height'</span></a>设置为<a href="visudet.html#propdef-min-height" class="noxref"><span class="propinst-min-height">'min-height'</span></a>的值。
+
+<LI>如果计算的高度大于<a href="visudet.html#propdef-max-height" class="noxref"><span class="propinst-max-height">'max-height'</span></a>，则<a href="#Computing_heights_and_margins">上述</a>规则再次使用，但是这次用<a href="visudet.html#propdef-max-height" class="noxref"><span class="propinst-max-height">'max-height'</span></a>作为<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>的指定值。
+
+<LI>如果计算高度小于<a href="visudet.html#propdef-min-height" class="noxref"><span class="propinst-min-height">'min-height'</span></a>，则<a href="#Computing_heights_and_margins">上述</a>规则再次使用，但是这次用<a href="visudet.html#propdef-min-height" class="noxref"><span class="propinst-min-height">'min-height'</span></a>所谓<a href="visudet.html#propdef-height" class="noxref"><span class="propinst-height">'height'</span></a>的指定值。
+</OL>
+
+<H2>10.8 <a name="line-height">行高的计算/a>：<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>及<a href="visudet.html#propdef-vertical-align" class="noxref"><span
+class="propinst-vertical-align">'vertical-align'</span></a>属性</H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在<a href="visuren.html#inline-formatting">行内格式化内容</a>的讨论中，用户端将行内框排列为垂直方向的<a href="visuren.html#line-box">线框</a>的堆叠。线框高度是这样决定的：</p>
+
+<ol>
+<li>计算线框内每个行内框的高度（参见<a href="#Computing_heights_and_margins">“高度和边距的计算”</a>以及<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>属性）。
+
+<li>行内框根据其<a href="visudet.html#propdef-vertical-align" class="noxref"><span class="propinst-vertical-align">'vertical-align'</span></a>属性而在垂直方向对齐。
+
+<li>线框的高度是最上面的框的顶边到最下面的框的底边的距离。
+</ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;空的行内元素产生空的行内框，但是这些框也包括边距，边白，边框和行高，因此和那些有内容的元素一样，影响上述的计算。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，如果线框内所有的框都对齐它们的底部，线框的高度恰好等于最高的框的高度。但是，如果框基于一个共同的基线对齐，线框的顶和底可能接触不到最高的框的顶和底。
+box.
+
+<H3><a name="q22">10.8.1 差异和半差异</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于一个行内框的高度会和框内文字的高度有差别（例如，<a href="visudet.html#propdef-line-height" class="noxref"><span
+class="propinst-line-height">'line-height'</span></a> &gt; 1em），在渲染的字形符号的上方和下方可能有空白。字体尺寸和<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>计算值间的差别就称为<a name="x15"><span class="index-def" title="leading"><EM>差异</EM></span></a>。差异的一半就称为<a name="x16"><span class="index-def" title="half-leading"><EM>半差异</EM></span></a>。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户端将字形放置在一个行内框的垂直中央，在顶和底加入半差异。例如，如果一段文字高度为'12pt'，而<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>值为'14pt'，则加入2pt的额外空白：1pt在顶部，1pt在底部。（这也适用于空的框，就好象这一空的框包含无限扁的字母。）
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>值小于字体尺寸，最后的行内框的高度将小于字体尺寸，而渲染的字形将“渗出”框的外面。如果这样的一个框接触到一个行内框的边，渲染的字形也会“渗入”相邻的线框。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;虽然非替换元素的边距、边框和边白并不加入行内框高度的计算（也就不参加线框高度的计算），它们还是在行内框周围得到渲染。这就意味着如果一个线框的高度小于框的<a href="box.html#outer-edge">外边</a>，背景以及边白和边框的颜色可能会“渗入”相邻的线框。不过在这种情况下，有些用户端可能使用线框来“裁剪”边框和边白区域（即，不渲染它们）。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'line-height'"><a name="propdef-line-height" class="propdef-title"><strong>'line-height'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>normal | <a href="syndata.html#value-def-number" class="noxref"><span class="value-inst-number">&lt;number&gt;</span></a> | <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>normal
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>基于元素自身的字体尺寸
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果该属性设置在一个<a ref="visuren.html#block-level">块类</a>元素，而后者的内容由<a href="visuren.html#inline-level">行内</a>元素组成，它指定了每一个生成的行内框的<em>最小</em>高度。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果该属性设置在一个<a ref="visuren.html#inline-level">行内</a>元素，它指定了该元素生成的每一个框的<em>确切</em>高度。（除了行内<a ref="conform.html#replaced-element">替换</a>元素，它的框的高度由<a href="visudet.html#propdef-height" class="noxref"><span lass="propinst-height">'height'</span></a>属性给出。）
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性取值的含义如下：</p>
+
+<dl>
+<dt><strong>normal</strong>
+<dd>指示用户端基于元素的字体尺寸将<a href="cascade.html#computed-value">计算值</a>设置为一个“合理”的值。该值的含义和<span class="index-inst" title="&lt;number&gt;"><a name="x18" href="syndata.html#value-def-number" class="noxref"><span class="value-inst-number">&lt;number&gt;</span></a></span>相同。我们推荐'normal'的计算值在1.0到1.2之间。
+
+<dt><span class="index-inst" title="&lt;length&gt;"><a name="x19" href="syndata.html#value-def-length" class="noxref"><span
+class="value-inst-length"><strong>&lt;length&gt;</strong></span></a></span>
+<dd>框的高度设置到该数值。负数是非法的。
+
+<dt><span class="index-inst" title="&lt;number&gt;"><a name="x20" href="syndata.html#value-def-number" class="noxref"><span
+class="value-inst-number"><strong>&lt;number&gt;</strong></span></a></span>
+<dd>该属性的<a href="cascade.html#computed-value">计算值</a>是该数字乘以元素的字体尺寸。负数是非法的。不过，该数字而不是<a href="cascade.html#computed-value">计算值</a>将被继承。
+
+<dt><span class="index-inst" title="&lt;percentage&gt;"><a name="x21" href="syndata.html#value-def-percentage" class="noxref"><span
+class="value-inst-percentage"><strong>&lt;percentage&gt;</strong></span></a></span>
+<dd>该属性的<a href="cascade.html#computed-value">计算值</a>是百分比乘以元素的计算的字体尺寸。负数是非法的。
+</dl>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下例的三条规则设置了相同的行高：
+
+<PRE>
+DIV { line-height: 1.2; font-size: 10pt }     /* number */
+DIV { line-height: 1.2em; font-size: 10pt }   /* length */
+DIV { line-height: 120%; font-size: 10pt }    /* percentage */
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果一个元素包含不止一个字体渲染的文本，用户端应该根据最大的字体尺寸来确定<a href="visudet.html#propdef-line-height" class="noxref"><span
+class="propinst-line-height">'line-height'</span></a>的值。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一般地，如果对于一个段落中的所有行内框只有一个<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>值（而不是对于所有高的图形），上述规则将保证下续行的基线正好距离<a href="visudet.html#propdef-line-height" class="noxref"><span
+class="propinst-line-height">'line-height'</span></a>的数值。这一点很重要，例如在表格中，不同字体的文本列必须对齐的情况时。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意替换元素有一个<a href="fonts.html#propdef-font-size" class="noxref"><span class="propinst-font-size">'font-size'</span></a>以及一个<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>属性，即使它们并不直接用来确定框的高度。<a href="fonts.html#propdef-font-size" class="noxref"><span class="propinst-font-size">'font-size'</span></a>用来定义'em'及'ex'单位，而'line-height'在<a href="visudet.html#propdef-vertical-align" class="noxref"><span class="propinst-vertical-align">'vertical-align'</span></a>属性中有一定的作用。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'vertical-align'"><a name="propdef-vertical-align" class="propdef-title"><strong>'vertical-align'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>baseline | sub | super | top | text-top | middle | 
+   bottom | text-bottom | <a href="syndata.html#value-def-percentage" class="noxref"><span class="value-inst-percentage">&lt;percentage&gt;</span></a> | <a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>baseline
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>行内元素和表格单元元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>基于元素自身的'line-height'
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性决定一个行内元素产生的框在一个线框内垂直方向的位置。下面的这些值仅在参考父行内元素或（如果该元素生成一个<a href="visuren.html#anonymous">匿名行内框</a>）父块类元素时，有意义；否则它们没有任何作用。</P>
+ 
+<div class="note"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<em><strong>注意。</strong>这些属性的值在表格内容中含义略微有所不同容。请参见<a href="tables.html#height-layout">表格高度算法</a>以了解更多细节。
+</em>
+</div>
+
+<DL>
+  <DT><strong>baseline</strong>
+  <DD>将框的基线对齐父框的基线。如果该框没有基线，将框的底线对齐父的基线。
+  <DT><strong>middle</strong>
+  <DD>将框的垂直中间点对齐父框的基线，加上父的x高度的一半。
+  <DT><strong>sub</strong>
+  <DD>将框的基线降低到父框的下标的恰当位置。（该值对元素文本的字体尺寸没有影响。）
+  <DT><strong>super</strong>
+  <DD>将框的基线升高到父框的上标的恰当位置。（该值对元素文本的字体尺寸没有影响。）
+  <DT><strong>text-top</strong>
+  <DD>框的顶对齐父元素字体的顶。
+  
+  <DT><strong>text-bottom</strong>
+  <DD>框的底对齐父元素字体的底。
+  <DT><span class="index-inst" title="&lt;percentage&gt;"><a name="x23" href="syndata.html#value-def-percentage" class="noxref"><span
+  class="value-inst-percentage"><strong>&lt;percentage&gt;
+  </strong></span></a></span>
+  <DD>将框升高（正值）或降低（负值）这一距离（<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>值的百分比）。'0%'等同于'baseline'。
+  <DT><span class="index-inst" title="&lt;length&gt;"><a name="x24" href="syndata.html#value-def-length" class="noxref"><span
+  class="value-inst-length"><strong>&lt;length&gt;
+  </strong></span></a></span>
+  <DD>将框升高（正值）或降低（负值）这一距离。'0cm'等同于'baseline'。
+</DL>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;其它值基于该生成的框所在的线框：</p>
+
+<DL>
+  <DT><strong>top</strong>
+  <DD>框的顶对齐线框的顶。
+  <DT><strong>bottom</strong>
+  <DD>框的底对齐线框的底。
+</DL>
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="visuren.html">上一篇</a> &nbsp;
+<a href="visufx.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</BODY>
+</HTML>

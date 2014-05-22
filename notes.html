@@ -1,0 +1,484 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>附录C：字体的实现和性能的注解</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="changes.html">
+<link rel="next" href="grammar.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="changes.html">上一篇</a> &nbsp;
+<a href="grammar.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">附录C. 字体的实现和性能的注解</H1>
+<div class="subtoc">
+<p><strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="notes.html#q1" class="tocxref">C.1 字体术语表</a>
+    <li class="tocline2"><a href="notes.html#coneg" class="tocxref">C.2 获取字体</a>
+    <li class="tocline2"><a href="notes.html#panose" class="tocxref">C.3 Panose数字的含义</a>
+    <li class="tocline2"><a href="notes.html#truetype-unicode" class="tocxref">C.4 对TrueType字体缩减Unicode范围</a>
+    
+    <li class="tocline2"><a href="notes.html#autodescgen" class="tocxref">C.5 描述子自动生成</a>
+    
+  </ul>
+</div>
+<P><em>&nbsp;&nbsp;&nbsp;&nbsp;该附录是提示性的，而不是规范性的。</em></P>
+
+
+
+<H2><a name="q1">C.1 字体术语表</a></H2>
+
+<dl>
+
+<DT><a name="definingDocLock"><b>DocLock&trade;</b></a>
+<dd>Bitstream的<i>DocLock&trade;</i>技术保证TrueDoc
+PFR只在它们发布的站点内得以适用。TrueDoc
+PFR移动到另一站点或被另一站点引用将无法工作。
+<dt><a name="definingDSIG"><b>数字签名</b></a>
+<dd>信任管理技术的一部分，用来提供关于一个资源的签名的断言。  
+<dt><a name="definingFontCaching"></A><b>字体缓存</b></dt>
+
+<dd><i>字体缓存</i>允许在客户系统上临时拷贝一个字体。通常它们存储在磁盘上，与其它缓存项目（例如UA特定的图形）共存。</dd>
+
+
+<DT><a name="definingFontFace"><b>字形</b></A>
+<DD>指定了一个字体的一个特定形状的“句柄”，不包含字体尺寸。
+<dt><a name="definingFontMatching"></A><b>字体匹配</b></dt>
+
+<dd><i>字体匹配</i>是一个基于一个或多个主要字体的属性而选择类似字体的过程。通常的属性有衬线，重量，大写高度，x高度，间隔，语种以及姿势等。字体匹配取决于具体的算法以及可供挑选的字体。</dd>
+
+
+<dt><a name="definingSubsetting"></A><b>轮廓呈现子集化</b></dt>
+
+<dd><i>轮廓呈现子集化</i>是这样一个过程：不需要的轮廓呈现（以及它们对应的边角方位、字距信息）从主要字体中被删除，从而得到一个较小的字体子集，可以适用于一个或一组特定的文档。对于表意语言来说，这是很特别的成就，因为表意语言的基本字体轮廓集通常都非常非常大。轮廓呈现子集化对于使用连字语种的文档（如阿拉伯文）会很困难，如果不知道最终显示系统的连字格式规则的话。</dd>
+
+<dt><a name="definingIntellifont"><b>Intellifont</b></a>
+<dd>Intellifont技术由Agfa开发，是HP和其它适用PCL5语言打印机的自然格式。它也是Amiga计算机上的自然字体格式。
+<dt><a name="defininginfinifont"><b>Infinifont</b></a>
+<dd>一种字体合成技术。给出一个Panose-1数字（以及可选的额外字体描述数据），可以产生一个人工字体而不需要从单一主外形外插或在两个或多个外形间内插得到（参见<a href="refs.html#ref-INFINIFONT" rel="biblioentry" class="noxref"><span class="informref">[INFINIFONT]</span></a>）。
+<dt><a name="definingItalic"><b>斜体</b></a>
+<dd>拉丁语言的一类字母格式，比罗马字母更草书化，但比手写体不那么草书化。通常，会设计一对连用的字体；一个是衬线罗马字母，而另一个是斜体。其它用来描述这一类字母格式的术语包括：草书，以及西里尔字符中的kursiv。对于无衬线字体，其对应字体通常是一个倾斜的变种，而不是另一类字母格式。<br>
+
+<P><img src="./images/italic-40.gif" alt="Italic forms"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-italic-40" href="images/longdesc/italic-40-desc.html" title="Long description for italic forms">[D]</A></SPAN></p>
+<dt><a name="definingKern"><b>字距</b></a>
+<dd>改变选择的轮廓呈现间的距离，从而获得更平滑的印刷效果，否则字符会过于接近或过于分开。
+
+  <p><img src="./images/kern-22.gif" alt="Illustration of kerning"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-kern-22" href="images/longdesc/kern-22-desc.html" title="Long description for kerning">[D]</A></SPAN></p>
+<dt><a name="definingMultiMaster"></A><b>多个主字体</b></dt>
+
+<dd><i>多个主字体</i>包含两个主字体，与特别的渲染软件连用，提供内插结果。Adobe
+Systems提供一种机制允许使用参数来控制输出或经内插得到的字体。这些参数通常描述了原始字体的一些特性，而得到的字体被称为“合成字体”。</dd>
+
+<dt><a name="definingOpenType"><b> Open Type</b></a>
+<dd>Open Type是TrueType字体格式的扩展，包含了一些额外信息，以扩充字体性能以支持高端国际化印刷。Open Type能够将单一字符与多个外廓呈现关联，或者字符组合与一个外廓呈现关联（连字格式）。  Open Type包括两维信息以支持复杂定位及外廓附加等性能。TrueType Open和OpenType包含显式的文本和语种信息，因此文本处理应用能相应调整其行为（参见<a href="refs.html#ref-OPENTYPE" rel="biblioentry" class="noxref"><span class="informref">[OPENTYPE]</span></a>）。
+<dt><a name="definingServerFont"></A><b>服务器字体</b></dt>
+
+<dd><i>服务器字体</i>是定位在WEB服务器上的字体资源，可以由WebFont定义引用。用户端可以用该资源来渲染页面。</dd>
+
+
+
+<dt><a name="definingSpeedo"><b>Speedo</b></a>
+<dd><i>Speedo</i>字体即使由Bitstream开发并且是Atari ST和Falcon计算机上的自然字体格式。运行X窗口系统的计算机也使用它。
+<dt><a name="definingTrueDoc"></A><b>TrueDoc</b></dt>
+
+<dd><i>TrueDoc</i>技术由Bitstream开发，用来创建、传输以及图形化WEB上的与平台无关的可缩放字体对象。字体对象的创建由TrueDoc字符形状记录器（CSR）完成，而字体对象的渲染由TrueDoc字符形状播放器（CSP）完成。该技术定位于WEB浏览和印刷。</dd>
+
+<dt><a name="definingTrueDocPFR"></A><b>TrueDoc便携字体资源</b></dt>
+
+<dd><i>TrueDoc便携字体资源</i>（或称为<b>PFR</b>）是平关无关的向量字体对象，并由CSP产生。输入可以是Windows/Max/Unix中的TrueType或Type 1。TrueDoc的PFR提供很好的压缩比，与平台无关。由于它们不是一种自然字体格式（而TrueType或Type 1是），它们的安装不那么容易。</dd>
+
+<dt><a name="definingTT"></A><b>TrueType</b></dt>
+
+<dd><i>TrueType</i>字体格式由Apple开发并授权给Microsoft。TrueType是Windows和Macintosh操作系统的自然字体格式。TrueType包含一个各种表格及外廓呈现的继承集。字符提示可以基于每字符及点阵数进行，从而在屏幕分辨率下得到质量非常好的结果。Windows和Mac的TrueType字体很少有不同，尽管本来它们的不同可以大到禁止跨平台使用。 </dd>
+
+<dt><a name="definingTTC"></A><b>TrueType集合</b></dt>
+
+<dd><i>TrueType集合</i>（或<b>TTC</b>）是TrueType格式的扩展，包含了一些表格允许多个TrueType字体包含在一个TrueType字体文件中。TrueType集合文件目前还比较少见。</dd>
+
+
+
+<dt><a name="definingTTGX"></A><b>TrueType GX字体</b></dt>
+
+<dd><i>TrueType GX字体</i>包含标准TrueType格式的扩展，以允许变异字体（类似多个主字体）。有若干个变异轴，如：种粮，高度以及倾斜。这些轴的取值可以定义而获得几乎任何效果。TrueType GX同时能支持替换外廓呈现来显示连字，语境形状，分数等。至今，TrueType GX只在Mac中使用（参见<a href="refs.html#ref-TRUETYPEGX" rel="biblioentry" class="noxref"><span class="informref">[TRUETYPEGX]</span></a>）。
+<dt><a name="definingT1"></A><b>Type 1字体</b></dt>
+
+<dd><i>Type 1字体</i>，由Adobe Systems开发，是最早出现的向量字体之一。Type 1字体通常包含228个字符，其外廓呈现用3次贝塞尔曲线描述。Mac，Windows以及X都相近但独立的格式；Adobe为这三个平台提供Adobe Type Manager。Type1c是最近发展的Type 1外廓呈现的无损压缩存储格式。</dd>
+
+<dt><a name="definingURIbound"><b>URI绑定</b></a>
+<dd>为一个给定的WEB站点锁定一个特定字体资源的过程。通过在字体资源中嵌入加密的URI或数字签名的使用断言而实现。
+</dl>
+
+<h2>C.2 <a name=coneg>获取字体</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;不同的平台使用各种不同的字体格式。要选择一个优先的字体格式，使用的是透明内容沟通方式（参见<a href="refs.html#ref-NEGOT" rel="biblioentry" class="noxref"><span class="informref">[NEGOT]</span></a>）。它总能指出字体何时不再被引用，因为URI嵌入在字体描述之中。某个特定的实现会知道它支持哪些可下载字体格式，从而使用格式提示而避免下载它不支持的格式中的字体。
+<h2>C.3 <a name="panose">Panose数字的含义</a></h2>
+
+<p><img src="./images/panose-16.gif" alt="Illustration of Panose-1"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-panose-16" href="images/longdesc/panose-16-desc.html" title="Long description for screen shot of Windows 95 font
+	description GUI">[D]</A></SPAN></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Family，Serif Style和Proportion选项由Windows 95系统用来进行字体选择和匹配。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这十个选项的含义以及可以取的值（括号中给出）在下面列出。这些是最通常的情形，其“family”为<tt>2，Text and Display</tt>。（如果这第一个数字取值不同，那么剩余九个数字的含义也随之不同）。关于Panose-1的更多细节，参见<a href="refs.html#ref-PANOSE" rel="biblioentry" class="noxref"><span class="informref">[PANOSE]</span></a>。
+<dl>
+<dt>Family
+<dd><ul>
+<li>Any (0)
+<li>No Fit (1)
+<li><a href="refs.html#ref-PANOSE" rel="biblioentry" class="noxref"><span class="informref">[PANOSE]</span></a> <b>Latin Text and Display</b> (2)
+<li><a href="refs.html#ref-PANOSE" rel="biblioentry" class="noxref"><span class="informref">[PANOSE]</span></a> <b>Latin Script</b> (3)
+<li><a href="refs.html#ref-PANOSE" rel="biblioentry" class="noxref"><span class="informref">[PANOSE]</span></a> <b>Latin Decorative</b> (4)
+<li><a href="refs.html#ref-PANOSE" rel="biblioentry" class="noxref"><span class="informref">[PANOSE]</span></a> <b>Latin Pictorial</b> (5)
+</ul>
+
+<dt>Serif Style
+<dd><ul>
+<li>Any (0)
+<li>No Fit (1)
+<li>Cove (2)
+<li>Obtuse Cove (3)
+<li>Square Cove (4)
+<li>Obtuse Square Cove (5)
+<li>Square (6)
+<li>Thin (7)
+<li>Bone (8)
+<li>Exaggerated (9)
+<li>Triangle (10)
+<li>Normal Sans (11)
+<li>Obtuse Sans (12)
+<li>Perp Sans (13)
+<li>Flared (14)
+<li>Rounded (15)
+</ul>
+
+<dt>Weight
+<dd><ul><li>Any (0)
+<li>No Fit (1)
+<li>Very Light  (2)[100]
+<li>Light (3) [200]
+<li>Thin (4) [300]
+<li>Book (5) [400] <i>same as CSS1 'normal'</i>
+<li>Medium (6) [500]
+<li>Demi (7) [600]
+<li>Bold (8) [700] <i>same as CSS1 'bold'</i>
+<li>Heavy (9) [800]
+<li>Black (10) [900]
+<li>Extra Black / Nord (11) [900] <i>force mapping to CSS1 100-900 scale</i>
+</ul>
+
+<dt>Proportion
+<dd><ul>
+<li>Any (0)
+<li>No Fit (1)
+<li>Old Style (2)
+<li>Modern (3)
+<li>Even Width (4)
+<li>Expanded (5)
+<li>Condensed (6)
+<li>Very Expanded (7)
+<li>Very Condensed (8)
+<li>Monospaced (9)
+</ul>
+
+<dt>Contrast
+<dd><ul><li>Any (0)
+<li>No Fit (1)
+<li>None (2)
+<li>Very Low (3)
+<li>Low (4)
+<li>Medium Low (5)
+<li>Medium (6)
+<li>Medium High (7)
+<li>High (8)
+<li>Very High (9)
+</ul>
+
+<dt>Stroke Variation
+<dd><ul><li>Any (0)
+<li>No Fit (1)
+<li>No Variation (2)
+<li>Gradual/Diagonal (3)
+<li>Gradual/Transitional (4)
+<li>Gradual/Vertical (5)
+<li>Gradual/Horizontal (6)
+<li>Rapid/Vertical (7)
+<li>Rapid/Horizontal (8)
+<li>Instant/Horizontal (9)
+<li>Instant/Vertical (10)
+</ul>
+
+<dt>Arm Style
+<dd><ul><li>Any (0)
+<li>No Fit (1)
+<li>Straight Arms/Horizontal (2)
+<li>Straight Arms/Wedge (3)
+<li>Straight Arms/Vertical (4)
+<li>Straight Arms/Single Serif (5)
+<li>Straight Arms/Double Serif (6)
+<li>Non-Straight Arms/Horizontal (7)
+<li>Non-Straight Arms/Wedge (8)
+<li>Non-Straight Arms/Vertical 90)
+<li>Non-Straight Arms/Single Serif (10)
+<li>Non-Straight Arms/Double Serif (11)
+</ul>
+
+
+<dt>Letterform
+<dd>
+<ul><li>Any (0)
+<li>No Fit (1)
+<li>Normal/Contact (2)
+<li>Normal/Weighted (3)
+<li>Normal/Boxed (4)
+<li>Normal/Flattened (5)
+<li>Normal/Rounded (6)
+<li>Normal/Off Center (7)
+<li>Normal/Square (8)
+<li>Oblique/Contact (9)
+<li>Oblique/Weighted (10)
+<li>Oblique/Boxed (11)
+<li>Oblique/Flattened (12)
+<li>Oblique/Rounded (13)
+<li>Oblique/Off Center (14)
+<li>Oblique/Square (15)
+</ul>
+
+<dt>Midline
+<dd>
+<ul><li>Any (0)
+<li>No Fit (1)
+<li>Standard/Trimmed (2)
+<li>Standard/Pointed (3)
+<li>Standard/Serifed (4)
+<li>High/Trimmed (5)
+<li>High/Pointed (6)
+<li>High/Serifed (7)
+<li>Constant/Trimmed (8)
+<li>Constant/Pointed (9)
+<li>Constant/Serifed (10)
+<li>Low/Trimmed (11)
+<li>Low/Pointed (12)
+<li>Low/Serifed (13)
+</ul>
+
+<dt>XHeight
+<dd><ul><li>Any (0)
+<li>No Fit (1)
+<li>Constant/Small (2)
+<li>Constant/Standard (3)
+<li>Constant/Large (4)
+<li>Ducking/Small (5)
+<li>Ducking/Standard (6)
+<li>Ducking/Large (7)
+</ul>
+</dl>
+
+<p><em>&nbsp;&nbsp;&nbsp;&nbsp;Panose-2</em>（参见<a href="refs.html#ref-PANOSE2" rel="biblioentry" class="noxref"><span class="informref">[PANOSE2]</span></a>）是一个字体分类和匹配技术更复杂的规范。例如，拉丁字体的衬线特性可以和日文字母的终止笔划进行比较。
+<p><img src="./images/P2F24.gif" alt="Illustration of Panose-2"></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Panose-2数值不存储于任何已知的字体格式中，但是可以测量。
+<h2>C.4 <a name="truetype-unicode">对TrueType字体缩减Unicode范围</a></h2>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;该信息可以通过观察OS/2表（如果有）中的ulUnicodeRange位得到，它保存了集合中的一个位表示。该表格在微软的TrueType规范版本1.66中定义。如果将这个信息考虑成一个集合，每个元素对应Unicode 1.1字符块，集合中出现该元素表示该字体有一个或多个外廓呈现来代表该块中的至少一个字符。 该集合有128个元素，描述如下表。次序一般按照Unicode 1.1标准中的次序。它可以用来转换TrueType字体中的信息到CSS的'unicode-range'描述子。
+<table>
+<thead>
+<tr><th colspan="4"><hr>
+<tr>
+  <th width="30">块
+  <th width="59">位
+  <th width="172">块名
+  <th width="181">Unicode范围
+<tr><th colspan="4"><hr>
+</thead>
+<tr><td>0<td>1<td>Basic Latin<td>U+0-7F
+<tr><td>1<td>2<td>Latin-1 Supplement<td>U+80-FF
+<tr><td>2<td>4<td>Latin-1 Extended-A<td>U+100-17F
+<tr><td>3<td>8<td>Latin Extended-B<td>U+180-24F
+<tr><th colspan="4"><hr>
+<tr><td>4<td>1<td>IPA Extensions<td>U+250-2AF
+<tr><td>5<td>2<td>Spacing Modifier Letters<td>U+2B0-2FF
+<tr><td>6<td>4<td>Combining Diacritical Marks<td>U+300-36F
+<tr><td>7<td>8<td>Greek<td>U+370-3CF
+<tr><th colspan="4"><hr>
+<tr><td>8<td>1<td><i>Greek Symbols and Coptic</i><td>U+3D0-3EF
+<tr><td>9<td>2<td>Cyrillic<td>U+400-4FF
+<tr><td>10<td>4<td>Armenian<td>U+530-58F
+<tr><td>11<td>8<td>Hebrew<td>U+590-5FF
+<tr><th colspan="4"><hr>
+<tr><td>12<td>1<td><i>Hebrew Extended-A<br>Hebrew Extended-B</i><td>?? what ranges ??
+<tr><td>13<td>2<td>Arabic<td>U+600-69F
+<tr><td>14<td>4<td><i>Arabic Extended</i><td>U+670-6FF
+<tr><td>15<td>8<td>Devanagari<td>U+900-97F
+<tr><th colspan="4"><hr>
+<tr><td>16<td>1<td>Bengali<td>U+980-9FF
+<tr><td>17<td>2<td>Gurmukhi<td>U+A00-A7F
+<tr><td>18<td>4<td>Gujarati<td>U+A80-AFF
+<tr><td>19<td>8<td>Oriya<td>U+B00-B7F
+<tr><th colspan="4"><hr>
+<tr><td>20<td>1<td>Tamil<td>U+B80-BFF
+<tr><td>21<td>2<td>Telugu<td>U+C00-C7F
+<tr><td>22<td>4<td>Kannada<td>U+C80-CFF
+<tr><td>23<td>8<td>Malayalam<td>U+D00-D7F
+<tr><th colspan="4"><hr>
+<tr><td>24<td>1<td>Thai<td>U+E00-E7F
+<tr><td>25<td>2<td>Lao<td>U+E80-EFF
+
+<tr><td>26<td>4<td>Georgian<td>U+10A0-10EF
+<tr><td>27<td>8<td><i>Georgian Extended</i><td>U+10F0-10FF ??
+<tr><th colspan="4"><hr>
+<tr><td>28<td>1<td>Hangul Jamo<td>U+1100-11FF
+<tr><td>29<td>2<td>Latin Extended Additional<td>-
+<tr><td>30<td>4<td>Greek Extended<td>U+1F00-1FFF
+<tr><td>31<td>8<td>General Punctuation<td>U+2000-206F
+<tr><th colspan="4"><hr>
+<tr><td>32<td>1<td>Superscripts and Subscripts<td>-
+<tr><td>33<td>2<td>Currency Symbols<td>U+20A0-20CF
+<tr><td>34<td>4<td>Combining Marks for Symbols<td>U+20D0-20FF
+<tr><td>35<td>8<td>Letterlike Symbols<td>U+2100-214F
+<tr><th colspan="4"><hr>
+<tr><td>36<td>1<td>Number Forms<td>U+2150-218F
+<tr><td>37<td>2<td>Arrows<td>U+2190-21FF
+<tr><td>38<td>4<td>Mathematical Operators<td>U+2200-22FF
+<tr><td>39<td>8<td>Miscellaneous Technical<td>U+2300-23FF
+<tr><th colspan="4"><hr>
+<tr><td>40<td>1<td>Control Pictures<td>U+2400-243F
+<tr><td>41<td>2<td>Optical Character Recognition<td>U+2440-245F
+<tr><td>42<td>4<td>Enclosed Alphanumerics<td>U+2460-24FF
+<tr><td>43<td>8<td>Box Drawing<td>U+2500-257F
+<tr><th colspan="4"><hr>
+<tr><td>44<td>1<td>Block Elements<td>U+2580-259F
+<tr><td>45<td>2<td>Geometric Shapes<td>U+25A0-25FF
+<tr><td>46<td>4<td>Miscellaneous Symbols<td>U+2600-26FF
+<tr><td>47<td>8<td>Dingbats<td>U+2700-27BF
+<tr><th colspan="4"><hr>
+<tr><td>48<td>1<td>CJK Symbols and Punctuation<td>U+3000-303F
+<tr><td>49<td>2<td>Hiragana<td>U+3040-309F
+<tr><td>50<td>4<td>Katakana<td>U+30A0-30FF
+<tr><td>51<td>8<td>Bopomofo<td>U+3100-312F
+<tr><th colspan="4"><hr>
+<tr><td>52<td>1<td>Hangul Compatibility Jamo<td>U+3130-318F
+
+<tr><td>53<td>2<td>CJK Miscellaneous<td>??
+<tr><td>54<td>4<td>Enclosed CJK Letters and Months<td>U+3200-32FF
+<tr><td>55<td>8<td>CJK compatibility<td>U+3300-33FF
+<tr><th colspan="4"><hr>
+<tr><td>56<td>1<td>Hangul<td>U+AC00-D7FF
+
+<tr><td>59<td>8<td>CJK Unified Ideographs<td>U+4E00-9FFF
+<tr><th colspan="4"><hr>
+
+<tr><td>60<td>1<td>Private Use Area<td>U+E000-F8FF
+<tr><td>61<td>2<td>CJK Compatibility Ideographs<td>U+F900-FAFF
+<tr><td>62<td>4<td>Alphabetic Presentation Forms<td>U+FB00-FB4F
+<tr><td>63<td>8<td>Arabic Presentation Forms-A<td>U+FB50-FDFF
+<tr><th colspan="4"><hr>
+<tr><td>64<td>1<td>Combining Half Marks<td>U+FE20-FE2F
+<tr><td>65<td>2<td>CJK compatibility Forms<td>U+FE30-FE4F
+<tr><td>66<td>4<td>Small Form Variants<td>U+FE50-FE6F
+<tr><td>67<td>8<td>Arabic Presentation Forms-B<td>U+FE70-FEFF
+<tr><th colspan="4"><hr>
+<tr><td>68<td>1<td>Halfwidth and Fullwidth Forms<td>U+FF00-FFEF
+<tr><td>69<td>2<td>Specials<td>U+FFF0-FFFD
+
+
+</table>
+
+<p class=comment>&nbsp;&nbsp;&nbsp;&nbsp;TrueType位系统的问题是，它绑定于Unicode 1.1，因而不能和Unicode扩展协同，例如它无法表示藏文，或者其它在Unicode 2.0或更晚版本中引进的语种。
+<h2>C.5 <a name="autodescgen">描述子自动生成</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;编辑工具应该允许样式表作者增加及修改字体描述子。然而在某些情况下，编辑工具可以通过本地安装的字体帮助自动生成样式表中引用到的字体的描述子。对于那些子集化或转换字体以供动态下载的工具而言也是它的功能。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于一般字体格式，下表给出了去哪里找这些信息的建议。</p>
+
+<table border>
+
+
+<tr>
+  <td width="86">描述子
+  <td width="177">Type 1
+  <td width="251">TrueType和OpenType
+  <td width="175">TrueType GX <a href="refs.html#ref-TRUETYPEGX" rel="biblioentry" class="noxref"><span class="informref">[TRUETYPEGX]</span></a></tr>
+
+<tr><td><a href="fonts.html#descdef-ascent" class="noxref"><span class="descinst-ascent">'ascent'</span></a>
+<td>AFM/PFM文件中的'Ascender'
+<td><tt>'hhea'表中的'Ascender'或（偏好）</tt>'OS/2'表中的<tt>'sTypoAscender'</tt>
+<td><tt>'fmtx'表里的'horizontalBefore'</tt>
+
+<tr><td><a href="fonts.html#descdef-baseline" class="noxref"><span class="descinst-baseline">'baseline'</span></a>
+<td><td>
+<td><tt>bsln表，参见</tt><a href="#bsln">注解</a>
+
+<tr><td><a href="fonts.html#descdef-bbox" class="noxref"><span class="descinst-bbox">'bbox'</span></a>
+<td><tt>FontBBox</tt>，字体字典
+<td><tt>'head'表的'xMin'，</tt><tt>'xMax'，</tt><tt>'yMin'和</tt><tt>'yMax'项</tt>
+<td>
+
+<tr><td><a href="fonts.html#descdef-cap-height" class="noxref"><span class="descinst-cap-height">'cap-height'</span></a>
+<td><tt>AFM/PFM文件中的CapHeight</tt>
+<td><td>
+
+<tr><td><a href="fonts.html#descdef-descent" class="noxref"><span class="descinst-descent">'descent'</span></a>
+<td><tt>AFM/PFM文件中的'Descender'</tt>
+<td><td>
+
+<tr><td><a href="fonts.html#descdef-mathline" class="noxref"><span class="descinst-mathline">'mathline'</span></a>
+<td><td><td><tt>bsln</tt> table
+
+<tr><td><a href="fonts.html#descdef-font-family" class="noxref"><span class="descinst-font-family">'font-family'</span></a>
+<td><tt>FamilyName</tt>，fontinfo字典
+<td><tt>名称表</tt>
+<td>
+
+<tr><td><a href="fonts.html#descdef-stemh" class="noxref"><span class="descinst-stemh">'stemh'</span></a>
+<td><tt>StdHW，AFM/PFM文件中的私有字典</tt>
+<td><td>
+
+<tr><td><a href="fonts.html#descdef-stemv" class="noxref"><span class="descinst-stemv">'stemv'</span></a>
+<td><tt>/StdVW</tt>，私有字典
+<td><tt>cvt</tt>表格
+<td>
+
+<tr><td><a href="fonts.html#descdef-topline" class="noxref"><span class="descinst-topline">'topline'</span></a>
+<td><td>
+<td><tt>bsln</tt>表
+<tr><td><a href="fonts.html#descdef-unicode-range" class="noxref"><span class="descinst-unicode-range">'unicode-range'</span></a>
+<td>cmap文件
+<td><tt>OS/2表，参见</tt><a href="#truetype-unicode">附录C</a>
+<td>
+
+<tr><td><a href="fonts.html#descdef-units-per-em" class="noxref"><span class="descinst-units-per-em">'units-per-em'</span></a>
+<td><tt>FontMatrix</tt>，字体字典
+<td><tt>unitsPerEm，头表格</tt>
+<td>
+
+<tr><td><a href="fonts.html#descdef-widths" class="noxref"><span class="descinst-widths">'widths'</span></a>
+<td>
+<td><tt>hmtx</tt>表格
+<td>
+
+</table>
+
+<ul>
+  <li><a name="bsln">在<tt>bsln</tt></a>表内，表意字的中基线可以用来延伸绝大部分的表意字，而下基线可能更适合临时用于大部分的拉丁，希腊或西里尔字符。
+</ul>
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p><a href="changes.html">上一篇</a> &nbsp;
+<a href="grammar.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a>&nbsp;
+</div>
+</BODY>
+</HTML>

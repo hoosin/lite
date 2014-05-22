@@ -1,0 +1,1139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312-80">
+<title>生成的内容，自动编号以及列表</title>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="visufx.html">
+<link rel="next" href="page.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</head>
+<body>
+<div class="navbar" align="center">
+<p><a href="visufx.html">上一篇</a> &nbsp;
+<a href="page.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<h1 align="center">12 <a name="generated-text">生成的</a><a name="x0"><span class="index-def" title="generated content">内容</span></a>，自动<a name="x1"><span class="index-def" title="automatic numbering">编号</span></a>以及列表</h1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="generate.html#before-after-content" class="tocxref">12.1 <span class="index-def" title=":before|pseudo-elements:::before|before">:before</span> 及<span class="index-def" title=":after|pseudo-elements:::after|after">:after</span>伪元素</a>
+    <li class="tocline2"><a href="generate.html#content" class="tocxref">12.2 <span class="propinst-content">'content'</span>属性</a>
+    <li class="tocline2"><a href="generate.html#compact-run-in-gen" class="tocxref">12.3  :before及:after与<span class="index-inst" title="compact"><span class="value-inst-compact">'compact'</span></span>及<span class="index-inst" title="run-in"><span class="value-inst-run-in">'run-in'</span></span>元素的交互作用</a>
+    <li class="tocline2"><a href="generate.html#quotes" class="tocxref">12.4 引号</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="generate.html#quotes-specify" class="tocxref">12.4.1 用<span class="propinst-quotes">'quotes'</span>属性指定引用</a>
+      <li class="tocline3"><a href="generate.html#quotes-insert" class="tocxref">12.4.2 用<span class="propinst-content">'content'</span>属性插入引号</a>
+    </ul>
+    <li class="tocline2"><a href="generate.html#counters" class="tocxref">12.5 自动<span class="index-def" title="counters">记数</span>及编号</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="generate.html#scope" class="tocxref">12.5.1 记数器嵌套和作用范围</a>
+      <li class="tocline3"><a href="generate.html#counter-styles" class="tocxref">12.5.2 记数器类型</a>
+      <li class="tocline3"><a href="generate.html#q10" class="tocxref">12.5.3 带有'display: none'属性的元素中的记数器</a>
+    </ul>
+    <li class="tocline2"><a href="generate.html#q11" class="tocxref">12.6 标记和列表</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="generate.html#markers" class="tocxref">12.6.1 标记：<span class="propinst-marker-offset">'marker-offset'</span>属性</a>
+      <li class="tocline3"><a href="generate.html#lists" class="tocxref">12.6.2 列表：<span class="propinst-list-style-type">'list-style-type'</span>，<span class="propinst-list-style-image">'list-style-image'</span>，<span class="propinst-list-style-position">'list-style-position'</span>及<span class="propinst-list-style">'list-style'</span>属性</a>
+    </ul>
+  </ul>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;某些情况下，作者可能希望用户端渲染那些不在<a href="conform.html#doctree">文档树</a>中的内容。很熟悉的一个例子是记数的列表；作者不想显式地给出记数，他希望用户端自动地生成它们。类似地，作者可能希望用户端在一个图形的标题前面插入单词“图形”，或在第七章标题前插入“第七章”。特别是对于音频和盲文，用户端应该能够插入这样的字符串。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2中，产生内容的机制有这样几个：</p>
+
+<ul>
+<li><a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性，和:before及:after伪元素联用。
+<li><a href="aural.html#propdef-cue-before" class="noxref"><span class="propinst-cue-before">'cue-before'</span></a>，<a href="aural.html#propdef-cue-after" class="noxref"><span class="propinst-cue-after">'cue-after'</span></a>语音属性（参见<a href="aural.html">语音样式表</a>）。如果<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性和语音属性联用，它们渲染的顺序为：:before，<a href="aural.html#propdef-cue-before" class="noxref"><span class="propinst-cue-before">'cue-before'</span></a>，（<a href="aural.html#propdef-pause-before" class="noxref"><span class="propinst-pause-before">'pause-before'</span></a>），元素的内容，(<a href="aural.html#propdef-pause-after" class="noxref"><span class="propinst-pause-after">'pause-after'</span></a>），<a href="aural.html#propdef-cue-after" class="noxref"><span class="propinst-cue-after">'cue-after'</span></a>，和:after。
+<li><a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性值为'list-item'的元素。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面我们讨论和<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性相关的机制。
+
+<h2>12.1 <a name="before-after-content"></a><a name="x2"><span class="index-def" title=":before|pseudo-elements:::before|before">:before</span></a>及<a name="x5"><span class="index-def" title=":after|pseudo-elements:::after|after">:after</span></a>伪元素</h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;作者用:before和:after伪元素指定生成的内容的样式和位置。如其名所示，:before和:after伪元素指定了一个元素<a href="conform.html#doctree">文档树</a>内容之前和之后的内容。<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性，与这些伪元素联用，指定了插入的内容。
+
+<div class=example><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，下面的规则在每一个"class"属性为"note"的P元素的内容前面都插入字符串"Note: "：</p>
+
+<pre>
+P.note:before { content: "Note: " }
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个元素生成的格式化对象（如，控制框）包含生成的内容。因此，假定改变上面的样式表为：</p>
+
+<pre class="example">
+P.note:before { content: "Note: " }
+P.note        { border: solid green }
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;将把整个段落渲染为有一个实线绿色边框包围，包括初始的字符串。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;:before和:after伪元素<a href="cascade.html#inheritance">继承</a>它们在文档树相联的元素的所有可继承的属性。
+
+<div class=example><P style="display:none">例子：</P>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，下面的规则在每一个Q元素前插入一个开引号。引号的颜色是红的，但是字体和Q元素的其它部分一样：</p>
+
+<pre>
+Q:before {
+  content: open-quote;
+  color: red
+}
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在:before或:after伪元素声明中，非继承的属性取它们的<a href="cascade.html#initial-value">初始值</a>。</p>
+
+<div class=example><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;因此，由于<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性的初始值为'inline'，上例中的引用作为一个行内框插入（即和元素的初始文本内容保持在同一行）。下一例显式地设置<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性为'block'，因此插入的文本成为一个块：</p>
+
+<pre>
+BODY:after {
+    content: "The End";
+    display: block;
+    margin-top: 2em;
+    text-align: center;
+}
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，一个音频用户端会在BODY内容渲染之后读出单词"The End"。
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户必须忽略与:before及:after伪元素相联的如下属性：<a href="visuren.html#propdef-position" class="noxref"><span class="propinst-position">'position'</span></a>，<a href="visuren.html#propdef-float" class="noxref"><span class="propinst-float">'float'</span></a>，<a href="#lists">list</a>属性，以及<a href="tables.html">表格</a>属性。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;:before和:after伪元素允许如下的<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性值：
+
+<ul>
+<li>如果选择子的<a href="selector.html#subject">主题</a>是一个<a href="visuren.html#block-level">块类</a>元素，允许的值为'none'，'inline'，'block'和'marker'。如果<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>值为其它值，伪元素的表现和取值为'block'时相同。
+<li>如果选择子的<a href="selector.html#subject">主题</a>是一个<a href="visuren.html#inline-level">行内</a>元素，允许的值为'none'和'inline'。如果<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>值为其它值，伪元素的表现和取值为'inline'时相同。
+</ul>
+
+<div class="note"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<em><strong>注意。</strong>在将来的CSS级别中，可能允许其它值。</em>
+</div>
+
+<h2>12.2 <a name="content"></a><a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性</h2>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'content'"><a name="propdef-content" class="propdef-title"><strong>'content'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>[ <a href="syndata.html#value-def-string" class="noxref"><span class="value-inst-string">&lt;string&gt;</span></a> | <a href="syndata.html#value-def-uri" class="noxref"><span class="value-inst-uri">&lt;uri&gt;</span></a> | <a href="syndata.html#value-def-counter" class="noxref"><span class="value-inst-counter">&lt;counter&gt;</span></a> | attr(X) | open-quote | close-quote
+| no-open-quote | no-close-quote ]+ | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>空字符串
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>:before和:after伪元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#all-media-group" class="noxref">所有</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性和:before及:after伪元素联用来在文档中产生内容。取值的含义如下：</p>
+
+<dl>
+<dt><span class="index-inst" title="&lt;string&gt;"><a name="x9" href="syndata.html#value-def-string" class="noxref"><span
+class="value-inst-string"><strong>&lt;string&gt;</strong></span></a></span>
+<dd>文本内容（参见<a href="syndata.html#strings">字符串</a>一节）。
+
+<dt><span class="index-inst" title="&lt;uri&gt;"><a name="x10" href="syndata.html#value-def-uri" class="noxref"><span
+class="value-inst-uri"><strong>&lt;uri&gt;</strong></span></a></span>
+<dd>该值为一个URI，指定了一个外部的资源。如果用户端由于它所支持的<a href="media.html">媒介类型</a>的限制而不支持该资源，它必须忽略该资源。<strong>注意。</strong> CSS2并不提供一种机制来改变嵌入对象的尺寸，或提供一个文本描述，如同HTML中图形的"alt"或"longdesc"属性做到的那样。以后级别的CSS可能会改变这一现象。
+
+<dt><span class="index-inst" title="&lt;counter&gt;"><a name="x11" href="syndata.html#value-def-counter" class="noxref"><span class="value-inst-counter"><strong>&lt;counter&gt;</strong></span></a></span>
+<dd><a href="syndata.html#counter">记数器</a>可以用两个不同的函数指定：'counter()'或'counters()'。前者有两种形式：'counter(<var>name</var>)'或'counter(<var>name</var>, <var>style</var>)'。生成的文本是在格式化结构中该点命名记数器的值；以指明的<a href="#counter-styles">样式</a>（缺省为'decimal'）格式化。后一函数也有两种形式：'counter(<var>name</var>, <var>string</var>)'或'counter(<var>name</var>, <var>string</var>, <var>style</var>)'。生成的文本是格式化结构中该点所有该命名的记数器的值，并以指定的字符串分割。记数器以指定的<a href="#counter-styles">样式</a>（缺省为'decimal'）渲染。更多的信息参见<a href="#counters">自动记数和编号</a>一节。
+<dt><span class="index-inst" title="open-quote"><a name="x12" href="generate.html#value-def-open-quote" class="noxref"><span
+class="value-inst-open-quote"><strong>open-quote</strong></span></a></span>和<span class="index-inst" title="close-quote"><a name="x13" href="generate.html#value-def-close-quote" class="noxref"><span class="value-inst-close-quote"><strong>close-quote</strong></span></a></span>
+<dd>该值由<a href="generate.html#propdef-quotes" class="noxref"><span class="propinst-quotes"><strong>'quotes'</strong></span></a>属性中合适的字符串代替。
+
+<dt><span class="index-inst" title="no-open-quote"><a name="x14" href="generate.html#value-def-no-open-quote" class="noxref"><span class="value-inst-no-open-quote"><strong>no-open-quote</strong></span></a></span>和<span class="index-inst" title="no-close-quote"><a name="x15" href="generate.html#value-def-no-close-quote" class="noxref"><span class="value-inst-no-close-quote"><strong>no-close-quote</strong></span></a></span>
+<dd>不插入任何内容（空字符串），但是增加引号的嵌套层次。
+
+<dt><a name="x16"><span class="index-def" title="attr()"><strong>attr(X)</strong></span></a>
+<dd>该函数以字符串形式返回选择子主题的X属性值。CSS处理器不解析该字符串。如果选择子主题没有X属性，返回一个空字符串。属性名的大小写敏感性取决于文档语言。<strong>注意。</strong>CSS2中，不可能引用选择子其它元素的属性值。
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性控制内容是放置在一个块，行内还是在标记框中。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果内容和媒介相关，作者应该将<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>声明放置在<span class="index-inst" title="@media"><a name="x17" href="media.html#at-media-rule">@media</a></span>规则中。例如，文本可以用于任何媒介组，而图形仅适用于图形和点阵图形媒介组，而声音文件只适用于音频媒介组。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的规则使得在一个引用的结尾，播放一个声音文件（参见<a href="aural.html">语音样式表</a>一节，那里有更多的机制）：</p>
+
+<pre>
+@media aural {
+   BLOCKQUOTE:after { content: url("beautiful-music.wav") }
+   }
+</pre>
+</div>
+
+<div class="example"><P style="display:none">Example(s):</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的规则在图形前插入HTML"alt"属性的文本。如果图形不被显示，读者还可以看到"alt"文本。
+
+<pre>
+IMG:before { content: attr(alt) }
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户可以在生成的内容中加入新行，这可以通过在<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性之后的一个字符串中写入"\A"转义序列而达到。它插入了一个<a name="x18"><span class="index-def" title="forced line break"><dfn>强制换行</dfn></span></a>，类似于HTML中的BR元素。参见<a href="syndata.html#strings">“字符串”</a>和<a href="syndata.html#escaped-characters">“字符和大小写”</a>以了解关于"\A"转义序列的更多信息。
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<PRE>
+H1:before {
+    display: block;
+    text-align: center;
+    content: "chapter\A hoofdstuk\A chapitre"
+}
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;生成的内容不改变文档树。特别地，它们并不反馈给文档语言处理器（如，进行再解析工作）。
+
+<div class=note>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>在将来级别的CSS中，<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性可能接受更多的值，允许它改变生成内容的部分的样式，但是在CSS2中，所有:before和:after伪元素的内容的样式都相同。
+</em></p>
+</div>
+
+<h2>12.3 :before及:after与<span class="index-inst" title="compact"><a name="x19" href="visuren.html#value-def-compact" class="noxref"><span class="value-inst-compact">'compact'</span></a></span>及<span class="index-inst" title="run-in"><a name="x20" href="visuren.html#value-def-run-in" class="noxref"><span class="value-inst-run-in">'run-in'</span></a></span>元素的<a name="compact-run-in-gen">交互作用</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;可能发生如下的情况：</p>
+
+<ol>
+<li><strong>一个'run-in'或'compact'元素具有一个:before伪元素，其类型为'inline'：</strong>计算元素框尺寸的时候，伪元素被考虑在内（对于'compact'），并在元素的同一块框内渲染。
+
+<li><strong>一个'run-in'或'compact'元素具有一个:after伪元素，其类型为'inline'：</strong>适用前述规则。
+
+<li><strong>一个'run-in'或'compact'元素具有一个:before伪元素，其类型为'block'：</strong>伪元素作为元素之上的一个块而格式化，并且不参与元素尺寸的计算（对于'compact'）。
+
+<li><strong>一个'run-in'或'compact'元素具有一个:after伪元素，其类型为'block'：</strong>元素和它的:after伪元素都格式化为块框。在它自己的:after伪元素中，该元素并<em>不</em>格式化为一个行内框。
+
+<li><strong>'run-in'或'compact'元素之后的元素具有一个:before伪元素，其类型为'block'：</strong>如何格式化'run-in'/'compact'元素取决于:before伪元素生成的块框。
+
+<li><strong>'run-in'或'compact'元素之后的元素具有一个:before伪元素，其类型为'inline'：</strong>如何格式化'run-in'/'compact'元素取决于:before元素相联的元素的<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>值。
+
+</ol>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这里是一个'run-in'标题，带有一个:after伪元素，后随一个段落带有一个:before伪元素。本例中所有的伪元素都是行内的（缺省）。如果样式表为：</p>
+
+<pre>
+H3 { display: run-in }
+H3:after { content: ": " }
+P:before { content: "... " }
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;并应用于该源文档：</p>
+
+<pre class="html-example">
+&lt;H3&gt;Centaurs&lt;/H3&gt;
+&lt;P&gt;have hoofs
+&lt;P&gt;have a tail
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;格式化的视觉效果为：</p>
+
+<pre class="none">
+Centaurs: ... have hoofs
+... have a tail
+</pre>
+</div>
+
+<h2>12.4 <a name="quotes">引号</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2中，作者可以用一种与样式相关且与内容相关的方式指定用户端应该如何渲染引号。<a href="generate.html#propdef-quotes" class="noxref"><span class="propinst-quotes">'quotes'</span></a>属性指定了每一层嵌套引用的引号对。<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性给出了这些引号的引用，并使其在一个引用之前和之后被插入。
+
+<H3>12.4.1 <a name="quotes-specify">用</a><a href="generate.html#propdef-quotes" class="noxref"><span class="propinst-quotes">'quotes'</span></a>属性指定引用</H3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'quotes'"><a name="propdef-quotes" class="propdef-title"><strong>'quotes'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>[<a href="syndata.html#value-def-string" class="noxref"><span class="value-inst-string">&lt;string&gt;</span></a> <a href="syndata.html#value-def-string" class="noxref"><span class="value-inst-string">&lt;string&gt;</span></a>]+ | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>取决于用户端
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定了任意数量的嵌入引用的引号。取值的含义如下：</p>
+
+<dl>
+<dt><strong>none</strong>
+<dd><a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性的'open-quote'和'close-quote'值不产生引号。
+<dt>[<span class="index-inst" title="&lt;string&gt;"><a name="x22" href="syndata.html#value-def-string" class="noxref"><span
+class="value-inst-string"><strong>&lt;string&gt;</strong></span></a></span>
+&nbsp;<span class="index-inst" title="&lt;string&gt;"><a name="x23" href="syndata.html#value-def-string" class="noxref"><span
+class="value-inst-string"><strong>&lt;string&gt;</strong></span></a></span>]+
+<dd><a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性的'open-quote'和'close-quote'值从该引号对列表中得到（开引号和闭引号）。第一（最左边的）对代表最外层的引用，第二对代表第一层的嵌套，以此类推。用户端必须根据嵌套的层次使用相应的引号对。
+</dl>
+
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，使用如下的样式表：</p>
+
+<PRE class="example">
+/* Specify pairs of quotes for two levels in two languages */
+Q:lang(en) { quotes: '"' '"' "'" "'" }
+Q:lang(no) { quotes: "�" "�" "&lt;" ">" }
+
+/* Insert quotes before and after Q element content */
+Q:before { content: open-quote }
+Q:after  { content: close-quote }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;以及如下的HTML片段：</p>
+
+<PRE class="html-example">
+&lt;HTML lang="en"&gt;
+  &lt;HEAD&gt;
+  &lt;TITLE&gt;Quotes&lt;/TITLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;P&gt;&lt;Q&gt;Quote me!&lt;/Q&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;允许一个用户端产生如下效果：</p>
+
+<PRE class="ascii-art">
+"Quote me!"
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;而在如下的HTML片段中：</p>
+
+<PRE class="html-example">
+&lt;HTML lang="no"&gt;
+  &lt;HEAD&gt;
+  &lt;TITLE&gt;Quotes&lt;/TITLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;P&gt;&lt;Q&gt;Tr&oslash;ndere gr&aring;ter n&aring;r &lt;Q&gt;Vinsjan p&aring; kaia&lt;/Q&gt; blir deklamert.&lt;/Q&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;会产生：</p>
+
+<PRE class="ascii-art">
+玊r&oslash;ndere gr&aring;ter n&aring;r &lt;Vinsjan p&aring; kaia> blir deklamert.�
+</PRE>
+</div>
+
+<div class="note"><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<em><strong>注意。</strong>尽管上例中由<a href="generate.html#propdef-quotes" class="noxref"><span class="propinst-quotes">'quotes'</span></a>属性指定的引号在计算机键盘上的位置是很让人舒服的，高质量的类型设置要求不同的ISO 10646字符。下面这个表格列出了一些ISO 10646的引号字符：</em></p>
+
+<TABLE border>
+<TR><TH>大致的渲染<TH>ISO 10646码（十六进制）<TH>描述
+<TR><TD>"<TD>0022<TD>引号（ASCII双引号）
+<TR><TD>'<TD>0027<TD>省略号（ASCII单引号）
+<TR><TD>&lt;<TD>2039<TD>左向单引号
+<TR><TD>><TD>203A<TD>右向单引号
+<TR><TD>�<TD>00AB<TD>左向双引号
+<TR><TD>�<TD>00BB<TD>右向双引号
+<TR><TD>`<TD>2018<TD>左单引号 [single high-6]
+<TR><TD>'<TD>2019<TD>右单引号 [single high-9]
+<TR><TD>``<TD>201C<TD>左双引号 [double high-6]
+<TR><TD>''<TD>201D<TD>右双引号 [double high-9]
+<TR><TD>,,<TD>201E<TD>双LOW-9引号 [double low-9]
+</TABLE>
+</div>
+
+<H3>12.4.2 <a name="quotes-insert">用</a><a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性插入引号</H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;引号在恰当的位置插入到一个文档中，插入的是<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性的<span class="index-def" title="open-quote"><a class="value-def" name="value-def-open-quote">'open-quote'</a></span>和<span class="index-def" title="close-quote"><a class="value-def" name="value-def-close-quote">'close-quote'</a></span>值。基于嵌套的深度，每一个'open-quote'或'close-quote'的出现都相应地被<a href="generate.html#propdef-quotes" class="noxref"><span class="propinst-quotes">'quotes'</span></a>值中的一个字符串代替。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;'Open-quote'引用引号对的第一部分，而'close-quote'引用第二部分。使用哪一对引号取决于引用的嵌套层次：当前'open-quote'之前出现在所有生成的文本中的'open-quote'次数，减去'close-quote'出现的次数。如果深度为0，使用第一对引号；如果深度为1，使用第二对，以此类推。如果深度大于引号对的数量，最后一对将重复使用。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，该嵌套深度与源文档的嵌套或格式化结构无关。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;有些印刷样式要求在一个跨越数个段落的引用的每一段之前重复开引号，而只在最后一段以闭引号结束。在CSS中，可以通过“虚”的闭引号来达到这一点。关键字<span class="index-def" title="no-close-quote"><a class="value-def" name="value-def-no-close-quote">'no-close-quote'</a></span>减少引号层次，但是不插入一个引号。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子在BLOCKQUOTE的每一段前插入一个开引号，在最后插入一个闭引号：
+
+<pre>
+BLOCKQUOTE P:before     { content: open-quote }
+BLOCKQUOTE P:after      { content: no-close-quote }
+BLOCKQUOTE P.last:after { content: close-quote }
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该方法需要最后一段的类标记为"last"，因为没有一个选择子可以匹配一个元素的最后一个子元素。
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;为了对称，也有一个<span class="index-def" title="no-open-quote"><a class="value-def" name="value-def-no-open-quote">'no-open-quote'</a></span>关键字，它不插入任何内容，但是将引号深度增加1。
+
+<div class="note">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>如果引用的文本语言和其周围的文本语言不同，习惯上用周围文本语言的引号来引用这些文本，而不是用引语语言的引号。
+</em>
+</div>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，英语中的法语：
+
+<blockquote>
+The device of the order of the garter is &#8220;Honi soit qui mal y
+pense.&#8221;
+</blockquote>
+
+法语中的英语：
+
+<blockquote>
+Il disait: �&nbsp;Il faut mettre l'action en &#8249;&nbsp;fast
+forward&nbsp;&#8250;.�
+</blockquote>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如下的一个样式表将设置'quotes'属性，使'open-quote'和'close-quote' 对于所有元素都能正常使用。这些规则适用于只包含英文，法文或其两者的文档。如果有额外的语言，就需要另一个规则。注意子<span class="index-inst" title="combinator"><a name="selector.html#combinator">结合子</a></span>的应用（">"），它根据周围文本的语言来设置引号：</P>
+
+<pre>
+[LANG|=fr] > *  { quotes: "�" "�" "\2039" "\203A" }
+[LANG|=en] > *  { quotes: "\201C" "\201D" "\2018" "\2019" }
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这里显示的英文引号应该是大部分人可以打出的。如果你可以直接打出，它们看起来就会是这样：
+
+<pre>
+[LANG|=fr] > * { quotes: "�" "�" "&#8249;" "&#8250;" }
+[LANG|=en] > * { quotes: "&#8220;" "&#8221;" "&#8216;" "&#8217;" }
+</pre>
+</div>
+
+
+<h2>12.5 自动<span class="index-def" title="counters"><a name="counters">记数</a></span>和编号</h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2中的自动记数由两个属性控制，<a href="generate.html#propdef-counter-increment" class="noxref"><span class="propinst-counter-increment">'counter-increment'</span></a>和<a href="generate.html#propdef-counter-reset" class="noxref"><span class="propinst-counter-reset">'counter-reset'</span></a>。这些属性定义的记数器和<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性的counter()和counters()函数联用。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'counter-reset'"><a name="propdef-counter-reset" class="propdef-title"><strong>'counter-reset'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>[ <a href="syndata.html#value-def-identifier" class="noxref"><span class="value-inst-identifier">&lt;identifier&gt;</span></a> <a href="syndata.html#value-def-integer" class="noxref"><span class="value-inst-integer">&lt;integer&gt;</span></a>? ]+ | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>none
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#all-media-group" class="noxref">所有</a>
+</table>
+</dl>
+</div>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'counter-increment'"><a name="propdef-counter-increment" class="propdef-title"><strong>'counter-increment'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>[ <a href="syndata.html#value-def-identifier" class="noxref"><span class="value-inst-identifier">&lt;identifier&gt;</span></a> <a href="syndata.html#value-def-integer" class="noxref"><span class="value-inst-integer">&lt;integer&gt;</span></a>? ]+ | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>none
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>所有元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#all-media-group" class="noxref">所有</a>
+</table>
+</dl>
+</div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="generate.html#propdef-counter-increment" class="noxref"><span class="propinst-counter-increment">'counter-increment'</span></a>属性接受一个或多个记数器的名称（标识符），每一个之后可选地跟一个整数。这一整数指明记数器在该元素每次出现时的递增量。缺省的增量是1。零和负整数也是允许的。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="generate.html#propdef-counter-reset" class="noxref"><span class="propinst-counter-reset">'counter-reset'</span></a>属性也包含一个或多个记数器名称的列表，每一个之后可选地跟一个证书。该整数指明该元素每次出现时记数器被设置的值。缺省为0。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="generate.html#propdef-counter-increment" class="noxref"><span class="propinst-counter-increment">'counter-increment'</span></a>引用了一个记数器，而它不在任何<a href="generate.html#propdef-counter-reset" class="noxref"><span class="propinst-counter-reset">'counter-reset'</span></a>的<a href="#scope">范围</a>中（参见下文），该记数器被认为由根元素设置为0。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下例显示了一种方法将章和节用"Chapter 1"，"1.1"，"1.2"等来标记：
+
+<pre>
+H1:before {
+    content: "Chapter " counter(chapter) ". ";
+    counter-increment: chapter;  /* Add 1 to chapter */
+    counter-reset: section;      /* Set section to 0 */
+}
+H2:before {
+    content: counter(chapter) "." counter(section) " ";
+    counter-increment: section;
+}
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果一个元素增加/重置了一个记数器，并且使用它（在它的:before或:after伪元素的<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性中），该记数器在增加/重置<em>之后</em>再使用。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果一个元素同时重置和增加一个记数器，记数器先被重置，然后增加。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="generate.html#propdef-counter-reset" class="noxref"><span class="propinst-counter-reset">'counter-reset'</span></a>属性遵循层叠规则。因此，基于层叠，下面的样式表：</p>
+
+<pre class="example">
+H1 { counter-reset: section -1 }
+H1 { counter-reset: imagenum 99 }
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;将只重置'imagenum'。要重置两个记数器，它们必须一起指定：</p>
+
+<pre class="example">
+H1 { counter-reset: section -1 imagenum 99 }
+</pre>
+
+<h3>12.5.1 <a name="scope">记数器嵌套和作用范围</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;记数器是“自我嵌套”的，即如果在一个子元素中重用一个记数器，将自动生成该记数器的一个新的实例。这对于某些情况，如HTML中的列表很重要，因为元素可以在它们之内嵌套到任意深度。不可能为每一个层次定义一个独立命名的记数器。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;因此，如下的代码对于数字编码的嵌套列表项来说就足够了。结果和设置LI元素的'display:list-item'和'list-style: inside'类似：
+
+<pre>
+OL { counter-reset: item }
+LI { display: block }
+LI:before { content: counter(item) ". "; counter-increment: item }
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;自我嵌套基于这样的准则，即：每一个元素如果有一个对于记数器X的<a href="generate.html#propdef-counter-reset" class="noxref"><span class="propinst-counter-reset">'counter-reset'</span></a>，将创建一个新的记数器X，其<a name="x32"><span class="index-def" title="scope"><dfn>范围</dfn></span></a>是该元素，它的前继同胞，以及所有该元素的派生和它的前继同胞。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在上例中，一个OL将产生一个记数器，而所有它的子元素将引用该记数器。
+
+<div class="html-example"> <p>&nbsp;&nbsp;&nbsp;&nbsp;我们以item[n]表示"item"记数器的第n个实例，以"("和")"表示范围的开始和结束，则下面的HTML片段将使用如下指出的记数器。（我们假定样式表已在上例中给出。）
+
+<pre>
+&lt;OL&gt;               &lt;!-- (设置item[0]为0      --&gt;
+  &lt;LI&gt;item         &lt;!--  增加item[0] (= 1)   --&gt;
+  &lt;LI&gt;item         &lt;!--  增加item[0] (= 2)   --&gt;
+    &lt;OL&gt;           &lt;!--  (设置item[1]为0     --&gt;
+      &lt;LI&gt;item     &lt;!--   增加item[1] (= 1)  --&gt;
+      &lt;LI&gt;item     &lt;!--   增加item[1] (= 2)  --&gt;
+      &lt;LI&gt;item     &lt;!--   增加item[1] (= 3)  --&gt;
+        &lt;OL&gt;       &lt;!--   (设置item[2]为0    --&gt;
+          &lt;LI&gt;item &lt;!--    增加item[2] (= 1) --&gt;
+        &lt;/OL&gt;      &lt;!--   )                  --&gt;
+        &lt;OL&gt;       &lt;!--   (设置item[3]为0    --&gt;
+          &lt;LI&gt;     &lt;!--    增加item[3] (= 1) --&gt;
+        &lt;/OL&gt;      &lt;!--   )                  --&gt;
+      &lt;LI&gt;item     &lt;!--   增加item[1] (= 4)  --&gt;
+    &lt;/OL&gt;          &lt;!--  )                   --&gt;
+  &lt;LI&gt;item         &lt;!--  增加item[0] (= 3)   --&gt;
+  &lt;LI&gt;item         &lt;!--  增加item[0] (= 4)   --&gt;
+&lt;/OL&gt;              &lt;!-- )                    --&gt;
+&lt;OL&gt;               &lt;!-- (重置item[4]为0      --&gt;
+  &lt;LI&gt;item         &lt;!--  增加item[4] (= 1)   --&gt;
+  &lt;LI&gt;item         &lt;!--  增加item[4] (= 2)   --&gt;
+&lt;/OL&gt;              &lt;!-- )                    --&gt;
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;'counters()'函数生成一个字符串，包含所有具有那个名称的记数器的值，并以指定的字符串分割。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的样式表将嵌套的列表内容编码为"1"，"1.1"，"1.1.1"等。
+
+<PRE>
+OL { counter-reset: item }
+LI { display: block }
+LI:before { content: counters(item, "."); counter-increment: item }
+</PRE>
+</div>
+
+<h3>12.5.2 <a name="counter-styles">记数器类型</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;缺省情况下，记数器是以十进制数格式化的，但是所有适用于<a href="generate.html#propdef-list-style-type" class="noxref"><span class="propinst-list-style-type">'list-style-type'</span></a>属性的样式也同样适用于记数器。注解如下：</P>
+
+<pre>
+counter(<var>name</var>)
+</pre>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;是缺省样式，或：</p>
+
+<pre>
+counter(<var>name</var>, <a href="generate.html#propdef-list-style-type" class="noxref"><span class="propinst-list-style-type">'list-style-type'</span></a>)
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;所有的样式都是允许的，包括'disc'，'circle'，'square'以及'none'。
+
+<div class="example"><P style="display:none">例子：</P>
+
+<pre>
+H1:before        { content: counter(chno, upper-latin) ". " }
+H2:before        { content: counter(section, upper-roman) " - " }
+BLOCKQUOTE:after { content: " [" counter(bq, hebrew) "]" }
+DIV.note:before  { content: counter(notecntr, disc) " " }
+P:before         { content: counter(p, none) }
+</pre>
+</div>
+
+
+<h3><a name="q10">12.5.3 带有'display: none'属性的元素中的记数器</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个不显示的元素（<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>设置为'none'）不可以增加或重置一个记数器。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，基于下面的样式表，类型为"secret"的H2元素不增加'count2'的值。
+
+<pre>
+H2.secret {counter-increment: count2; display: none}
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;另一方面，元素的<a href="visufx.html#propdef-visibility" class="noxref"><span class="propinst-visibility">'visibility'</span></a>设置为'hidden'，它<em>还是</em>增加记数值的。
+
+<h2><a name="q11">12.6 标记和列表</a></h2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;大部分CSS中的块类元素生成一个原始的块框。本节中，我们讨论两种CSS机制使一个元素生成两个框：一个<a href="visuren.html#principal-box">原始</a>块框（包含元素的内容），一个独立的标记框（包含诸如符号，图形，数字的装饰）。标记框可能定位在原始框的内部或外部。与:before和:after内容不同，标记框不影响原始框的定位，而不管定位机制是什么。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这两个机制中比较通用的一个是CSS2中新的内容，称为<a name="x33"><span class="index-def" title="markers"><dfn>标记</dfn></span></a>。比较专用的机制牵涉到CSS1中的<a href="#lists">列表</a>属性。列表属性对于大量常用的有序或无序的列表场合，给予作者一个快速的结果。不过标记给予用户在标记内容和位置方面精确的控制。标记可以和<a href="#counters">记数器</a>来联用，以创建新的列表样式，边距注解的编号，等等等等。
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，下面的例子展示了如何应用标记在每一个编号的列表项之后加入一个句点。HTML片段和样式表：</p>
+
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+   &lt;HEAD&gt;
+     &lt;TITLE&gt;Creating a list with markers&lt;/TITLE&gt;
+     &lt;STYLE type="text/css"&gt;
+	  LI:before { 
+	      display: marker;
+	      content: counter(mycounter, lower-roman) ".";
+	      counter-increment: mycounter;
+	  }   
+     &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;OL&gt;
+      &lt;LI&gt; This is the first item.
+      &lt;LI&gt; This is the second item.
+      &lt;LI&gt; This is the third item.
+    &lt;/OL&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;产生如下的结果：</P>
+
+<PRE>
+   i. This is the first item.
+  ii. This is the second item.
+ iii. This is the third item.
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;和<a href="./selector.html#descendant-selectors">派生选择子</a>和<a href="./selector.html#child-selectors">子选择子</a>联用，可以根据列表嵌套的深度来定义不同的标记类型。
+
+<h3>12.6.1 <a name="markers">标记：</a><a href="generate.html#propdef-marker-offset" class="noxref"><span class="propinst-marker-offset">'marker-offset'</span></a>属性</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;标记的创建是通过设置:before或:after伪元素中的<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性为'marker'而实现的。尽管'block'和'inline'的:before和:after内容是该元素生成的<a href="visuren.html#principal-box">原始框</a>的一部分，'marker'的内容在一个独立的标记框中格式化，在原始框之外。标记框格式化为一个单行（即，一个<a href="visuren.html#line-box">线框</a>），因此它们不如<a href="visuren.html">浮动</a>那么灵活。标记框只有在该伪元素的<a href="generate.html#propdef-content" class="noxref"><span class="propinst-content">'content'</span></a>属性确实产生内容时，才被创建。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;标记框有边白和边框，但是没有边距。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于:before伪元素，标记框中文字的基线在垂直方向对齐原始框内容第一行文本的基线。如果原始框中没有文本，标记框的顶外边对齐原始框的顶外边。对于:after伪元素，标记框中文字的基线在垂直方向对齐原始框内容最后一行文本的基线。如果原始框中没有文本，标记框的底外边对齐原始框的底外边。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;标记框的高度由<a href="visudet.html#propdef-line-height" class="noxref"><span class="propinst-line-height">'line-height'</span></a>属性给出。:before（:after）标记框参与原始框的第一个（最后一个）线框高度的计算。因此，即使标记框存在于独立的线框中，标记和元素内容的第一行和最后一行对齐。如果原始框中不存在第一个或最后一个线框，标记框独立创建线框。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;标记框在它的线框内的垂直对齐由<a href="visudet.html#propdef-vertical-align" class="noxref"><span class="propinst-vertical-align">'vertical-align'</span></a>属性指定。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>属性的值为'auto'，标记框的<a href="box.html#content-width">内容宽度</a>就是内容的宽度，否则它是<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>的值。如果<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>的值小于内容宽度，<a href="visufx.html#propdef-overflow" class="noxref"><span class="propinst-overflow">'overflow'</span></a>属性指定了溢出的表现。标记框可能覆盖原始框。如果<a href="visudet.html#propdef-width" class="noxref"><span class="propinst-width">'width'</span></a>值大于内容宽度，<a href="text.html#propdef-text-align" class="noxref"><span class="propinst-text-align">'text-align'</span></a>属性决定内容在标记框中的水平对齐。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="generate.html#propdef-marker-offset" class="noxref"><span class="propinst-marker-offset">'marker-offset'</span></a>属性指定了标记框和其相连的<a href="visuren.html#principal-box">原始框</a>之间的水平偏移。所衡量的是它们最靠近的<a href="box.html#border-edge">边框边</a>间的距离。<strong>注意。</strong>如果在左到右的格式化内容中，一个标记排列在一个浮动的右边，原始框将排列在浮动的右边，而标记框在出现在浮动的左边。由于原始框的左边框排在浮动的左边（参见<a href="visuren.html#floats">浮动</a>的描述），而标记框排在原始框边框边的外边，因此标记也将排在浮动的左边。相似的情况出现在右到左的格式化内容中，标记排列在浮动左边的场景。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于一个设置了'display: list-item'的元素所生成的内容，如果<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性取值为'marker'，为':before'生成的标记框取代通常的列表项标记。
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下例中，在一个固定宽度的标记框中，内容居中排列。下面的文档：</p>
+
+<PRE>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+ &lt;HTML&gt;
+    &lt;HEAD&gt;
+      &lt;TITLE&gt;Content alignment in the marker box&lt;/TITLE&gt;
+      &lt;STYLE type="text/css"&gt;
+           LI:before { 
+               display: marker;
+               content: "(" counter(counter) ")";
+               counter-increment: counter;
+               width: 6em;
+               text-align: center;
+           }
+      &lt;/STYLE&gt;
+   &lt;/HEAD&gt;
+   &lt;BODY&gt;
+     &lt;OL&gt;
+       &lt;LI&gt; This is the first item.
+       &lt;LI&gt; This is the second item.
+       &lt;LI&gt; This is the third item.
+     &lt;/OL&gt;
+   &lt;/BODY&gt;
+ &lt;/HTML&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;应该产生如下的效果：</P>
+
+<PRE>
+  (1)    This is the 
+         first item.
+  (2)    This is the 
+         second item.
+  (3)    This is the 
+         third item.
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子在列表项之前和之后生成标记。
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该文档：</p>
+
+<PRE>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Markers before and after list items&lt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      @media screen, print {
+         LI:before { 
+   	      display: marker;
+	      content: url("smiley.gif");
+         LI:after {
+	      display: marker;
+   	      content: url("sad.gif");
+         }
+      }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;UL&gt;
+      &lt;LI&gt;first list item comes first
+      &lt;LI&gt;second list item comes second
+    &lt;/UL&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;应该产生如下的效果（这里用ASCII字符来代表图形文件）：</p>
+
+<PRE>
+  :-) first list item 
+      comes first      :-(
+  :-) second list item 
+      comes second     :-(
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子用标记来编号注释（段落）。</p>
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的文档：</p>
+
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Markers to create numbered notes4&gt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      P { margin-left: 12 em; }
+      @media screen, print {
+         P.Note:before         { 
+  	      display: marker;
+	      content: url("note.gif") 
+                       "Note " counter(note-counter) ":";
+              counter-increment: note-counter;
+              text-align: left;
+              width: 10em;
+         }
+     }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;P&gt;This is the first paragraph in this document.&lt;/P&gt;
+    &lt;P CLASS="Note"&gt;This is a very short document.&lt;/P&gt;
+    &lt;P&gt;This is the end.&lt;/P&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;应该产生如下的效果：</p>
+
+<PRE>
+            This is the first paragraph 
+            in this document.
+
+  Note 1:   This is a very short 
+            document.
+           
+            This is the end.
+</PRE>
+</div>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'marker-offset'"><a name="propdef-marker-offset" class="propdef-title"><strong>'marker-offset'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a> | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>设置了'display: marker'的元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定了标记框的<a href="box.html#border-edge">边框边</a>和最靠近它的与之相连的<a href="visuren.html#principal-box">原始框</a>的边框边的距离。该偏移或者是用户指定的（<span class="index-inst" title="&lt;length&gt;"><a name="x35" href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a></span>）或由用户端选择（'auto'）。长度可以是负数，但是可能有实现上的限制。
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的例子展示了如何用标记在每一个编号的列表项之后加入一个句点。HTML片段和样式表如下：</p>
+
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+ &lt;HTML&gt;
+    &lt;HEAD&gt;
+      &lt;TITLE&gt;Marker example 5&lt;/TITLE&gt;
+      &lt;STYLE type="text/css"&gt;
+           P { margin-left: 8em } /* Make space for counters */
+           LI:before { 
+               display: marker;
+               marker-offset: 3em;
+               content: counter(mycounter, lower-roman) ".";
+               counter-increment: mycounter;
+           }   
+      &lt;/STYLE&gt;
+   &lt;/HEAD&gt;
+   &lt;BODY&gt;
+     &lt;P&gt; This is a long preceding paragraph ...
+     &lt;OL&gt;
+       &lt;LI&gt; This is the first item.
+       &lt;LI&gt; This is the second item.
+       &lt;LI&gt; This is the third item.
+     &lt;/OL&gt;
+     &lt;P&gt; This is a long following paragraph ...
+   &lt;/BODY&gt;
+ &lt;/HTML&gt;
+</pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;应该产生如下的效果：</P>
+
+<PRE>
+        This is a long preceding
+        paragraph ...
+      
+   i.   This is the first item.
+  ii.   This is the second item.
+ iii.   This is the third item.
+
+        This is a long following
+        paragraph ...
+</PRE>
+</div>
+
+<h3>12.6.2 <a name="lists">列表：</a><a href="generate.html#propdef-list-style-type" class="noxref"><span class="propinst-list-style-type">'list-style-type'</span></a>，<a href="generate.html#propdef-list-style-image" class="noxref"><span class="propinst-list-style-image">'list-style-image'</span></a>，<a href="generate.html#propdef-list-style-position" class="noxref"><span class="propinst-list-style-position">'list-style-position'</span></a>及<a href="generate.html#propdef-list-style" class="noxref"><span class="propinst-list-style">'list-style'</span></a>属性</h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x36"><span class="index-def" title="list properties"><dfn>列表属性</dfn></span></a>允许列表的基本可视格式化。对于更一般的标记，元素设置了'display: list-item'，将生成一个<a href="visuren.html#principal-box">原始框</a>来包含元素的内容，以及一个可选的标记框。其它列表属性允许作者指定标记类型（图形，字形或数字）以及它们相对原始框的位置（在框之外或框之内，内容之前）。它们不允许作者为列表标记指定个别的样式（颜色，字体，对齐等），也不允许相对原始框而调整它的位置。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;另外，如果一个标记M（用'display: marker'创建）用在一个由列表属性创建的列表项，M替代了标准的列表项标记。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于列表属性，<a href="colors.html#background-properties">背景属性</a>只适用于原始框；一个'outside'的标记框是透明的。标记提供了标记框样式更多的控制。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'list-style-type'"><a name="propdef-list-style-type" class="propdef-title"><strong>'list-style-type'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>disc | circle | square | decimal | decimal-leading-zero | lower-roman | upper-roman | lower-greek | lower-alpha | lower-latin | upper-alpha | upper-latin | hebrew | armenian | georgian | cjk-ideographic | hiragana | katakana | hiragana-iroha | katakana-iroha | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>disc
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>设置了'display: list-item'的元素
+<tr valign=baseline><td width=20%><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="generate.html#propdef-list-style-image" class="noxref"><span class="propinst-list-style-image">'list-style-image'</span></a>为'none'或由该URI指向的图形无法被显示时，该属性指定了列表项标记的呈现。'none'指定没有标记，否则有三种类型的标记：字形，数字系统和字母系统。<strong>注意。</strong>通过使列表的导航更容易，标号的列表改进了文档的可阅读性 。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;字形由<strong><span class="index-def" title="disc"><a class="value-def" name="value-def-disc">disc</a></span></strong>，<strong><span class="index-def" title="circle"><a class="value-def" name="value-def-circle">circle</a></span></strong>和<strong><span class="index-def" title="square"><a class="value-def" name="value-def-square">square</a></span></strong>指定。它们确切的渲染取决于用户端。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;数字系统的指定如下：</P>
+
+<dl>
+<dt><span class="index-def" title="decimal">
+<a class="value-def" name="value-def-decimal">
+<strong>decimal</strong></a></span>
+<dd>十进制数，以1开始。
+<dt><strong><span class="index-def" title="decimal-leading-zero"><a class="value-def" name="value-def-decimal-leading-zero">decimal-leading-zero</a></span></strong>
+<dd>十进制数，带有前导0（01，02，03，……，98，99）。
+<dt><strong><span class="index-def" title="lower-roman"><a class="value-def" name="value-def-lower-roman">lower-roman</a></span></strong>
+<dd>小写罗马数字（i，ii，iii，iv，v等）。
+<dt><strong><span class="index-def" title="upper-roman"><a class="value-def" name="value-def-upper-roman">upper-roman</a></span></strong>
+<dd>大写罗马数字（I，II，III，IV，V等）。
+<dt><strong><span class="index-def" title="hebrew"><a class="value-def" name="value-def-hebrew">hebrew</a></span></strong>
+<dd>传统的希伯来数字。
+<dt><strong><span class="index-def" title="georgian"><a class="value-def" name="value-def-georgian">georgian</a></span></strong>
+<dd>传统的格鲁吉亚数字。（an，ban，gan，……，he，tan，in，in-an，……）。
+<dt><strong><span class="index-def" title="armenian"><a class="value-def" name="value-def-armenian">armenian</a></span></strong>
+<dd>传统的亚美尼亚数字。
+<dt><strong><span class="index-def" title="cjk-ideographic"><a class="value-def" name="value-def-cjk-ideographic">cjk-ideographic</a></span></strong>
+<dd>一般表意数字。
+<dt><strong><span class="index-def" title="hiragana"><a class="value-def" name="value-def-hiragana">hiragana</a></span></strong>
+<dd>a，i，u，e，o，ka，ki，……
+<dt><strong><span class="index-def" title="katakana"><a class="value-def" name="value-def-katakana">katakana</a></span></strong>
+<dd>A，I，U，E，O，KA，KI，……
+<dt><strong><span class="index-def" title="hiragana-iroha"><a class="value-def" name="value-def-hiragana-iroha">hiragana-iroha</a></span></strong>
+<dd>i，ro，ha，ni，ho，he，to，……
+<dt><strong><span class="index-def" title="katakana-iroha"><a class="value-def" name="value-def-katakana-iroha">katakana-iroha</a></span></strong>
+<dd>I，RO，HA，NI，HO，HE，TO，……
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果用户端无法识别一个数字系统，它应该使用'decimal'。
+
+<div class="note">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>本文档并不规定每一个数字系统的确切机制（如，罗马数字如何计算）。以后的W3C注解可能提供更详细的声明。
+</em>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;字母系统的指定如下：</P>
+
+<dl>
+<dt><strong><span class="index-def" title="lower-latin"><a class="value-def" name="value-def-lower-latin">lower-latin</a></span></strong>或<strong>lower-alpha</strong>
+<dd>小写ASCII字母（a，b，c，…… z）。
+<dt><strong><span class="index-def" title="upper-latin"><a class="value-def" name="value-def-upper-latin">upper-latin</a></span></strong>或<strong>upper-alpha</strong>
+<dd>大写ASCII字母（A，B，C，…… Z)。
+<dt><strong><span class="index-def" title="lower-greek"><a class="value-def" name="value-def-lower-greek">lower-greek</a></span></strong>
+<dd>小写标准希腊字母alpha，beta，gamma，……（&#941;，&#942;，&#943;，……）
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本规范并不定义字母系统在字母表之后如何回绕。例如，26个列表项之后，'lower-latin'的渲染未被定义。因此，对于长的列表，我们推荐作者指定真实的数字。
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，如下的HTML文档：
+<PRE>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"&gt;
+&lt;HTML&gt;
+   &lt;HEAD&gt;
+     &lt;TITLE&gt;Lowercase latin numbering&lt;/TITLE&gt;
+     &lt;STYLE type="text/css"&gt;
+          OL { list-style-type: lower-roman }   
+     &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;OL&gt;
+      &lt;LI&gt; This is the first item.
+      &lt;LI&gt; This is the second item.
+      &lt;LI&gt; This is the third item.
+    &lt;/OL&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;可能产生如下的效果：
+
+<PRE>
+  i This is the first item.
+ ii This is the second item.
+iii This is the third item.
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;注意，列表标记的对齐（在这里是右对齐）取决于用户端。
+</div>
+
+<div class="note">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>以后版本的CSS可能提供更多完整的机制来包括国际数字编码系统。
+</em>
+</div>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'list-style-image'"><a name="propdef-list-style-image" class="propdef-title"><strong>'list-style-image'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-uri" class="noxref"><span class="value-inst-uri">&lt;uri&gt;</span></a> | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>none
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>带有'display: list-item'的元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定用来列表项标记的图形。如果图形是可以得到的，它将替换由<a href="generate.html#propdef-list-style-type" class="noxref"><span class="propinst-list-style-type">'list-style-type'</span></a>标记设置的标记。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面的这个例子将每一个列表项开头的标记设置为图形"ellipse.png"。
+
+<PRE>
+UL { list-style-image: url("http://png.com/ellipse.png") }
+</PRE>
+</div>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'list-style-position'"><a name="propdef-list-style-position" class="propdef-title"><strong>'list-style-position'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>inside | outside | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>outside
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>带有'display: list-item'的元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该值指定标记框相对原始块框的位置。取值的含义如下：</p>
+
+<dl>
+<dt><strong>outside</strong>
+<dd>标记框在原始块框的外面。<strong>注意。</strong>CSS1没有指定标记框的确切位置，为了兼容性的考虑，CSS2保持了同样的含糊。要得到标记框更精确的控制，请使用标记。
+<dt><strong>inside</strong>
+<dd>标记框是原始块框的第一个行内框，其后跟随的是元素的内容。
+</dl>
+
+<div class="html-example">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如：
+
+<PRE>
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Comparison of inside/outside position&lt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      UL         { list-style: outside }
+      UL.compact { list-style: inside }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;UL&gt;
+      &lt;LI&gt;first list item comes first
+      &lt;LI&gt;second list item comes second
+    &lt;/UL&gt;
+
+    &lt;UL class="compact"&gt;
+      &lt;LI&gt;first list item comes first
+      &lt;LI&gt;second list item comes second
+    &lt;/UL&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;上例可能被格式化为：</P>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/list-inout.gif" alt="Difference between inside
+and outside list style position"><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-list-inout" href="images/longdesc/list-inout-desc.html" title="Long description for example showing inside vs. outside
+list marker">[D]</A></SPAN></p>
+</div>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在右到左排列的文本中，标记会出现在框的右边。
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'list-style'"><a name="propdef-list-style" class="propdef-title"><strong>'list-style'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>[ <a href="generate.html#propdef-list-style-type" class="noxref"><span class="propinst-list-style-type">&lt;'list-style-type'&gt;</span></a> || <a href="generate.html#propdef-list-style-position" class="noxref"><span class="propinst-list-style-position">&lt;'list-style-position'&gt;</span></a> || <a href="generate.html#propdef-list-style-image" class="noxref"><span class="propinst-list-style-image">&lt;'list-style-image'&gt;</span></a> ] | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>对于缩写属性未定义
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>带有'display: list-item'的元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="generate.html#propdef-list-style" class="noxref"><span class="propinst-list-style">'list-style'</span></a>属性是一个缩写的属性，用来在样式表的同一处一次性设置三个属性（<a href="generate.html#propdef-list-style-type" class="noxref"><span class="propinst-list-style-type">'list-style-type'</span></a>，<a href="generate.html#propdef-list-style-image" class="noxref"><span class="propinst-list-style-image">'list-style-image'</span></a>和<a href="generate.html#propdef-list-style-position" class="noxref"><span class="propinst-list-style-position">'list-style-position'</span></a>）。
+
+<div class="example"><P style="display:none">例子：</P><p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+UL { list-style: upper-roman inside }  /* Any UL */
+UL > UL { list-style: circle outside } /* Any UL child of a UL */
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;虽然作者可以在列表项元素（如，HTML中的LI）上直接指定指定<a href="generate.html#propdef-list-style" class="noxref"><span class="propinst-list-style">'list-style'</span></a>信息，他们这样做时要小心。下面的规则看上去很相象，但是第一个声明了一个<a href="./selector.html#descendant-selectors">派生选择子</a>而第二个声明了一个更有针对性的<a href="./selector.html#child-selectors">子选择子</a>。
+
+<PRE class="example">
+OL.alpha LI   { list-style: lower-alpha } /* Any LI descendant of an OL */
+OL.alpha > LI { list-style: lower-alpha } /* Any LI child of an OL */
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果作者只使用<a href="selector.html#descendant-selectors">派生选择子</a>，可能达不到他们希望的效果。考虑如下的例子：
+
+<PRE class="html-example">
+&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;WARNING: Unexpected results due to cascade&lt;/TITLE&gt;
+    &lt;STYLE type="text/css"&gt;
+      OL.alpha LI  { list-style: lower-alpha }
+      UL LI        { list-style: disc }
+    &lt;/STYLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;OL class="alpha"&gt;
+      &lt;LI&gt;level 1
+      &lt;UL&gt;
+         &lt;LI&gt;level 2
+      &lt;/UL&gt;
+    &lt;/OL&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;需要的效果是第一级列表项的标签为'lower-alpha'，第二级的标签为'disc'。但是<a href="./cascade.html#cascading-order">层叠顺序</a>将使第一个样式规则（包含一个特定的类信息）覆盖的第二个。下面的规则通过改用<a href="./selector.html#child-selectors">子选择子</a>解决了这一问题：
+
+<PRE class="example">
+OL.alpha > LI  { list-style: lower-alpha }
+UL LI   { list-style: disc }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;另外一个解决方法是只在列表类型元素上指定<a href="generate.html#propdef-list-style" class="noxref"><span class="propinst-list-style">'list-style'</span></a>信息：
+
+<PRE class="example">
+OL.alpha  { list-style: lower-alpha }
+UL        { list-style: disc }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;继承将OL和UL元素的<a href="generate.html#propdef-list-style" class="noxref"><span class="propinst-list-style">'list-style'</span></a>值转移到LI元素。这是指定列表样式信息的推荐方法。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个URI值可以和其它值联用，如：
+
+<PRE>
+UL { list-style: url("http://png.com/ellipse.png") disc }
+</PRE>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;上例中，如果无法获取图形，将使用'disc'。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果<a href="generate.html#propdef-list-style" class="noxref"><span class="propinst-list-style">'list-style'</span></a>属性取值为'none'，它将<a href="generate.html#propdef-list-style-type" class="noxref"><span class="propinst-list-style-type">'list-style-type'</span></a>和<a href="generate.html#propdef-list-style-image" class="noxref"><span class="propinst-list-style-image">'list-style-image'</span></a>都设置为'none'：
+
+<PRE>
+UL { list-style: none }
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;结果是不显示任何列表项标记。
+
+</div>
+
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="visufx.html">上一篇</a> &nbsp;
+<a href="page.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</body>
+</html>

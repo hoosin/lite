@@ -1,0 +1,551 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="zh-cn">
+
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>页面介质</TITLE>
+<link rel="stylesheet" href="style/default.css" type="text/css">
+<link rel="prev" href="generate.html">
+<link rel="next" href="colors.html">
+<link rel="contents" href="cover.html#minitoc">
+<link rel="CSS-properties" href="propidx.html" title="properties">
+<link rel="index" href="indexlist.html" title="index">
+</HEAD>
+<BODY>
+<div class="navbar" align="center">
+<p><a href="generate.html">上一篇</a> &nbsp;
+<a href="colors.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+<hr class="navbar">
+
+<H1 align="center">13 <a name="the-page">页面介质</a></H1>
+<div class="subtoc">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>目录</strong>
+  <ul class="toc">
+    <li class="tocline2"><a href="page.html#q1" class="tocxref">13.1 页面媒介简介</a>
+    <li class="tocline2"><a href="page.html#page-box" class="tocxref">13.2 页框：@page规则</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="page.html#page-margins" class="tocxref">13.2.1 页边距</a>
+      <li class="tocline3"><a href="page.html#page-size-prop" class="tocxref">13.2.2 页面尺寸：<span class="propinst-size">'size'</span>属性</a>
+      <ul class="toc">
+        <li class="tocline4"><a href="page.html#q5" class="tocxref">页框和目标页面不匹配时的渲染</a>
+        <li class="tocline4"><a href="page.html#q6" class="tocxref">页面上页框的定位</a>
+      </ul>
+      <li class="tocline3"><a href="page.html#crop-mark-prop" class="tocxref">13.2.3 裁剪标记：<span class="propinst-marks">'marks'</span>属性</a>
+      <li class="tocline3"><a href="page.html#q8" class="tocxref">13.2.4 左页，右页及第一页</a>
+      <li class="tocline3"><a href="page.html#q9" class="tocxref">13.2.5 页框外的内容</a>
+    </ul>
+    <li class="tocline2"><a href="page.html#page-breaks" class="tocxref">13.3 分页</a>
+    <ul class="toc">
+      <li class="tocline3"><a href="page.html#page-break-props" class="tocxref">13.3.1 在元素前/后分页：<span class="propinst-page-break-before">'page-break-before'</span>，<span class="propinst-page-break-after">'page-break-after'</span>，<span class="propinst-page-break-inside">'page-break-inside'</span></a>
+      <li class="tocline3"><a href="page.html#named-pages" class="tocxref">13.3.2 使用命名的页：<span class="propinst-page">'page'</span></a>
+      <li class="tocline3"><a href="page.html#break-inside" class="tocxref">13.3.3 元素内的分割：<span class="propinst-orphans">'orphans'</span>，<span class="propinst-widows">'widows'</span></a>
+      <li class="tocline3"><a href="page.html#allowed-page-breaks" class="tocxref">13.3.4 允许的分页</a>
+      <li class="tocline3"><a href="page.html#forced" class="tocxref">13.3.5 强制的分页</a>
+      <li class="tocline3"><a href="page.html#q16" class="tocxref">13.3.6 “最佳”分页</a>
+    </ul>
+    <li class="tocline2"><a href="page.html#q17" class="tocxref">13.4 页面内容的层叠</a>
+  </ul>
+</div>
+
+<H2><a name="q1">13.1 页面媒介简介</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;页面媒介（如，纸张，透明胶片，显示在计算机屏幕上的页面等）与<a href="./media.html#continuous-media-group">连续媒介</a>不同，主要是文档的内容被分割为一个或多个独立的页。为了处理分页，CSS2扩展了<a href="visuren.html">可视化格式模型</a>：</p>
+
+<ol>
+<li><a href="#page-box">页框</a>扩展了<a href="box.html#box-model">包含框模型</a>，允许作者指定页面的大小，它的边距等等。
+
+<li><a name="x0"><span class="index-def" title="page model"><dfn>页面模型</dfn></span></a>扩展了<a href="visuren.html">可视化格式模型</a>，以加入对<a href="#page-breaks">分页</a>的考虑。
+</ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2的<a name="page-model">页面模型</a>规定一个文档如何在一个长方形区域——<a href="#page-box">页框</a>——内格式化，该区域宽度和高度是固定的。页框并不一定相应于文档最终要渲染在其上的实际的<a name="x1"><span class="index-def" title="sheet"><dfn>页面</dfn></span></a>（纸张，透明胶片，屏幕等）。CSS页面模型指定在页框内的格式化，但是需要用户端将页框转换为页面。可能的转换包括：</P>
+
+<ul>
+<li>将一个页框转换为一个页面（如，单面打印）。
+<li>将两个页框转换为同一页面的两面（如，双面打印）。
+<li>将N个（小）页框转换到一个页面（称为"n-up"）。
+<li>将一个（大）页框转换到N x M个页面（称为“分块”）。
+<li>创建签名。一个签名是一组页打印到一个页面上，当给页面如同一本书那样折叠或裁剪时，该组页以正确的顺序出现。
+<li>将一个文档打印到若干个输出托盘。
+<li>将一个文档输出为一个文件。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;尽管CSS2没有指定用户端应该如何将页框转换为页面，但是它确实包含特定的机制告诉用户端目的页面的<a href="#page-size-prop">尺寸和方向</a>。
+
+<H2>13.2 <a name="page-box">页框</a>：@page规则</H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x2"><span class="index-def" title="page box"><dfn>页框</dfn></span></a>是一个长方形的范围，并包含两个区域：</p>
+
+<ul>
+<li><span class="index-def" title="page area"><a name="page-area"><dfn>页面区域</dfn></a></span>。页面区域包括布置在该页面上的框。页面区域的边作为分页之间发生的布局的初始<a href="visuren.html#initial-containing-block">包含块</a>。
+<li>边距区域，包围了页面区域。
+</ul>
+
+<div class="note">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>CSS2中，<a href="./box.html#border-properties">边框属性</a>和<a href="./box.html#padding-properties">边白属性</a>不适用于页面；在将来可能实现。
+</em>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;作者在一个<a name="x4"><span class="index-def" title="@page">@page</span></a>规则中指定页框的尺寸，方向，边距等信息。一个@page规则包含关键字"@page"，一个页面选择子（其后可选地跟随一个页面伪类，中间没有空格），和一个声明块（可以说是在<span class="index-def" title="page-context"><a name="page-context"><dfn>页面内容</dfn></a></span>中）。</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x6"><span class="index-def" title="page selector"><dfn>页面选择子</dfn></span></a>指定了声明所适用的页面。CSS2中，页面选择子可以指定第一页，所有左页，所有右页或有一个特定名字的页。
+</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;页框的尺寸由<a href="page.html#propdef-size" class="noxref"><span lass="propinst-size">'size'</span></a>属性来设置。页面区域的尺寸是页框的尺寸减去边距区域的尺寸。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如，下面的@page规则将页框的尺寸设置为8.5 x 11英寸，并在页框边和页面区域之间的每一边创建了'2cm'的边距：</p>
+
+<pre>
+@page { size 8.5in 11in; margin: 2cm }
+</pre>
+</div>
+
+@page规则中的<a href="page.html#propdef-marks" class="noxref"><span class="propinst-marks">'marks'</span></a>属性指定了该页面框的剪切和十字线标记。
+
+<h3>13.2.1 <a name="page-margins">页边距</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="box.html#margin-properties">边距属性</a>（<a href="box.html#propdef-margin-top" class="noxref"><span class="propinst-margin-top">'margin-top'</span></a>，<a href="box.html#propdef-margin-right" class="noxref"><span class="propinst-margin-right">'margin-right'</span></a>，<a href="box.html#propdef-margin-bottom" class="noxref"><span class="propinst-margin-bottom">'margin-bottom'</span></a>，<a href="box.html#propdef-margin-left" class="noxref"><span class="propinst-margin-left">'margin-left'</span></a>和<a href="box.html#propdef-margin" class="noxref"><span class="propinst-margin">'margin'</span></a>）适用于<a href="#page-context">页面内容</a>。下图显示了页面，页框和页边距之间的关系：</P>
+
+<div class="figure">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/page-info.gif" alt="Illustration of sheet, page
+box, margin, and page area."><SPAN class="dlink">&nbsp;&nbsp;&nbsp;<A name="img-page-info" href="images/longdesc/page-info-desc.html" title="Long description illustrating relationship between page box
+      and sheet">[D]</A></SPAN></p>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;页面区域框的顶、底边距的计算值为'0'。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#page-context">页面内容</a>中没有字体的概念，因此不允许使用'em'和'ex'作为单位。边距属性的百分比值相对于<a href="#page-box">页框</a>的尺寸；对于左右边距，它们基于页框的宽度，对于顶底边距，它们基于页框的高度。其它和相应的CSS2属性相关联的单位是允许使用的。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于负的边距值（或者是页框的或者是元素的），或<a href="visuren.html#absolute-positioning">绝对定位</a>的缘故，内容可能最后出现在页框之外，但是这样的内容会被“剪切”掉——或者由用户端，打印机，或者，最后由裁纸机来完成。
+
+<h3>13.2.2 <a name="page-size-prop">页面尺寸</a>：<a href="page.html#propdef-size" class="noxref"><span class="propinst-size">'size'</span></a>属性</h3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'size'"><a name="propdef-size" class="propdef-title"><strong>'size'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-length" class="noxref"><span class="value-inst-length">&lt;length&gt;</span></a>{1,2} | auto | portrait | landscape | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>页面内容
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>，<a href="media.html#paged-media-group" class="noxref">页面</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该属性指定了一个页框的尺寸和方向。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;页框的尺寸可以是“绝对尺寸”（固定尺寸）或“相对尺寸”（可放缩的，即，适应可用的页面尺寸）。相对页框允许用户端放缩一个文档以最佳利用目标尺寸。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="page.html#propdef-size" class="noxref"><span class="propinst-size">'size'</span></a>属性取三个值之一将创建一个相对尺寸的页框：</p>
+
+<DL>
+<DT><strong>auto</strong>
+<DD>页框将根据目标页面的尺寸和方向设置。
+
+<DT><strong>landscape</strong>
+<DD>超越目标的方向。页框和目标的尺寸一样，较长的边为水平边。
+
+<DT><strong>portrait</strong>
+<DD>超越目标的方向。页框和目标的尺寸一样，较短的边为水平边。
+</DL>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下例中，页框的外边将对齐目标页面的边。<a href="box.html#propdef-margin" class="noxref"><span class="propinst-margin">'margin'</span></a>属性的百分比值相对于目标尺寸，因此如果目标页面的尺寸为21.0cm x 29.7cm（即A4幅面），边距为2.10cm和2.97cm。
+
+<pre>
+@page {
+  size: auto;   /* auto is the initial value */
+  margin: 10%;
+}
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="page.html#propdef-size" class="noxref"><span class="propinst-size">'size'</span></a>属性的长度值创建一个绝对页框。如果只有一个长度值被指定，它同时设置了该页框宽度和高度（即，这个框是一个正方形）。由于页框是<a href="visuren.html#initial-containing-block">初始包含块</a>，不允许为<a href="page.html#propdef-size" class="noxref"><span class="propinst-size">'size'</span></a>属性指定百分比值。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;例如：
+<PRE>
+@page {
+  size: 8.5in 11in;  /* width height */
+}
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;上例将页框的宽度设置为8.5in，高度设置为11in。本例中的页框要求目标页面的尺寸为&quot;8.5x11&quot;或更大。
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;用户端可以允许用户控制页框到页面的转换（例如，旋转一个被打印的绝对页框）。
+
+<h4><a name="q5">页框和目标页面不匹配时的渲染</a></h4>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果一个页框不匹配目标页面的尺寸，用户端可以选择：</p>
+
+<UL>
+<LI>将页框旋转90度，如果这样可以使页框和页面匹配。
+<LI>放缩页面使之与目标匹配。
+</UL>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在这样做之前，用户端应该询问用户。
+
+<h4><a name="q6">页面上页框的定位</a></h4>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果页框小于目标尺寸，用户端可以自由地在页面上放置页框。不过，推荐的方法是将页框放置在页面的中央，因为这样做会对齐双面的页面，也避免了错误丢失那些打印在靠近页面边的信息。
+
+<h3>13.2.3 <a name="crop-mark-prop">裁剪标记</a>：<a href="page.html#propdef-marks" class="noxref"><span class="propinst-marks">'marks'</span></a>属性</h3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'marks'"><a name="propdef-marks" class="propdef-title"><strong>'marks'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>[ crop || cross ] | none | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>none
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>页面内容
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>，<a href="media.html#paged-media-group" class="noxref">页面</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在高质量打印中，经常在页框之外加入标记。该属性指定了十字线或裁剪标记或两者是否应该在<a href="#page-box">页框</a>边的外面得到渲染。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a name="x9"><span class="index-def" title="crop marks"><dfn>裁剪标记</dfn></span></a>标明页面应该在哪里被裁剪。<a name="x10"><span class="index-def" title="cross marks"><dfn>十字线标记</dfn></span></a>（也称为注册标记）用来对齐各个页面。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;标记只在绝对页框中可见（参见<a href="page.html#propdef-size" class="noxref"><span class="propinst-size">'size'</span></a>属性）。相对页框中，页框对齐目标页面而标记将在可打印的区域之外。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;十字线标记的尺寸，样式和位置取决于用户端。
+
+<h3><a name="q8">13.2.4 左页，右页及第一页</a></H3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;打印双面文档时，左页和右页的<a href="#page-box">页框</a>应该不同。通过可能在<a href="#page-context">页面内容</a>中定义的两个CSS伪类可以达到这一要求。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;所有的页都自动地被用户端归为<a name="x11"><span class="index-def" title=":left|pseudo-class:::left">:left</span></a>或<a name="x13"><span class="index-def" title=":right|pseudo-class:::right">:right</span></a>伪类。
+
+<div class="example"><P style="display:none">例子：</P>
+<PRE>
+@page :left {
+  margin-left: 4cm;
+  margin-right: 3cm;
+}
+
+@page :right {
+  margin-left: 3cm;
+  margin-right: 4cm;
+}
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果对于左页和右页设置了不同的声明，那么即使用户端并不将页框转换为左页和右页（例如，一个打印机可能只打印单页），用户端也要遵循这些声明。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;作者可以通过<a name="x15"><span class="index-def" title=":first|pseudo-class:::first">:first</span></a>伪类来为文档的第一页指定样式：
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;
+<PRE>
+@page { margin: 2cm } /* All margins set to 2cm */
+
+@page :first {
+  margin-top: 10cm    /* Top margin on first page 10cm */
+}
+</PRE>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;文档的第一页是:left或:right取决于该文档的主要的书写方向，超出了本文档的讨论范围。不过，要强迫第一页为:left或:right，作者可以在第一个生成的框（如，在HTML中，对于BODY元素指定该设置）之前插入一个分页。 
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在:left（或:right）@page规则中指定的属性将超越没有指定伪类的@page规则中指定的属性。在:first @page规则中指定的属性超越那些在:left（或:right）@page规则中指定的属性。
+
+<div class="note">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>在:left或:right伪类中增加声明并不影响文档从打印机中出来是双面的还是单面的（关于它的讨论超出了本规范的范围）。
+</em>
+</div>
+
+<div class="note">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>注意。</strong>以后版本的CSS可能包含另外的页面伪类。
+</em>
+</div>
+
+<h3><a name="q9">13.2.5 页框外的内容</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在页面模型中格式化内容时，某些内容可能最终出现在页框之外。例如，一个元素的<a href="text.html#propdef-white-space" class="noxref"><span class="propinst-white-space">'white-space'</span></a>属性设置为'pre'，它可能产生一个比页框宽的框。同样的，如果框是<a href="visuren.html#absolute-positioning">绝对定位</a>的，它们最后也可能出现在“不合适”的位置。例如，图形可能放置在页框边上，或者是在页框之下100,000英寸的地方。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这些元素如何确切地格式化的规范超出了本文档的范围。不过，我们推荐作者和用户端在处理页框外的内容时，遵循如下的一般规则：</p>
+
+<ul>
+<li>应该允许内容在页框稍微外边一点的地方出现，而允许页面“撑出”。
+
+<li>用户端应该避免为了遵守元素的定位而产生大量的空白页框（例如，你肯定不想打印100张空白页）。不过要注意，为了遵守<a href="page.html#propdef-page-break-before" class="noxref"><span class="propinst-page-break-before">'page-break-before'</span></a>和<a href="page.html#propdef-page-break-after" class="noxref"><span class="propinst-page-break-after">'page-break-after'</span></a>的'left'和'right'值，少量的空白页框还是必须产生的。
+
+<li>作者不应该将元素放在一个不合适的位置而避免渲染它们。相反的：
+
+<ul>
+<li>要整个抑制框的产生，将<a href="visuren.html#propdef-display" class="noxref"><span class="propinst-display">'display'</span></a>属性设置为'none'。
+<li>要使一个框不可见，使用<a href="visufx.html#propdef-visibility" class="noxref"><span class="propinst-visibility">'visibility'</span></a>属性。
+</ul>
+
+<LI>拥护端可以用几种方法处理定位在页框之外的框，包括忽视它们或在文档结尾处为它们创建页框。
+</ul>
+
+<H2>13.3 <a name="page-breaks">分页</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;以下各节讨论了CSS2中的页面格式化。有五个属性规定了用户端在哪里可以或应该分页，在哪一页（左页或右页）上接续后继的内容。每一个分页终止了当前<a href="#page-box">页框</a>的布局，并把<a href="conform.html#doctree">文档树</a>中剩余的部分在一个新的页框中进行布局。
+
+<h3>13.3.1 <a name="page-break-props">在元素前/后分页</a>：<a href="page.html#propdef-page-break-before" class="noxref"><span class="propinst-page-break-before">'page-break-before'</span></a>，<a href="page.html#propdef-page-break-after" class="noxref"><span class="propinst-page-break-after">'page-break-after'</span></a>，<a href="page.html#propdef-page-break-inside" class="noxref"><span class="propinst-page-break-inside">'page-break-inside'</span></a>
+</h3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'page-break-before'"><a name="propdef-page-break-before" class="propdef-title"><strong>'page-break-before'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>auto | always | avoid | left | right | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块类元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>，<a href="media.html#paged-media-group" class="noxref">页面</a>
+</table>
+</dl>
+</div>
+
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'page-break-after'"><a name="propdef-page-break-after" class="propdef-title"><strong>'page-break-after'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>auto | always | avoid | left | right | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块类元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>否
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>，<a href="media.html#paged-media-group" class="noxref">页面</a>
+</table>
+</dl>
+</div>
+
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'page-break-inside'"><a name="propdef-page-break-inside" class="propdef-title"><strong>'page-break-inside'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td>avoid | auto | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块类元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>是
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>，<a href="media.html#paged-media-group" class="noxref">页面</a>
+</table>
+</dl>
+</div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这些属性取值的含义如下：</p>
+
+<dl>
+<dt><strong>auto</strong></dt>
+<dd>不强迫也不禁止在生成框之前（之后，之间）分页。
+<dt><strong>always</strong></dt>
+<dd>总是强迫在生成框之前（之后）分页。</dd>
+<dt><strong>avoid</strong></dt>
+<dd>避免在生成框之前（之后，之间）分页。
+<dt><strong>left</strong></dt>
+<dd>强迫在生成框之前（之后）分一个或两个页，使下一页成为一个左页。</dd>
+<dt><strong>right</strong></dt>
+<dd>强迫在生成框之前（之后）分一个或两个页，使下一页成为一个右页。</dd>
+</dl>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个可能的分页位置通常受到它父元素的<a href="page.html#propdef-page-break-inside" class="noxref"><span class="propinst-page-break-inside">'page-break-inside'</span></a>属性，它前继元素的<a href="page.html#propdef-page-break-after" class="noxref"><span class="propinst-page-break-after">'page-break-after'</span></a>属性，它后续元素的<a href="page.html#propdef-page-break-before" class="noxref"><span class="propinst-page-break-before">'page-break-before'</span></a>属性的影响。如果这些属性值不为'auto'，则'always'，'left'和'right'将优先于'avoid'。参见<a href="#allowed-page-breaks">允许的分页</a>一节，以了解这些属性如何强迫和抑制分页的确切的规则。
+
+<h3>13.3.2 <a name="named-pages">使用命名的页：</a><a href="page.html#propdef-page" class="noxref"><span class="propinst-page">'page'</span></a></h3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'page'"><a name="propdef-page" class="propdef-title"><strong>'page'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-identifier" class="noxref"><span class="value-inst-identifier">&lt;identifier&gt;</span></a> | auto
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>auto
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块类元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>，<a href="media.html#paged-media-group" class="noxref">页面</a>
+</table>
+</dl>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="page.html#propdef-page" class="noxref"><span class="propinst-page">'page'</span></a>属性可以用来指定一个元素应该显示在其上的特定的页面类型。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下例将所有的表格显示在横放的右页上（该页称为"rotated"）：</P>
+
+<pre>
+@page rotated {size: landscape}
+TABLE {page: rotated; page-break-before: right}
+</pre>
+</div>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="page.html#propdef-page" class="noxref"><span class="propinst-page">'page'</span></a>属性工作情况如下：如果一个块框包含行内内容的<a href="page.html#propdef-page" class="noxref"><span class="propinst-page">'page'</span></a>属性不同于包含行内内容的前继块框，则在它们之间插入一到两个分页，分页后的框渲染在某命名类型的页框中。参见<a href="#forced">“强制的分页”</a>。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本例中，两个表格在横排的页面上渲染（如果可以的话，在同一页上），尽管DIV中使用了该页面，页面类型"narrow"根本不被使用：</p>
+
+<pre>
+@page narrow {size: 9cm 18cm}
+@page rotated {size: landscape}
+DIV {page: narrow}
+TABLE {page: rotated}
+</pre>
+
+文档为：
+
+<pre>
+&lt;DIV&gt;
+&lt;TABLE&gt;...&lt;/TABLE&gt;
+&lt;TABLE&gt;...&lt;/TABLE&gt;
+&lt;/DIV&gt;
+</pre>
+</div>
+
+
+<h3>13.3.3 <a name="break-inside">元素内的分割</a>：<a href="page.html#propdef-orphans" class="noxref"><span class="propinst-orphans">'orphans'</span></a>，<a href="page.html#propdef-widows" class="noxref"><span class="propinst-widows">'widows'</span></a></h3>
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'orphans'"><a name="propdef-orphans" class="propdef-title"><strong>'orphans'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-integer" class="noxref"><span class="value-inst-integer">&lt;integer&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>2
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块类元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>，<a href="media.html#paged-media-group" class="noxref">页面</a>
+</table>
+</dl>
+</div>
+
+
+<div class="propdef">
+<dl><dt>
+<span class="index-def" title="'widows'"><a name="propdef-widows" class="propdef-title"><strong>'widows'</strong></a></span>
+<dd>
+<table class="propinfo" cellspacing=0 cellpadding=0>
+<tr valign=baseline><td><em>值：</em>&nbsp;&nbsp;<td><a href="syndata.html#value-def-integer" class="noxref"><span class="value-inst-integer">&lt;integer&gt;</span></a> | <a href="cascade.html#value-def-inherit" class="noxref"><span class="value-inst-inherit">inherit</span></a>
+<tr valign=baseline><td><em>初始值：</em>&nbsp;&nbsp;<td>2
+<tr valign=baseline><td><em>适用于：</em>&nbsp;&nbsp;<td>块类元素
+<tr valign=baseline><td><em>可否继承：</em>&nbsp;&nbsp;<td>可
+<tr valign=baseline><td><em>百分比：</em>&nbsp;&nbsp;<td>N/A
+<tr valign=baseline><td><em>媒介：</em>&nbsp;&nbsp;<td><a href="media.html#visual-media-group" class="noxref">图形</a>，<a href="media.html#paged-media-group" class="noxref">页面</a>
+</table>
+</dl>
+</div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="page.html#propdef-orphans" class="noxref"><span class="propinst-orphans">'orphans'</span></a>属性规定了一个段落中必须遗留在一个页面底部的行数的最小数目。<a href="page.html#propdef-widows" class="noxref"><span class="propinst-widows">'widows'</span></a>属性规定了一个段落中必须遗留在一个页面顶部的行数的最小数目。如何使用它们的例子见后。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;段落格式化的信息，请参见<a href="visuren.html#line-box">线框</a>一节。
+
+<h3>13.3.4 <a name="allowed-page-breaks">允许的分页</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;常规流向中，分页可以出现在如下这些地方：</p>
+
+<ol>
+<li>
+块框的垂直边距之间。如果在这里发生分页，那么相关的<a href="box.html#propdef-margin-top" class="noxref"><span class="propinst-margin-top">'margin-top'</span></a>和<a href="box.html#propdef-margin-bottom" class="noxref"><span class="propinst-margin-bottom">'margin-bottom'</span></a>的计算值都设置为'0'。
+<li>在一个<a href="visuren.html#block-box">块框</a>中的<a href="visuren.html#line-box">线框</a>之间。
+</ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这些分页要基于如下规则：
+
+<ul>
+<li><strong>规则A：</strong>允许分页在(1)处的条件是：所有在该边距会合的元素生成框的<a href="page.html#propdef-page-break-after" class="noxref"><span class="propinst-page-break-after">'page-break-after'</span></a>和<a href="page.html#propdef-page-break-before" class="noxref"><span class="propinst-page-break-before">'page-break-before'</span></a>属性允许如此，即它们中至少有一个设置了'always'，'left'或'right'，或者它们都是'auto'。
+
+<li><strong>规则B：</strong>然而，如果它们都是'auto'且所有这些元素的最近的共同前辈设置了<a href="page.html#propdef-page-break-inside" class="noxref"><span class="propinst-page-break-inside">'page-break-inside'</span></a>为'avoid'，则该处的分页将被禁止。
+
+<li>
+<strong>规则C：</strong>允许分页在(2)处的条件是：分页和包含块框开始之间的<a href="visuren.html#line-box">线框</a>数量等于或大于<a href="page.html#propdef-orphans" class="noxref"><span class="propinst-orphans">'orphans'</span></a>值，且分页和框结尾之间的线框的数量等于或大于<a href="page.html#propdef-widows" class="noxref"><span class="propinst-widows">'widows'</span></a>值。
+
+<li><strong>规则D：</strong>另外，在(2)处的分页只有在<a href="page.html#propdef-page-break-inside" class="noxref"><span class="propinst-page-break-inside">'page-break-inside'</span></a>属性设置为'auto'时才被允许。
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果上述规则无法提供足够的分页点来防止内容溢出页面框，规则B和规则D将被忽略以寻找额外的分页点。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果还不能找到足够的分页点，规则A和规则C将被忽略，以进一步找出更多的分页点。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;分页不可以发生在<a href="visuren.html#absolute-positioning">绝对定位</a>的框中。
+
+<h3>13.3.5 <a name="forced">强制的分页</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;分页<em>必须</em>出现在(1)处，如果在该边距会合的所有的元素生成的框的<a href="page.html#propdef-page-break-after" class="noxref"><span class="propinst-page-break-after">'page-break-after'</span></a>和<a href="page.html#propdef-page-break-before" class="noxref"><span class="propinst-page-break-before">'page-break-before'</span></a>属性中，至少有一个设置为'always'，'left'或'right'。
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;分页必须出现在(1)处，如果该边距之上的最后一个线框和其下的第一个线框具有不同的<a href="page.html#propdef-page" class="noxref"><span class="propinst-page">'page'</span></a>值。
+
+<h3><a name="q16">13.3.6 “最佳”分页</a></h3>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CSS2并<em>不</em>定义必须使用哪些允许的分页；CSS2并不禁止用户端在任何一个可能的点分页，也不禁止它根本不分页。但是CSS2确实推荐用户端遵循如下考虑（由于它们有时互相矛盾，所有称为考虑而不是规则）：</p>
+
+<ul>
+<li>尽可能少地分页。
+<li>所有不以强制分页结束的页面看上去的高度要差不多。
+<li>避免在有边框的块内分页。
+<li>避免在表格内分页。
+<li>避免在浮动元素内分页。
+</ul>
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;让我们假定样式表包含'orphans : 4'，'widows : 2'，而一共有20行（<a href="visuren.html#line-box">线框</a>）在当前页的底部可用：</p>
+
+<ul>
+<li>如果当前页的底部的一个段落包含20行或更少，它应该被放置在当前页。
+
+<li>如果段落包含21或22行，该段落的第二部分不应该违背<a href="page.html#propdef-widows" class="noxref"><span class="propinst-widows">'widows'</span></a>约束，因此，第二部分正好包含两行。
+
+<li>如果段落包含23行或更多，第一部分将包含20行，第二部分包含剩余的行。					    
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;现在我们假定<a href="page.html#propdef-orphans" class="noxref"><span class="propinst-orphans">'orphans'</span></a>为'10'，而<a href="page.html#propdef-widows" class="noxref"><span class="propinst-widows">'widows'</span></a>为'20'，在当前页的底部还有8行可用：</p>
+
+<ul>
+<li>如果当前页底部的一个段落包含8行或更少，它应该放置在当前页。
+
+<li>如果段落包含9行或更多，它不应该被分割（否则会违反'orphans'约束），因此它将作为一个块移到下一页。
+</ul>
+</div>
+
+<h2><a name="q17">13.4 页面内容的层叠</a></H2>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#page-context">页面内容</a>中的声明遵循<a href="cascade.html">层叠</a>，就如同一般的CSS2声明那样。
+
+<div class="example"><P style="display:none">例子：</P>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;考虑如下的例子：
+<PRE>
+@page {
+  margin-left: 3cm;
+}
+
+@page :left {
+  margin-left: 4cm;
+}
+</PRE>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;由于伪类选择子的<a href="cascade.html#cascading-order">更高的特殊性</a>，左页的左边距为'4cm'，而其它页（即，右页）的左边距为'3cm'。
+</div>
+<hr class="navbar">
+
+<div class="navbar" align="center">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="generate.html">上一篇</a> &nbsp;
+<a href="colors.html">下一篇</a> &nbsp;
+<a href="cover.html#minitoc">目录</a> &nbsp;
+<a href="propidx.html">属性</a> &nbsp;
+<a href="indexlist.html">索引</a> &nbsp;
+</div>
+</body>
+</html>
