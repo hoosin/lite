@@ -7,7 +7,7 @@
  * [note](/note) 笔记
  * [interview](/interview) 面试
  * [knowledge](/knowledge) 知识体系
- * [standard](/standard) 前端规范
+ * [Standard](/Standard) 前端规范
  * [img](/img) 素材
 
 
