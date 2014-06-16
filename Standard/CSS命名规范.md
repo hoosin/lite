@@ -16,7 +16,7 @@
 3. 双单词或多单词组合方式：形容词-名词、命名空间-名次、命名空间-形容词-名词。例如：```news-list、mod-feeds、mod-my-feeds、cell-title```
 
 ###1.3 Class 和 id的使用方法
-把id留给后台开发和JS使用，除此之外页面的page id(如首页的外层需要一个ID ```id="page-index"```)，页面结构（header main footer）允许用id命名。其他禁止id使用在样式表CSS命名中，一律使用class命名。
+把id留给后台开发和JS使用，除此之外页面的page id(如首页的外层需要一个ID ```id="pageIndex"```)，页面结构（header main footer）允许用id命名(ID命名建议使用驼峰命名)。其他禁止id使用在样式表CSS命名中，一律使用class命名。
 
 ###1.4 命名空间
 
@@ -41,7 +41,7 @@ ID名称|命名|ID名称	|命名
 :---------------|:---------------|:---------------|:---------------
 头部|header|主体|	main
 脚部|footer|容器|wrapper
-侧栏|side-bar|栏目|column
+侧栏|sideBar|栏目|column
 布局|layout|||
 
 ####(2)模块结构命名
